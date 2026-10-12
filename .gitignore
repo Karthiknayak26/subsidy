@@ -1,0 +1,105 @@
+# ==========================================
+# .gitignore - Farmer Benefit ML Project
+# ==========================================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*-checkpoint.ipynb
+.virtual_documents/
+
+# Datasets & Large Files
+# (Preserve directories using .gitkeep while ignoring actual data dumps)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/external/*
+!data/external/.gitkeep
+scheme_database/raw/*
+!scheme_database/raw/.gitkeep
+scheme_database/processed/*
+!scheme_database/processed/.gitkeep
+
+# Large binary / data dumps
+*.csv
+*.tsv
+*.parquet
+*.feather
+*.h5
+*.hdf5
+*.tar.gz
+*.zip
+*.7z
+
+# Retain scheme_master.xlsx tracking
+!scheme_database/scheme_master.xlsx
+
+# ML Models and Artifacts
+models/*
+!models/.gitkeep
+*.pt
+*.pth
+*.pkl
+*.pickle
+*.joblib
+*.onnx
+*.bin
+*.weights
+checkpoints/
+
+# Evaluation Reports and Logs
+logs/
+*.log
+reports/*.pdf
+reports/*.docx
+
+# IDE & Editor Files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
