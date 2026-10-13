@@ -139,15 +139,22 @@ Open `reports/pilot_agreement_report.md` and:
 
 ---
 
-## Agreement Metric Interpretation
+## Agreement Metric Interpretation & Decision Gate Alignment
 
-| Metric | When to use | Threshold for scaling |
-|:---|:---|:---|
-| Krippendorff's alpha (ordinal) | 2+ raters with potential missing ratings | alpha >= 0.67 (tentative), >= 0.80 (good) |
-| Quadratic weighted kappa | Exactly 2 raters, ordinal 0–3 scale | kappa_w >= 0.61 (substantial) |
-| Kendall's W | Only if experts explicitly **rank** schemes | W >= 0.70 |
+To ensure statistical rigor, the primary scaling decision metric is aligned with the number of participating experts:
 
-> Kendall's W is **not** used here because experts assign absolute scores (0–3), not relative ranks.
+| Number of Experts | Primary Agreement Statistic | Secondary / Supplementary Statistic | Decision Threshold for Scaling |
+|:---|:---|:---|:---|
+| **Exactly Two Experts (E1 & E2)** | **Quadratic Weighted Cohen's Kappa ($\kappa_w$)** | Ordinal Krippendorff's alpha ($\alpha$) | $\kappa_w \ge 0.61$ (Substantial pairwise agreement)<br>Supplementary: $\alpha \ge 0.67$ |
+| **Three or More Experts (E1, E2, E3...)** | **Krippendorff's Alpha ($\alpha$) with Ordinal Distance** | Pairwise Quadratic Weighted Kappas ($\kappa_w$) | $\alpha \ge 0.67$ (Provisional scaling gate)<br>$\alpha \ge 0.80$ (Strong multi-rater benchmark) |
+| **Ranked Orders (if converted)** | **Kendall's $W$ (Concordance)** | Spearman's $\rho$ | $W \ge 0.70$ (Supplementary only) |
+
+> [!IMPORTANT]
+> **Provisional Pilot Decision Rule:**
+> 1. **Two-Expert Sessions (E1 & E2):** Report Quadratic Weighted Cohen's Kappa ($\kappa_w$) as the primary pairwise metric. Ordinal Krippendorff's alpha ($\alpha$) is calculated as a supplementary multi-rater continuity metric to ensure parity with the multi-rater framework.
+> 2. **Three-Expert Sessions (E1, E2, E3):** Use Ordinal Krippendorff's alpha ($\alpha$) as the primary multi-rater statistic across all raters, alongside pairwise $\kappa_w$ comparisons and disagreement tables.
+> 3. **Threshold Caveat:** Meeting $\kappa_w \ge 0.61$ or $\alpha \ge 0.67$ is a **provisional pilot decision gate** to evaluate whether annotation guidelines are clear enough to proceed to the 50–100 scenario expansion. It is **not** definitive proof that labels are infallible.
+> 4. **Mandatory Qualitative Review:** Even when the numerical threshold is met, the coordinator must examine the **Disagreement Table (Section 3)** for all HIGH disagreements (score range $\ge 2$) and review the written qualitative justifications in **Section B** before scaling.
 
 ---
 

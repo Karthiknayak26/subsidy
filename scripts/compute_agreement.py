@@ -459,16 +459,33 @@ def generate_report(
     lines.append("")
     lines.append("## 7. Decision Gate")
     lines.append("")
-    lines.append("| Criterion | Status |")
-    lines.append("|:---|:---|")
-    alpha_status = "PASS" if (not np.isnan(k_alpha) and k_alpha >= 0.67) else ("REVIEW" if not np.isnan(k_alpha) else "PENDING DATA")
-    alpha_str = f"{k_alpha:.4f}" if not np.isnan(k_alpha) else "N/A"
-    lines.append(f"| Krippendorff alpha >= 0.67 | **{alpha_status}** (alpha = {alpha_str}) |")
-    lines.append("| All HIGH disagreements investigated | [ ] |")
-    lines.append("| Protocol revision notes written (Section 6) | [ ] |")
-    lines.append("| Model training remains deferred | [x] (deferred by design) |")
+    lines.append("| Criterion | Metric Role | Status |")
+    lines.append("|:---|:---|:---|")
+    if n_experts == 2 and pairwise_results:
+        pw_kappa = pairwise_results[0]['quadratic_weighted_kappa']
+        pw_status = "PASS" if (not np.isnan(pw_kappa) and pw_kappa >= 0.61) else ("REVIEW" if not np.isnan(pw_kappa) else "PENDING DATA")
+        pw_str = f"{pw_kappa:.4f}" if not np.isnan(pw_kappa) else "N/A"
+        lines.append(f"| Quadratic weighted kappa >= 0.61 | **Primary (2 raters)** | **{pw_status}** (kappa_w = {pw_str}) |")
+        alpha_status = "PASS" if (not np.isnan(k_alpha) and k_alpha >= 0.67) else ("REVIEW" if not np.isnan(k_alpha) else "PENDING DATA")
+        alpha_str = f"{k_alpha:.4f}" if not np.isnan(k_alpha) else "N/A"
+        lines.append(f"| Krippendorff alpha >= 0.67 | **Supplementary (2 raters)** | **{alpha_status}** (alpha = {alpha_str}) |")
+    else:
+        alpha_status = "PASS" if (not np.isnan(k_alpha) and k_alpha >= 0.67) else ("REVIEW" if not np.isnan(k_alpha) else "PENDING DATA")
+        alpha_str = f"{k_alpha:.4f}" if not np.isnan(k_alpha) else "N/A"
+        lines.append(f"| Krippendorff alpha >= 0.67 | **Primary (3+ raters)** | **{alpha_status}** (alpha = {alpha_str}) |")
+        if pairwise_results:
+            min_pw = min(pr['quadratic_weighted_kappa'] for pr in pairwise_results if not np.isnan(pr['quadratic_weighted_kappa'])) if any(not np.isnan(pr['quadratic_weighted_kappa']) for pr in pairwise_results) else np.nan
+            pw_status = "PASS" if (not np.isnan(min_pw) and min_pw >= 0.61) else ("REVIEW" if not np.isnan(min_pw) else "PENDING DATA")
+            pw_str = f"{min_pw:.4f}" if not np.isnan(min_pw) else "N/A"
+            lines.append(f"| Pairwise quadratic weighted kappas >= 0.61 | **Supplementary** | **{pw_status}** (min kappa_w = {pw_str}) |")
+    lines.append("| All HIGH disagreements investigated | Protocol Review | [ ] |")
+    lines.append("| Section B qualitative policy feedback reviewed | Policy Review | [ ] |")
+    lines.append("| Protocol revision notes written (Section 6) | Scaling Decision | [ ] |")
+    lines.append("| Model training remains deferred | Quality Safeguard | [x] (deferred by design) |")
     lines.append("")
-    lines.append("> All criteria must be PASS/checked before proceeding to the 50-100 scenario benchmark.")
+    lines.append("> **Decision Rule:** Meeting the statistical threshold is a provisional pilot decision gate to determine")
+    lines.append("> whether annotation instructions are sufficiently calibrated to proceed to the 50-100 scenario expansion.")
+    lines.append("> It does NOT replace manual investigation of the disagreement table and Section B qualitative feedback.")
 
     report_text = "\n".join(lines)
     Path(output_path).parent.mkdir(parents=True, exist_ok=True)
