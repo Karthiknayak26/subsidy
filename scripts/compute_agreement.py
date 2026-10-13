@@ -436,8 +436,14 @@ def generate_report(
     if section_b_by_expert:
         for eid in sorted(section_b_by_expert.keys()):
             lines.append(f"### Expert {eid}")
+            # Deduplicate comments while tracking scenarios
+            dedup_comments = defaultdict(list)
             for row in section_b_by_expert[eid]:
-                lines.append(f"- **{row['scenario_id']} / {row['scheme_id']}:** {row.get('expert_availability_comment', '(no comment)')}")
+                comment = row.get('expert_availability_comment', '(no comment)')
+                dedup_comments[(row['scheme_id'], comment)].append(row['scenario_id'])
+            for (sch_id, comment), sids in dedup_comments.items():
+                sids_str = ", ".join(sids)
+                lines.append(f"- **{sch_id} (Scenarios: {sids_str}):** {comment}")
             lines.append("")
     else:
         lines.append("*(No Section B annotations found in loaded files.)*")
@@ -478,7 +484,7 @@ def generate_report(
             pw_status = "PASS" if (not np.isnan(min_pw) and min_pw >= 0.61) else ("REVIEW" if not np.isnan(min_pw) else "PENDING DATA")
             pw_str = f"{min_pw:.4f}" if not np.isnan(min_pw) else "N/A"
             lines.append(f"| Pairwise quadratic weighted kappas >= 0.61 | **Supplementary** | **{pw_status}** (min kappa_w = {pw_str}) |")
-    lines.append("| All HIGH disagreements investigated | Protocol Review | [ ] |")
+    lines.append("| All flagged disagreements (spread >= 2) investigated | Protocol Review | [ ] |")
     lines.append("| Section B qualitative policy feedback reviewed | Policy Review | [ ] |")
     lines.append("| Protocol revision notes written (Section 6) | Scaling Decision | [ ] |")
     lines.append("| Model training remains deferred | Quality Safeguard | [x] (deferred by design) |")

@@ -1094,7 +1094,7 @@ Stage 4: Pilot Scenarios & Expert Annotation
 #### 15. What are the primary technical risks and limitations of your project in its current state?
 **Answer:**
 1. The dynamic availability layer is currently an unpopulated template.
-2. The benchmark dataset currently consists of 10 pilot scenarios, requiring expansion to 50–100 scenarios before model training.
+2. The initial 10-scenario pilot calibration has passed inter-rater agreement (kappa_w = 0.8306, alpha = 0.8311), and progression to 50–100 scenario expansion under `annotation-protocol-v1.1` is formally approved prior to ML training.
 3. Ganga Kalyana modeling covers four corporations, rather than statewide coverage.
 4. Rules are currently hardcoded in Python methods rather than a declarative rule DSL.
 5. The system lacks a user-facing web/mobile interface and Kannada localization for direct farmer use.
