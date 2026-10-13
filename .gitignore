@@ -47,6 +47,8 @@ data/processed/*
 !data/processed/.gitkeep
 data/external/*
 !data/external/.gitkeep
+data/annotations/*
+!data/annotations/.gitkeep
 scheme_database/raw/*
 !scheme_database/raw/.gitkeep
 scheme_database/processed/*
