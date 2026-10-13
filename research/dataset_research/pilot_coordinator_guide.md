@@ -1,7 +1,8 @@
 # Expert Annotation Pilot — Coordinator Guide
 
 **Project:** ML-Based Personalized Government Scheme and Subsidy Recommendation System for Farmers  
-**Pilot version:** `pilot-v1.0` (git commit `7724fa7`)  
+**Baseline Freeze:** `pilot-v1.0` (commit `7724fa7` — scheme master, scenario definitions, eligibility rules)  
+**Working Checkout:** Commit `b12a81e` / HEAD (includes annotation CLI, agreement engine, decision gate alignment)  
 **Pilot scope:** 10 scenarios (S001–S010) × 16 eligible scheme records  
 
 ---
@@ -42,11 +43,14 @@ farmer-benefit-ml/
 
 ## Pre-flight Checklist
 
-- [ ] Repository is at commit `7724fa7` (run `git log --oneline -1` to verify)
+- [ ] Working checkout contains annotation tools and has `7724fa7` as ancestor:
+      `git merge-base --is-ancestor 7724fa7 HEAD`
+- [ ] Zero diff against frozen policy rules, scheme master, and scenario specs:
+      `git diff --exit-code 7724fa7..HEAD -- src/eligibility/engine.py research/dataset_research/case_b_scenario_spec.md scheme_database/raw/ scheme_database/processed/ scheme_database/scheme_master.xlsx`
 - [ ] All 56 tests pass: `python -m pytest tests/ -q --tb=no`
 - [ ] `pilot_execution_results.json` exists: `research/dataset_research/pilot_execution_results.json`
 - [ ] Python dependencies installed: `pip install numpy scipy`
-- [ ] `data/annotations/` directory exists (created automatically by the script)
+- [ ] `data/annotations/` directory is clean and ready for session output files
 
 ---
 
@@ -109,9 +113,7 @@ Once **all 2–3 experts** have completed their sessions:
 2. Run the agreement script:
 
 ```powershell
-python scripts/compute_agreement.py \
-    --annotation-dir data/annotations \
-    --output-report  reports/pilot_agreement_report.md
+python scripts/compute_agreement.py --annotation-dir data/annotations --output-report reports/pilot_agreement_report.md
 ```
 
 This generates `reports/pilot_agreement_report.md` with:
@@ -163,7 +165,8 @@ To ensure statistical rigor, the primary scaling decision metric is aligned with
 See `research/dataset_research/pilot_version_freeze.md` for the full list.
 
 Key items:
-- **Git commit:** `7724fa7`
+- **Baseline freeze commit:** `7724fa7` (scheme master, scenario specs, eligibility rules)
+- **Working checkout commit:** `b12a81e` / HEAD (contains annotation CLI and agreement computation scripts)
 - **Scenarios:** S001–S010 (do not modify scenario YAML attributes)
 - **Rating scale:** 0 = Irrelevant, 1 = Marginal, 2 = Relevant, 3 = Highly Relevant
 - **Eligibility rules:** `src/eligibility/engine.py` (frozen)
@@ -175,18 +178,17 @@ If any correction is needed mid-annotation, stop all sessions, create `pilot-v1.
 ## Quick Reference — Commands
 
 ```powershell
-# Verify repo state
-git log --oneline -1
+# Verify working checkout has freeze baseline 7724fa7 as ancestor and zero policy diff:
+git merge-base --is-ancestor 7724fa7 HEAD
+git diff --exit-code 7724fa7..HEAD -- src/eligibility/engine.py research/dataset_research/case_b_scenario_spec.md scheme_database/raw/ scheme_database/processed/ scheme_database/scheme_master.xlsx
 
 # Confirm tests still pass
 python -m pytest tests/ -q --tb=no
 
-# Run annotation session (one per expert)
-python scripts/run_annotation_session.py --expert-id E1
+# Run annotation session independently (one per expert)
+python scripts/run_annotation_session.py --expert-id E1 --pilot-results research/dataset_research/pilot_execution_results.json
+python scripts/run_annotation_session.py --expert-id E2 --pilot-results research/dataset_research/pilot_execution_results.json
 
-# Compute agreement (after all experts done)
-python scripts/compute_agreement.py
-
-# Regenerate engine outputs if needed (do not do mid-annotation)
-python scripts/run_pilot_execution.py
+# Compute agreement report (after both experts submit)
+python scripts/compute_agreement.py --annotation-dir data/annotations --output-report reports/pilot_agreement_report.md
 ```
