@@ -73,3 +73,42 @@ def test_community_pool_clarifications():
     assert "Ambedkar" in s066["policy"]
     assert s066["qual_parcel"] == 3.5
     assert "14.0 ac" in s066["pool"]
+
+
+def test_cross_field_subsidized_area_within_qualifying_parcel():
+    """Verify requested subsidized area (ha) never exceeds qualifying parcel (converted to ha)."""
+    ha_per_acre = 0.40468564224
+    subsidized_cases = [s for s in scenarios if s["subsidized_ha"] != "—"]
+    assert len(subsidized_cases) == 6, f"Expected 6 subsidized area boundary cases, found {len(subsidized_cases)}"
+
+    for s in subsidized_cases:
+        req_ha = float(s["subsidized_ha"])
+        max_phys_ha = s["qual_parcel"] * ha_per_acre
+        assert req_ha <= (max_phys_ha + 1e-4), (
+            f"Cross-field failure in {s['sid']}: requested {req_ha} ha exceeds "
+            f"qualifying parcel {s['qual_parcel']} ac ({max_phys_ha:.4f} ha)"
+        )
+
+
+def test_solar_pump_scenario_prerequisites():
+    """Verify that all 6 solar pump scenarios specify explicit water-source and electric status."""
+    solar_scenarios = [s for s in scenarios if s["need"] == "SOLAR_PUMP_INSTALLATION"]
+    assert len(solar_scenarios) == 6
+    expected_sids = {"S012", "S020", "S024", "S030", "S051", "S063"}
+    assert set(s["sid"] for s in solar_scenarios) == expected_sids
+
+    for s in solar_scenarios:
+        assert s.get("water_source") and s["water_source"] != "Rainfed (None)", (
+            f"{s['sid']} must have explicit operational water source"
+        )
+        assert s.get("electric_status"), f"{s['sid']} must have explicit electric status"
+
+        if s["sid"] == "S020":
+            # Three-valued logic test: electric status UNKNOWN must trigger REQUIRES_VERIFICATION
+            assert s["electric_status"] == "UNKNOWN"
+            assert "REQUIRES_VERIFICATION" in s["policy"]
+        else:
+            # Off-grid standalone solar pump must be UNENERGIZED_OFF_GRID
+            assert s["electric_status"] == "UNENERGIZED_OFF_GRID"
+            assert "UNENERGIZED_OFF_GRID" in s["policy"]
+

@@ -1,18 +1,29 @@
 # Benchmark v1.0 — Scenario Design & Coverage Matrix
 
-**Document Version:** `benchmark-design-v1.0.2`  
-**Supersedes:** `benchmark-design-v1.0.1` (commit `2d06675`)  
+**Document Version:** `benchmark-design-v1.0.3`  
+**Supersedes:** `benchmark-design-v1.0.2` (commit `8d4e92c`)  
 **Milestone:** Benchmark v1.0 Scenario Design and Validation  
 **Approved Scope:** 60 New Scenarios (`S011`–`S070`) across all 10 Karnataka Agro-Climatic Zones  
 **Annotation Standard:** `annotation-protocol-v1.1`  
-**Status:** Pre-Generation Design Freeze (Reconciled & Validated)  
+**Status:** Pre-Generation Design Freeze (Area-Consistent & Validated)  
 **Model Training Status:** **STRICTLY DEFERRED**  
 
 ---
 
-## Revision Notes: v1.0.1 → v1.0.2
+## Revision Notes: v1.0.2 → v1.0.3
 
-This revision reconciles the scenario assignment matrix with all declared target quotas, adds explicit holding/parcel/subsidy area columns, clarifies community-pool assignments, and adds automated validation tests (`validate_benchmark_matrix.py` and `tests/test_benchmark_matrix.py`). No changes were made to the frozen eligibility engine (`pilot-v1.0`, commit `7724fa7`), scheme database, pilot calibration data (`S001`–`S010`), or annotation protocol v1.1. Pre-specified heuristic baseline weights and evaluation methodology remain strictly unchanged.
+This revision applies minimal physical-area and prerequisite corrections to the validated scenario assignment matrix before generating farmer profiles. No changes were made to the frozen eligibility engine (`pilot-v1.0`, commit `7724fa7`), scheme database, pilot calibration data (`S001`–`S010`), or annotation protocol v1.1. All quota totals across all 8 dimensions remain 100% identical to v1.0.2.
+
+| Issue | Target / Dimension Affected | v1.0.2 Value | v1.0.3 Corrected Value | Technical & Regulatory Rationale |
+|:---:|:---|:---:|:---:|:---|
+| 1 | **S058 Area Accommodation** | Total: 11.5 ac, Qual: 11.5 ac, Req: 5.00 ha | **Total: 12.5 ac, Qual: 12.5 ac, Req: 5.00 ha** | 5.00 ha = ~12.36 acres. 11.5 ac (4.65 ha) could not physically accommodate 5.00 ha. 12.5 ac (5.06 ha) cleanly accommodates the 5.00 ha ceiling. Preserves Large class (> 10.0 ac) and all existing quotas. |
+| 2 | **S023 Subsidized Area Cap** | Req: 1.42 ha, Qual: 3.5 ac | **Req: 1.41 ha, Qual: 3.5 ac** | 3.5 ac = 1.4164 ha. Requested 1.42 ha slightly exceeded physical parcel size. Corrected to 1.41 ha ($\le 1.4164$ ha). |
+| 3 | **Cross-Field Validation Rule** | *Not automated* | **Automated in CI & Test Suite** | Added automated cross-field rule ensuring `requested_subsidized_area_ha <= qualifying_parcel_acres * 0.404686` for all scenarios. |
+| 4 | **Solar Pump Prerequisites** | Implicit schema fields | **Explicit water source & grid status** | Explicitly declared water source and grid-connected electric status for all 6 solar pump scenarios (`S012`, `S020`, `S024`, `S030`, `S051`, `S063`). Preserved `REQUIRES_VERIFICATION` when electric status is `UNKNOWN` (`S020`). |
+
+---
+
+## Revision Notes: v1.0.1 → v1.0.2
 
 | Dimension | Target Quota | v1.0.1 Actual | v1.0.2 Reconciled | Reconciliation Actions Applied |
 |:---|:---:|:---:|:---:|:---|
@@ -83,34 +94,35 @@ The goal of Benchmark v1.0 is **not** to create training data for immediate neur
 > **Distinction Between Demographic Landholding Classes and Scheme Ceilings:**
 > - **Landholding Class** is a demographic categorization of the farmer's **Total Operational Holding** (`total_operational_holding_acres`), structured into four mutually exclusive mathematical intervals with endpoints at 2.5, 5.0, and 10.0 acres.
 > - **Scheme Ceilings** govern specific program entitlements independently of demographic classification. For example:
->   - **PMKSY-PDMC:** Statutory ceiling is **5.0 hectares (~12.36 acres)** of subsidized micro-irrigation area per beneficiary (`requested_subsidized_area_ha`). A Large farmer with 11.5 acres requesting 5.0 ha is evaluated against the 5-ha ceiling, not disqualified by farm size.
+>   - **PMKSY-PDMC:** Statutory ceiling is **5.0 hectares (~12.36 acres)** of subsidized micro-irrigation area per beneficiary (`requested_subsidized_area_ha`). A Large farmer with 12.5 acres requesting 5.0 ha is evaluated against the 5-ha ceiling, not disqualified by farm size. Physical capacity rule strictly requires `requested_subsidized_area_ha <= qualifying_parcel_acres * 0.404686`.
 >   - **Ganga Kalyana:** Eligibility evaluates the **Qualifying Parcel** (`qualifying_parcel_acres`), requiring dryland $\le 5.0$ acres for individual borewells, or 8.0–15.0 pooled acres with $\ge 3$ beneficiaries for community borewells.
 >   - **MIDH Protected Cultivation:** Subsidy is capped by physical structure area (typically up to 4,000 m² / ~1.0 acre), not total farm size.
 >   - **SMAM:** Implements tiered subsidy percentages based on landholding class (higher for Marginal/Small, standard for Medium/Large), rather than blanket exclusions.
 
 **Landholding Classes (Mutually Exclusive Intervals — Reconciled to 60 Scenarios):**
 
-| Class | Mathematical Interval | Endpoint Handling | Target Quota | Actual v1.0.2 | Representative Boundary Scenarios |
+| Class | Mathematical Interval | Endpoint Handling | Target Quota | Actual v1.0.3 | Representative Boundary Scenarios |
 |:---|:---|:---|:---:|:---:|:---|
 | **Marginal** | $[0.0, 2.5)$ | Strictly less than 2.5 acres | 22 | **22** | S011, S014, S015, S018, S019, S022, S024, S025, S029, S031, S035, S038, S039, S043, S044, S045, S048, S054, S060, S062, S067, S068 |
 | **Small** | $[2.5, 5.0]$ | Inclusive of both 2.5 and 5.0 acres | 20 | **20** | **2.5 ac boundary:** S026, S032, S037, S051, S063; **5.0 ac boundary:** S013, S040; Others: S012, S016, S021, S030, S036, S042, S049, S050, S055, S056, S059, S061 |
 | **Medium** | $(5.0, 10.0]$ | Strictly greater than 5.0, inclusive of 10.0 acres | 12 | **12** | **10.0 ac boundary:** S028; Others: S017, S020, S027, S033, S041, S046, S047, S052, S053, S064, S066 |
-| **Large** | $(10.0, \infty)$ | Strictly greater than 10.0 acres | 6 | **6** | S034 (11.0 ac), S057 (12.0 ac), S058 (11.5 ac), S065 (14.0 ac), S069 (13.0 ac), S070 (12.5 ac) |
+| **Large** | $(10.0, \infty)$ | Strictly greater than 10.0 acres | 6 | **6** | S034 (11.0 ac), S057 (12.0 ac), S058 (12.5 ac), S065 (14.0 ac), S069 (13.0 ac), S070 (12.5 ac) |
 | **Total** | | | **60** | **60** | **100% Target Reconciled** |
 
-**Explicit Boundary Test Cases:**
+**Explicit Boundary & Physical Consistency Test Cases:**
 
 | Boundary Value | Dimension Tested | Scenario IDs | Expected Classification & Rule Evaluation |
 |:---|:---|:---:|:---|
 | **Exactly 2.5 acres** | Small / Marginal boundary | `S026`, `S032`, `S037`, `S051`, `S063` | Classified as **Small** ($\ge 2.5$). Tests Small farmer tier in PMKSY-PDMC and SMAM. |
 | **Exactly 5.0 acres** | Small / Medium boundary | `S013`, `S040` | Classified as **Small** ($\le 5.0$). Tests maximum individual holding for Ganga Kalyana dryland ceiling. |
 | **Exactly 10.0 acres** | Medium / Large boundary | `S028` | Classified as **Medium** ($\le 10.0$). Tests medium demographic status while pooling contiguous parcel for community borewell. |
-| **Exactly 5.00 ha** | PMKSY-PDMC subsidy ceiling | `S058` | Requested subsidized area exactly matches 5.00 ha (~12.36 acres) statutory ceiling for large holding. |
+| **Exactly 5.00 ha** | PMKSY-PDMC statutory ceiling | `S058` | Large holding (12.5 ac holding & qualifying parcel) cleanly accommodates requested 5.00 ha (~12.36 ac; $5.00 	ext{ ha} \le 5.059 	ext{ ha}$). Tests 5.00 ha ceiling boundary. |
+| **Subsidized Area Cap** | Physical parcel capacity | `S023` | Requested 1.41 ha micro-irrigation strictly within 3.5 ac ($1.416 	ext{ ha}$) parcel capacity. |
 | **Exactly ₹10,000/mo** | PM-KISAN pension exclusion | `S018` | Pensioner receiving exactly ₹10,000/month; inclusive threshold fires statutory exclusion (`PMKISAN_PENSION_UNDER_10K_OR_NONE`). |
 
 **Land Types Covered (Reconciled to 60 Scenarios):**
 
-| Land Type | Target Quota | Actual v1.0.2 | Key Statutory Gating Role |
+| Land Type | Target Quota | Actual v1.0.3 | Key Statutory Gating Role |
 |:---|:---:|:---:|:---|
 | **Dryland (Rainfed Dryland)** | 28 | **28** | Mandatory for Ganga Kalyana individual/community borewells; mandatory for Krishi Bhagya farm ponds. |
 | **Canal-irrigated** | 10 | **10** | High-intensity command areas (Tungabhadra, UKP, Cauvery, Malaprabha, Hemavathi); tests credit, crop insurance, and mechanization. |
@@ -125,7 +137,7 @@ The goal of Benchmark v1.0 is **not** to create training data for immediate neur
 
 Social category is an **overlapping attribute**, not mutually exclusive with land class, tenure status, or land type.
 
-| Social Category | Target Quota | Actual v1.0.2 | Covered Corporation Scheme / Policy Mandate |
+| Social Category | Target Quota | Actual v1.0.3 | Covered Corporation Scheme / Policy Mandate |
 |:---|:---:|:---:|:---|
 | **SC (Scheduled Caste)** | 15 | **15** | `SCH010_AMBEDKAR` — Individual borewell ($\le 5.0$ ac dryland) and community borewell ($\ge 3$ beneficiaries, 8–15 pooled acres). Enhanced subsidy slabs under SMAM and Krishi Bhagya. |
 | **ST (Scheduled Tribe)** | 10 | **10** | `SCH010_VALMIKI` — Individual and community borewell rules (provisionally modeled). Enhanced subsidy slabs under SMAM and Krishi Bhagya. |
@@ -143,7 +155,7 @@ Social category is an **overlapping attribute**, not mutually exclusive with lan
 
 **Tenure Status (Mutually Exclusive — Reconciled to 60 Scenarios):**
 
-| Tenure Status | Target Quota | Actual v1.0.2 | Statutory Test Purpose & Handling |
+| Tenure Status | Target Quota | Actual v1.0.3 | Statutory Test Purpose & Handling |
 |:---|:---:|:---:|:---|
 | **Pre-Feb 2019 Land Ownership Verified** | 47 | **47** | Baseline for PM-KISAN cut-off date compliance and registered land RTC verification. |
 | **Post-Feb 2019 Inheritance Partition** | 4 | **4** | Tests inheritance partition exemption: legal succession/family partition is exempt from PM-KISAN cut-off disqualification. Scenarios: `S039`, `S049`, `S064`, `S069`. |
@@ -163,11 +175,26 @@ Community-pool membership is an independent overlapping attribute (3 Yes, 57 No)
 
 ---
 
-### 3.4 Stated Need Distribution (10 Core Need Classes)
+### 3.4 Solar Pump Water-Source & Grid-Electricity Prerequisites
+
+Per statutory PM-KUSUM Component B guidelines, standalone solar pumps strictly require an existing water source (unenergized borewell, open well, or farm pond) and the **absence of grid electric energization** (`UNENERGIZED_OFF_GRID`). Grid-connected borewells are statutorily disqualified from Component B. Incomplete or missing ESCOM energization proof must trigger `REQUIRES_VERIFICATION`.
+
+| Scenario ID | Zone & District | Stated Need | Operational Water Source | ESCOM Electric Status | Evaluation Handling & Policy Rationale |
+|:---:|:---|:---|:---|:---|:---|
+| **`S012`** | Z1 Kalaburagi | `SOLAR_PUMP_INSTALLATION` | Borewell (Non-energized) | `UNENERGIZED_OFF_GRID` | **Challenge 1:** Standalone solar pump vs. Krishi Bhagya package. Eligible for PM-KUSUM B. |
+| **`S020`** | Z2 Yadgir | `SOLAR_PUMP_INSTALLATION` | Borewell (Unconfirmed) | `UNKNOWN` | **Challenge 4:** Three-Valued Logic. ESCOM electric status is `UNKNOWN` $	o$ Engine returns `REQUIRES_VERIFICATION` for PM-KUSUM B (`KUSUM_ELECTRIC_STATUS_UNKNOWN`). |
+| **`S024`** | Z3 Bagalkot | `SOLAR_PUMP_INSTALLATION` | Borewell (Non-energized) | `UNENERGIZED_OFF_GRID` | **Challenge 1:** Standalone solar pump vs. Krishi Bhagya package. Eligible for PM-KUSUM B. |
+| **`S030`** | Z4 Davanagere | `SOLAR_PUMP_INSTALLATION` | Borewell (Non-energized) | `UNENERGIZED_OFF_GRID` | **Challenge 1:** Standalone solar pump vs. Krishi Bhagya package. Eligible for PM-KUSUM B. |
+| **`S051`** | Z7 Shivamogga | `SOLAR_PUMP_INSTALLATION` | Borewell (Non-energized) | `UNENERGIZED_OFF_GRID` | **Boundary Test:** Exactly 2.5 ac (Small); Minority; unenergized borewell verified. Eligible for PM-KUSUM B. |
+| **`S063`** | Z9 Chikkamagaluru | `SOLAR_PUMP_INSTALLATION` | Borewell (Non-energized) | `UNENERGIZED_OFF_GRID` | **Boundary Test:** Exactly 2.5 ac (Small); Minority; off-grid plantation water source. Eligible for PM-KUSUM B. |
+
+---
+
+### 3.5 Stated Need Distribution (10 Core Need Classes)
 
 Each of the 10 core need classes has **exactly 6 dedicated scenarios** distributed across zones:
 
-| # | Need Code | Description | Target Quota | Actual v1.0.2 | Scenario IDs |
+| # | Need Code | Description | Target Quota | Actual v1.0.3 | Scenario IDs |
 |:---:|:---|:---|:---:|:---:|:---|
 | 1 | `CROP_INSURANCE` | Calamity, post-harvest loss, standing crop pest attack | 6 | **6** | `S011`, `S017`, `S039`, `S042`, `S062`, `S067` |
 | 2 | `SOLAR_PUMP_INSTALLATION` | Standalone off-grid solar agriculture pump (PM-KUSUM B) | 6 | **6** | `S012`, `S020`, `S024`, `S030`, `S051`, `S063` |
@@ -190,11 +217,11 @@ Each of the 10 core need classes has **exactly 6 dedicated scenarios** distribut
 | **1: Civil Works & Package Complexity** | `S012`, `S024`, `S030` | Standalone solar pump requested; Krishi Bhagya passes eligibility. | Protocol v1.1 Rule 1: Krishi Bhagya scored $\le 1$ when unrequested excavation is an impractical barrier; PM-KUSUM B scored 3. |
 | **2: Relief vs. Reimbursable Debt** | `S015`, `S038`, `S044` | Farmer in distress requests non-repayable `INCOME_SUPPORT`. | Protocol v1.1 Rule 2: KCC must not receive score 3; PM-KISAN scores 3 (or evaluated against tenancy in `S044`). |
 | **3: Disqualification Boundary** | `S018`, `S032`, `S055` | Income tax payer (`S032`); regular government officer (`S055`); pensioner at exactly ₹10,000/month (`S018`). | Engine returns `INELIGIBLE` with explicit rule key; scheme absent from Section A. |
-| **4: Three-Valued Logic / Unknowns** | `S020`, `S048`, `S056`, `S062` | Income tax status unknown (`S020`); pension MTS exemption unknown (`S048`); land title unknown (`S048`, `S056`, `S062`, `S070`). | Engine returns `REQUIRES_VERIFICATION`; scheme enters Section B advisory only. |
+| **4: Three-Valued Logic / Unknowns** | `S020`, `S048`, `S056`, `S062` | Income tax status unknown (`S020`); borewell electric status unknown (`S020`); pension MTS exemption unknown (`S048`); land title unknown (`S048`, `S056`, `S062`, `S070`). | Engine returns `REQUIRES_VERIFICATION`; scheme enters Section B advisory only. |
 | **5: Pure Tenant — Scheme-Specific Rules** | `S026`, `S042`, `S044`, `S061`, `S068` | Pure tenant, no registered land title. | PM-KISAN $	o$ `INELIGIBLE`; PMFBY $	o$ `REQUIRES_VERIFICATION` pending documentation; KCC $	o$ `REQUIRES_VERIFICATION` pending crop docs. |
 | **6: Competing Credit Channels** | `S014`, `S036`, `S050` | Commercial KCC-MISS vs. State PACS zero-interest credit. | Central KCC in Section A (scored); PACS credit in Section B (qualitative advisory pending annual GO). |
 | **7: Corporation Land Limits & Community Pool** | `S028`, `S052`, `S066` | Individual holding $> 5.0$ ac dryland; community pool route ($\ge 3$ members, 8–15 pooled acres). | Engine rejects individual borewell; evaluates community pool route. Provisional corporations return `REQUIRES_VERIFICATION`. |
-| **8: Scheme-Specific Area Ceilings (Large Holding)** | `S034`, `S057`, `S058`, `S065`, `S069`, `S070` | Farmers with holding $> 10.0$ acres. | Evaluated per specific scheme ceiling (e.g. PMKSY-PDMC 5.00 ha ceiling in `S034`, `S058`, `S070`; SMAM tiered rates in `S057`; SHC in `S065`; MIDH structure cap in `S069`). No blanket exclusion. |
+| **8: Scheme-Specific Area Ceilings (Large Holding)** | `S034`, `S057`, `S058`, `S065`, `S069`, `S070` | Farmers with holding $> 10.0$ acres. | Evaluated per specific scheme ceiling (e.g. PMKSY-PDMC 5.00 ha ceiling in `S034`, `S058`, `S070`; SMAM tiered rates in `S057`; SHC in `S065`; MIDH structure cap in `S069`). Physical capacity rule strictly verified. No blanket exclusion. |
 
 ---
 
@@ -205,7 +232,7 @@ The table below defines the complete, reconciled 60-scenario matrix with explici
 | Scenario | Zone | District | Crop | Primary Need | Land Type | Total Holding (ac) | Qualifying Parcel (ac) | Req Subsidized Area (ha) | Land Class | Social Cat. | Tenure Status | Community Pool | Primary Policy Test |
 |:---:|:---:|:---|:---|:---|:---|:---:|:---:|:---:|:---:|:---:|:---|:---|:---|
 | S011 | Z1 | Bidar | Redgram | `CROP_INSURANCE` | Dryland | 1.8 | 1.8 | — | Marginal | OBC | Pre-Feb 2019 | No | Standard multi-need rainfed pulse profile; OBC category |
-| S012 | Z1 | Kalaburagi | Maize | `SOLAR_PUMP_INSTALLATION` | Dryland | 3.0 | 3.0 | — | Small | SC | Pre-Feb 2019 | No | **Challenge 1:** Standalone solar pump vs. Krishi Bhagya package |
+| S012 | Z1 | Kalaburagi | Maize | `SOLAR_PUMP_INSTALLATION` | Dryland | 3.0 | 3.0 | — | Small | SC | Pre-Feb 2019 | No | **Challenge 1:** Standalone solar pump vs. Krishi Bhagya package; water source: unenergized borewell; electric status: UNENERGIZED_OFF_GRID; eligible for PM-KUSUM B |
 | S013 | Z1 | Bidar | Sugarcane | `SOIL_HEALTH_AND_FERTILIZER` | Canal-irrigated | 5.0 | 5.0 | — | Small | GM | Pre-Feb 2019 | No | **Boundary test:** Exactly 5.0 acres (Small/Medium boundary, <= 5.0 is Small); SHC nutrient advisory |
 | S014 | Z1 | Kalaburagi | Soybean | `PRODUCTION_CREDIT` | Dryland | 2.2 | 2.2 | — | Marginal | ST | Pre-Feb 2019 | No | **Challenge 6:** Central KCC-MISS commercial credit vs. State PACS zero-interest credit |
 | S015 | Z1 | Bidar | Jowar | `INCOME_SUPPORT` | Dryland | 1.5 | 1.5 | — | Marginal | SC | Pre-Feb 2019 | No | **Challenge 2:** Relief vs. debt; KCC must not receive score 3 for income support |
@@ -213,28 +240,28 @@ The table below defines the complete, reconciled 60-scenario matrix with explici
 | S017 | Z2 | Yadgir | Cotton | `CROP_INSURANCE` | Dryland | 6.0 | 6.0 | — | Medium | ST | Pre-Feb 2019 | No | Dryland cotton PMFBY coverage; medium holding (6.0 ac); notified area pest risk |
 | S018 | Z2 | Raichur | Sunflower | `INCOME_SUPPORT` | Dryland | 2.0 | 2.0 | — | Marginal | GM | Pre-Feb 2019 | No | **Challenge 3:** Pensioner at exactly ₹10,000/month; PM-KISAN exclusion threshold test |
 | S019 | Z2 | Kalaburagi | Bajra | `RAINWATER_HARVESTING` | Dryland | 1.2 | 1.2 | — | Marginal | OBC | Pre-Feb 2019 | No | Krishi Bhagya farm-pond primary need; dryland Bajra in rainfed dry zone |
-| S020 | Z2 | Yadgir | Redgram | `SOLAR_PUMP_INSTALLATION` | Dryland | 6.5 | 6.5 | — | Medium | SC | Pre-Feb 2019 | No | **Challenge 4:** Income tax status UNKNOWN -> REQUIRES_VERIFICATION for PM-KISAN; PM-KUSUM B solar pump |
+| S020 | Z2 | Yadgir | Redgram | `SOLAR_PUMP_INSTALLATION` | Dryland | 6.5 | 6.5 | — | Medium | SC | Pre-Feb 2019 | No | **Challenge 4:** Solar pump requested; borewell electric status UNKNOWN -> triggers REQUIRES_VERIFICATION for PM-KUSUM B; income tax status UNKNOWN -> triggers REQUIRES_VERIFICATION for PM-KISAN |
 | S021 | Z2 | Raichur | Cotton | `FARM_MECHANIZATION` | Canal-irrigated | 4.0 | 4.0 | — | Small | Minority | Pre-Feb 2019 | No | SMAM sprayer/equipment subsidy; canal command cotton; Minority category |
 | S022 | Z2 | Kalaburagi | Sunflower | `SOIL_HEALTH_AND_FERTILIZER` | Dryland | 1.8 | 1.8 | — | Marginal | GM | Pre-Feb 2019 | No | Soil Health Card diagnostic profiling, dryland sunflower, GM category |
-| S023 | Z3 | Vijayapura | Pomegranate | `MICRO_IRRIGATION_SUPPORT` | Borewell-irrigated | 3.5 | 3.5 | 1.42 | Small | Minority | Pre-Feb 2019 | No | PMKSY-PDMC drip for high-value horticulture; Minority category |
-| S024 | Z3 | Bagalkot | Maize | `SOLAR_PUMP_INSTALLATION` | Canal-irrigated | 2.0 | 2.0 | — | Marginal | ST | Pre-Feb 2019 | No | **Challenge 1:** Standalone solar pump vs. Krishi Bhagya package |
+| S023 | Z3 | Vijayapura | Pomegranate | `MICRO_IRRIGATION_SUPPORT` | Borewell-irrigated | 3.5 | 3.5 | 1.41 | Small | Minority | Pre-Feb 2019 | No | PMKSY-PDMC drip for high-value horticulture; requested 1.41 ha <= 3.5 ac (1.416 ha); Minority category |
+| S024 | Z3 | Bagalkot | Maize | `SOLAR_PUMP_INSTALLATION` | Canal-irrigated | 2.0 | 2.0 | — | Marginal | ST | Pre-Feb 2019 | No | **Challenge 1:** Standalone solar pump vs. Krishi Bhagya package; water source: unenergized borewell; electric status: UNENERGIZED_OFF_GRID; eligible for PM-KUSUM B |
 | S025 | Z3 | Gadag | Onion | `PROTECTED_HORTICULTURE` | Borewell-irrigated | 1.5 | 1.5 | — | Marginal | SC | Pre-Feb 2019 | No | MIDH shade-net structure for commercial onion; SC marginal holding |
 | S026 | Z3 | Koppal | Bengalgram | `PRODUCTION_CREDIT` | Canal-irrigated | 2.5 | 2.5 | — | Small | GM | Pure Tenant | No | **Challenge 5 & Boundary test:** Exactly 2.5 ac (Small); Pure tenant; KCC tenant rules, PM-KISAN ineligible |
 | S027 | Z3 | Vijayapura | Pomegranate | `RAINWATER_HARVESTING` | Dryland | 6.5 | 6.5 | — | Medium | SC | Pre-Feb 2019 | No | Krishi Bhagya farm pond; SC dryland horticulture holding (6.5 ac) |
 | S028 | Z3 | Bagalkot | Onion | `BOREWELL_IRRIGATION` | Dryland | 10.0 | 3.0 | — | Medium | OBC | Pre-Feb 2019 | Yes (3 farmers, 9.0 ac pooled, contiguous) | **Challenge 7 & Boundary test:** Exactly 10.0 ac (Medium); individual dryland > 5 ac ineligible for indiv borewell; community pool route (3 farmers, 9.0 ac pooled contiguous dryland, qualifying parcel 3.0 ac); REQUIRES_VERIFICATION (provisional Devaraj Urs corporation rules) |
 | S029 | Z4 | Chitradurga | Groundnut | `BOREWELL_IRRIGATION` | Dryland | 2.0 | 2.0 | — | Marginal | SC | Pre-Feb 2019 | No | Ganga Kalyana individual borewell (Ambedkar Corp); marginal dryland SC farmer |
-| S030 | Z4 | Davanagere | Maize | `SOLAR_PUMP_INSTALLATION` | Canal-irrigated | 3.8 | 3.8 | — | Small | GM | Pre-Feb 2019 | No | **Challenge 1:** Standalone solar pump vs. Krishi Bhagya package |
+| S030 | Z4 | Davanagere | Maize | `SOLAR_PUMP_INSTALLATION` | Canal-irrigated | 3.8 | 3.8 | — | Small | GM | Pre-Feb 2019 | No | **Challenge 1:** Standalone solar pump vs. Krishi Bhagya package; water source: unenergized borewell; electric status: UNENERGIZED_OFF_GRID; eligible for PM-KUSUM B |
 | S031 | Z4 | Tumakuru | Ragi | `RAINWATER_HARVESTING` | Dryland | 1.8 | 1.8 | — | Marginal | ST | Pre-Feb 2019 | No | Krishi Bhagya farm pond; ST dryland farmer in Central Dry Zone |
 | S032 | Z4 | Chitradurga | Groundnut | `INCOME_SUPPORT` | Dryland | 2.5 | 2.5 | — | Small | GM | Pre-Feb 2019 | No | **Challenge 3 & Boundary test:** Exactly 2.5 ac (Small); income tax payer -> PM-KISAN INELIGIBLE |
 | S033 | Z4 | Davanagere | Arecanut | `FARM_MECHANIZATION` | Borewell-irrigated | 7.5 | 7.5 | — | Medium | OBC | Pre-Feb 2019 | No | SMAM machinery subsidy for arecanut cultivation; Medium holding (7.5 ac); OBC |
-| S034 | Z4 | Tumakuru | Maize | `MICRO_IRRIGATION_SUPPORT` | Borewell-irrigated | 11.0 | 11.0 | 4.45 | Large | GM | Pre-Feb 2019 | No | **Challenge 8:** Large holding (11.0 ac); PMKSY-PDMC evaluated against 5-ha (~12.36 ac) ceiling; requested 4.45 ha <= 5.0 ha |
+| S034 | Z4 | Tumakuru | Maize | `MICRO_IRRIGATION_SUPPORT` | Borewell-irrigated | 11.0 | 11.0 | 4.45 | Large | GM | Pre-Feb 2019 | No | **Challenge 8:** Large holding (11.0 ac); PMKSY-PDMC evaluated against 5-ha (~12.36 ac) ceiling; requested 4.45 ha <= 11.0 ac (4.451 ha) and <= 5.00 ha ceiling |
 | S035 | Z5 | Kolar | Tomato | `PROTECTED_HORTICULTURE` | Borewell-irrigated | 1.5 | 1.5 | — | Marginal | SC | Pre-Feb 2019 | No | MIDH polyhouse structure; SC marginal horticulture farmer |
 | S036 | Z5 | Chikkaballapura | Mulberry | `PRODUCTION_CREDIT` | Borewell-irrigated | 3.0 | 3.0 | — | Small | Minority | Pre-Feb 2019 | No | **Challenge 6:** KCC commercial credit vs. PACS cooperative credit for sericulture; Minority |
-| S037 | Z5 | Bengaluru Rural | Mango | `MICRO_IRRIGATION_SUPPORT` | Borewell-irrigated | 2.5 | 2.5 | 1.01 | Small | ST | Pre-Feb 2019 | No | **Boundary test:** Exactly 2.5 ac (Small); PMKSY-PDMC drip for mango orchard |
+| S037 | Z5 | Bengaluru Rural | Mango | `MICRO_IRRIGATION_SUPPORT` | Borewell-irrigated | 2.5 | 2.5 | 1.01 | Small | ST | Pre-Feb 2019 | No | **Boundary test:** Exactly 2.5 ac (Small); PMKSY-PDMC drip for mango orchard; requested 1.01 ha <= 2.5 ac (1.012 ha) |
 | S038 | Z5 | Kolar | Tomato | `INCOME_SUPPORT` | Dryland | 1.2 | 1.2 | — | Marginal | GM | Pre-Feb 2019 | No | **Challenge 2:** Post-harvest price collapse distress; KCC debt must not receive score 3 |
 | S039 | Z5 | Chikkaballapura | Ragi | `CROP_INSURANCE` | Dryland | 2.0 | 2.0 | — | Marginal | SC | Post-Feb 2019 Inheritance | No | PM-KISAN inheritance partition exemption test; legal family succession verified |
 | S040 | Z5 | Bengaluru Rural | Mango | `FARM_MECHANIZATION` | Borewell-irrigated | 5.0 | 5.0 | — | Small | OBC | Pre-Feb 2019 | No | **Boundary test:** Exactly 5.0 acres (Small/Medium boundary, <= 5.0 is Small); SMAM orchard implements |
-| S041 | Z6 | Mandya | Sugarcane | `MICRO_IRRIGATION_SUPPORT` | Canal-irrigated | 6.5 | 6.5 | 2.50 | Medium | GM | Pre-Feb 2019 | No | PMKSY-PDMC drip irrigation in irrigated sugarcane canal command; Medium holding (6.5 ac) |
+| S041 | Z6 | Mandya | Sugarcane | `MICRO_IRRIGATION_SUPPORT` | Canal-irrigated | 6.5 | 6.5 | 2.50 | Medium | GM | Pre-Feb 2019 | No | PMKSY-PDMC drip irrigation in irrigated sugarcane canal command; requested 2.50 ha <= 6.5 ac (2.630 ha); Medium holding (6.5 ac) |
 | S042 | Z6 | Mysuru | Paddy | `CROP_INSURANCE` | Wetland/valley | 3.5 | 3.5 | — | Small | SC | Pure Tenant | No | **Challenge 5:** Pure tenant paddy; PMFBY coverage with tenancy documentation verification |
 | S043 | Z6 | Chamarajanagar | Banana | `BOREWELL_IRRIGATION` | Dryland | 1.8 | 1.8 | — | Marginal | ST | Pre-Feb 2019 | No | Ganga Kalyana individual borewell (Valmiki Corp); ST marginal dryland farmer; REQUIRES_VERIFICATION (provisional corporation rules) |
 | S044 | Z6 | Mandya | Paddy | `INCOME_SUPPORT` | Wetland/valley | 2.0 | 2.0 | — | Marginal | OBC | Pure Tenant | No | **Challenge 2 & Challenge 5:** Pure tenant wetland paddy; PM-KISAN INELIGIBLE due to lack of land title; relief vs. credit |
@@ -244,26 +271,26 @@ The table below defines the complete, reconciled 60-scenario matrix with explici
 | S048 | Z7 | Shivamogga | Ginger | `PROTECTED_HORTICULTURE` | Borewell-irrigated | 2.0 | 2.0 | — | Marginal | ST | Unknown Title Status | No | **Challenge 4:** Pension MTS exemption unknown & title status UNKNOWN -> REQUIRES_VERIFICATION for land-dependent schemes |
 | S049 | Z7 | Chikkamagaluru | Potato | `PROTECTED_HORTICULTURE` | Borewell-irrigated | 4.5 | 4.5 | — | Small | GM | Post-Feb 2019 Inheritance | No | MIDH shade-net structure for commercial seed potato; post-2019 inheritance exemption test |
 | S050 | Z7 | Hassan | Arecanut | `PRODUCTION_CREDIT` | Borewell-irrigated | 3.5 | 3.5 | — | Small | OBC | Pre-Feb 2019 | No | **Challenge 6:** KCC commercial credit vs. PACS cooperative credit; arecanut garden |
-| S051 | Z7 | Shivamogga | Maize | `SOLAR_PUMP_INSTALLATION` | Dryland | 2.5 | 2.5 | — | Small | Minority | Pre-Feb 2019 | No | **Boundary test:** Exactly 2.5 ac (Small); PM-KUSUM B solar pump; unenergized borewell; Minority |
+| S051 | Z7 | Shivamogga | Maize | `SOLAR_PUMP_INSTALLATION` | Dryland | 2.5 | 2.5 | — | Small | Minority | Pre-Feb 2019 | No | **Boundary test:** Exactly 2.5 ac (Small); water source: unenergized borewell; electric status: UNENERGIZED_OFF_GRID; PM-KUSUM B solar pump; Minority |
 | S052 | Z7 | Chikkamagaluru | Potato | `BOREWELL_IRRIGATION` | Dryland | 9.5 | 4.0 | — | Medium | OBC | Pre-Feb 2019 | Yes (3 farmers, 12.0 ac pooled, contiguous) | **Challenge 7:** Individual dryland > 5 ac ineligible for indiv borewell; community pool route (3 farmers, 12.0 ac pooled contiguous dryland, qualifying parcel 4.0 ac); REQUIRES_VERIFICATION (provisional Devaraj Urs corporation rules) |
 | S053 | Z8 | Dharwad | Soybean | `RAINWATER_HARVESTING` | Dryland | 5.5 | 5.5 | — | Medium | Minority | Pre-Feb 2019 | No | Krishi Bhagya farm pond; medium holding (5.5 ac); Northern Transition Zone; Minority |
 | S054 | Z8 | Belagavi | Chilli | `PROTECTED_HORTICULTURE` | Wetland/valley | 1.5 | 1.5 | — | Marginal | SC | Pre-Feb 2019 | No | MIDH shade-net structure for high-value chilli; SC marginal farmer |
 | S055 | Z8 | Haveri | Cotton | `INCOME_SUPPORT` | Dryland | 3.0 | 3.0 | — | Small | GM | Pre-Feb 2019 | No | **Challenge 3:** Regular government officer -> PM-KISAN INELIGIBLE statutory exclusion |
 | S056 | Z8 | Dharwad | Wheat | `SOIL_HEALTH_AND_FERTILIZER` | Dryland | 4.0 | 4.0 | — | Small | ST | Unknown Title Status | No | **Challenge 4:** Land title UNKNOWN -> SHC accessible; title-dependent schemes trigger REQUIRES_VERIFICATION |
 | S057 | Z8 | Belagavi | Sugarcane | `FARM_MECHANIZATION` | Canal-irrigated | 12.0 | 12.0 | — | Large | OBC | Pre-Feb 2019 | No | **Challenge 8:** Large holding (12.0 ac); SMAM evaluated per scheme machinery tier; no blanket exclusion |
-| S058 | Z8 | Haveri | Soybean | `MICRO_IRRIGATION_SUPPORT` | Borewell-irrigated | 11.5 | 11.5 | 5.00 | Large | GM | Pre-Feb 2019 | No | **Challenge 8 & Boundary test:** Large holding (11.5 ac); PMKSY-PDMC boundary test at exactly 5.00 ha (~12.36 ac) statutory ceiling |
+| S058 | Z8 | Haveri | Soybean | `MICRO_IRRIGATION_SUPPORT` | Borewell-irrigated | 12.5 | 12.5 | 5.00 | Large | GM | Pre-Feb 2019 | No | **Challenge 8 & Boundary test:** Large holding (12.5 ac holding & qualifying parcel); PMKSY-PDMC boundary test at exactly 5.00 ha (~12.36 ac) statutory ceiling; 5.00 ha <= 12.5 ac (5.059 ha) |
 | S059 | Z9 | Kodagu | Coffee | `SOIL_HEALTH_AND_FERTILIZER` | Hilly/terraced | 4.5 | 4.5 | — | Small | GM | Pre-Feb 2019 | No | Soil Health Card soil testing for plantation coffee in Hilly Zone |
 | S060 | Z9 | Chikkamagaluru | Cardamom | `RAINWATER_HARVESTING` | Hilly/terraced | 2.0 | 2.0 | — | Marginal | ST | Pre-Feb 2019 | No | Water harvesting storage structure for hillside cardamom plantation; ST |
 | S061 | Z9 | Uttara Kannada | Paddy | `PRODUCTION_CREDIT` | Wetland/valley | 3.0 | 3.0 | — | Small | SC | Pure Tenant | No | **Challenge 5:** Hill zone valley paddy pure tenant; KCC tenant route; PMFBY verification |
 | S062 | Z9 | Kodagu | Black Pepper | `CROP_INSURANCE` | Hilly/terraced | 1.8 | 1.8 | — | Marginal | GM | Unknown Title Status | No | **Challenge 4:** Land title UNKNOWN -> land-dependent schemes trigger REQUIRES_VERIFICATION |
-| S063 | Z9 | Chikkamagaluru | Coffee | `SOLAR_PUMP_INSTALLATION` | Hilly/terraced | 2.5 | 2.5 | — | Small | Minority | Pre-Feb 2019 | No | **Boundary test:** Exactly 2.5 ac (Small); PM-KUSUM B solar pump for off-grid plantation; Minority |
+| S063 | Z9 | Chikkamagaluru | Coffee | `SOLAR_PUMP_INSTALLATION` | Hilly/terraced | 2.5 | 2.5 | — | Small | Minority | Pre-Feb 2019 | No | **Boundary test:** Exactly 2.5 ac (Small); water source: unenergized borewell; electric status: UNENERGIZED_OFF_GRID; PM-KUSUM B solar pump for off-grid plantation; Minority |
 | S064 | Z9 | Uttara Kannada | Paddy | `FARM_MECHANIZATION` | Canal-irrigated | 8.0 | 8.0 | — | Medium | OBC | Post-Feb 2019 Inheritance | No | SMAM power tiller/paddy transplanter subsidy; medium holding (8.0 ac); post-2019 inheritance partition |
 | S065 | Z10 | Dakshina Kannada | Coconut | `SOIL_HEALTH_AND_FERTILIZER` | Dryland | 14.0 | 14.0 | — | Large | GM | Pre-Feb 2019 | No | Soil Health Card universal diagnostic service for large coastal plantation (14.0 ac); GM |
 | S066 | Z10 | Udupi | Arecanut | `BOREWELL_IRRIGATION` | Dryland | 5.5 | 3.5 | — | Medium | SC | Pre-Feb 2019 | Yes (4 farmers, 14.0 ac pooled, contiguous) | **Challenge 7:** Individual holding 5.5 ac exceeds 5.0 ac individual Ambedkar ceiling; community pool route valid with 4 SC farmers, 14.0 ac pooled contiguous dryland, qualifying parcel 3.5 ac; requires verification of parcel contiguity & groundwater clearance |
 | S067 | Z10 | Dakshina Kannada | Cashew | `CROP_INSURANCE` | Dryland | 2.0 | 2.0 | — | Marginal | ST | Pre-Feb 2019 | No | PMFBY cashew crop insurance in coastal plantation belt; ST marginal farmer |
 | S068 | Z10 | Udupi | Coastal Paddy | `PRODUCTION_CREDIT` | Wetland/valley | 1.5 | 1.5 | — | Marginal | Minority | Pure Tenant | No | **Challenge 5:** Pure tenant coastal wetland paddy; KCC crop loan & PMFBY insurance proof check; Minority |
 | S069 | Z10 | Dakshina Kannada | Coconut | `PROTECTED_HORTICULTURE` | Dryland | 13.0 | 13.0 | — | Large | Minority | Post-Feb 2019 Inheritance | No | MIDH coastal nursery / shade-net; Large holding (13.0 ac); Minority; post-2019 inheritance exemption test |
-| S070 | Z10 | Udupi | Arecanut | `MICRO_IRRIGATION_SUPPORT` | Wetland/valley | 12.5 | 12.5 | 4.80 | Large | SC | Unknown Title Status | No | **Challenge 8:** Large holding (12.5 ac); PMKSY-PDMC requested 4.80 ha <= 5.00 ha; title status UNKNOWN -> REQUIRES_VERIFICATION |
+| S070 | Z10 | Udupi | Arecanut | `MICRO_IRRIGATION_SUPPORT` | Wetland/valley | 12.5 | 12.5 | 4.80 | Large | SC | Unknown Title Status | No | **Challenge 8:** Large holding (12.5 ac); PMKSY-PDMC requested 4.80 ha <= 12.5 ac (5.059 ha) and <= 5.00 ha ceiling; title status UNKNOWN -> REQUIRES_VERIFICATION |
 
 ---
 
@@ -273,7 +300,7 @@ The matrix has been audited and validated by the automated reproducibility scrip
 
 ```
 ==================================================
-BENCHMARK V1.0.2 MATRIX VALIDATION REPORT
+BENCHMARK V1.0.3 MATRIX VALIDATION REPORT
 ==================================================
 Total Scenarios: 60 (Target: 60) -> PASS
 Scenario IDs Continuous S011-S070: PASS
@@ -335,8 +362,26 @@ Land Types (Dryland: 28, Canal: 10, Borewell: 12, Wetland: 6, Hilly: 4): PASS
   Wetland/valley: 6 / 6
   Hilly/terraced: 4 / 4
 
+Cross-Field Area Validation (Requested Subsidized Area ha <= Qualifying Parcel ha):
+  S023: req=1.41 ha <= qual_parcel=3.5 ac (1.4164 ha) -> PASS
+  S034: req=4.45 ha <= qual_parcel=11.0 ac (4.4515 ha) -> PASS
+  S037: req=1.01 ha <= qual_parcel=2.5 ac (1.0117 ha) -> PASS
+  S041: req=2.50 ha <= qual_parcel=6.5 ac (2.6305 ha) -> PASS
+  S058: req=5.00 ha <= qual_parcel=12.5 ac (5.0586 ha) -> PASS
+  S070: req=4.80 ha <= qual_parcel=12.5 ac (5.0586 ha) -> PASS
+Total Subsidized Area Cases Verified: 6
+
+Solar Pump Prerequisite Validation (Water Source & Grid Electric Status):
+  S012: water_source='Borewell (Non-energized)', electric_status='UNENERGIZED_OFF_GRID', status=PASS
+  S020: water_source='Borewell (Unconfirmed)', electric_status='UNKNOWN', status=PASS
+  S024: water_source='Borewell (Non-energized)', electric_status='UNENERGIZED_OFF_GRID', status=PASS
+  S030: water_source='Borewell (Non-energized)', electric_status='UNENERGIZED_OFF_GRID', status=PASS
+  S051: water_source='Borewell (Non-energized)', electric_status='UNENERGIZED_OFF_GRID', status=PASS
+  S063: water_source='Borewell (Non-energized)', electric_status='UNENERGIZED_OFF_GRID', status=PASS
+Total Solar Pump Cases Verified: 6 / 6
+
 --------------------------------------------------
-OVERALL STATUS: ALL 8 DIMENSIONS PASSED PERFECTLY!
+OVERALL STATUS: ALL DIMENSIONS & CROSS-FIELD CHECKS PASSED PERFECTLY!
 ```
 
 ---
@@ -421,6 +466,7 @@ Both baselines are evaluated at the **scenario level** (not treating each scheme
 
 - [x] **Coverage Matrix Designed (`benchmark-design-v1.0.1`):** Design across 10 zones, 10 needs, statutory categories.
 - [x] **Coverage Matrix Reconciled & Validated (`benchmark-design-v1.0.2`):** All 8 quota dimensions reconciled and passing automated test suite (`validate_benchmark_matrix.py` and `tests/test_benchmark_matrix.py`). Explicit holding, parcel, and subsidy-area columns added; community-pool scenarios clarified.
+- [x] **Cross-Field Physical Area & Solar Prerequisite Validation (`benchmark-design-v1.0.3`):** Physical area consistency verified for PMKSY-PDMC; explicit water source & grid electricity attributes formalized; automated cross-field validation passed.
 - [ ] **Scenario Profiles Authored (`S011`–`S070`):** Full JSON + markdown definitions generated in zone batches (strictly deferred until matrix review).
 - [ ] **Eligibility Engine Verification:** All 60 scenarios executed through `EligibilityEngine`; zero statutory hallucinations; boundary test cases pass.
 - [ ] **Dual-Expert Annotation:** Independent annotations from E1 and E2 under `annotation-protocol-v1.1`.

@@ -1,5 +1,5 @@
 """
-Validation script for Benchmark v1.0.2 Scenario Assignment Matrix.
+Validation script for Benchmark v1.0.3 Scenario Assignment Matrix.
 Tests all target quotas:
 - Total scenarios: 60 (S011-S070)
 - Zones: 10 zones, 6 each
@@ -10,10 +10,14 @@ Tests all target quotas:
 - Community pool: 3 Yes (S028, S052, S066), 57 No
 - Land types: 28 Dryland, 10 Canal-irrigated, 12 Borewell-irrigated, 6 Wetland/valley, 4 Hilly/terraced
 - Boundaries: 2.5 ac, 5.0 ac, 10.0 ac, 5.0 ha PMKSY, Rs 10k pension
+- Cross-field area consistency: requested subsidized area (ha) <= qualifying parcel (ha)
+- Solar pump prerequisites: explicit water source and grid electric status (preserving REQUIRES_VERIFICATION when UNKNOWN)
 """
 
 import sys
 from collections import Counter
+
+HA_PER_ACRE = 0.40468564224
 
 scenarios = [
     # --- ZONE 1: North Eastern Transition Zone (Bidar, Kalaburagi) ---
@@ -23,6 +27,7 @@ scenarios = [
         "total_holding": 1.8, "qual_parcel": 1.8, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "OBC", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Rainfed (None)", "electric_status": "NONE",
         "policy": "Standard multi-need rainfed pulse profile; OBC category"
     },
     {
@@ -31,7 +36,8 @@ scenarios = [
         "total_holding": 3.0, "qual_parcel": 3.0, "subsidized_ha": "—",
         "lclass": "Small", "social": "SC", "tenure": "Pre-Feb 2019",
         "pool": "No",
-        "policy": "**Challenge 1:** Standalone solar pump vs. Krishi Bhagya package"
+        "water_source": "Borewell (Non-energized)", "electric_status": "UNENERGIZED_OFF_GRID",
+        "policy": "**Challenge 1:** Standalone solar pump vs. Krishi Bhagya package; water source: unenergized borewell; electric status: UNENERGIZED_OFF_GRID; eligible for PM-KUSUM B"
     },
     {
         "sid": "S013", "zone": "Z1", "dist": "Bidar", "crop": "Sugarcane",
@@ -39,6 +45,7 @@ scenarios = [
         "total_holding": 5.0, "qual_parcel": 5.0, "subsidized_ha": "—",
         "lclass": "Small", "social": "GM", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Canal Outlet", "electric_status": "NONE",
         "policy": "**Boundary test:** Exactly 5.0 acres (Small/Medium boundary, <= 5.0 is Small); SHC nutrient advisory"
     },
     {
@@ -47,6 +54,7 @@ scenarios = [
         "total_holding": 2.2, "qual_parcel": 2.2, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "ST", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Rainfed (None)", "electric_status": "NONE",
         "policy": "**Challenge 6:** Central KCC-MISS commercial credit vs. State PACS zero-interest credit"
     },
     {
@@ -55,6 +63,7 @@ scenarios = [
         "total_holding": 1.5, "qual_parcel": 1.5, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "SC", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Rainfed (None)", "electric_status": "NONE",
         "policy": "**Challenge 2:** Relief vs. debt; KCC must not receive score 3 for income support"
     },
     {
@@ -63,6 +72,7 @@ scenarios = [
         "total_holding": 4.5, "qual_parcel": 4.5, "subsidized_ha": "—",
         "lclass": "Small", "social": "SC", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "None (Dryland kushki)", "electric_status": "NONE",
         "policy": "Ganga Kalyana individual borewell (Ambedkar Corp); SC dryland within <= 5.0 ac ceiling"
     },
 
@@ -73,6 +83,7 @@ scenarios = [
         "total_holding": 6.0, "qual_parcel": 6.0, "subsidized_ha": "—",
         "lclass": "Medium", "social": "ST", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Rainfed (None)", "electric_status": "NONE",
         "policy": "Dryland cotton PMFBY coverage; medium holding (6.0 ac); notified area pest risk"
     },
     {
@@ -81,6 +92,7 @@ scenarios = [
         "total_holding": 2.0, "qual_parcel": 2.0, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "GM", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Rainfed (None)", "electric_status": "NONE",
         "policy": "**Challenge 3:** Pensioner at exactly ₹10,000/month; PM-KISAN exclusion threshold test"
     },
     {
@@ -89,6 +101,7 @@ scenarios = [
         "total_holding": 1.2, "qual_parcel": 1.2, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "OBC", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Rainfed Catchment", "electric_status": "NONE",
         "policy": "Krishi Bhagya farm-pond primary need; dryland Bajra in rainfed dry zone"
     },
     {
@@ -97,7 +110,8 @@ scenarios = [
         "total_holding": 6.5, "qual_parcel": 6.5, "subsidized_ha": "—",
         "lclass": "Medium", "social": "SC", "tenure": "Pre-Feb 2019",
         "pool": "No",
-        "policy": "**Challenge 4:** Income tax status UNKNOWN -> REQUIRES_VERIFICATION for PM-KISAN; PM-KUSUM B solar pump"
+        "water_source": "Borewell (Unconfirmed)", "electric_status": "UNKNOWN",
+        "policy": "**Challenge 4:** Solar pump requested; borewell electric status UNKNOWN -> triggers REQUIRES_VERIFICATION for PM-KUSUM B; income tax status UNKNOWN -> triggers REQUIRES_VERIFICATION for PM-KISAN"
     },
     {
         "sid": "S021", "zone": "Z2", "dist": "Raichur", "crop": "Cotton",
@@ -105,6 +119,7 @@ scenarios = [
         "total_holding": 4.0, "qual_parcel": 4.0, "subsidized_ha": "—",
         "lclass": "Small", "social": "Minority", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Canal Distributary", "electric_status": "NONE",
         "policy": "SMAM sprayer/equipment subsidy; canal command cotton; Minority category"
     },
     {
@@ -113,6 +128,7 @@ scenarios = [
         "total_holding": 1.8, "qual_parcel": 1.8, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "GM", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Rainfed (None)", "electric_status": "NONE",
         "policy": "Soil Health Card diagnostic profiling, dryland sunflower, GM category"
     },
 
@@ -120,10 +136,11 @@ scenarios = [
     {
         "sid": "S023", "zone": "Z3", "dist": "Vijayapura", "crop": "Pomegranate",
         "need": "MICRO_IRRIGATION_SUPPORT", "land_type": "Borewell-irrigated",
-        "total_holding": 3.5, "qual_parcel": 3.5, "subsidized_ha": 1.42,
+        "total_holding": 3.5, "qual_parcel": 3.5, "subsidized_ha": 1.41,
         "lclass": "Small", "social": "Minority", "tenure": "Pre-Feb 2019",
         "pool": "No",
-        "policy": "PMKSY-PDMC drip for high-value horticulture; Minority category"
+        "water_source": "Borewell (Grid-connected)", "electric_status": "GRID_CONNECTED_IP_SET",
+        "policy": "PMKSY-PDMC drip for high-value horticulture; requested 1.41 ha <= 3.5 ac (1.416 ha); Minority category"
     },
     {
         "sid": "S024", "zone": "Z3", "dist": "Bagalkot", "crop": "Maize",
@@ -131,7 +148,8 @@ scenarios = [
         "total_holding": 2.0, "qual_parcel": 2.0, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "ST", "tenure": "Pre-Feb 2019",
         "pool": "No",
-        "policy": "**Challenge 1:** Standalone solar pump vs. Krishi Bhagya package"
+        "water_source": "Borewell (Non-energized)", "electric_status": "UNENERGIZED_OFF_GRID",
+        "policy": "**Challenge 1:** Standalone solar pump vs. Krishi Bhagya package; water source: unenergized borewell; electric status: UNENERGIZED_OFF_GRID; eligible for PM-KUSUM B"
     },
     {
         "sid": "S025", "zone": "Z3", "dist": "Gadag", "crop": "Onion",
@@ -139,6 +157,7 @@ scenarios = [
         "total_holding": 1.5, "qual_parcel": 1.5, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "SC", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Borewell (Grid-connected)", "electric_status": "GRID_CONNECTED_IP_SET",
         "policy": "MIDH shade-net structure for commercial onion; SC marginal holding"
     },
     {
@@ -147,6 +166,7 @@ scenarios = [
         "total_holding": 2.5, "qual_parcel": 2.5, "subsidized_ha": "—",
         "lclass": "Small", "social": "GM", "tenure": "Pure Tenant",
         "pool": "No",
+        "water_source": "Canal Command", "electric_status": "NONE",
         "policy": "**Challenge 5 & Boundary test:** Exactly 2.5 ac (Small); Pure tenant; KCC tenant rules, PM-KISAN ineligible"
     },
     {
@@ -155,6 +175,7 @@ scenarios = [
         "total_holding": 6.5, "qual_parcel": 6.5, "subsidized_ha": "—",
         "lclass": "Medium", "social": "SC", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Rainfed Catchment", "electric_status": "NONE",
         "policy": "Krishi Bhagya farm pond; SC dryland horticulture holding (6.5 ac)"
     },
     {
@@ -163,6 +184,7 @@ scenarios = [
         "total_holding": 10.0, "qual_parcel": 3.0, "subsidized_ha": "—",
         "lclass": "Medium", "social": "OBC", "tenure": "Pre-Feb 2019",
         "pool": "Yes (3 farmers, 9.0 ac pooled, contiguous)",
+        "water_source": "None (Dryland kushki)", "electric_status": "NONE",
         "policy": "**Challenge 7 & Boundary test:** Exactly 10.0 ac (Medium); individual dryland > 5 ac ineligible for indiv borewell; community pool route (3 farmers, 9.0 ac pooled contiguous dryland, qualifying parcel 3.0 ac); REQUIRES_VERIFICATION (provisional Devaraj Urs corporation rules)"
     },
 
@@ -173,6 +195,7 @@ scenarios = [
         "total_holding": 2.0, "qual_parcel": 2.0, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "SC", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "None (Dryland kushki)", "electric_status": "NONE",
         "policy": "Ganga Kalyana individual borewell (Ambedkar Corp); marginal dryland SC farmer"
     },
     {
@@ -181,7 +204,8 @@ scenarios = [
         "total_holding": 3.8, "qual_parcel": 3.8, "subsidized_ha": "—",
         "lclass": "Small", "social": "GM", "tenure": "Pre-Feb 2019",
         "pool": "No",
-        "policy": "**Challenge 1:** Standalone solar pump vs. Krishi Bhagya package"
+        "water_source": "Borewell (Non-energized)", "electric_status": "UNENERGIZED_OFF_GRID",
+        "policy": "**Challenge 1:** Standalone solar pump vs. Krishi Bhagya package; water source: unenergized borewell; electric status: UNENERGIZED_OFF_GRID; eligible for PM-KUSUM B"
     },
     {
         "sid": "S031", "zone": "Z4", "dist": "Tumakuru", "crop": "Ragi",
@@ -189,6 +213,7 @@ scenarios = [
         "total_holding": 1.8, "qual_parcel": 1.8, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "ST", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Rainfed Catchment", "electric_status": "NONE",
         "policy": "Krishi Bhagya farm pond; ST dryland farmer in Central Dry Zone"
     },
     {
@@ -197,6 +222,7 @@ scenarios = [
         "total_holding": 2.5, "qual_parcel": 2.5, "subsidized_ha": "—",
         "lclass": "Small", "social": "GM", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Rainfed (None)", "electric_status": "NONE",
         "policy": "**Challenge 3 & Boundary test:** Exactly 2.5 ac (Small); income tax payer -> PM-KISAN INELIGIBLE"
     },
     {
@@ -205,6 +231,7 @@ scenarios = [
         "total_holding": 7.5, "qual_parcel": 7.5, "subsidized_ha": "—",
         "lclass": "Medium", "social": "OBC", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Borewell (Grid-connected)", "electric_status": "GRID_CONNECTED_IP_SET",
         "policy": "SMAM machinery subsidy for arecanut cultivation; Medium holding (7.5 ac); OBC"
     },
     {
@@ -213,7 +240,8 @@ scenarios = [
         "total_holding": 11.0, "qual_parcel": 11.0, "subsidized_ha": 4.45,
         "lclass": "Large", "social": "GM", "tenure": "Pre-Feb 2019",
         "pool": "No",
-        "policy": "**Challenge 8:** Large holding (11.0 ac); PMKSY-PDMC evaluated against 5-ha (~12.36 ac) ceiling; requested 4.45 ha <= 5.0 ha"
+        "water_source": "Borewell (Grid-connected)", "electric_status": "GRID_CONNECTED_IP_SET",
+        "policy": "**Challenge 8:** Large holding (11.0 ac); PMKSY-PDMC evaluated against 5-ha (~12.36 ac) ceiling; requested 4.45 ha <= 11.0 ac (4.451 ha) and <= 5.00 ha ceiling"
     },
 
     # --- ZONE 5: Eastern Dry Zone (Kolar, Chikkaballapura, Bengaluru Rural) ---
@@ -223,6 +251,7 @@ scenarios = [
         "total_holding": 1.5, "qual_parcel": 1.5, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "SC", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Borewell (Grid-connected)", "electric_status": "GRID_CONNECTED_IP_SET",
         "policy": "MIDH polyhouse structure; SC marginal horticulture farmer"
     },
     {
@@ -231,6 +260,7 @@ scenarios = [
         "total_holding": 3.0, "qual_parcel": 3.0, "subsidized_ha": "—",
         "lclass": "Small", "social": "Minority", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Borewell (Grid-connected)", "electric_status": "GRID_CONNECTED_IP_SET",
         "policy": "**Challenge 6:** KCC commercial credit vs. PACS cooperative credit for sericulture; Minority"
     },
     {
@@ -239,7 +269,8 @@ scenarios = [
         "total_holding": 2.5, "qual_parcel": 2.5, "subsidized_ha": 1.01,
         "lclass": "Small", "social": "ST", "tenure": "Pre-Feb 2019",
         "pool": "No",
-        "policy": "**Boundary test:** Exactly 2.5 ac (Small); PMKSY-PDMC drip for mango orchard"
+        "water_source": "Borewell (Grid-connected)", "electric_status": "GRID_CONNECTED_IP_SET",
+        "policy": "**Boundary test:** Exactly 2.5 ac (Small); PMKSY-PDMC drip for mango orchard; requested 1.01 ha <= 2.5 ac (1.012 ha)"
     },
     {
         "sid": "S038", "zone": "Z5", "dist": "Kolar", "crop": "Tomato",
@@ -247,6 +278,7 @@ scenarios = [
         "total_holding": 1.2, "qual_parcel": 1.2, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "GM", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Rainfed (None)", "electric_status": "NONE",
         "policy": "**Challenge 2:** Post-harvest price collapse distress; KCC debt must not receive score 3"
     },
     {
@@ -255,6 +287,7 @@ scenarios = [
         "total_holding": 2.0, "qual_parcel": 2.0, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "SC", "tenure": "Post-Feb 2019 Inheritance",
         "pool": "No",
+        "water_source": "Rainfed (None)", "electric_status": "NONE",
         "policy": "PM-KISAN inheritance partition exemption test; legal family succession verified"
     },
     {
@@ -263,6 +296,7 @@ scenarios = [
         "total_holding": 5.0, "qual_parcel": 5.0, "subsidized_ha": "—",
         "lclass": "Small", "social": "OBC", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Borewell (Grid-connected)", "electric_status": "GRID_CONNECTED_IP_SET",
         "policy": "**Boundary test:** Exactly 5.0 acres (Small/Medium boundary, <= 5.0 is Small); SMAM orchard implements"
     },
 
@@ -273,7 +307,8 @@ scenarios = [
         "total_holding": 6.5, "qual_parcel": 6.5, "subsidized_ha": 2.50,
         "lclass": "Medium", "social": "GM", "tenure": "Pre-Feb 2019",
         "pool": "No",
-        "policy": "PMKSY-PDMC drip irrigation in irrigated sugarcane canal command; Medium holding (6.5 ac)"
+        "water_source": "Canal & Storage Tank", "electric_status": "NONE",
+        "policy": "PMKSY-PDMC drip irrigation in irrigated sugarcane canal command; requested 2.50 ha <= 6.5 ac (2.630 ha); Medium holding (6.5 ac)"
     },
     {
         "sid": "S042", "zone": "Z6", "dist": "Mysuru", "crop": "Paddy",
@@ -281,6 +316,7 @@ scenarios = [
         "total_holding": 3.5, "qual_parcel": 3.5, "subsidized_ha": "—",
         "lclass": "Small", "social": "SC", "tenure": "Pure Tenant",
         "pool": "No",
+        "water_source": "Canal Flow", "electric_status": "NONE",
         "policy": "**Challenge 5:** Pure tenant paddy; PMFBY coverage with tenancy documentation verification"
     },
     {
@@ -289,6 +325,7 @@ scenarios = [
         "total_holding": 1.8, "qual_parcel": 1.8, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "ST", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "None (Dryland kushki)", "electric_status": "NONE",
         "policy": "Ganga Kalyana individual borewell (Valmiki Corp); ST marginal dryland farmer; REQUIRES_VERIFICATION (provisional corporation rules)"
     },
     {
@@ -297,6 +334,7 @@ scenarios = [
         "total_holding": 2.0, "qual_parcel": 2.0, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "OBC", "tenure": "Pure Tenant",
         "pool": "No",
+        "water_source": "Canal Flow", "electric_status": "NONE",
         "policy": "**Challenge 2 & Challenge 5:** Pure tenant wetland paddy; PM-KISAN INELIGIBLE due to lack of land title; relief vs. credit"
     },
     {
@@ -305,6 +343,7 @@ scenarios = [
         "total_holding": 1.5, "qual_parcel": 1.5, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "SC", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Rainfed Catchment", "electric_status": "NONE",
         "policy": "Krishi Bhagya farm pond; SC dryland farmer in Southern Dry Zone"
     },
     {
@@ -313,6 +352,7 @@ scenarios = [
         "total_holding": 7.0, "qual_parcel": 7.0, "subsidized_ha": "—",
         "lclass": "Medium", "social": "GM", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Canal Command", "electric_status": "NONE",
         "policy": "Soil Health Card soil profiling for medium sugarcane holding (7.0 ac); GM"
     },
 
@@ -323,6 +363,7 @@ scenarios = [
         "total_holding": 5.5, "qual_parcel": 5.5, "subsidized_ha": "—",
         "lclass": "Medium", "social": "GM", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Canal Command", "electric_status": "NONE",
         "policy": "SMAM tractor/thresher implements subsidy; Medium holding (5.5 ac); GM"
     },
     {
@@ -331,6 +372,7 @@ scenarios = [
         "total_holding": 2.0, "qual_parcel": 2.0, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "ST", "tenure": "Unknown Title Status",
         "pool": "No",
+        "water_source": "Borewell (Grid-connected)", "electric_status": "GRID_CONNECTED_IP_SET",
         "policy": "**Challenge 4:** Pension MTS exemption unknown & title status UNKNOWN -> REQUIRES_VERIFICATION for land-dependent schemes"
     },
     {
@@ -339,6 +381,7 @@ scenarios = [
         "total_holding": 4.5, "qual_parcel": 4.5, "subsidized_ha": "—",
         "lclass": "Small", "social": "GM", "tenure": "Post-Feb 2019 Inheritance",
         "pool": "No",
+        "water_source": "Borewell (Grid-connected)", "electric_status": "GRID_CONNECTED_IP_SET",
         "policy": "MIDH shade-net structure for commercial seed potato; post-2019 inheritance exemption test"
     },
     {
@@ -347,6 +390,7 @@ scenarios = [
         "total_holding": 3.5, "qual_parcel": 3.5, "subsidized_ha": "—",
         "lclass": "Small", "social": "OBC", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Borewell (Grid-connected)", "electric_status": "GRID_CONNECTED_IP_SET",
         "policy": "**Challenge 6:** KCC commercial credit vs. PACS cooperative credit; arecanut garden"
     },
     {
@@ -355,7 +399,8 @@ scenarios = [
         "total_holding": 2.5, "qual_parcel": 2.5, "subsidized_ha": "—",
         "lclass": "Small", "social": "Minority", "tenure": "Pre-Feb 2019",
         "pool": "No",
-        "policy": "**Boundary test:** Exactly 2.5 ac (Small); PM-KUSUM B solar pump; unenergized borewell; Minority"
+        "water_source": "Borewell (Non-energized)", "electric_status": "UNENERGIZED_OFF_GRID",
+        "policy": "**Boundary test:** Exactly 2.5 ac (Small); water source: unenergized borewell; electric status: UNENERGIZED_OFF_GRID; PM-KUSUM B solar pump; Minority"
     },
     {
         "sid": "S052", "zone": "Z7", "dist": "Chikkamagaluru", "crop": "Potato",
@@ -363,6 +408,7 @@ scenarios = [
         "total_holding": 9.5, "qual_parcel": 4.0, "subsidized_ha": "—",
         "lclass": "Medium", "social": "OBC", "tenure": "Pre-Feb 2019",
         "pool": "Yes (3 farmers, 12.0 ac pooled, contiguous)",
+        "water_source": "None (Dryland kushki)", "electric_status": "NONE",
         "policy": "**Challenge 7:** Individual dryland > 5 ac ineligible for indiv borewell; community pool route (3 farmers, 12.0 ac pooled contiguous dryland, qualifying parcel 4.0 ac); REQUIRES_VERIFICATION (provisional Devaraj Urs corporation rules)"
     },
 
@@ -373,6 +419,7 @@ scenarios = [
         "total_holding": 5.5, "qual_parcel": 5.5, "subsidized_ha": "—",
         "lclass": "Medium", "social": "Minority", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Rainfed Catchment", "electric_status": "NONE",
         "policy": "Krishi Bhagya farm pond; medium holding (5.5 ac); Northern Transition Zone; Minority"
     },
     {
@@ -381,6 +428,7 @@ scenarios = [
         "total_holding": 1.5, "qual_parcel": 1.5, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "SC", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Open Well / Stream Lift", "electric_status": "NONE",
         "policy": "MIDH shade-net structure for high-value chilli; SC marginal farmer"
     },
     {
@@ -389,6 +437,7 @@ scenarios = [
         "total_holding": 3.0, "qual_parcel": 3.0, "subsidized_ha": "—",
         "lclass": "Small", "social": "GM", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Rainfed (None)", "electric_status": "NONE",
         "policy": "**Challenge 3:** Regular government officer -> PM-KISAN INELIGIBLE statutory exclusion"
     },
     {
@@ -397,6 +446,7 @@ scenarios = [
         "total_holding": 4.0, "qual_parcel": 4.0, "subsidized_ha": "—",
         "lclass": "Small", "social": "ST", "tenure": "Unknown Title Status",
         "pool": "No",
+        "water_source": "Rainfed (None)", "electric_status": "NONE",
         "policy": "**Challenge 4:** Land title UNKNOWN -> SHC accessible; title-dependent schemes trigger REQUIRES_VERIFICATION"
     },
     {
@@ -405,15 +455,17 @@ scenarios = [
         "total_holding": 12.0, "qual_parcel": 12.0, "subsidized_ha": "—",
         "lclass": "Large", "social": "OBC", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Canal Command", "electric_status": "NONE",
         "policy": "**Challenge 8:** Large holding (12.0 ac); SMAM evaluated per scheme machinery tier; no blanket exclusion"
     },
     {
         "sid": "S058", "zone": "Z8", "dist": "Haveri", "crop": "Soybean",
         "need": "MICRO_IRRIGATION_SUPPORT", "land_type": "Borewell-irrigated",
-        "total_holding": 11.5, "qual_parcel": 11.5, "subsidized_ha": 5.00,
+        "total_holding": 12.5, "qual_parcel": 12.5, "subsidized_ha": 5.00,
         "lclass": "Large", "social": "GM", "tenure": "Pre-Feb 2019",
         "pool": "No",
-        "policy": "**Challenge 8 & Boundary test:** Large holding (11.5 ac); PMKSY-PDMC boundary test at exactly 5.00 ha (~12.36 ac) statutory ceiling"
+        "water_source": "Borewell (Grid-connected)", "electric_status": "GRID_CONNECTED_IP_SET",
+        "policy": "**Challenge 8 & Boundary test:** Large holding (12.5 ac holding & qualifying parcel); PMKSY-PDMC boundary test at exactly 5.00 ha (~12.36 ac) statutory ceiling; 5.00 ha <= 12.5 ac (5.059 ha)"
     },
 
     # --- ZONE 9: Hilly Zone (Kodagu, Chikkamagaluru Ghats, Uttara Kannada Ghats) ---
@@ -423,6 +475,7 @@ scenarios = [
         "total_holding": 4.5, "qual_parcel": 4.5, "subsidized_ha": "—",
         "lclass": "Small", "social": "GM", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Hillside Stream Catchment", "electric_status": "NONE",
         "policy": "Soil Health Card soil testing for plantation coffee in Hilly Zone"
     },
     {
@@ -431,6 +484,7 @@ scenarios = [
         "total_holding": 2.0, "qual_parcel": 2.0, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "ST", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Hillside Stream Catchment", "electric_status": "NONE",
         "policy": "Water harvesting storage structure for hillside cardamom plantation; ST"
     },
     {
@@ -439,6 +493,7 @@ scenarios = [
         "total_holding": 3.0, "qual_parcel": 3.0, "subsidized_ha": "—",
         "lclass": "Small", "social": "SC", "tenure": "Pure Tenant",
         "pool": "No",
+        "water_source": "Valley Natural Flow", "electric_status": "NONE",
         "policy": "**Challenge 5:** Hill zone valley paddy pure tenant; KCC tenant route; PMFBY verification"
     },
     {
@@ -447,6 +502,7 @@ scenarios = [
         "total_holding": 1.8, "qual_parcel": 1.8, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "GM", "tenure": "Unknown Title Status",
         "pool": "No",
+        "water_source": "Hillside Rainfed", "electric_status": "NONE",
         "policy": "**Challenge 4:** Land title UNKNOWN -> land-dependent schemes trigger REQUIRES_VERIFICATION"
     },
     {
@@ -455,7 +511,8 @@ scenarios = [
         "total_holding": 2.5, "qual_parcel": 2.5, "subsidized_ha": "—",
         "lclass": "Small", "social": "Minority", "tenure": "Pre-Feb 2019",
         "pool": "No",
-        "policy": "**Boundary test:** Exactly 2.5 ac (Small); PM-KUSUM B solar pump for off-grid plantation; Minority"
+        "water_source": "Borewell (Non-energized)", "electric_status": "UNENERGIZED_OFF_GRID",
+        "policy": "**Boundary test:** Exactly 2.5 ac (Small); water source: unenergized borewell; electric status: UNENERGIZED_OFF_GRID; PM-KUSUM B solar pump for off-grid plantation; Minority"
     },
     {
         "sid": "S064", "zone": "Z9", "dist": "Uttara Kannada", "crop": "Paddy",
@@ -463,6 +520,7 @@ scenarios = [
         "total_holding": 8.0, "qual_parcel": 8.0, "subsidized_ha": "—",
         "lclass": "Medium", "social": "OBC", "tenure": "Post-Feb 2019 Inheritance",
         "pool": "No",
+        "water_source": "Canal Command", "electric_status": "NONE",
         "policy": "SMAM power tiller/paddy transplanter subsidy; medium holding (8.0 ac); post-2019 inheritance partition"
     },
 
@@ -473,6 +531,7 @@ scenarios = [
         "total_holding": 14.0, "qual_parcel": 14.0, "subsidized_ha": "—",
         "lclass": "Large", "social": "GM", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Rainfed Coastal", "electric_status": "NONE",
         "policy": "Soil Health Card universal diagnostic service for large coastal plantation (14.0 ac); GM"
     },
     {
@@ -481,6 +540,7 @@ scenarios = [
         "total_holding": 5.5, "qual_parcel": 3.5, "subsidized_ha": "—",
         "lclass": "Medium", "social": "SC", "tenure": "Pre-Feb 2019",
         "pool": "Yes (4 farmers, 14.0 ac pooled, contiguous)",
+        "water_source": "None (Dryland kushki)", "electric_status": "NONE",
         "policy": "**Challenge 7:** Individual holding 5.5 ac exceeds 5.0 ac individual Ambedkar ceiling; community pool route valid with 4 SC farmers, 14.0 ac pooled contiguous dryland, qualifying parcel 3.5 ac; requires verification of parcel contiguity & groundwater clearance"
     },
     {
@@ -489,6 +549,7 @@ scenarios = [
         "total_holding": 2.0, "qual_parcel": 2.0, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "ST", "tenure": "Pre-Feb 2019",
         "pool": "No",
+        "water_source": "Rainfed Coastal", "electric_status": "NONE",
         "policy": "PMFBY cashew crop insurance in coastal plantation belt; ST marginal farmer"
     },
     {
@@ -497,6 +558,7 @@ scenarios = [
         "total_holding": 1.5, "qual_parcel": 1.5, "subsidized_ha": "—",
         "lclass": "Marginal", "social": "Minority", "tenure": "Pure Tenant",
         "pool": "No",
+        "water_source": "Wetland Inflow", "electric_status": "NONE",
         "policy": "**Challenge 5:** Pure tenant coastal wetland paddy; KCC crop loan & PMFBY insurance proof check; Minority"
     },
     {
@@ -505,6 +567,7 @@ scenarios = [
         "total_holding": 13.0, "qual_parcel": 13.0, "subsidized_ha": "—",
         "lclass": "Large", "social": "Minority", "tenure": "Post-Feb 2019 Inheritance",
         "pool": "No",
+        "water_source": "Open Well / Rainfed", "electric_status": "NONE",
         "policy": "MIDH coastal nursery / shade-net; Large holding (13.0 ac); Minority; post-2019 inheritance exemption test"
     },
     {
@@ -513,13 +576,14 @@ scenarios = [
         "total_holding": 12.5, "qual_parcel": 12.5, "subsidized_ha": 4.80,
         "lclass": "Large", "social": "SC", "tenure": "Unknown Title Status",
         "pool": "No",
-        "policy": "**Challenge 8:** Large holding (12.5 ac); PMKSY-PDMC requested 4.80 ha <= 5.00 ha; title status UNKNOWN -> REQUIRES_VERIFICATION"
+        "water_source": "Borewell (Grid-connected)", "electric_status": "GRID_CONNECTED_IP_SET",
+        "policy": "**Challenge 8:** Large holding (12.5 ac); PMKSY-PDMC requested 4.80 ha <= 12.5 ac (5.059 ha) and <= 5.00 ha ceiling; title status UNKNOWN -> REQUIRES_VERIFICATION"
     }
 ]
 
 def validate_matrix(data):
     print("==================================================")
-    print("BENCHMARK V1.0.2 MATRIX VALIDATION REPORT")
+    print("BENCHMARK V1.0.3 MATRIX VALIDATION REPORT")
     print("==================================================")
     failures = []
     
@@ -653,9 +717,55 @@ def validate_matrix(data):
         if cnt != tgt:
             failures.append(f"Land type {lt} count {cnt} != {tgt}")
 
+    # 10. Cross-Field Area Validation: Subsidized Area (ha) <= Qualifying Parcel (ha)
+    print("\nCross-Field Area Validation (Requested Subsidized Area ha <= Qualifying Parcel ha):")
+    area_checked = 0
+    area_failures = []
+    for s in data:
+        if s["subsidized_ha"] != "—":
+            area_checked += 1
+            req_ha = float(s["subsidized_ha"])
+            max_phys_ha = s["qual_parcel"] * HA_PER_ACRE
+            # Allow 1e-4 tolerance for floating point
+            if req_ha > (max_phys_ha + 1e-4):
+                area_failures.append(
+                    f"{s['sid']}: requested {req_ha:.2f} ha exceeds physical capacity of qualifying parcel {s['qual_parcel']} ac ({max_phys_ha:.4f} ha)"
+                )
+                print(f"  {s['sid']}: req={req_ha:.2f} ha > qual_parcel={s['qual_parcel']} ac ({max_phys_ha:.4f} ha) -> FAIL")
+            else:
+                print(f"  {s['sid']}: req={req_ha:.2f} ha <= qual_parcel={s['qual_parcel']} ac ({max_phys_ha:.4f} ha) -> PASS")
+
+    print(f"Total Subsidized Area Cases Verified: {area_checked}")
+    if area_failures:
+        failures.extend(area_failures)
+
+    # 11. Solar Pump Prerequisite Attributes Validation
+    print("\nSolar Pump Prerequisite Validation (Water Source & Grid Electric Status):")
+    solar_checked = 0
+    solar_failures = []
+    for s in data:
+        if s["need"] == "SOLAR_PUMP_INSTALLATION":
+            solar_checked += 1
+            ws = s.get("water_source", "")
+            es = s.get("electric_status", "")
+            if not ws or ws == "Rainfed (None)":
+                solar_failures.append(f"{s['sid']}: Solar pump requires valid water source, found '{ws}'")
+            if not es:
+                solar_failures.append(f"{s['sid']}: Solar pump requires explicit electric_status")
+            if s["sid"] == "S020":
+                if es != "UNKNOWN" or "REQUIRES_VERIFICATION" not in s["policy"]:
+                    solar_failures.append(f"{s['sid']}: S020 must have electric_status UNKNOWN and policy REQUIRES_VERIFICATION")
+            elif es != "UNENERGIZED_OFF_GRID":
+                solar_failures.append(f"{s['sid']}: Off-grid solar pump requires UNENERGIZED_OFF_GRID, found '{es}'")
+            print(f"  {s['sid']}: water_source='{ws}', electric_status='{es}', status={'PASS' if not solar_failures else 'CHECK'}")
+
+    print(f"Total Solar Pump Cases Verified: {solar_checked} / 6")
+    if solar_failures:
+        failures.extend(solar_failures)
+
     print("\n--------------------------------------------------")
     if not failures:
-        print("OVERALL STATUS: ALL 8 DIMENSIONS PASSED PERFECTLY!")
+        print("OVERALL STATUS: ALL DIMENSIONS & CROSS-FIELD CHECKS PASSED PERFECTLY!")
         return True
     else:
         print(f"OVERALL STATUS: {len(failures)} FAILURES DETECTED!")
