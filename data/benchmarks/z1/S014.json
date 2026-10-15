@@ -1,0 +1,65 @@
+{
+  "scenario_id": "S014",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z1",
+  "agro_climatic_zone": "North Eastern Transition Zone",
+  "district": "Kalaburagi",
+  "crop_primary": "Soybean",
+  "crop_secondary": "Redgram",
+  "land_size_acres": 2.2,
+  "land_type": "Dryland (Rainfed)",
+  "social_category": "ST",
+  "farmer_category": "Marginal (< 2.5 acres)",
+  "existing_assets": [],
+  "annual_family_income_lakh": 1.1,
+  "immediate_need": "PRODUCTION_CREDIT",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "NONE",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Pre-Sowing / Input Procurement",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "Marginal tribal farmer in Sedam, Kalaburagi preparing for Kharif soybean sowing; need short-term crop loan for seeds and fertilizer; want to know interest subvention rate between Grameena Bank KCC and local PACS cooperative society.",
+  "landholding_details": {
+    "total_operational_holding_acres": 2.2,
+    "qualifying_parcel_acres": 2.2,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "[0.0, 2.5) Marginal",
+    "physical_area_consistency": "PASS: 2.2 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Rainfed Dryland (No operational water source)",
+    "borewell_electric_status": "NONE",
+    "grid_connection_evidence": "Not applicable \u2014 no water extraction equipment"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "NSS 77th Round: Marginal ST dryland cultivators in Kalaburagi, seasonal borrowing dependency for Kharif inputs.",
+    "farmer_query_inspiration": "KCC Karnataka credit query logs: Marginal farmers comparing commercial bank KCC credit versus zero-interest cooperative loans through Primary Agricultural Credit Societies (PACS).",
+    "statutory_policy_test": "Benchmark Challenge 6 (Competing Credit Channels): Tests handling of dual credit routes; Central KCC-MISS is scored in Section A (4% interest up to Rs. 3 Lakh); Karnataka Cooperative Zero-Interest Credit is retained as PROVISIONAL in Section B pending active financial year Government Order verification."
+  },
+  "intended_test_purpose": "Evaluate Challenge 6 credit routing; confirm ST routing under Maharshi Valmiki ST Development Corporation for Ganga Kalyana; confirm KCC-MISS eligibility and PACS provisional status.",
+  "unresolved_dependencies": [
+    "Karnataka Cooperative Department Annual Government Order specifying interest subvention allocation for PACS/DCCBs for FY 2026-27 (SCH008_KA_COOP provisional status)",
+    "Maharshi Valmiki Scheduled Tribes Development Corporation annual circular verification (SCH010_VALMIKI provisional status)"
+  ]
+}

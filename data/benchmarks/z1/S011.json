@@ -1,0 +1,65 @@
+{
+  "scenario_id": "S011",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z1",
+  "agro_climatic_zone": "North Eastern Transition Zone",
+  "district": "Bidar",
+  "crop_primary": "Redgram",
+  "crop_secondary": "Soybean",
+  "land_size_acres": 1.8,
+  "land_type": "Dryland (Rainfed)",
+  "social_category": "OBC (2A)",
+  "farmer_category": "Marginal (< 2.5 acres)",
+  "existing_assets": [],
+  "annual_family_income_lakh": 1.4,
+  "immediate_need": "CROP_INSURANCE",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "NONE",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Standing Crop / Pod Development",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "Redgram crop in Aurad taluk, Bidar suffering from severe pod borer and wilt attack; flower dropping observed; need immediate compensation claim procedure under PMFBY and advisory.",
+  "landholding_details": {
+    "total_operational_holding_acres": 1.8,
+    "qualifying_parcel_acres": 1.8,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "[0.0, 2.5) Marginal",
+    "physical_area_consistency": "PASS: 1.8 ac holding matches parcel; no micro-irrigation area requested"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Rainfed Dryland (No borewell or open well present)",
+    "borewell_electric_status": "NONE",
+    "grid_connection_evidence": "Not applicable \u2014 no water extraction equipment installed"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "Registered land RTC record verified pre-February 2019"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "NSS 77th Round (Schedule 33.1, Karnataka North Eastern Transition Zone): marginal dryland pulse farmers in Bidar district, average operational holding ~1.8 acres, redgram-soybean intercropping.",
+    "farmer_query_inspiration": "Kisan Call Centre (KCC) Karnataka call records: Kharif pulse pest distress (pod borer / wilt) and PMFBY claim inquiries in Bidar district.",
+    "statutory_policy_test": "Deliberately constructed policy test: Evaluates universal PMFBY coverage for rainfed redgram; confirms OBC category routing to D. Devaraj Urs Backward Classes Development Corporation (excluding Ambedkar/Valmiki corporations); baseline statutory pass for PM-KISAN without tax/service exclusions."
+  },
+  "intended_test_purpose": "Standard multi-need rainfed pulse profile in Zone Z1; validates PMFBY as primary candidate; tests OBC routing in Ganga Kalyana; tests parent-child credit resolution.",
+  "unresolved_dependencies": [
+    "Kharif 2026 PMFBY insurance unit notification and threshold yield for Bidar taluks",
+    "Operational circulars of D. Devaraj Urs Backward Classes Development Corporation (remains provisionally modeled in registry)"
+  ]
+}

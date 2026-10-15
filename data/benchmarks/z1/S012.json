@@ -1,0 +1,66 @@
+{
+  "scenario_id": "S012",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z1",
+  "agro_climatic_zone": "North Eastern Transition Zone",
+  "district": "Kalaburagi",
+  "crop_primary": "Maize",
+  "crop_secondary": "Redgram",
+  "land_size_acres": 3.0,
+  "land_type": "Dryland (Rainfed)",
+  "social_category": "SC",
+  "farmer_category": "Small (2.5-5 acres)",
+  "existing_assets": [
+    "Borewell (Non-energized)"
+  ],
+  "annual_family_income_lakh": 1.8,
+  "immediate_need": "SOLAR_PUMP_INSTALLATION",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "UNENERGIZED_OFF_GRID",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Pre-Sowing / Land Preparation",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "Drilled 400ft borewell in Aland taluk, Kalaburagi with good yield but no electricity line nearby; GESCOM waiting list is long; need standalone solar pump subsidy under PM-KUSUM Component B.",
+  "landholding_details": {
+    "total_operational_holding_acres": 3.0,
+    "qualifying_parcel_acres": 3.0,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "[2.5, 5.0] Small",
+    "physical_area_consistency": "PASS: 3.0 ac holding matches qualifying parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Borewell (Non-energized)",
+    "borewell_electric_status": "UNENERGIZED_OFF_GRID",
+    "grid_connection_evidence": "Verified non-energized borewell; GESCOM non-energization certificate confirmed; no existing grid IP-set connection"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "NSS 77th Round (Karnataka): Small dryland holding in Kalaburagi, capital-constrained farmer investing in unenergized groundwater extraction.",
+    "farmer_query_inspiration": "KCC Karnataka solar pump query logs: Farmers with privately drilled borewells awaiting grid energization seeking off-grid solar alternatives.",
+    "statutory_policy_test": "Benchmark Challenge 1 (Civil Works & Package Complexity): Standalone solar pump requested; Krishi Bhagya passes statutory eligibility as dryland SC farmer, but Protocol v1.1 Rule 1 penalizes Krishi Bhagya (<= 1) due to unrequested civil excavation, making PM-KUSUM B the high-priority score 3 candidate. Also tests disqualification of Ganga Kalyana due to existing borewell."
+  },
+  "intended_test_purpose": "Evaluate PM-KUSUM Component B standalone solar pump eligibility with verified unenergized borewell; test Protocol v1.1 Rule 1 preference over Krishi Bhagya package; verify Ganga Kalyana exclusion on existing borewell.",
+  "unresolved_dependencies": [
+    "KREDL PM-KUSUM Component B vendor empanelment and online application window dates for 2026-27"
+  ]
+}

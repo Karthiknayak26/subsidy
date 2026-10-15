@@ -1,0 +1,64 @@
+{
+  "scenario_id": "S015",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z1",
+  "agro_climatic_zone": "North Eastern Transition Zone",
+  "district": "Bidar",
+  "crop_primary": "Jowar",
+  "crop_secondary": "Bengalgram",
+  "land_size_acres": 1.5,
+  "land_type": "Dryland (Rainfed)",
+  "social_category": "SC",
+  "farmer_category": "Marginal (< 2.5 acres)",
+  "existing_assets": [],
+  "annual_family_income_lakh": 0.9,
+  "immediate_need": "INCOME_SUPPORT",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "NONE",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Standing Crop / Grain Filling",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "Dryland jowar in Humnabad taluk, Bidar facing severe moisture stress; family has acute cash shortage for daily food and medicine; need non-repayable government cash assistance or pension relief, cannot take more bank debt.",
+  "landholding_details": {
+    "total_operational_holding_acres": 1.5,
+    "qualifying_parcel_acres": 1.5,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "[0.0, 2.5) Marginal",
+    "physical_area_consistency": "PASS: 1.5 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Rainfed Dryland (No operational water source)",
+    "borewell_electric_status": "NONE",
+    "grid_connection_evidence": "Not applicable \u2014 no water extraction equipment"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "NSS 77th Round: Marginal SC dryland jowar farmers in Bidar, low non-farm income (< \u20b91 Lakh), high vulnerability to agricultural dry spells.",
+    "farmer_query_inspiration": "KCC Karnataka distress query logs: Farmers seeking direct cash assistance / Parihara / PM-KISAN installment status rather than credit during crop failure.",
+    "statutory_policy_test": "Benchmark Challenge 2 (Relief vs. Reimbursable Debt): Immediate need is non-repayable INCOME_SUPPORT; Protocol v1.1 Rule 2 dictates that loan/credit schemes (KCC) must NOT receive score 3 when farmer explicitly seeks direct income relief; PM-KISAN cash transfer is the primary candidate (score 3). Also tests Ambedkar Corp individual route boundary at exactly 1.5 acres."
+  },
+  "intended_test_purpose": "Evaluate Challenge 2 handling for income distress; verify PM-KISAN priority over repayable debt; test lower acreage bound of 1.5 acres for Ambedkar Corporation individual borewell route.",
+  "unresolved_dependencies": [
+    "Aadhaar-land seeding (DBT/NPCI bank mapper verification) status for PM-KISAN installment disbursement"
+  ]
+}
