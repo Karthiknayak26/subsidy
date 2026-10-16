@@ -4,7 +4,7 @@
 **Execution Date:** October 16, 2026  
 **Agro-Climatic Zone:** Northern Transition Zone (Zone Z8 — Dharwad, Belagavi, Haveri)  
 **Total Scenarios Evaluated:** Exactly 6 (`S053`–`S058`)  
-**Audit Scope:** Exactly six detailed scenarios (`S053`–`S058`) evaluated across all 16 scheme records (6 parent/standalone + 10 child/standalone).  
+**Audit Scope:** Exactly six detailed scenarios (`S053`–`S058`) evaluated across all 16 scheme records (8 standalone records, 2 parent records, and 6 child records).  
 
 ## 1. Executive Summary & Project Invariants
 
@@ -18,7 +18,7 @@ This report documents the rule-validation and governance audit of the eighth bat
 6. **Crop Insurance Decoupling (PMFBY/RWBCIS):** Static whitelist results from the raw engine are decoupled from governance presentation across all six scenarios. Unverified seasonal Insurance Unit (Gram Panchayat/Hobli level) notifications are strictly routed to Section B as `REQUIRES_VERIFICATION` with numerical scoring disabled.
 7. **Provisional Schemes Quarantine:** Corporation schemes (`SCH008_KA_COOP`, `SCH010_VALMIKI`, `SCH010_KMDC`) are strictly quarantined in Section B without clinical scoring.
 8. **Challenge 4: Three-Valued Logic & Unknown Title Handling (S056):** Missing land title cut-off date (`land_ownership_cutoff_pre_feb_2019 = None`) strictly returns `REQUIRES_VERIFICATION` in PM-KISAN (`PMKISAN_CUTOFF_DATE_UNKNOWN`) and routes title-dependent capital schemes (Krishi Bhagya, Valmiki Corporation) to Section B. Universal diagnostic access for Soil Health Card (`SCH009`) is preserved in Section A.
-9. **Challenge 8 & Boundary Test: Large Holding PMKSY-PDMC Area Cap (S058):** The raw engine determination (`INELIGIBLE` under `PMKSY_LAND_ABOVE_5_HA`) is strictly preserved. In governance presentation, PMKSY-PDMC qualifies in Section A at the 5.00 ha statutory ceiling because the applicant requested exactly 5.00 ha, cleanly accommodated by the 12.5-acre qualifying parcel ($5.00 \le 12.5 \times 0.404686 = 5.059$ ha).
+9. **Challenge 8 & Boundary Test: Large Holding PMKSY-PDMC Area Cap & Repeat Subsidy Restriction (S058):** The raw engine determination (`INELIGIBLE` under `PMKSY_LAND_ABOVE_5_HA`) is strictly preserved. In governance presentation, PMKSY-PDMC qualifies in Section A at the 5.00 ha statutory ceiling pursuant to PMKSY-PDMC Revised Operational Guidelines 2023 Section 7.9 (financial assistance capped at 5.00 ha per beneficiary family rather than blanket disqualifying large holdings; $5.00 \le 12.5 \times 0.404686 = 5.059$ ha physical capacity). Furthermore, per Section 7.10, S058's data contract explicitly declares `prior_micro_irrigation_subsidy_years_ago = None` as confirmed zero prior subsidy (`EXPLICIT_NO_PRIOR_SUBSIDY`), satisfying the 7-year repeat-assistance restriction (engine rule `PMKSY_NO_PRIOR_SUBSIDY`).
 10. **Challenge 3: Regular Government Officer Exclusion (S055):** Regular government officer is strictly disqualified from PM-KISAN under `PMKISAN_REGULAR_OFFICER_EXCLUSION`, with no spillover to universal or non-statutorily excluded schemes.
 
 ## 2. Zone Z8 Scenario Input Overview (S053–S058)
@@ -177,7 +177,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 
 ### 4.8 Scenario S058: Haveri — Soybean (12.5 ac, General (OC))
 
-- **Context & Need:** Challenge 8 and boundary test: PMKSY-PDMC 5.00 ha ceiling at exactly 5.00 ha requested; 12.5 ac / 5.059 ha physical capacity PASS; PMKSY-PDMC qualifies in Section A; Ganga Kalyana and PM-KUSUM B disqualified by existing grid borewell.
+- **Context & Need:** Challenge 8 and boundary test: PMKSY-PDMC 5.00 ha ceiling at exactly 5.00 ha requested (PMKSY-PDMC 2023 Guidelines §7.9); explicit first-time applicant status (§7.10 7-year lock-in satisfied); 12.5 ac / 5.059 ha physical capacity PASS; PMKSY-PDMC qualifies in Section A; Ganga Kalyana and PM-KUSUM B disqualified by existing grid borewell.
 - **Physical Area Consistency:** `PASS: requested 5.00 ha <= 12.5 ac (5.059 ha) qualifying parcel; satisfies PMKSY-PDMC 5.00 ha statutory ceiling`
 - **Water Infrastructure:** Borewell (Grid-connected) (`GRID_CONNECTED_IP_SET`)
 - **Statutory Flags:** Tenure=`RTC registered pre-February 2019 in Savanur taluk, Haveri district`, Income Tax=`False`, Govt Employee=`NONE`
@@ -186,7 +186,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 |:---|:---|:---:|:---:|:---|:---:|:---|
 | `SCH001` | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned ELIGIBLE based on static crop whitelist, but PMFBY claims ar... |
-| `SCH003` | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `INELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Governance Area Capping Determination: Raw engine returned INELIGIBLE due to tot... |
+| `SCH003` | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `INELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Governance Area Capping & Prior Subsidy Determination: Raw engine returned INELI... |
 | `SCH004` | Sub-Mission on Agricultural Mechanization (SMAM) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH005` | Krishi Bhagya Yojana | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
 | `SCH006` | PM-KUSUM Component B (Standalone Solar Agriculture Pumps) | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |

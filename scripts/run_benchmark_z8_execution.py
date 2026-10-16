@@ -425,6 +425,17 @@ ZONE_Z8_PROFILES: List[Dict[str, Any]] = [
             "borewell_electric_status": "GRID_CONNECTED_IP_SET",
             "grid_connection_evidence": "HESCOM energized 10 HP IP set; partial sprinkler network installed"
         },
+        "prior_subsidy_history": {
+            "prior_micro_irrigation_subsidy_years_ago": None,
+            "interpretation": "EXPLICIT_NO_PRIOR_SUBSIDY",
+            "factual_declaration": "First-time micro-irrigation applicant; applicant and beneficiary family have never previously availed micro-irrigation capital assistance on this parcel or any other holding.",
+            "regulatory_framework": "PMKSY-PDMC Revised Operational Guidelines 2023",
+            "statutory_clauses": {
+                "section_7_9_area_ceiling": "Section 7.9: Financial assistance is limited to 5.0 hectares per beneficiary family (either in contiguous or distributed parcels). S058 requests exactly 5.00 ha within a 12.5 ac (5.059 ha) parcel.",
+                "section_7_10_repeat_subsidy_restriction": "Section 7.10: Assistance restrictions apply to beneficiaries who have already received micro-irrigation subsidy, imposing a mandatory 7-year lock-in period before becoming eligible again. Because applicant has never availed micro-irrigation subsidy, this 7-year repeat-assistance restriction is fully satisfied.",
+                "engine_mapping": "prior_micro_irrigation_subsidy_years_ago = None strictly represents confirmed zero prior subsidy, firing rule PMKSY_NO_PRIOR_SUBSIDY."
+            }
+        },
         "statutory_flags": {
             "paid_income_tax_last_assessment_year": False,
             "govt_employee_category": "NONE",
@@ -438,9 +449,9 @@ ZONE_Z8_PROFILES: List[Dict[str, Any]] = [
         "attribute_provenance": {
             "empirical_baseline": "DES Karnataka & Haveri Agriculture Department: Commercial soybean-cotton growers in Savanur/Shiggaon taluks, large landholdings investing in precision drip irrigation.",
             "farmer_query_inspiration": "KCC Haveri micro-irrigation logs: Large farmers requesting PMKSY-PDMC subsidy clarification regarding the maximum 5.00 ha subsidy ceiling and physical parcel accommodation.",
-            "statutory_policy_test": "Benchmark Challenge 8 & Boundary Test: Large holding of 12.5 acres (> 10.0 ac); requested subsidized area of exactly 5.00 ha strictly satisfies physical parcel capacity (5.00 ha <= 12.5 ac * 0.404686 = 5.0586 ha) and statutory ceiling (5.00 ha <= 5.00 ha); operational borewell satisfies water requirement; raw engine INELIGIBLE (PMKSY_LAND_ABOVE_5_HA) preserved; governance presentation qualifies in Section A at 5.00 ha statutory ceiling; confirms grid connection excludes PM-KUSUM B; existing borewell excludes Ganga Kalyana."
+            "statutory_policy_test": "Benchmark Challenge 8 & Boundary Test: Large holding of 12.5 acres (> 10.0 ac); requested subsidized area of exactly 5.00 ha strictly satisfies physical parcel capacity (5.00 ha <= 12.5 ac * 0.404686 = 5.0586 ha) and statutory ceiling (5.00 ha <= 5.00 ha) pursuant to PMKSY-PDMC Revised Operational Guidelines 2023 Section 7.9; Section 7.10 repeat-assistance restriction satisfied by explicit first-time applicant declaration (null mapped to PMKSY_NO_PRIOR_SUBSIDY); operational borewell satisfies water requirement; raw engine INELIGIBLE (PMKSY_LAND_ABOVE_5_HA) preserved; governance presentation qualifies in Section A at 5.00 ha statutory ceiling; confirms grid connection excludes PM-KUSUM B; existing borewell excludes Ganga Kalyana."
         },
-        "intended_test_purpose": "Challenge 8 and boundary test: PMKSY-PDMC 5.00 ha ceiling at exactly 5.00 ha requested; 12.5 ac / 5.059 ha physical capacity PASS; PMKSY-PDMC qualifies in Section A; Ganga Kalyana and PM-KUSUM B disqualified by existing grid borewell.",
+        "intended_test_purpose": "Challenge 8 and boundary test: PMKSY-PDMC 5.00 ha ceiling at exactly 5.00 ha requested (PMKSY-PDMC 2023 Guidelines §7.9); explicit first-time applicant status (§7.10 7-year lock-in satisfied); 12.5 ac / 5.059 ha physical capacity PASS; PMKSY-PDMC qualifies in Section A; Ganga Kalyana and PM-KUSUM B disqualified by existing grid borewell.",
         "unresolved_dependencies": [
             "Verification of GoK Kharif 2026 PMFBY Insurance Unit notification for Soybean in Savanur taluk, Haveri district",
             "Haveri District Agriculture office PMKSY-PDMC FY 2026-27 drip/sprinkler target allocation and empanelled vendor confirmation"
@@ -606,7 +617,7 @@ def run_execution() -> Dict[str, Any]:
                 presentation_section = "Section A (Confirmed Actionable Candidates)"
                 allow_scoring = True
                 missing_verifications = []
-                gov_note = "Governance Area Capping Determination: Raw engine returned INELIGIBLE due to total landholding (12.5 ac > 12.35 ac) exceeding 5.0 ha. Under statutory PMKSY-PDMC operational guidelines and Benchmark Challenge 8, large farmers are not blanket excluded; assistance is capped at 5.00 ha. Applicant requested exactly 5.00 ha, cleanly accommodated by the 12.5-acre qualifying parcel (5.00 ha <= 5.059 ha physical capacity). Assured water source and 7-year lock-in verified. Qualified in Section A for clinical relevance scoring against primary need MICRO_IRRIGATION_SUPPORT."
+                gov_note = "Governance Area Capping & Prior Subsidy Determination: Raw engine returned INELIGIBLE due to total landholding (12.5 ac > 12.35 ac) exceeding 5.0 ha. Under statutory PMKSY-PDMC Revised Operational Guidelines 2023 Section 7.9 and Benchmark Challenge 8, financial assistance is capped at 5.00 ha per beneficiary family rather than blanket disqualifying large holdings. Applicant requested exactly 5.00 ha, cleanly accommodated by the 12.5-acre qualifying parcel (5.00 ha <= 5.059 ha physical capacity). Furthermore, per Section 7.10, the scenario factually confirms first-time applicant status (no prior micro-irrigation subsidy availed), satisfying the 7-year repeat-assistance restriction (engine rule PMKSY_NO_PRIOR_SUBSIDY). Operational water source verified. Qualified in Section A for clinical relevance scoring against primary need MICRO_IRRIGATION_SUPPORT."
 
             # --- GOVERNANCE CASE 4: Provisional Corporation Schemes ---
             elif is_prov and d.status == EligibilityStatus.ELIGIBLE:
@@ -741,12 +752,28 @@ def generate_scenario_markdown(profile: Dict[str, Any], actionable: List[Dict[st
         f"- **Income Tax Assessed (AY 2025-26):** `{'YES (EXCLUDED)' if profile['statutory_flags']['paid_income_tax_last_assessment_year'] else 'NO (VERIFIED)'}`",
         f"- **Government Employment:** `{profile['statutory_flags']['govt_employee_category']}`",
         f"- **Pension Status:** ₹{profile['statutory_flags']['superannuated_pensioner_monthly_amount']:.2f}/month (MTS Exempt: {profile['statutory_flags']['pensioner_is_mts_exempt']})",
+    ]
+
+    if "prior_subsidy_history" in profile:
+        psh = profile["prior_subsidy_history"]
+        lines.extend([
+            "",
+            "## Prior Subsidy History & Regulatory Compliance",
+            f"- **Interpretation:** `{psh['interpretation']}`",
+            f"- **Factual Declaration:** {psh['factual_declaration']}",
+            f"- **Regulatory Framework:** {psh['regulatory_framework']}",
+            f"  - **Section 7.9 (5.0 ha Area Ceiling):** {psh['statutory_clauses']['section_7_9_area_ceiling']}",
+            f"  - **Section 7.10 (7-Year Repeat Restriction):** {psh['statutory_clauses']['section_7_10_repeat_subsidy_restriction']}",
+            f"  - **Engine Mapping:** `{psh['statutory_clauses']['engine_mapping']}`"
+        ])
+        
+    lines.extend([
         "",
         "## Evaluated Actionable Recommendations & Governance Presentation",
         "",
         "| Scheme ID | Scheme Name | Raw Engine Status | Governance Status | Presentation Section | Clinical Scoring |",
         "|:---|:---|:---:|:---:|:---|:---:|"
-    ]
+    ])
     
     for d in actionable:
         scoring_str = "Enabled (0–3)" if d["allow_numerical_scoring"] else "Disabled"
@@ -770,7 +797,7 @@ def generate_execution_report(execution_output: Dict[str, Any]) -> str:
     doc.append("**Execution Date:** October 16, 2026  \n")
     doc.append("**Agro-Climatic Zone:** Northern Transition Zone (Zone Z8 — Dharwad, Belagavi, Haveri)  \n")
     doc.append("**Total Scenarios Evaluated:** Exactly 6 (`S053`–`S058`)  \n")
-    doc.append("**Audit Scope:** Exactly six detailed scenarios (`S053`–`S058`) evaluated across all 16 scheme records (6 parent/standalone + 10 child/standalone).  \n\n")
+    doc.append("**Audit Scope:** Exactly six detailed scenarios (`S053`–`S058`) evaluated across all 16 scheme records (8 standalone records, 2 parent records, and 6 child records).  \n\n")
     
     doc.append("## 1. Executive Summary & Project Invariants\n\n")
     doc.append("This report documents the rule-validation and governance audit of the eighth batch of six benchmark scenarios (S053–S058) representing the **Northern Transition Zone (Zone Z8)**. In strict adherence to project invariants:\n\n")
@@ -782,7 +809,7 @@ def generate_execution_report(execution_output: Dict[str, Any]) -> str:
     doc.append("6. **Crop Insurance Decoupling (PMFBY/RWBCIS):** Static whitelist results from the raw engine are decoupled from governance presentation across all six scenarios. Unverified seasonal Insurance Unit (Gram Panchayat/Hobli level) notifications are strictly routed to Section B as `REQUIRES_VERIFICATION` with numerical scoring disabled.\n")
     doc.append("7. **Provisional Schemes Quarantine:** Corporation schemes (`SCH008_KA_COOP`, `SCH010_VALMIKI`, `SCH010_KMDC`) are strictly quarantined in Section B without clinical scoring.\n")
     doc.append("8. **Challenge 4: Three-Valued Logic & Unknown Title Handling (S056):** Missing land title cut-off date (`land_ownership_cutoff_pre_feb_2019 = None`) strictly returns `REQUIRES_VERIFICATION` in PM-KISAN (`PMKISAN_CUTOFF_DATE_UNKNOWN`) and routes title-dependent capital schemes (Krishi Bhagya, Valmiki Corporation) to Section B. Universal diagnostic access for Soil Health Card (`SCH009`) is preserved in Section A.\n")
-    doc.append("9. **Challenge 8 & Boundary Test: Large Holding PMKSY-PDMC Area Cap (S058):** The raw engine determination (`INELIGIBLE` under `PMKSY_LAND_ABOVE_5_HA`) is strictly preserved. In governance presentation, PMKSY-PDMC qualifies in Section A at the 5.00 ha statutory ceiling because the applicant requested exactly 5.00 ha, cleanly accommodated by the 12.5-acre qualifying parcel ($5.00 \\le 12.5 \\times 0.404686 = 5.059$ ha).\n")
+    doc.append("9. **Challenge 8 & Boundary Test: Large Holding PMKSY-PDMC Area Cap & Repeat Subsidy Restriction (S058):** The raw engine determination (`INELIGIBLE` under `PMKSY_LAND_ABOVE_5_HA`) is strictly preserved. In governance presentation, PMKSY-PDMC qualifies in Section A at the 5.00 ha statutory ceiling pursuant to PMKSY-PDMC Revised Operational Guidelines 2023 Section 7.9 (financial assistance capped at 5.00 ha per beneficiary family rather than blanket disqualifying large holdings; $5.00 \\le 12.5 \\times 0.404686 = 5.059$ ha physical capacity). Furthermore, per Section 7.10, S058's data contract explicitly declares `prior_micro_irrigation_subsidy_years_ago = None` as confirmed zero prior subsidy (`EXPLICIT_NO_PRIOR_SUBSIDY`), satisfying the 7-year repeat-assistance restriction (engine rule `PMKSY_NO_PRIOR_SUBSIDY`).\n")
     doc.append("10. **Challenge 3: Regular Government Officer Exclusion (S055):** Regular government officer is strictly disqualified from PM-KISAN under `PMKISAN_REGULAR_OFFICER_EXCLUSION`, with no spillover to universal or non-statutorily excluded schemes.\n\n")
     
     doc.append("## 2. Zone Z8 Scenario Input Overview (S053–S058)\n\n")

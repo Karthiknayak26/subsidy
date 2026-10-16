@@ -387,3 +387,36 @@ def test_zone_z8_s058_pmksy_pdmc_large_holding_boundary_test(z8_execution_result
     kusum = acts["SCH006"]
     assert kusum["governance_status"] == "INELIGIBLE"
     assert "KUSUM_B_GRID_CONNECTED_DISQUALIFIED" in kusum["rule_keys_fired"]
+
+
+def test_zone_z8_s058_subsidy_history_and_statutory_guidelines_regression(z8_execution_results, z8_profiles):
+    """Verify S058 micro-irrigation subsidy history data contract and PMKSY-PDMC 2023 Guidelines §§ 7.9 & 7.10 citations."""
+    p = z8_profiles["S058"]
+    s058_res = next(r for r in z8_execution_results["results"] if r["scenario_id"] == "S058")
+    acts = {d["scheme_id"]: d for d in s058_res["actionable_determinations"]}
+    pdmc = acts["SCH003"]
+
+    # 1. Explicit data contract: prior_micro_irrigation_subsidy_years_ago = None declared as EXPLICIT_NO_PRIOR_SUBSIDY
+    assert "prior_subsidy_history" in p, "S058 must contain explicit prior_subsidy_history contract"
+    psh = p["prior_subsidy_history"]
+    assert psh["interpretation"] == "EXPLICIT_NO_PRIOR_SUBSIDY"
+    assert psh["prior_micro_irrigation_subsidy_years_ago"] is None
+    assert "First-time micro-irrigation applicant" in psh["factual_declaration"]
+
+    # 2. Statutory Guidelines citations in profile
+    assert "PMKSY-PDMC Revised Operational Guidelines 2023" in psh["regulatory_framework"]
+    assert "Section 7.9" in psh["statutory_clauses"]["section_7_9_area_ceiling"]
+    assert "Section 7.10" in psh["statutory_clauses"]["section_7_10_repeat_subsidy_restriction"]
+
+    # 3. Engine rule check: null mapped to PMKSY_NO_PRIOR_SUBSIDY
+    assert "PMKSY_NO_PRIOR_SUBSIDY" in pdmc["rule_keys_fired"], (
+        "Engine must fire PMKSY_NO_PRIOR_SUBSIDY for confirmed first-time applicant"
+    )
+
+    # 4. Governance note citations to Sections 7.9 and 7.10
+    gov_note = pdmc["governance_note"]
+    assert "Section 7.9" in gov_note
+    assert "Section 7.10" in gov_note
+    assert "PMKSY-PDMC Revised Operational Guidelines 2023" in gov_note
+    assert "first-time applicant status" in gov_note
+    assert "7-year" in gov_note
