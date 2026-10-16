@@ -1,0 +1,66 @@
+{
+  "scenario_id": "S038",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z5",
+  "agro_climatic_zone": "Eastern Dry Zone",
+  "district": "Kolar",
+  "crop_primary": "Tomato",
+  "crop_secondary": null,
+  "land_size_acres": 1.2,
+  "land_type": "Dryland (Rainfed)",
+  "social_category": "General (OC)",
+  "farmer_category": "Marginal (< 2.5 acres)",
+  "existing_assets": [],
+  "annual_family_income_lakh": 0.9,
+  "immediate_need": "INCOME_SUPPORT",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "NONE",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Post-Harvest Distress",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "Marginal dryland tomato farmer with 1.2 acres in Bangarapet, Kolar; suffered complete crop loss and price collapse where tomatoes fetched \u20b92/kg against \u20b912/kg cost of cultivation; facing severe household distress and mounting input dealer debt; urgently seeking non-repayable income support and DBT relief under PM-KISAN.",
+  "landholding_details": {
+    "total_operational_holding_acres": 1.2,
+    "qualifying_parcel_acres": 1.2,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "[0.0, 2.5) Marginal",
+    "physical_area_consistency": "PASS: 1.2 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "None (Rainfed dryland)",
+    "borewell_electric_status": "NONE",
+    "grid_connection_evidence": "No electrical infrastructure"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Bangarapet taluk"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "APMC Kolar market arrivals & NSS 77th Round: Extreme tomato price volatility in Kolar district causing severe farmer distress when farmgate prices crash below transportation costs.",
+    "farmer_query_inspiration": "KCC Karnataka distress calls: Marginal farmers in severe financial distress requesting immediate government cash relief and DBT payments.",
+    "statutory_policy_test": "Benchmark Challenge 2: Relief vs. Reimbursable Debt; farmer requests non-repayable income support due to market collapse distress; Protocol v1.1 Rule 2 mandates that reimbursable production credit (KCC-MISS) must NOT receive clinical score 3; PM-KISAN directly matches need for non-repayable cash assistance (score 3); Krishi Bhagya qualifies on dryland holding (1.2 ac); PM-KUSUM B disqualified due to lack of water source; Ganga Kalyana disqualified due to General Merit social category mismatch; PMFBY raw engine returns ELIGIBLE for tomato, but governance routes to Section B as REQUIRES_VERIFICATION pending Kharif 2026 Insurance Unit notification verification."
+  },
+  "intended_test_purpose": "Evaluate Challenge 2 (Relief vs. Debt) clinical recommendation protocol; confirm PM-KISAN eligibility for non-repayable income support; verify exclusion of credit from score 3; route PMFBY to Section B pending seasonal notification verification.",
+  "unresolved_dependencies": [
+    "Market Intervention Scheme (MIS) notification: State/Central price deficiency payment or market intervention for tomato in Kolar district during price crash events",
+    "PM-KISAN e-KYC and NPCI bank account Aadhaar-seeding operational verification",
+    "Verification of GoK Kharif 2026 PMFBY/RWBCIS Insurance Unit (Gram Panchayat/Hobli level) notification for Tomato in Kolar district (Bangarapet taluk)"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "scenario_id": "S018",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z2",
+  "agro_climatic_zone": "North Eastern Dry Zone",
+  "district": "Raichur",
+  "crop_primary": "Sunflower",
+  "crop_secondary": null,
+  "land_size_acres": 2.0,
+  "land_type": "Dryland (Rainfed)",
+  "social_category": "General (OC)",
+  "farmer_category": "Marginal (< 2.5 acres)",
+  "existing_assets": [],
+  "annual_family_income_lakh": 1.6,
+  "immediate_need": "INCOME_SUPPORT",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 10000.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "NONE",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Vegetative / Flowering",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "Retired non-MTS state board employee with 2.0 acres rainfed sunflower in Manvi taluk, Raichur; receiving exactly \u20b910,000 per month pension; registered on FRUITS portal but PM-KISAN 17th installment rejected at state nodal verification; need reason for rejection and grievance procedure.",
+  "landholding_details": {
+    "total_operational_holding_acres": 2.0,
+    "qualifying_parcel_acres": 2.0,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "[0.0, 2.5) Marginal",
+    "physical_area_consistency": "PASS: 2.0 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Rainfed (None)",
+    "borewell_electric_status": "NONE",
+    "grid_connection_evidence": "Not applicable \u2014 rainfed dryland parcel"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 10000.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Manvi taluk"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "NSS 77th Round: Marginal dryland sunflower cultivators in Raichur with mixed non-farm retirement income sources.",
+    "farmer_query_inspiration": "FRUITS & PM-KISAN grievance portal tickets: Retired institutional pensioners querying why Rs. 2,000 direct benefit transfers were withheld under the Rs. 10,000 pension cutoff rule.",
+    "statutory_policy_test": "Benchmark Challenge 3 (Disqualification Boundary): Exactly \u20b910,000/month pension test. Evaluates whether the inclusive statutory cutoff (>= \u20b910,000) correctly triggers INELIGIBLE (rule key PMKISAN_PENSION_OVER_10K_EXCLUSION) for a non-MTS pensioner despite holding 2.0 acres of registered land; tests General Merit corporation exclusion under Ganga Kalyana."
+  },
+  "intended_test_purpose": "Evaluate PM-KISAN pension exclusion boundary at exactly \u20b910,000/month; verify explicit non-MTS exemption status representation; confirm disqualification with rule key PMKISAN_PENSION_OVER_10K_EXCLUSION.",
+  "unresolved_dependencies": [
+    "Treasury pension sanction order documentation validating non-MTS cadre status",
+    "PM-KISAN state-level grievance adjudication circular on exact \u20b910,000 gross vs net pension determination"
+  ]
+}

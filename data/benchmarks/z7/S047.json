@@ -1,0 +1,69 @@
+{
+  "scenario_id": "S047",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z7",
+  "agro_climatic_zone": "Southern Transition Zone",
+  "district": "Hassan",
+  "crop_primary": "Maize",
+  "crop_secondary": "Potato",
+  "land_size_acres": 5.5,
+  "land_type": "Irrigated (Canal)",
+  "social_category": "General (OC)",
+  "farmer_category": "Medium (5-10 acres)",
+  "existing_assets": [
+    "Canal Outlet",
+    "Intermediate Storage Sump",
+    "Diesel Engine Pump"
+  ],
+  "annual_family_income_lakh": 3.2,
+  "immediate_need": "FARM_MECHANIZATION",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "NONE",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Harvesting / Land Preparation",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "General category medium maize farmer with 5.5 acres canal command in Holenarasipura, Hassan; seeking 40% capital subsidy on multi-crop power thresher and tractor-mounted disc plough under Sub-Mission on Agricultural Mechanization (SMAM); inquiring about registered dealer empanelment and online application window on KSAMB portal.",
+  "landholding_details": {
+    "total_operational_holding_acres": 5.5,
+    "qualifying_parcel_acres": 5.5,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "(5.0, 10.0] Medium",
+    "physical_area_consistency": "PASS: 5.5 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Canal Command",
+    "borewell_electric_status": "NONE",
+    "grid_connection_evidence": "Hemavathi canal command distributary gravity flow with farm intermediate sump"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Holenarasipura taluk"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "DES Karnataka & Hassan Agriculture Department: Intensive maize and commercial crop tract under Hemavathi reservoir command, with high demand for post-harvest threshing and primary tillage mechanization.",
+    "farmer_query_inspiration": "KCC Karnataka SMAM helpline logs: Medium farmers in canal commands seeking implement subsidies for post-harvest grain handling.",
+    "statutory_policy_test": "SMAM Mechanization in Medium Holding: Qualifies for SMAM 40% implement subsidy for Medium General category holding (SMAM_NO_PRIOR_SUBSIDY) matching immediate need; PM-KISAN qualifies in Section A; PMKSY-PDMC qualifies in Section A; PMFBY decoupled to Section B pending seasonal IU notification; canal land type strictly disqualifies Krishi Bhagya and Ganga Kalyana."
+  },
+  "intended_test_purpose": "Validate SMAM implement subsidy eligibility for medium general holding matching primary need; enforce canal command exclusions for Krishi Bhagya and affirmative welfare exclusions for Ganga Kalyana.",
+  "unresolved_dependencies": [
+    "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Maize in Hassan district",
+    "Hassan District Agriculture Joint Director SMAM FY 2026-27 target allocation circular"
+  ]
+}

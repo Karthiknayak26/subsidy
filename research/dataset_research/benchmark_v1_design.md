@@ -1,12 +1,25 @@
 # Benchmark v1.0 — Scenario Design & Coverage Matrix
 
-**Document Version:** `benchmark-design-v1.0.3`  
-**Supersedes:** `benchmark-design-v1.0.2` (commit `8d4e92c`)  
+**Document Version:** `benchmark-design-v1.0.4`  
+**Supersedes:** `benchmark-design-v1.0.3`  
 **Milestone:** Benchmark v1.0 Scenario Design and Validation  
 **Approved Scope:** 60 New Scenarios (`S011`–`S070`) across all 10 Karnataka Agro-Climatic Zones  
 **Annotation Standard:** `annotation-protocol-v1.1`  
-**Status:** Pre-Generation Design Freeze (Area-Consistent & Validated)  
+**Status:** Pre-Generation Design Freeze (Area-Consistent & Validated with PM-KISAN Statutory Succession Clarification)  
 **Model Training Status:** **STRICTLY DEFERRED**  
+
+---
+
+## Revision Notes: v1.0.3 → v1.0.4 (PM-KISAN Inheritance vs. Partition Clarification)
+
+This versioned clarification reconciles the statutory distinction between land ownership acquired post-01.02.2019 through **inheritance following the demise of the prior landowner** versus transfers through **family partition deeds, sale deeds, or gift deeds** under the PM-KISAN Revised Operational Guidelines (Clause 3(d) / Final OG 21.6.19 and subsequent official clarifications). No changes were made to frozen benchmark quotas, scenario counts, or frozen eligibility engine code.
+
+| Issue | Target / Dimension Affected | v1.0.3 Wording / Handling | v1.0.4 Clarified Policy & Specification | Technical & Regulatory Rationale |
+|:---:|:---|:---:|:---:|:---|
+| 1 | **Inheritance vs. Partition Conflation** | Described tenure quota as "Post-Feb 2019 Inheritance Partition" and cited family partition as exempt. | **Post-Feb 2019 Statutory Inheritance (Succession upon Demise)**. Explicitly restricts exemption to succession upon death of the registered landowner. Post-cutoff partition deeds are statutorily disqualified. | Under PM-KISAN Revised Operational Guidelines (21.06.2019), land acquired after 01.02.2019 is barred *except* for succession following the landowner's death. Family partition deeds, sale deeds, and gift deeds executed post-cutoff do not qualify for this exception. |
+| 2 | **Engine Cutoff Input Interpretation** | `land_ownership_cutoff_pre_feb_2019 = True` could be misinterpreted as literal historical acquisition date. | **Clarified as consolidated cutoff-rule compliance input.** `True` denotes statutory cutoff compliance (pre-Feb 2019 title OR post-cutoff succession upon death). Literal post-cutoff acquisition date, `transfer_basis = INHERITANCE_DUE_TO_DEATH`, and succession evidence are explicitly recorded in scenario metadata. | Frozen engine (`src/eligibility/engine.py` lines 178–186) evaluates `land_ownership_cutoff_pre_feb_2019` as a boolean rule: `True` yields `PMKISAN_CUTOFF_DATE_VERIFIED`, `False` yields `PMKISAN_CUTOFF_DATE_POST_FEB_2019`, and `None` yields `PMKISAN_CUTOFF_DATE_UNKNOWN`. |
+| 3 | **Scenarios S039 & S049 Evidence Standard** | Stated succession/inheritance in text, but metadata lacked explicit structured transfer route fields. | Explicitly codified `transfer_basis = "INHERITANCE_DUE_TO_DEATH"`, `factual_acquisition_date` (post-01.02.2019), `acquisition_date_relationship_to_cutoff = "POST_FEB_2019"`, registered death certificate, legal heir order, and revenue mutation extract. | Ensures robust legal evidence chain distinguishing qualifying succession from ineligible partition deeds. |
+| 4 | **Forward Safeguard for S064 & S069** | Generic "post-2019 inheritance partition" notes. | **Explicit transfer route mandatory before generation.** Scenarios S064 (Z9) and S069 (Z10) are strictly required to model `transfer_basis = INHERITANCE_DUE_TO_DEATH` with verified death and legal heir certification. Partition deeds must not be assumed to qualify. | Enforces forward consistency across Zones Z9 and Z10. |
 
 ---
 
@@ -118,7 +131,7 @@ The goal of Benchmark v1.0 is **not** to create training data for immediate neur
 | **Exactly 10.0 acres** | Medium / Large boundary | `S028` | Classified as **Medium** ($\le 10.0$). Tests medium demographic status while pooling contiguous parcel for community borewell. |
 | **Exactly 5.00 ha** | PMKSY-PDMC statutory ceiling | `S058` | Large holding (12.5 ac holding & qualifying parcel) cleanly accommodates requested 5.00 ha (~12.36 ac; $5.00 	ext{ ha} \le 5.059 	ext{ ha}$). Tests 5.00 ha ceiling boundary. |
 | **Subsidized Area Cap** | Physical parcel capacity | `S023` | Requested 1.41 ha micro-irrigation strictly within 3.5 ac ($1.416 	ext{ ha}$) parcel capacity. |
-| **Exactly ₹10,000/mo** | PM-KISAN pension exclusion | `S018` | Pensioner receiving exactly ₹10,000/month; inclusive threshold fires statutory exclusion (`PMKISAN_PENSION_UNDER_10K_OR_NONE`). |
+| **Exactly ₹10,000/mo** | PM-KISAN pension exclusion | `S018` | Pensioner receiving exactly ₹10,000/month; inclusive threshold fires statutory exclusion (`PMKISAN_PENSION_OVER_10K_EXCLUSION`). |
 
 **Land Types Covered (Reconciled to 60 Scenarios):**
 
@@ -155,13 +168,33 @@ Social category is an **overlapping attribute**, not mutually exclusive with lan
 
 **Tenure Status (Mutually Exclusive — Reconciled to 60 Scenarios):**
 
-| Tenure Status | Target Quota | Actual v1.0.3 | Statutory Test Purpose & Handling |
+| Tenure Status | Target Quota | Actual v1.0.4 | Statutory Test Purpose & Handling |
 |:---|:---:|:---:|:---|
 | **Pre-Feb 2019 Land Ownership Verified** | 47 | **47** | Baseline for PM-KISAN cut-off date compliance and registered land RTC verification. |
-| **Post-Feb 2019 Inheritance Partition** | 4 | **4** | Tests inheritance partition exemption: legal succession/family partition is exempt from PM-KISAN cut-off disqualification. Scenarios: `S039`, `S049`, `S064`, `S069`. |
+| **Post-Feb 2019 Statutory Inheritance (Succession upon Demise)** | 4 | **4** | Tests statutory inheritance exemption: legal succession upon demise of registered landowner is exempt from PM-KISAN 01.02.2019 cut-off disqualification. Post-cutoff partition deeds, sale deeds, and gift deeds are strictly disqualified. Matrix validation key: `Post-Feb 2019 Inheritance`. Scenarios: `S039`, `S049`, `S064`, `S069`. |
 | **Pure Tenant (No Registered Land Title)** | 5 | **5** | Tests scheme-specific tenancy rules: PM-KISAN $	o$ `INELIGIBLE`; PMFBY $	o$ `REQUIRES_VERIFICATION` pending crop agreement/sowing certificate; KCC $	o$ `REQUIRES_VERIFICATION` pending crop loan documentation. Scenarios: `S026`, `S042`, `S044`, `S061`, `S068`. |
 | **Unknown / Unverified Title Status** | 4 | **4** | Tests Three-Valued Logic: all land-dependent schemes return `REQUIRES_VERIFICATION` rather than false eligibility. Scenarios: `S048`, `S056`, `S062`, `S070`. |
 | **Total** | **60** | **60** | **100% Target Reconciled** |
+
+#### 3.3.1 PM-KISAN Statutory Succession vs. Partition Transfer Route Specification
+
+Under official PM-KISAN Revised Operational Guidelines (Clause 3(d) / Final OG 21.6.19) and subsequent Ministry clarifications:
+1. **Statutory Cutoff Rule (01.02.2019):** Financial assistance under PM-KISAN is restricted to eligible farmer families owning cultivable land as on 01.02.2019.
+2. **Succession Exception:** For land ownership acquired after 01.02.2019, the benefit is allowed **only in the event of transfer of land ownership due to inheritance on the death of the previous landowner**, provided the successor meets all other scheme criteria.
+3. **Partition Deeds & Voluntary Transfers Are NOT Exempt:** Transfers of land ownership effected after 01.02.2019 through family partition deeds, sale deeds, gift deeds, or other inter-vivos instruments do **not** qualify for the inheritance exception. Transferees acquiring title through post-cutoff partition deeds remain statutorily disqualified.
+4. **Semantics of Frozen Engine Input `land_ownership_cutoff_pre_feb_2019`:**
+   In the frozen eligibility engine (`src/eligibility/engine.py` lines 178–186), this boolean field functions as a **consolidated cutoff-rule compliance input**:
+   - `True`: Holding passes statutory cut-off check (either pre-Feb 2019 title OR post-cutoff title acquired strictly via statutory inheritance following landowner's death).
+   - `False`: Holding acquired post-01.02.2019 without qualifying statutory succession (e.g., family partition deed, sale deed, gift deed). Yields `PMKISAN_CUTOFF_DATE_POST_FEB_2019` and disqualification.
+   - `None`: Cutoff date or succession evidence is unverified / pending. Yields `PMKISAN_CUTOFF_DATE_UNKNOWN` (`REQUIRES_VERIFICATION`).
+5. **Scenario Profiles & Forward Generation Requirement:**
+   - For all four benchmark inheritance scenarios (`S039`, `S049`, `S064`, `S069`), the underlying profile MUST explicitly record:
+     - `factual_acquisition_date`: Historical date post-01.02.2019.
+     - `acquisition_date_relationship_to_cutoff`: `"POST_FEB_2019"`.
+     - `transfer_basis`: `"INHERITANCE_DUE_TO_DEATH"` (strictly distinguished from `"PARTITION_DEED"`).
+     - Statutory succession documentation: Registered death certificate, legal heir certificate, and updated revenue mutation record (Bhoomi Form 12 / updated Pahani).
+     - Engine cutoff compliance flag: `land_ownership_cutoff_pre_feb_2019 = True`.
+   - When generating future profiles `S064` (Z9) and `S069` (Z10), the transfer route must be modeled explicitly as statutory inheritance following death with full supporting documentation, and must not silently assume that all family transfers qualify.
 
 **Community Pool Assignments (Clarified — S028, S052, S066):**
 
@@ -259,7 +292,7 @@ The table below defines the complete, reconciled 60-scenario matrix with explici
 | S036 | Z5 | Chikkaballapura | Mulberry | `PRODUCTION_CREDIT` | Borewell-irrigated | 3.0 | 3.0 | — | Small | Minority | Pre-Feb 2019 | No | **Challenge 6:** KCC commercial credit vs. PACS cooperative credit for sericulture; Minority |
 | S037 | Z5 | Bengaluru Rural | Mango | `MICRO_IRRIGATION_SUPPORT` | Borewell-irrigated | 2.5 | 2.5 | 1.01 | Small | ST | Pre-Feb 2019 | No | **Boundary test:** Exactly 2.5 ac (Small); PMKSY-PDMC drip for mango orchard; requested 1.01 ha <= 2.5 ac (1.012 ha) |
 | S038 | Z5 | Kolar | Tomato | `INCOME_SUPPORT` | Dryland | 1.2 | 1.2 | — | Marginal | GM | Pre-Feb 2019 | No | **Challenge 2:** Post-harvest price collapse distress; KCC debt must not receive score 3 |
-| S039 | Z5 | Chikkaballapura | Ragi | `CROP_INSURANCE` | Dryland | 2.0 | 2.0 | — | Marginal | SC | Post-Feb 2019 Inheritance | No | PM-KISAN inheritance partition exemption test; legal family succession verified |
+| S039 | Z5 | Chikkaballapura | Ragi | `CROP_INSURANCE` | Dryland | 2.0 | 2.0 | — | Marginal | SC | Post-Feb 2019 Inheritance | No | PM-KISAN statutory succession exemption test; land title acquired post-cutoff strictly via inheritance following death of landowner (father deceased Aug 2021; Death Cert & Bhoomi mutation Form 12 verified; transfer_basis=INHERITANCE_DUE_TO_DEATH); distinct from post-cutoff partition deeds |
 | S040 | Z5 | Bengaluru Rural | Mango | `FARM_MECHANIZATION` | Borewell-irrigated | 5.0 | 5.0 | — | Small | OBC | Pre-Feb 2019 | No | **Boundary test:** Exactly 5.0 acres (Small/Medium boundary, <= 5.0 is Small); SMAM orchard implements |
 | S041 | Z6 | Mandya | Sugarcane | `MICRO_IRRIGATION_SUPPORT` | Canal-irrigated | 6.5 | 6.5 | 2.50 | Medium | GM | Pre-Feb 2019 | No | PMKSY-PDMC drip irrigation in irrigated sugarcane canal command; requested 2.50 ha <= 6.5 ac (2.630 ha); Medium holding (6.5 ac) |
 | S042 | Z6 | Mysuru | Paddy | `CROP_INSURANCE` | Wetland/valley | 3.5 | 3.5 | — | Small | SC | Pure Tenant | No | **Challenge 5:** Pure tenant paddy; PMFBY coverage with tenancy documentation verification |
@@ -269,7 +302,7 @@ The table below defines the complete, reconciled 60-scenario matrix with explici
 | S046 | Z6 | Chamarajanagar | Sugarcane | `SOIL_HEALTH_AND_FERTILIZER` | Canal-irrigated | 7.0 | 7.0 | — | Medium | GM | Pre-Feb 2019 | No | Soil Health Card soil profiling for medium sugarcane holding (7.0 ac); GM |
 | S047 | Z7 | Hassan | Maize | `FARM_MECHANIZATION` | Canal-irrigated | 5.5 | 5.5 | — | Medium | GM | Pre-Feb 2019 | No | SMAM tractor/thresher implements subsidy; Medium holding (5.5 ac); GM |
 | S048 | Z7 | Shivamogga | Ginger | `PROTECTED_HORTICULTURE` | Borewell-irrigated | 2.0 | 2.0 | — | Marginal | ST | Unknown Title Status | No | **Challenge 4:** Pension MTS exemption unknown & title status UNKNOWN -> REQUIRES_VERIFICATION for land-dependent schemes |
-| S049 | Z7 | Chikkamagaluru | Potato | `PROTECTED_HORTICULTURE` | Borewell-irrigated | 4.5 | 4.5 | — | Small | GM | Post-Feb 2019 Inheritance | No | MIDH shade-net structure for commercial seed potato; post-2019 inheritance exemption test |
+| S049 | Z7 | Chikkamagaluru | Potato | `PROTECTED_HORTICULTURE` | Borewell-irrigated | 4.5 | 4.5 | — | Small | GM | Post-Feb 2019 Inheritance | No | MIDH shade-net structure for commercial seed potato; post-2019 statutory succession exemption test (transfer_basis=INHERITANCE_DUE_TO_DEATH; father deceased May 2022; Death Cert, legal heir order, Bhoomi mutation Form 16 verified; land_ownership_cutoff_pre_feb_2019=True engine input); distinct from non-qualifying partition deed |
 | S050 | Z7 | Hassan | Arecanut | `PRODUCTION_CREDIT` | Borewell-irrigated | 3.5 | 3.5 | — | Small | OBC | Pre-Feb 2019 | No | **Challenge 6:** KCC commercial credit vs. PACS cooperative credit; arecanut garden |
 | S051 | Z7 | Shivamogga | Maize | `SOLAR_PUMP_INSTALLATION` | Dryland | 2.5 | 2.5 | — | Small | Minority | Pre-Feb 2019 | No | **Boundary test:** Exactly 2.5 ac (Small); water source: unenergized borewell; electric status: UNENERGIZED_OFF_GRID; PM-KUSUM B solar pump; Minority |
 | S052 | Z7 | Chikkamagaluru | Potato | `BOREWELL_IRRIGATION` | Dryland | 9.5 | 4.0 | — | Medium | OBC | Pre-Feb 2019 | Yes (3 farmers, 12.0 ac pooled, contiguous) | **Challenge 7:** Individual dryland > 5 ac ineligible for indiv borewell; community pool route (3 farmers, 12.0 ac pooled contiguous dryland, qualifying parcel 4.0 ac); REQUIRES_VERIFICATION (provisional Devaraj Urs corporation rules) |
@@ -284,12 +317,12 @@ The table below defines the complete, reconciled 60-scenario matrix with explici
 | S061 | Z9 | Uttara Kannada | Paddy | `PRODUCTION_CREDIT` | Wetland/valley | 3.0 | 3.0 | — | Small | SC | Pure Tenant | No | **Challenge 5:** Hill zone valley paddy pure tenant; KCC tenant route; PMFBY verification |
 | S062 | Z9 | Kodagu | Black Pepper | `CROP_INSURANCE` | Hilly/terraced | 1.8 | 1.8 | — | Marginal | GM | Unknown Title Status | No | **Challenge 4:** Land title UNKNOWN -> land-dependent schemes trigger REQUIRES_VERIFICATION |
 | S063 | Z9 | Chikkamagaluru | Coffee | `SOLAR_PUMP_INSTALLATION` | Hilly/terraced | 2.5 | 2.5 | — | Small | Minority | Pre-Feb 2019 | No | **Boundary test:** Exactly 2.5 ac (Small); water source: unenergized borewell; electric status: UNENERGIZED_OFF_GRID; PM-KUSUM B solar pump for off-grid plantation; Minority |
-| S064 | Z9 | Uttara Kannada | Paddy | `FARM_MECHANIZATION` | Canal-irrigated | 8.0 | 8.0 | — | Medium | OBC | Post-Feb 2019 Inheritance | No | SMAM power tiller/paddy transplanter subsidy; medium holding (8.0 ac); post-2019 inheritance partition |
+| S064 | Z9 | Uttara Kannada | Paddy | `FARM_MECHANIZATION` | Canal-irrigated | 8.0 | 8.0 | — | Medium | OBC | Post-Feb 2019 Inheritance | No | SMAM power tiller/paddy transplanter subsidy; medium holding (8.0 ac); post-2019 statutory inheritance upon demise of parent (transfer_basis=INHERITANCE_DUE_TO_DEATH, legal heir cert & mutation verified; distinct from ineligible partition deed) |
 | S065 | Z10 | Dakshina Kannada | Coconut | `SOIL_HEALTH_AND_FERTILIZER` | Dryland | 14.0 | 14.0 | — | Large | GM | Pre-Feb 2019 | No | Soil Health Card universal diagnostic service for large coastal plantation (14.0 ac); GM |
 | S066 | Z10 | Udupi | Arecanut | `BOREWELL_IRRIGATION` | Dryland | 5.5 | 3.5 | — | Medium | SC | Pre-Feb 2019 | Yes (4 farmers, 14.0 ac pooled, contiguous) | **Challenge 7:** Individual holding 5.5 ac exceeds 5.0 ac individual Ambedkar ceiling; community pool route valid with 4 SC farmers, 14.0 ac pooled contiguous dryland, qualifying parcel 3.5 ac; requires verification of parcel contiguity & groundwater clearance |
 | S067 | Z10 | Dakshina Kannada | Cashew | `CROP_INSURANCE` | Dryland | 2.0 | 2.0 | — | Marginal | ST | Pre-Feb 2019 | No | PMFBY cashew crop insurance in coastal plantation belt; ST marginal farmer |
 | S068 | Z10 | Udupi | Coastal Paddy | `PRODUCTION_CREDIT` | Wetland/valley | 1.5 | 1.5 | — | Marginal | Minority | Pure Tenant | No | **Challenge 5:** Pure tenant coastal wetland paddy; KCC crop loan & PMFBY insurance proof check; Minority |
-| S069 | Z10 | Dakshina Kannada | Coconut | `PROTECTED_HORTICULTURE` | Dryland | 13.0 | 13.0 | — | Large | Minority | Post-Feb 2019 Inheritance | No | MIDH coastal nursery / shade-net; Large holding (13.0 ac); Minority; post-2019 inheritance exemption test |
+| S069 | Z10 | Dakshina Kannada | Coconut | `PROTECTED_HORTICULTURE` | Dryland | 13.0 | 13.0 | — | Large | Minority | Post-Feb 2019 Inheritance | No | MIDH coastal nursery / shade-net; Large holding (13.0 ac); Minority; post-2019 statutory inheritance upon demise of parent (transfer_basis=INHERITANCE_DUE_TO_DEATH, legal heir cert & mutation verified; distinct from ineligible partition deed) |
 | S070 | Z10 | Udupi | Arecanut | `MICRO_IRRIGATION_SUPPORT` | Wetland/valley | 12.5 | 12.5 | 4.80 | Large | SC | Unknown Title Status | No | **Challenge 8:** Large holding (12.5 ac); PMKSY-PDMC requested 4.80 ha <= 12.5 ac (5.059 ha) and <= 5.00 ha ceiling; title status UNKNOWN -> REQUIRES_VERIFICATION |
 
 ---

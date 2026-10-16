@@ -1,0 +1,65 @@
+{
+  "scenario_id": "S017",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z2",
+  "agro_climatic_zone": "North Eastern Dry Zone",
+  "district": "Yadgir",
+  "crop_primary": "Cotton",
+  "crop_secondary": "Redgram",
+  "land_size_acres": 6.0,
+  "land_type": "Dryland (Rainfed)",
+  "social_category": "ST",
+  "farmer_category": "Medium (5-10 acres)",
+  "existing_assets": [],
+  "annual_family_income_lakh": 2.1,
+  "immediate_need": "CROP_INSURANCE",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "NONE",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Standing Crop / Boll Formation",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "Cotton crop in Shorapur taluk, Yadgir severely infested by pink bollworm and whitefly; boll rot observed following dry-spell; enrolled in PMFBY via Samrakshane portal; need claim assessment procedure and localized calamity survey details.",
+  "landholding_details": {
+    "total_operational_holding_acres": 6.0,
+    "qualifying_parcel_acres": 6.0,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "(5.0, 10.0] Medium",
+    "physical_area_consistency": "PASS: 6.0 ac holding matches parcel; no micro-irrigation requested"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Rainfed (None)",
+    "borewell_electric_status": "NONE",
+    "grid_connection_evidence": "Not applicable \u2014 rainfed dryland with no water extraction infrastructure"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Shorapur taluk, Yadgir"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "DES Karnataka & NSS 77th Round: Dryland commercial cotton growers in Yadgir (Shorapur/Shahapur taluks), average medium operational holding 6.0 acres, vulnerable to pink bollworm infestations.",
+    "farmer_query_inspiration": "KCC Karnataka query records: Dryland cotton pest distress, post-sowing localized calamity insurance claims, and Samrakshane portal claim status queries.",
+    "statutory_policy_test": "Medium landholding (6.0 ac) in notified dryland cotton insurance unit; tests universal PMFBY coverage; verifies Ganga Kalyana individual ceiling disqualification (6.0 ac > 5.0 ac ceiling for individual borewell under Maharshi Valmiki ST Corporation); clean statutory pass for PM-KISAN."
+  },
+  "intended_test_purpose": "Evaluate cotton crop-insurance relevance and confirmation requirements for notified PMFBY insurance units; verify statutory handling of medium dryland holdings exceeding individual Ganga Kalyana ceiling.",
+  "unresolved_dependencies": [
+    "Kharif 2026 Government of Karnataka PMFBY notification specifying village/gram panchayat insurance units and threshold yield for commercial cotton in Yadgir taluks",
+    "Samrakshane insurance portal enrollment cutoff date verification"
+  ]
+}

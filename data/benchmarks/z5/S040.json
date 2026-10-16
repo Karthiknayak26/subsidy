@@ -1,0 +1,68 @@
+{
+  "scenario_id": "S040",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z5",
+  "agro_climatic_zone": "Eastern Dry Zone",
+  "district": "Bengaluru Rural",
+  "crop_primary": "Mango",
+  "crop_secondary": "Vegetables",
+  "land_size_acres": 5.0,
+  "land_type": "Irrigated (Borewell)",
+  "social_category": "OBC (2A)",
+  "farmer_category": "Small (2.5-5 acres)",
+  "existing_assets": [
+    "Borewell (Grid-connected)"
+  ],
+  "annual_family_income_lakh": 2.4,
+  "immediate_need": "FARM_MECHANIZATION",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Inter-cultivation / Orchard Maintenance",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "OBC small farmer with exactly 5.0 acres borewell-irrigated mango and intercropped vegetable orchard in Hosakote, Bengaluru Rural; applying for 50% subsidy under SMAM for power tiller and high-pressure orchard sprayer; need tractor RC requirements and subsidy slab verification.",
+  "landholding_details": {
+    "total_operational_holding_acres": 5.0,
+    "qualifying_parcel_acres": 5.0,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "[2.5, 5.0] Small",
+    "physical_area_consistency": "PASS: 5.0 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Borewell (Grid-connected)",
+    "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+    "grid_connection_evidence": "BESCOM agricultural meter connection"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Hosakote taluk"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "Department of Agriculture & Horticulture Bengaluru Rural: Peri-urban high-value commercial horticulture and mango orchards in Hosakote/Nelamangala requiring mechanized pruning, weed clearing, and high-pressure spraying.",
+    "farmer_query_inspiration": "KCC Karnataka SMAM mechanization query logs: Small farmers inquiring about farm implement subsidies at exactly the 5.0-acre boundary.",
+    "statutory_policy_test": "Boundary Test: Exactly 5.0 acres classified as Small holding ([2.5, 5.0], Small/Medium boundary where <= 5.0 is Small); qualifies for SMAM farm machinery subsidy matching primary need FARM_MECHANIZATION; PM-KISAN qualifies; PMKSY-PDMC qualifies; PMFBY returns INELIGIBLE by raw engine due to static whitelist exclusion, but mango is insurable under RWBCIS; routed to Section B as REQUIRES_VERIFICATION pending RWBCIS notification confirmation; Krishi Bhagya disqualified due to irrigated land type; PM-KUSUM B disqualified due to grid-connected IP set; D. Devaraj Urs Ganga Kalyana disqualified due to irrigated land type and existing borewell."
+  },
+  "intended_test_purpose": "Verify exact 5.0-acre boundary classification under Small farmer category; validate SMAM farm mechanization subsidy eligibility; route PMFBY/RWBCIS mango insurance to Section B as REQUIRES_VERIFICATION; enforce water infrastructure and land type exclusions for Krishi Bhagya and Ganga Kalyana.",
+  "unresolved_dependencies": [
+    "SMAM FY 2026-27 Bengaluru Rural district beneficiary lottery and manufacturer empanelment portal status",
+    "Regional Transport Office (RTO) tractor registration certificate linkage verification for PTO-operated implements",
+    "Verification of applicable RWBCIS horticultural weather-index crop insurance notification for Mango in Bengaluru Rural district (Hosakote taluk)"
+  ]
+}

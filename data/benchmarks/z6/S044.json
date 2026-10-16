@@ -1,0 +1,65 @@
+{
+  "scenario_id": "S044",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z6",
+  "agro_climatic_zone": "Southern Dry Zone",
+  "district": "Mandya",
+  "crop_primary": "Paddy",
+  "crop_secondary": "None",
+  "land_size_acres": 2.0,
+  "land_type": "Wetland/valley",
+  "social_category": "OBC (2A)",
+  "farmer_category": "Marginal (< 2.5 acres)",
+  "existing_assets": [],
+  "annual_family_income_lakh": 0.9,
+  "immediate_need": "INCOME_SUPPORT",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": null,
+  "is_pure_tenant_without_land_title": true,
+  "borewell_electric_status": "NONE",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Post-Harvest Distress",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "OBC tenant farmer cultivating 2.0 acres wetland paddy in Malavalli, Mandya on oral lease; suffered acute crop failure and submergence loss; facing severe debt distress and requesting non-repayable cash assistance under PM-KISAN; inquiring whether landless tenant farmers can apply.",
+  "landholding_details": {
+    "total_operational_holding_acres": 2.0,
+    "qualifying_parcel_acres": 2.0,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "[0.0, 2.5) Marginal",
+    "physical_area_consistency": "PASS: 2.0 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Canal Flow",
+    "borewell_electric_status": "NONE",
+    "grid_connection_evidence": "Rotational canal outlet in wetland valley"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": null,
+    "is_pure_tenant_without_land_title": true,
+    "tenure_documentation": "Pure Tenant (Oral agreement without registered title)"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "DES Karnataka & Mandya Agricultural Labour Survey: Marginal tenant cultivators in Malavalli taluk operating under informal oral tenancy in tail-end wetland canal networks with high vulnerability to flash floods.",
+    "farmer_query_inspiration": "KCC Karnataka distress calls: Tenant farmers requesting government income support and cash transfers following crop submergence.",
+    "statutory_policy_test": "Dual Challenge: Challenge 2 (Relief vs. Reimbursable Debt) and Challenge 5 (Pure Tenant Gating); farmer urgently needs non-repayable income support, but lacks registered land title; PM-KISAN strictly disqualifies pure tenants (PMKISAN_PURE_TENANT_EXCLUSION); Protocol v1.1 Rule 2 mandates that reimbursable production credit (KCC-MISS) must NOT receive clinical score 3; furthermore, tenant status routes KCC to Section B pending JLG / oral lease declaration; PMFBY routed to Section B pending tenant sowing certificate and seasonal IU notification; Krishi Bhagya disqualified due to wetland status; Ganga Kalyana disqualified due to lack of title and wetland land type."
+  },
+  "intended_test_purpose": "Demonstrate statutory exclusion overriding stated immediate need (PM-KISAN ineligibility for pure tenant); enforce Protocol v1.1 Rule 2 forbidding credit from receiving score 3 for income support; route tenant credit and insurance to Section B.",
+  "unresolved_dependencies": [
+    "Tenant farmer oral lease verification or Joint Liability Group (JLG) documentation norms under Mandya DCC Bank / commercial banks",
+    "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Paddy in Malavalli taluk, Mandya district"
+  ]
+}

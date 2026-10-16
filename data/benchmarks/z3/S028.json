@@ -1,0 +1,64 @@
+{
+  "scenario_id": "S028",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z3",
+  "agro_climatic_zone": "Northern Dry Zone",
+  "district": "Bagalkot",
+  "crop_primary": "Onion",
+  "crop_secondary": "Sorghum",
+  "land_size_acres": 10.0,
+  "land_type": "Dryland (Rainfed)",
+  "social_category": "OBC (2A)",
+  "farmer_category": "Medium (5-10 acres)",
+  "existing_assets": [],
+  "annual_family_income_lakh": 3.0,
+  "immediate_need": "BOREWELL_IRRIGATION",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "NONE",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 9.0,
+  "community_pool_beneficiaries_count": 3,
+  "farming_stage": "Pre-Sowing / Group Application",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "OBC (2A Kuruba) farmer in Bilagi taluk, Bagalkot with 10.0 acres dryland; individual borewell rejected due to > 5.0 acre ceiling; joined 2 adjacent small OBC farmers to pool 9.0 contiguous dryland acres for community borewell under D. Devaraj Urs Corporation; need joint application procedure.",
+  "landholding_details": {
+    "total_operational_holding_acres": 10.0,
+    "qualifying_parcel_acres": 3.0,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "(5.0, 10.0] Medium (Boundary point: exactly 10.0 acres)",
+    "physical_area_consistency": "PASS: 10.0 ac holding matches declared boundary; qualifying parcel for joint borewell is 3.0 ac"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "None (Dryland kushki)",
+    "borewell_electric_status": "NONE",
+    "grid_connection_evidence": "Not applicable \u2014 community borewell application stage"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Bilagi taluk"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "DES Karnataka & NSS 77th Round: Dryland onion and coarse grain growers in Bagalkot (Bilagi/Hunagund taluks), land pooling strategies among contiguous smallholders.",
+    "farmer_query_inspiration": "KCC Karnataka Ganga Kalyana query logs: Farmers disqualified for individual borewell schemes pooling land with adjacent relatives to meet community borewell criteria.",
+    "statutory_policy_test": "Benchmark Challenge 7 (Community Pool Irrigation) & Boundary Test: Exactly 10.0 acres tests upper Medium boundary (5.0, 10.0]; individual holding > 5.0 ac is disqualified from individual borewell; community route satisfies 8.0-15.0 pooled acres (9.0 ac) with >= 2 beneficiaries (3 pooled farmers); raw engine fires GK_SCH010_DEVARAJ_URS_COMMUNITY_ROUTE_VALID. CRITICAL SAFEGUARD: D. Devaraj Urs Corporation remains PROVISIONAL; presentation pipeline preserves raw ELIGIBLE but places scheme in Section B as REQUIRES_VERIFICATION without numerical scoring."
+  },
+  "intended_test_purpose": "Evaluate Ganga Kalyana community-pool borewell route (Samooha Kola Bavi); test 10.0-acre Medium boundary condition; enforce governance safeguard placing provisional Devaraj Urs determination into Section B.",
+  "unresolved_dependencies": [
+    "D. Devaraj Urs Backward Classes Development Corporation annual notification specifying community borewell target allocations and joint deed verification guidelines for FY 2026-27"
+  ]
+}

@@ -1,0 +1,420 @@
+[
+  {
+    "scenario_id": "S047",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z7",
+    "agro_climatic_zone": "Southern Transition Zone",
+    "district": "Hassan",
+    "crop_primary": "Maize",
+    "crop_secondary": "Potato",
+    "land_size_acres": 5.5,
+    "land_type": "Irrigated (Canal)",
+    "social_category": "General (OC)",
+    "farmer_category": "Medium (5-10 acres)",
+    "existing_assets": [
+      "Canal Outlet",
+      "Intermediate Storage Sump",
+      "Diesel Engine Pump"
+    ],
+    "annual_family_income_lakh": 3.2,
+    "immediate_need": "FARM_MECHANIZATION",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "borewell_electric_status": "NONE",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Harvesting / Land Preparation",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "General category medium maize farmer with 5.5 acres canal command in Holenarasipura, Hassan; seeking 40% capital subsidy on multi-crop power thresher and tractor-mounted disc plough under Sub-Mission on Agricultural Mechanization (SMAM); inquiring about registered dealer empanelment and online application window on KSAMB portal.",
+    "landholding_details": {
+      "total_operational_holding_acres": 5.5,
+      "qualifying_parcel_acres": 5.5,
+      "requested_subsidized_area_ha": null,
+      "land_classification_interval": "(5.0, 10.0] Medium",
+      "physical_area_consistency": "PASS: 5.5 ac holding matches parcel"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "Canal Command",
+      "borewell_electric_status": "NONE",
+      "grid_connection_evidence": "Hemavathi canal command distributary gravity flow with farm intermediate sump"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": true,
+      "is_pure_tenant_without_land_title": false,
+      "tenure_documentation": "RTC registered pre-February 2019 in Holenarasipura taluk"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "DES Karnataka & Hassan Agriculture Department: Intensive maize and commercial crop tract under Hemavathi reservoir command, with high demand for post-harvest threshing and primary tillage mechanization.",
+      "farmer_query_inspiration": "KCC Karnataka SMAM helpline logs: Medium farmers in canal commands seeking implement subsidies for post-harvest grain handling.",
+      "statutory_policy_test": "SMAM Mechanization in Medium Holding: Qualifies for SMAM 40% implement subsidy for Medium General category holding (SMAM_NO_PRIOR_SUBSIDY) matching immediate need; PM-KISAN qualifies in Section A; PMKSY-PDMC qualifies in Section A; PMFBY decoupled to Section B pending seasonal IU notification; canal land type strictly disqualifies Krishi Bhagya and Ganga Kalyana."
+    },
+    "intended_test_purpose": "Validate SMAM implement subsidy eligibility for medium general holding matching primary need; enforce canal command exclusions for Krishi Bhagya and affirmative welfare exclusions for Ganga Kalyana.",
+    "unresolved_dependencies": [
+      "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Maize in Hassan district",
+      "Hassan District Agriculture Joint Director SMAM FY 2026-27 target allocation circular"
+    ]
+  },
+  {
+    "scenario_id": "S048",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z7",
+    "agro_climatic_zone": "Southern Transition Zone",
+    "district": "Shivamogga",
+    "crop_primary": "Ginger",
+    "crop_secondary": "Spices",
+    "land_size_acres": 2.0,
+    "land_type": "Irrigated (Borewell)",
+    "social_category": "ST",
+    "farmer_category": "Marginal (< 2.5 acres)",
+    "existing_assets": [
+      "Borewell (Grid-connected)",
+      "Drip Irrigation (Installed)",
+      "Storage Shed"
+    ],
+    "annual_family_income_lakh": 1.4,
+    "immediate_need": "PROTECTED_HORTICULTURE",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": null,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": null,
+    "is_pure_tenant_without_land_title": false,
+    "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Rhizome Sprouting / Vegetative",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "ST marginal commercial ginger grower with 2.0 acres borewell-irrigated land in Shikaripura, Shivamogga; family inherited land title records pending mutation certification; applicant's father receives government pension with unconfirmed monthly amount / MTS designation; seeking 50% subsidy for shade-net protected cultivation under MIDH to prevent rhizome rot; inquiring about title regularization requirements.",
+    "landholding_details": {
+      "total_operational_holding_acres": 2.0,
+      "qualifying_parcel_acres": 2.0,
+      "requested_subsidized_area_ha": null,
+      "land_classification_interval": "[0.0, 2.5) Marginal",
+      "physical_area_consistency": "PASS: 2.0 ac holding matches parcel"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "Borewell (Grid-connected)",
+      "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+      "grid_connection_evidence": "MESCOM energized IP set with existing drip installation"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": null,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": null,
+      "is_pure_tenant_without_land_title": false,
+      "tenure_documentation": "Title mutation pending (ancestral land with uncertified RTC cut-off date)"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "DES Karnataka & Shivamogga Horticulture Department: Intensive commercial ginger and spice farming in Shikaripura/Soraba taluks, relying on shaded micro-environments to prevent soft rot disease in high humidity.",
+      "farmer_query_inspiration": "KCC Karnataka MIDH query logs: Marginal tribal spice growers inquiring about shade-net subsidies while RTC inheritance mutation is under process.",
+      "statutory_policy_test": "Benchmark Challenge 4 (Three-Valued Logic & Unknown Attribute Handling): Land title cut-off date is UNKNOWN (land_ownership_cutoff_pre_feb_2019 = None) and monthly pension amount is UNKNOWN (superannuated_pensioner_monthly_amount = None); raw engine returns REQUIRES_VERIFICATION for PM-KISAN (rules PMKISAN_CUTOFF_DATE_UNKNOWN, PMKISAN_PENSION_UNKNOWN); MIDH evaluates raw ELIGIBLE (MIDH_HORTICULTURE_CROP_VERIFIED, MIDH_LAND_MIN_MET, MIDH_MICRO_IRRIGATION_VERIFIED), but governance safeguard routes it to Section B as REQUIRES_VERIFICATION without scoring pending verified land title deed / RTC mutation; PM-KUSUM B disqualified due to grid connection; Ganga Kalyana disqualified due to existing borewell."
+    },
+    "intended_test_purpose": "Evaluate Benchmark Challenge 4 under explicit UNKNOWN tenure and pension attributes; enforce three-valued logic in PM-KISAN; route title-dependent schemes to Section B pending land title certification.",
+    "unresolved_dependencies": [
+      "Revenue Department certification of land ownership record date / inheritance mutation order on RTC for Shikaripura taluk",
+      "Verification of family pensioner monthly amount and Class IV / Group D (MTS) exemption status",
+      "Verification of GoK Kharif 2026 PMFBY/RWBCIS Insurance Unit notification for Ginger in Shivamogga district"
+    ]
+  },
+  {
+    "scenario_id": "S049",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z7",
+    "agro_climatic_zone": "Southern Transition Zone",
+    "district": "Chikkamagaluru",
+    "crop_primary": "Potato",
+    "crop_secondary": "Vegetables",
+    "land_size_acres": 4.5,
+    "land_type": "Irrigated (Borewell)",
+    "social_category": "General (OC)",
+    "farmer_category": "Small (2.5-5 acres)",
+    "existing_assets": [
+      "Borewell (Grid-connected)",
+      "Drip Irrigation (Installed)",
+      "Storage Shed"
+    ],
+    "annual_family_income_lakh": 2.8,
+    "immediate_need": "PROTECTED_HORTICULTURE",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Tubers / Vegetative Growth",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "General category small potato grower with 4.5 acres borewell-irrigated land in Tarikere, Chikkamagaluru; holding inherited in June 2022 following demise of father with registered legal heir certificate and updated Pahani; applying for 50% subsidy under MIDH for 2,000 sq. meter shade-net house for certified seed potato multiplication; seeking confirmation of post-2019 succession eligibility for PM-KISAN and MIDH.",
+    "landholding_details": {
+      "total_operational_holding_acres": 4.5,
+      "qualifying_parcel_acres": 4.5,
+      "requested_subsidized_area_ha": null,
+      "land_classification_interval": "[2.5, 5.0] Small",
+      "physical_area_consistency": "PASS: 4.5 ac holding matches parcel"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "Borewell (Grid-connected)",
+      "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+      "grid_connection_evidence": "MESCOM energized 7.5 HP IP set connected to pressurized drip network"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": true,
+      "is_pure_tenant_without_land_title": false,
+      "factual_acquisition_date": "2022-06-14",
+      "acquisition_date_relationship_to_cutoff": "POST_FEB_2019",
+      "transfer_basis": "INHERITANCE_DUE_TO_DEATH",
+      "succession_death_certificate": "Registered Death Certificate Reg No. DC-2022-4419 issued by Tarikere Municipal / Revenue Authority (demise of registered landowner/father in May 2022)",
+      "succession_legal_heir_order": "Tahsildar Legal Heir Certificate LND/CR-104/2022-23 naming applicant as legal successor",
+      "revenue_mutation_record": "Bhoomi Mutation Extract MR-2022-0815 and updated Record of Rights, Tenancy and Crops (RTC) Form 16 under Section 128/129 of Karnataka Land Revenue Act, 1964",
+      "engine_cutoff_rule_input_interpretation": "land_ownership_cutoff_pre_feb_2019 represents the frozen engine's consolidated cutoff-rule input (True = qualifies under pre-Feb 2019 ownership OR post-cutoff succession upon death of previous owner; False = ineligible post-cutoff transfer via partition deed, sale, or gift; None = unknown/unverified); the literal historical acquisition date is 2022-06-14 (post-01.02.2019), but qualifies for PM-KISAN under statutory succession exemption per PM-KISAN Revised Operational Guidelines \u00a73(d) and Clarification \u00a72.",
+      "tenure_documentation": "Inherited title mutated June 2022 upon demise of registered landowner (father deceased in May 2022; Death Certificate Reg No. DC-2022-4419; Tahsildar Legal Heir Certificate LND/CR-104/2022-23; Bhoomi Mutation Extract MR-2022-0815; updated RTC Form 16). Transfer basis: INHERITANCE_DUE_TO_DEATH. Factual acquisition date: 2022-06-14 (post-01.02.2019). Statutorily exempt under PM-KISAN Revised Operational Guidelines \u00a73(d) and Clarification \u00a72; strictly distinguished from non-exempt post-cutoff transfers via family partition deed, sale deed, or gift deed. Input flag land_ownership_cutoff_pre_feb_2019=True represents the engine's consolidated cutoff-compliance rule."
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "DES Karnataka & Chikkamagaluru Horticulture Department: High-value seed potato and horticultural multiplication in Tarikere taluk transition belt, vulnerable to blight and requiring climate-controlled shade-net structures.",
+      "farmer_query_inspiration": "KCC Karnataka MIDH query logs: Small potato farmers asking about shade-net subsidies for seed preservation following inheritance transfer.",
+      "statutory_policy_test": "Post-Feb 2019 Statutory Succession Exemption & MIDH Protected Horticulture: Factual acquisition date is 2022-06-14 (post-01.02.2019); transfer basis is strictly INHERITANCE_DUE_TO_DEATH following demise of father with verified Death Certificate Reg No. DC-2022-4419, Tahsildar Legal Heir Certificate LND/CR-104/2022-23, and Bhoomi Mutation Extract MR-2022-0815 (updated RTC Form 16); statutorily exempt under PM-KISAN Revised Operational Guidelines \u00a73(d) and Clarification \u00a72; strictly distinguished from non-exempt post-cutoff transfers via family partition deed, sale deed, or gift deed; satisfies cutoff compliance input (land_ownership_cutoff_pre_feb_2019 = True); PM-KISAN qualifies in Section A (PMKISAN_CUTOFF_DATE_VERIFIED); MIDH qualifies in Section A (MIDH_HORTICULTURE_CROP_VERIFIED, MIDH_LAND_MIN_MET, MIDH_MICRO_IRRIGATION_VERIFIED) matching primary need; SMAM qualifies in Section A; PMFBY routed to Section B pending seasonal IU notification; PM-KUSUM B disqualified due to grid connection; Ganga Kalyana disqualified due to existing borewell and General Merit category."
+    },
+    "intended_test_purpose": "Demonstrate statutory inheritance succession exemption under PM-KISAN; validate MIDH protected horticulture eligibility on small holding with verified drip asset.",
+    "unresolved_dependencies": [
+      "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Potato in Chikkamagaluru district",
+      "Tarikere taluk RSK horticulture nursery certification for seed potato multiplication"
+    ]
+  },
+  {
+    "scenario_id": "S050",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z7",
+    "agro_climatic_zone": "Southern Transition Zone",
+    "district": "Hassan",
+    "crop_primary": "Arecanut",
+    "crop_secondary": "Pepper",
+    "land_size_acres": 3.5,
+    "land_type": "Irrigated (Borewell)",
+    "social_category": "OBC (2A)",
+    "farmer_category": "Small (2.5-5 acres)",
+    "existing_assets": [
+      "Borewell (Grid-connected)",
+      "Drip Irrigation (Installed)"
+    ],
+    "annual_family_income_lakh": 2.2,
+    "immediate_need": "PRODUCTION_CREDIT",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Nut Development / Harvest",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "OBC small arecanut farmer with 3.5 acres irrigated plantation in Belur, Hassan; needing short-term production credit of \u20b92.5 lakh for intercultural operations, fertilizer, and copper sulphate spraying; inquiring whether to apply for Central KCC via Canara Bank or State Cooperative interest-free loan via local PACS; seeking interest subvention and scale-of-finance terms.",
+    "landholding_details": {
+      "total_operational_holding_acres": 3.5,
+      "qualifying_parcel_acres": 3.5,
+      "requested_subsidized_area_ha": null,
+      "land_classification_interval": "[2.5, 5.0] Small",
+      "physical_area_consistency": "PASS: 3.5 ac holding matches parcel"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "Borewell (Grid-connected)",
+      "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+      "grid_connection_evidence": "CESC energized agricultural borewell with operational micro-irrigation"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": true,
+      "is_pure_tenant_without_land_title": false,
+      "tenure_documentation": "RTC registered pre-February 2019 in Belur taluk"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "DES Karnataka & Hassan District Cooperative Central Bank: Arecanut plantation tract in Belur/Alur taluks with high institutional credit demand under District Level Technical Committee (DLTC) scale of finance.",
+      "farmer_query_inspiration": "KCC Karnataka credit helpline logs: Small plantation owners comparing commercial bank KCC-MISS with PACS interest-subsidy schemes.",
+      "statutory_policy_test": "Benchmark Challenge 6 (Competing Credit Channels): Applicant needs short-term production credit for arecanut plantation; evaluates Central KCC (SCH008_CENTRAL) and State Cooperative Credit (SCH008_KA_COOP); Central KCC cleanly qualifies in Section A (KCC_CENTRAL_COMMERCIAL_ELIGIBLE) with clinical score 3; State cooperative credit is PROVISIONAL in registry and routed to Section B as REQUIRES_VERIFICATION without numerical scoring; abstract parent SCH008 is suppressed; PM-KISAN qualifies in Section A; PMFBY routed to Section B pending seasonal IU notification; PM-KUSUM B disqualified due to grid connection; Ganga Kalyana disqualified due to existing borewell."
+    },
+    "intended_test_purpose": "Demonstrate Benchmark Challenge 6 resolution: evaluate Central KCC in Section A while quarantining provisional State PACS credit in Section B; verify parent suppression.",
+    "unresolved_dependencies": [
+      "Administrative circular verification for provisional scheme SCH008_KA_COOP (GoK PACS 0% interest crop loan rules)",
+      "Hassan District DCC Bank / DLTC scale-of-finance order for Arecanut cultivation for FY 2026-27",
+      "Verification of GoK Kharif 2026 PMFBY/RWBCIS Insurance Unit notification for Arecanut in Hassan district"
+    ]
+  },
+  {
+    "scenario_id": "S051",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z7",
+    "agro_climatic_zone": "Southern Transition Zone",
+    "district": "Shivamogga",
+    "crop_primary": "Maize",
+    "crop_secondary": "Pulses",
+    "land_size_acres": 2.5,
+    "land_type": "Dryland (Rainfed)",
+    "social_category": "Minority",
+    "farmer_category": "Small (2.5-5 acres)",
+    "existing_assets": [
+      "Borewell (Non-energized)"
+    ],
+    "annual_family_income_lakh": 1.6,
+    "immediate_need": "SOLAR_PUMP_INSTALLATION",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "borewell_electric_status": "UNENERGIZED_OFF_GRID",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Pre-Sowing / Land Preparation",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "Minority small farmer with exactly 2.5 acres dryland in Bhadravati, Shivamogga; has newly drilled non-energized borewell with proven yield of 2.5 inches; facing 3-year waiting list for regular IP set energization under MESCOM; applying for 60% subsidy on 5 HP standalone solar pump under PM-KUSUM Component B; seeking MNRE vendor portal registration steps.",
+    "landholding_details": {
+      "total_operational_holding_acres": 2.5,
+      "qualifying_parcel_acres": 2.5,
+      "requested_subsidized_area_ha": null,
+      "land_classification_interval": "[2.5, 5.0] Small",
+      "physical_area_consistency": "PASS: Exactly 2.5 ac holding satisfies Small boundary condition"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "Borewell (Non-energized)",
+      "borewell_electric_status": "UNENERGIZED_OFF_GRID",
+      "grid_connection_evidence": "MESCOM non-energized certificate / zero electrical service line to plot"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": true,
+      "is_pure_tenant_without_land_title": false,
+      "tenure_documentation": "RTC registered pre-February 2019 in Bhadravati taluk"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "DES Karnataka & KREDL: Transition dryland tract in Bhadravati taluk with long queues for agricultural electricity connections, driving high adoption of standalone solar irrigation.",
+      "farmer_query_inspiration": "KCC Karnataka PM-KUSUM query logs: Small dryland farmers inquiring about off-grid solar pump eligibility on exactly 2.5-acre holdings.",
+      "statutory_policy_test": "Boundary Test & Standalone Solar Pump Gating: Exactly 2.5 acres classified as Small holding ([2.5, 5.0]); drilled non-energized borewell verified; off-grid electrical status verified; qualifies for PM-KUSUM Component B standalone solar pump (KUSUM_B_WATER_SOURCE_PRESENT, KUSUM_B_OFF_GRID_VERIFIED) matching primary need in Section A; PM-KISAN qualifies in Section A; SMAM qualifies in Section A; Soil Health Card qualifies in Section A; PMFBY routed to Section B pending seasonal IU notification; Krishi Bhagya disqualified due to unnotified district (Shivamogga is Malnad/coastal district); Ganga Kalyana disqualified due to existing borewell."
+    },
+    "intended_test_purpose": "Validate PM-KUSUM Component B eligibility on exactly 2.5-acre Small boundary holding with off-grid unenergized borewell; enforce existing borewell disqualification for Ganga Kalyana.",
+    "unresolved_dependencies": [
+      "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Maize in Bhadravati taluk, Shivamogga district",
+      "KREDL PM-KUSUM Component B vendor empanelment and slot booking confirmation for Shivamogga district"
+    ]
+  },
+  {
+    "scenario_id": "S052",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z7",
+    "agro_climatic_zone": "Southern Transition Zone",
+    "district": "Chikkamagaluru",
+    "crop_primary": "Potato",
+    "crop_secondary": "Pulses",
+    "land_size_acres": 9.5,
+    "land_type": "Dryland (Rainfed)",
+    "social_category": "OBC (2A)",
+    "farmer_category": "Medium (5-10 acres)",
+    "existing_assets": [],
+    "annual_family_income_lakh": 2.6,
+    "immediate_need": "BOREWELL_IRRIGATION",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "borewell_electric_status": "NONE",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 12.0,
+    "community_pool_beneficiaries_count": 3,
+    "farming_stage": "Pre-Planting / Land Preparation",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "OBC medium dryland farmer with 9.5 acres rainfed holding in Kadur, Chikkamagaluru; individual land exceeds 5.0 acres ceiling for individual borewell; has formed a contiguous group with two neighboring OBC small farmers pooling a 12.0 acres block (qualifying parcel 4.0 acres); applying for shared community borewell and lift irrigation under D. Devaraj Urs Backward Classes Development Corporation; seeking group registration requirements and beneficiary criteria.",
+    "landholding_details": {
+      "total_operational_holding_acres": 9.5,
+      "qualifying_parcel_acres": 4.0,
+      "requested_subsidized_area_ha": null,
+      "land_classification_interval": "(5.0, 10.0] Medium",
+      "physical_area_consistency": "PASS: 4.0 ac qualifying parcel within 9.5 ac operational holding; 12.0 ac pooled group"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "None (Dryland kushki)",
+      "borewell_electric_status": "NONE",
+      "grid_connection_evidence": "Zero electrical and irrigation infrastructure on pooled dryland block"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": true,
+      "is_pure_tenant_without_land_title": false,
+      "tenure_documentation": "RTC registered pre-February 2019 in Kadur taluk; registered joint consent deed"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "DES Karnataka & Backward Classes Welfare Department: Rain-shadow plains tract in Kadur taluk, Chikkamagaluru district, where small/medium OBC farmers pool contiguous dryland holdings to qualify for community lift/borewell schemes.",
+      "farmer_query_inspiration": "KCC Karnataka Ganga Kalyana query logs: Medium dryland farmers seeking community borewell packages when individual holdings exceed the 5.0-acre ceiling.",
+      "statutory_policy_test": "Benchmark Challenge 7 & Special Governance Condition (Community Beneficiary Discrepancy & Provisional Scheme Safeguard): Individual holding (9.5 ac) exceeds 5.0 acres ceiling for individual borewell; community pool route satisfies acreage range [8.0, 15.0] ac with 12.0 acres pooled and 3 contiguous OBC beneficiaries; raw engine evaluates ELIGIBLE (GK_SCH010_DEVARAJ_URS_COMMUNITY_ROUTE_VALID). CRITICAL GOVERNANCE SAFEGUARD: The benchmark design specification requires at least 3 beneficiaries, while the frozen engine's non-Ambedkar community route rule accepts 2; furthermore, SCH010_DEVARAJ_URS is PROVISIONAL in registry; governance strictly decouples determination to Section B as REQUIRES_VERIFICATION without numerical scoring pending administrative circular confirmation of beneficiary thresholds and contiguous pooling registration; abstract parent SCH010 is suppressed from visible recommendations; PM-KISAN qualifies in Section A; SMAM qualifies in Section A; PMFBY routed to Section B pending seasonal IU notification; Krishi Bhagya disqualified due to unnotified district."
+    },
+    "intended_test_purpose": "Demonstrate Benchmark Challenge 7 (Community Borewell Pooling) while enforcing governance safeguard on beneficiary-count discrepancy and provisional corporation registry status; verify parent suppression.",
+    "unresolved_dependencies": [
+      "Administrative circular verification for provisional scheme SCH010_DEVARAJ_URS (D. Devaraj Urs Backward Classes Development Corporation)",
+      "Confirmation of D. Devaraj Urs Corporation community borewell minimum beneficiary threshold (benchmark specification >= 3 vs encoded rule >= 2)",
+      "Field verification of registered joint consent deed and contiguous boundary alignment for the 12.0-acre pooled block in Kadur taluk",
+      "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Potato in Kadur taluk, Chikkamagaluru district"
+    ]
+  }
+]

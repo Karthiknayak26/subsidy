@@ -1,0 +1,69 @@
+{
+  "scenario_id": "S036",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z5",
+  "agro_climatic_zone": "Eastern Dry Zone",
+  "district": "Chikkaballapura",
+  "crop_primary": "Mulberry",
+  "crop_secondary": "Vegetables",
+  "land_size_acres": 3.0,
+  "land_type": "Irrigated (Borewell)",
+  "social_category": "Minority",
+  "farmer_category": "Small (2.5-5 acres)",
+  "existing_assets": [
+    "Borewell (Grid-connected)",
+    "Silkworm Rearing House"
+  ],
+  "annual_family_income_lakh": 2.1,
+  "immediate_need": "PRODUCTION_CREDIT",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Shoot Rearing / Leaf Harvest",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "Minority small sericulture farmer with 3.0 acres irrigated mulberry garden in Sidlaghatta, Chikkaballapura; seeking working capital credit for dfl silkworm seed purchase and disinfection; inquiring about Central KCC crop loan at 4% interest subvention vs Karnataka PACS 0% interest cooperative loan.",
+  "landholding_details": {
+    "total_operational_holding_acres": 3.0,
+    "qualifying_parcel_acres": 3.0,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "[2.5, 5.0] Small",
+    "physical_area_consistency": "PASS: 3.0 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Borewell (Grid-connected)",
+    "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+    "grid_connection_evidence": "BESCOM agricultural power connection for sericulture plot"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "Registered RTC in Sidlaghatta taluk prior to February 2019"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "Central Silk Board & Dept of Sericulture Karnataka: Chikkaballapura (Sidlaghatta/Chintamani) is the premier bivoltine/cross-breed sericulture cluster in South India, with high recurring seasonal input costs for cocoon rearing.",
+    "farmer_query_inspiration": "KCC Karnataka credit query logs: Sericulture farmers asking about scale of finance for mulberry garden maintenance under KCC vs cooperative loans.",
+    "statutory_policy_test": "Benchmark Challenge 6: Evaluates competing credit channels (Central KCC-MISS commercial route at 4% vs Karnataka State Cooperative Credit 0% route); Central KCC placed in Section A as confirmed actionable candidate; provisional PACS cooperative credit routed to Section B; PMFBY raw engine evaluates INELIGIBLE because Mulberry is absent from the static crop whitelist, but static omission does not establish legal exclusion; routed to Section B as REQUIRES_VERIFICATION pending sericulture insurance circular verification; KMDC Ganga Kalyana disqualified due to irrigated land type and existing borewell."
+  },
+  "intended_test_purpose": "Evaluate Challenge 6 competing credit channels for Minority sericulture cultivator; decouple PMFBY static exclusion to Section B pending sericulture insurance verification; confirm KMDC Ganga Kalyana disqualification on existing water infrastructure.",
+  "unresolved_dependencies": [
+    "Karnataka Department of Sericulture & DCC Bank annual circular on mulberry scale of finance per acre for FY 2026-27",
+    "Chikkaballapura District Central Cooperative (DCC) Bank PACS share capital admission norms for sericulture farmers",
+    "Verification of applicable crop insurance notification or dedicated sericulture insurance scheme guidelines for Mulberry in Chikkaballapura district for Kharif 2026"
+  ]
+}

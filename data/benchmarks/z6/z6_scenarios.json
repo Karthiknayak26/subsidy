@@ -1,0 +1,402 @@
+[
+  {
+    "scenario_id": "S041",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z6",
+    "agro_climatic_zone": "Southern Dry Zone",
+    "district": "Mandya",
+    "crop_primary": "Sugarcane",
+    "crop_secondary": "Paddy",
+    "land_size_acres": 6.5,
+    "land_type": "Irrigated (Canal)",
+    "social_category": "General (OC)",
+    "farmer_category": "Medium (5-10 acres)",
+    "existing_assets": [
+      "Canal Outlet",
+      "Farm Storage Tank",
+      "Diesel Pump Set"
+    ],
+    "annual_family_income_lakh": 3.2,
+    "immediate_need": "MICRO_IRRIGATION_SUPPORT",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "borewell_electric_status": "NONE",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Tillering / Vegetative",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "General category medium sugarcane grower with 6.5 acres canal command land in Maddur taluk, Mandya; facing intermittent rotational canal supply from Visvesvaraya canal; applying for drip irrigation subsidy for 2.50 hectares under PMKSY-PDMC; seeking quotation requirements and water source verification protocol.",
+    "landholding_details": {
+      "total_operational_holding_acres": 6.5,
+      "qualifying_parcel_acres": 6.5,
+      "requested_subsidized_area_ha": 2.5,
+      "land_classification_interval": "(5.0, 10.0] Medium",
+      "physical_area_consistency": "PASS: Requested 2.50 ha <= qualifying parcel 6.5 ac (2.6305 ha)"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "Canal & Storage Tank",
+      "borewell_electric_status": "NONE",
+      "grid_connection_evidence": "Canal gravity flow with farm intermediate sump/pump set"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": true,
+      "is_pure_tenant_without_land_title": false,
+      "tenure_documentation": "RTC registered pre-February 2019 in Maddur taluk"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "DES Karnataka & Mandya Irrigation Department: Cauvery basin canal command sugarcane cultivation in Maddur/Mandya taluks, transitioning to micro-irrigation to conserve canal water during low reservoir storage periods.",
+      "farmer_query_inspiration": "KCC Karnataka PMKSY query logs: Medium farmers in canal commands inquiring about drip installation subsidies on holdings above 5.0 acres.",
+      "statutory_policy_test": "Physical Area Cap & Medium Holding Gating: Evaluates PMKSY-PDMC on 6.5-acre holding; requested subsidized area of 2.50 ha strictly satisfies physical parcel capacity (2.50 ha <= 6.5 ac = 2.6305 ha) and statutory ceiling (2.50 ha <= 5.00 ha); qualifies for PMKSY-PDMC; PMFBY crop insurance subject to seasonal Kharif 2026 Insurance Unit notification verification; Krishi Bhagya disqualified due to irrigated canal status; Ganga Kalyana disqualified due to General Merit category and irrigated land type."
+    },
+    "intended_test_purpose": "Validate PMKSY-PDMC drip irrigation eligibility in canal command under 2.50 ha area cap; enforce dryland gating for Krishi Bhagya and affirmative welfare exclusions for Ganga Kalyana.",
+    "unresolved_dependencies": [
+      "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Sugarcane in Mandya district",
+      "Mandya Irrigation Consultative Committee (ICC) rotational canal release schedule for Kharif 2026"
+    ]
+  },
+  {
+    "scenario_id": "S042",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z6",
+    "agro_climatic_zone": "Southern Dry Zone",
+    "district": "Mysuru",
+    "crop_primary": "Paddy",
+    "crop_secondary": "Pulses",
+    "land_size_acres": 3.5,
+    "land_type": "Wetland/valley",
+    "social_category": "SC",
+    "farmer_category": "Small (2.5-5 acres)",
+    "existing_assets": [],
+    "annual_family_income_lakh": 1.3,
+    "immediate_need": "CROP_INSURANCE",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": null,
+    "is_pure_tenant_without_land_title": true,
+    "borewell_electric_status": "NONE",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Transplanting / Vegetative",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "SC tenant farmer cultivating 3.5 acres wetland paddy in T. Narasipura, Mysuru on oral lease agreement without registered title deed; seeking crop insurance coverage under PMFBY against flood and pest infestation; inquiring about tenant farmer enrollment documents and landlord declaration format.",
+    "landholding_details": {
+      "total_operational_holding_acres": 3.5,
+      "qualifying_parcel_acres": 3.5,
+      "requested_subsidized_area_ha": null,
+      "land_classification_interval": "[2.5, 5.0] Small",
+      "physical_area_consistency": "PASS: 3.5 ac operational holding matches parcel"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "Canal Flow",
+      "borewell_electric_status": "NONE",
+      "grid_connection_evidence": "Kabini canal branch channel field flow"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": null,
+      "is_pure_tenant_without_land_title": true,
+      "tenure_documentation": "Oral Lease / Tenancy without registered title (Pahani/RTC in landlord's name)"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "DES Karnataka & NSS 77th Round: Landless and pure tenant sharecroppers in Kabini/Cauvery river basin (T. Narasipura/Nanjangud taluks), facing high production risks in flood-prone wetland valleys without registered land records.",
+      "farmer_query_inspiration": "KCC Karnataka PMFBY helpline: Pure tenant farmers asking how to insure leased paddy fields when landowners refuse to provide formal lease deeds.",
+      "statutory_policy_test": "Benchmark Challenge 5 (Pure Tenant Gating): Farmer is a pure tenant without registered land ownership (is_pure_tenant_without_land_title = True); PM-KISAN strictly disqualifies pure tenants (PMKISAN_PURE_TENANT_EXCLUSION); PMFBY raw engine evaluates ELIGIBLE based on notified paddy crop, but governance presentation routes PMFBY to Section B as REQUIRES_VERIFICATION without scoring pending verification of tenant crop declaration / sowing certificate from Village Accountant; Central KCC routed to Section B pending JLG / oral lease documentation; Krishi Bhagya and Ganga Kalyana disqualified due to wetland status and lack of land ownership."
+    },
+    "intended_test_purpose": "Evaluate Benchmark Challenge 5 (Pure Tenant Gating); enforce PM-KISAN statutory disqualification on pure tenancy; route PMFBY and KCC to Section B pending tenant documentation and seasonal IU notification checks.",
+    "unresolved_dependencies": [
+      "Verification of tenant farmer crop declaration / sowing certificate from Village Accountant / Revenue Inspector for T. Narasipura taluk",
+      "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification and enrolment cut-off dates for Paddy in Mysuru district"
+    ]
+  },
+  {
+    "scenario_id": "S043",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z6",
+    "agro_climatic_zone": "Southern Dry Zone",
+    "district": "Chamarajanagar",
+    "crop_primary": "Banana",
+    "crop_secondary": "Turmeric",
+    "land_size_acres": 1.8,
+    "land_type": "Dryland (Rainfed)",
+    "social_category": "ST",
+    "farmer_category": "Marginal (< 2.5 acres)",
+    "existing_assets": [],
+    "annual_family_income_lakh": 1.0,
+    "immediate_need": "BOREWELL_IRRIGATION",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "borewell_electric_status": "NONE",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Pre-Planting / Land Preparation",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "ST marginal dryland farmer with 1.8 acres rainfed land in Gundlupet, Chamarajanagar; planning to cultivate tissue-culture banana but facing complete lack of irrigation; applying for free individual borewell and submersible pump package under Karnataka Maharshi Valmiki ST Development Corporation Ganga Kalyana scheme; need offline application checklist.",
+    "landholding_details": {
+      "total_operational_holding_acres": 1.8,
+      "qualifying_parcel_acres": 1.8,
+      "requested_subsidized_area_ha": null,
+      "land_classification_interval": "[0.0, 2.5) Marginal",
+      "physical_area_consistency": "PASS: 1.8 ac holding matches parcel"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "None (Dryland kushki)",
+      "borewell_electric_status": "NONE",
+      "grid_connection_evidence": "Zero water extraction equipment installed on plot"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": true,
+      "is_pure_tenant_without_land_title": false,
+      "tenure_documentation": "RTC registered pre-February 2019 in Gundlupet taluk"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "DES Karnataka & Tribal Welfare Department: Soliga and ST marginal cultivators in Gundlupet taluk, rain-shadow semi-arid zone adjoining Bandipur, reliant on affirmative welfare borewell packages.",
+      "farmer_query_inspiration": "KCC Karnataka Ganga Kalyana query logs: ST farmers inquiring about individual borewell entitlements under Maharshi Valmiki ST Development Corporation.",
+      "statutory_policy_test": "Evaluates Ganga Kalyana Individual Route for ST category (Karnataka Maharshi Valmiki ST Development Corporation); landholding of 1.8 acres satisfies demographic interval [1.0, 5.0]; family income of \u20b91.0 lakh recorded; raw engine evaluates ELIGIBLE (GK_SCH010_VALMIKI_INDIVIDUAL_ROUTE_VALID). CRITICAL GOVERNANCE SAFEGUARD: Scheme record is PROVISIONAL in registry, and individual irrigation requires field verification of perennial water source adjacency and Chamarajanagar district income order confirmation; governance strictly decouples SCH010_VALMIKI to Section B as REQUIRES_VERIFICATION without numerical scoring; abstract parent SCH010 is suppressed from recommendations; Krishi Bhagya qualifies for dryland farm pond in Section A; PM-KISAN qualifies in Section A; PMFBY routed to Section B pending seasonal IU notification."
+    },
+    "intended_test_purpose": "Validate Maharshi Valmiki ST Ganga Kalyana individual route raw eligibility while enforcing governance safeguard routing to Section B as REQUIRES_VERIFICATION; confirm parent suppression and dryland Krishi Bhagya access.",
+    "unresolved_dependencies": [
+      "Administrative circular and Government Order verification for provisional scheme SCH010_VALMIKI",
+      "Verification of Karnataka Maharshi Valmiki ST Development Corporation FY 2026-27 Gundlupet taluk individual borewell sanction norms and perennial water source adjacency criteria",
+      "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Banana in Chamarajanagar district"
+    ]
+  },
+  {
+    "scenario_id": "S044",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z6",
+    "agro_climatic_zone": "Southern Dry Zone",
+    "district": "Mandya",
+    "crop_primary": "Paddy",
+    "crop_secondary": "None",
+    "land_size_acres": 2.0,
+    "land_type": "Wetland/valley",
+    "social_category": "OBC (2A)",
+    "farmer_category": "Marginal (< 2.5 acres)",
+    "existing_assets": [],
+    "annual_family_income_lakh": 0.9,
+    "immediate_need": "INCOME_SUPPORT",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": null,
+    "is_pure_tenant_without_land_title": true,
+    "borewell_electric_status": "NONE",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Post-Harvest Distress",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "OBC tenant farmer cultivating 2.0 acres wetland paddy in Malavalli, Mandya on oral lease; suffered acute crop failure and submergence loss; facing severe debt distress and requesting non-repayable cash assistance under PM-KISAN; inquiring whether landless tenant farmers can apply.",
+    "landholding_details": {
+      "total_operational_holding_acres": 2.0,
+      "qualifying_parcel_acres": 2.0,
+      "requested_subsidized_area_ha": null,
+      "land_classification_interval": "[0.0, 2.5) Marginal",
+      "physical_area_consistency": "PASS: 2.0 ac holding matches parcel"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "Canal Flow",
+      "borewell_electric_status": "NONE",
+      "grid_connection_evidence": "Rotational canal outlet in wetland valley"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": null,
+      "is_pure_tenant_without_land_title": true,
+      "tenure_documentation": "Pure Tenant (Oral agreement without registered title)"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "DES Karnataka & Mandya Agricultural Labour Survey: Marginal tenant cultivators in Malavalli taluk operating under informal oral tenancy in tail-end wetland canal networks with high vulnerability to flash floods.",
+      "farmer_query_inspiration": "KCC Karnataka distress calls: Tenant farmers requesting government income support and cash transfers following crop submergence.",
+      "statutory_policy_test": "Dual Challenge: Challenge 2 (Relief vs. Reimbursable Debt) and Challenge 5 (Pure Tenant Gating); farmer urgently needs non-repayable income support, but lacks registered land title; PM-KISAN strictly disqualifies pure tenants (PMKISAN_PURE_TENANT_EXCLUSION); Protocol v1.1 Rule 2 mandates that reimbursable production credit (KCC-MISS) must NOT receive clinical score 3; furthermore, tenant status routes KCC to Section B pending JLG / oral lease declaration; PMFBY routed to Section B pending tenant sowing certificate and seasonal IU notification; Krishi Bhagya disqualified due to wetland status; Ganga Kalyana disqualified due to lack of title and wetland land type."
+    },
+    "intended_test_purpose": "Demonstrate statutory exclusion overriding stated immediate need (PM-KISAN ineligibility for pure tenant); enforce Protocol v1.1 Rule 2 forbidding credit from receiving score 3 for income support; route tenant credit and insurance to Section B.",
+    "unresolved_dependencies": [
+      "Tenant farmer oral lease verification or Joint Liability Group (JLG) documentation norms under Mandya DCC Bank / commercial banks",
+      "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Paddy in Malavalli taluk, Mandya district"
+    ]
+  },
+  {
+    "scenario_id": "S045",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z6",
+    "agro_climatic_zone": "Southern Dry Zone",
+    "district": "Mysuru",
+    "crop_primary": "Ragi",
+    "crop_secondary": "Cowpea",
+    "land_size_acres": 1.5,
+    "land_type": "Dryland (Rainfed)",
+    "social_category": "SC",
+    "farmer_category": "Marginal (< 2.5 acres)",
+    "existing_assets": [],
+    "annual_family_income_lakh": 1.1,
+    "immediate_need": "RAINWATER_HARVESTING",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "borewell_electric_status": "NONE",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Sowing / Pre-Monsoon",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "SC marginal dryland farmer with 1.5 acres rainfed ragi in H.D. Kote, Mysuru; dependent entirely on erratic rainfall; applying for Krishi Honda (farm pond) with polythene lining and diesel pump package under Krishi Bhagya; seeking subsidy percentage and RSK application procedure.",
+    "landholding_details": {
+      "total_operational_holding_acres": 1.5,
+      "qualifying_parcel_acres": 1.5,
+      "requested_subsidized_area_ha": null,
+      "land_classification_interval": "[0.0, 2.5) Marginal",
+      "physical_area_consistency": "PASS: 1.5 ac holding matches parcel"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "Rainfed Catchment",
+      "borewell_electric_status": "NONE",
+      "grid_connection_evidence": "Zero electrical infrastructure on rainfed dryland parcel"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": true,
+      "is_pure_tenant_without_land_title": false,
+      "tenure_documentation": "RTC registered pre-February 2019 in H.D. Kote taluk"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "DES Karnataka & Watershed Development Department: Rainfed red soil tract in H.D. Kote/Periyapatna taluks, Mysuru district, designated notified dryland zone qualifying for Krishi Bhagya in situ rainwater harvesting.",
+      "farmer_query_inspiration": "KCC Karnataka Krishi Bhagya query logs: Marginal dryland SC farmers asking about farm pond excavation subsidies in Southern Dry Zone.",
+      "statutory_policy_test": "Evaluates Krishi Bhagya on SC marginal dryland parcel (1.5 ac); Mysuru is a notified rainfed district; dryland kushki verified; qualifies in Section A (KRISHI_BHAGYA_DRYLAND_VERIFIED, KRISHI_BHAGYA_DISTRICT_NOTIFIED, KRISHI_BHAGYA_ACREAGE_VALID), noting historical 90% SC rate is pending FY 2026-27 GO verification; PM-KISAN qualifies in Section A; Ambedkar Ganga Kalyana raw engine returns ELIGIBLE (GK_AMBEDKAR_INDIVIDUAL_ROUTE_VALID) on demographic land interval [1.5, 5.0] ac and recorded family income of \u20b91.10 Lakh (H.D. Kote rural classification). CRITICAL GOVERNANCE SAFEGUARD: In alignment with S029 governance precedent, official Dr. B.R. Ambedkar Development Corporation guidelines require both land parcel adjacency to a perennial water source (rivers/streams/tanks) and administrative confirmation of the applicable district annual family income ceiling (historical \u20b91.50 Lakh rural ceiling vs \u20b92.00 Lakh state ceiling order). Because S045 lacks recorded perennial source adjacency and Mysuru rural income ceiling rules remain unverified against a current scheme-specific Government Order, governance strictly decouples SCH010_AMBEDKAR to Section B as REQUIRES_VERIFICATION without numerical scoring; abstract parent SCH010 is suppressed; PMFBY routed to Section B pending seasonal IU notification."
+    },
+    "intended_test_purpose": "Validate Krishi Bhagya farm pond eligibility on SC marginal dryland holding matching primary need; enforce Ambedkar Ganga Kalyana source-adjacency and income-rule governance safeguards; confirm parent suppression.",
+    "unresolved_dependencies": [
+      "Krishi Bhagya FY 2026-27 Government Order confirming component-wise subsidy rates (90% SC rate indicative)",
+      "Field verification of land parcel adjacency to a qualifying perennial water source under Dr. B.R. Ambedkar Development Corporation individual irrigation guidelines",
+      "Administrative verification of applicable Mysuru district annual family income ceiling order (rural \u20b91.50 L vs state \u20b92.00 L ceiling) and current scheme circulars for Dr. B.R. Ambedkar Development Corporation",
+      "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Ragi in H.D. Kote taluk, Mysuru district"
+    ]
+  },
+  {
+    "scenario_id": "S046",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z6",
+    "agro_climatic_zone": "Southern Dry Zone",
+    "district": "Chamarajanagar",
+    "crop_primary": "Sugarcane",
+    "crop_secondary": "Banana",
+    "land_size_acres": 7.0,
+    "land_type": "Irrigated (Canal)",
+    "social_category": "General (OC)",
+    "farmer_category": "Medium (5-10 acres)",
+    "existing_assets": [
+      "Canal Sump",
+      "Electric Pump Set"
+    ],
+    "annual_family_income_lakh": 3.4,
+    "immediate_need": "SOIL_HEALTH_AND_FERTILIZER",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "borewell_electric_status": "NONE",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Ratoon / Land Preparation",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "General category sugarcane grower with 7.0 acres canal command land in Kollegal, Chamarajanagar; observing declining sugarcane tonnage and soil salinization; applying for Soil Health Card diagnostic testing and micronutrient advisory; inquiring about RSK soil sample collection protocol.",
+    "landholding_details": {
+      "total_operational_holding_acres": 7.0,
+      "qualifying_parcel_acres": 7.0,
+      "requested_subsidized_area_ha": null,
+      "land_classification_interval": "(5.0, 10.0] Medium",
+      "physical_area_consistency": "PASS: 7.0 ac holding matches parcel"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "Canal Command",
+      "borewell_electric_status": "NONE",
+      "grid_connection_evidence": "Canal network outlet with authorized electric pump lift"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": true,
+      "is_pure_tenant_without_land_title": false,
+      "tenure_documentation": "RTC registered pre-February 2019 in Kollegal taluk"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "Department of Agriculture Chamarajanagar & ICAR KVK: Intensive sugarcane and commercial cultivation in Kollegal/Yelandur taluks experiencing nutrient imbalances and micro-nutrient deficiencies from prolonged monocropping.",
+      "farmer_query_inspiration": "KCC Karnataka Soil Health Card query logs: Medium farmers requesting GPS-based soil sampling and soil health card generation.",
+      "statutory_policy_test": "Universal Access Diagnostic Service: Evaluates Soil Health Card (SHC) on 7.0-acre medium sugarcane holding; qualifies for 100% free soil diagnostic profiling and crop nutrient recommendation (SHC_UNIVERSAL_ACCESS_VERIFIED), directly matching primary need SOIL_HEALTH_AND_FERTILIZER in Section A; PM-KISAN qualifies in Section A; PMKSY-PDMC qualifies in Section A; SMAM qualifies in Section A; PMFBY routed to Section B pending seasonal IU notification; Krishi Bhagya and Ganga Kalyana disqualified due to canal command irrigated land type and General Merit category."
+    },
+    "intended_test_purpose": "Validate Soil Health Card universal entitlement matching primary diagnostic need; enforce irrigated land type and affirmative welfare exclusions for Krishi Bhagya and Ganga Kalyana.",
+    "unresolved_dependencies": [
+      "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Sugarcane in Kollegal taluk, Chamarajanagar district",
+      "Chamarajanagar district RSK soil testing laboratory cycle and sampling schedule for Kharif 2026"
+    ]
+  }
+]

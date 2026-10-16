@@ -1,0 +1,76 @@
+{
+  "scenario_id": "S049",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z7",
+  "agro_climatic_zone": "Southern Transition Zone",
+  "district": "Chikkamagaluru",
+  "crop_primary": "Potato",
+  "crop_secondary": "Vegetables",
+  "land_size_acres": 4.5,
+  "land_type": "Irrigated (Borewell)",
+  "social_category": "General (OC)",
+  "farmer_category": "Small (2.5-5 acres)",
+  "existing_assets": [
+    "Borewell (Grid-connected)",
+    "Drip Irrigation (Installed)",
+    "Storage Shed"
+  ],
+  "annual_family_income_lakh": 2.8,
+  "immediate_need": "PROTECTED_HORTICULTURE",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Tubers / Vegetative Growth",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "General category small potato grower with 4.5 acres borewell-irrigated land in Tarikere, Chikkamagaluru; holding inherited in June 2022 following demise of father with registered legal heir certificate and updated Pahani; applying for 50% subsidy under MIDH for 2,000 sq. meter shade-net house for certified seed potato multiplication; seeking confirmation of post-2019 succession eligibility for PM-KISAN and MIDH.",
+  "landholding_details": {
+    "total_operational_holding_acres": 4.5,
+    "qualifying_parcel_acres": 4.5,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "[2.5, 5.0] Small",
+    "physical_area_consistency": "PASS: 4.5 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Borewell (Grid-connected)",
+    "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+    "grid_connection_evidence": "MESCOM energized 7.5 HP IP set connected to pressurized drip network"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "factual_acquisition_date": "2022-06-14",
+    "acquisition_date_relationship_to_cutoff": "POST_FEB_2019",
+    "transfer_basis": "INHERITANCE_DUE_TO_DEATH",
+    "succession_death_certificate": "Registered Death Certificate Reg No. DC-2022-4419 issued by Tarikere Municipal / Revenue Authority (demise of registered landowner/father in May 2022)",
+    "succession_legal_heir_order": "Tahsildar Legal Heir Certificate LND/CR-104/2022-23 naming applicant as legal successor",
+    "revenue_mutation_record": "Bhoomi Mutation Extract MR-2022-0815 and updated Record of Rights, Tenancy and Crops (RTC) Form 16 under Section 128/129 of Karnataka Land Revenue Act, 1964",
+    "engine_cutoff_rule_input_interpretation": "land_ownership_cutoff_pre_feb_2019 represents the frozen engine's consolidated cutoff-rule input (True = qualifies under pre-Feb 2019 ownership OR post-cutoff succession upon death of previous owner; False = ineligible post-cutoff transfer via partition deed, sale, or gift; None = unknown/unverified); the literal historical acquisition date is 2022-06-14 (post-01.02.2019), but qualifies for PM-KISAN under statutory succession exemption per PM-KISAN Revised Operational Guidelines \u00a73(d) and Clarification \u00a72.",
+    "tenure_documentation": "Inherited title mutated June 2022 upon demise of registered landowner (father deceased in May 2022; Death Certificate Reg No. DC-2022-4419; Tahsildar Legal Heir Certificate LND/CR-104/2022-23; Bhoomi Mutation Extract MR-2022-0815; updated RTC Form 16). Transfer basis: INHERITANCE_DUE_TO_DEATH. Factual acquisition date: 2022-06-14 (post-01.02.2019). Statutorily exempt under PM-KISAN Revised Operational Guidelines \u00a73(d) and Clarification \u00a72; strictly distinguished from non-exempt post-cutoff transfers via family partition deed, sale deed, or gift deed. Input flag land_ownership_cutoff_pre_feb_2019=True represents the engine's consolidated cutoff-compliance rule."
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "DES Karnataka & Chikkamagaluru Horticulture Department: High-value seed potato and horticultural multiplication in Tarikere taluk transition belt, vulnerable to blight and requiring climate-controlled shade-net structures.",
+    "farmer_query_inspiration": "KCC Karnataka MIDH query logs: Small potato farmers asking about shade-net subsidies for seed preservation following inheritance transfer.",
+    "statutory_policy_test": "Post-Feb 2019 Statutory Succession Exemption & MIDH Protected Horticulture: Factual acquisition date is 2022-06-14 (post-01.02.2019); transfer basis is strictly INHERITANCE_DUE_TO_DEATH following demise of father with verified Death Certificate Reg No. DC-2022-4419, Tahsildar Legal Heir Certificate LND/CR-104/2022-23, and Bhoomi Mutation Extract MR-2022-0815 (updated RTC Form 16); statutorily exempt under PM-KISAN Revised Operational Guidelines \u00a73(d) and Clarification \u00a72; strictly distinguished from non-exempt post-cutoff transfers via family partition deed, sale deed, or gift deed; satisfies cutoff compliance input (land_ownership_cutoff_pre_feb_2019 = True); PM-KISAN qualifies in Section A (PMKISAN_CUTOFF_DATE_VERIFIED); MIDH qualifies in Section A (MIDH_HORTICULTURE_CROP_VERIFIED, MIDH_LAND_MIN_MET, MIDH_MICRO_IRRIGATION_VERIFIED) matching primary need; SMAM qualifies in Section A; PMFBY routed to Section B pending seasonal IU notification; PM-KUSUM B disqualified due to grid connection; Ganga Kalyana disqualified due to existing borewell and General Merit category."
+  },
+  "intended_test_purpose": "Demonstrate statutory inheritance succession exemption under PM-KISAN; validate MIDH protected horticulture eligibility on small holding with verified drip asset.",
+  "unresolved_dependencies": [
+    "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Potato in Chikkamagaluru district",
+    "Tarikere taluk RSK horticulture nursery certification for seed potato multiplication"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "scenario_id": "S039",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z5",
+  "agro_climatic_zone": "Eastern Dry Zone",
+  "district": "Chikkaballapura",
+  "crop_primary": "Ragi",
+  "crop_secondary": "Groundnut",
+  "land_size_acres": 2.0,
+  "land_type": "Dryland (Rainfed)",
+  "social_category": "SC",
+  "farmer_category": "Marginal (< 2.5 acres)",
+  "existing_assets": [],
+  "annual_family_income_lakh": 1.1,
+  "immediate_need": "CROP_INSURANCE",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "NONE",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Sowing / Crop Establishment",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "SC marginal dryland farmer with 2.0 acres rainfed ragi in Bagepalli, Chikkaballapura; acquired land title strictly via succession upon death of father (registered Death Certificate and Bhoomi mutation extract Form 12); applying for PMFBY crop insurance against drought and seeking PM-KISAN registration; inquiring whether succession upon death is exempt from post-Feb 2019 cut-off.",
+  "landholding_details": {
+    "total_operational_holding_acres": 2.0,
+    "qualifying_parcel_acres": 2.0,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "[0.0, 2.5) Marginal",
+    "physical_area_consistency": "PASS: 2.0 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "None (Rainfed dryland)",
+    "borewell_electric_status": "NONE",
+    "grid_connection_evidence": "No electric grid connection on plot"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "factual_acquisition_date": "2021-08-10",
+    "acquisition_date_relationship_to_cutoff": "POST_FEB_2019",
+    "transfer_basis": "INHERITANCE_DUE_TO_DEATH",
+    "succession_death_certificate": "Registered Death Certificate Reg No. DC-2021-9872 issued by Bagepalli Revenue Authority (demise of registered landowner/father in August 2021)",
+    "succession_legal_heir_order": "Tahsildar Legal Heir Certificate LND/CR-089/2021-22 naming applicant as legal successor",
+    "revenue_mutation_record": "Bhoomi Mutation Register Extract MR-2021-0412 Form 12 and updated Record of Rights, Tenancy and Crops (RTC) Pahani under Section 128/129 of Karnataka Land Revenue Act, 1964",
+    "engine_cutoff_rule_input_interpretation": "land_ownership_cutoff_pre_feb_2019 represents the frozen engine's consolidated cutoff-rule input (True = qualifies under pre-Feb 2019 ownership OR post-cutoff succession upon death of previous owner; False = ineligible post-cutoff transfer via partition deed, sale, or gift; None = unknown/unverified); the literal historical acquisition date is 2021-08-10 (post-01.02.2019), but qualifies for PM-KISAN under statutory succession exemption per PM-KISAN Revised Operational Guidelines \u00a73(d) and Clarification \u00a72.",
+    "tenure_documentation": "Succession upon death of registered landowner (father deceased in August 2021; Death Certificate Reg No. DC-2021-9872; Tahsildar Legal Heir Certificate LND/CR-089/2021-22; Bhoomi Mutation Register Extract MR-2021-0412 recording succession/inheritance; updated RTC Pahani). Transfer basis: INHERITANCE_DUE_TO_DEATH. Factual acquisition date: 2021-08-10 (post-01.02.2019). Statutorily exempt under PM-KISAN Revised Operational Guidelines \u00a73(d) and Clarification \u00a72; strictly distinguished from non-exempt post-cutoff transfers via family partition deed, sale deed, or gift deed. Input flag land_ownership_cutoff_pre_feb_2019=True represents the engine's consolidated cutoff-compliance rule."
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "Directorate of Economics and Statistics & Bhoomi Land Records: Dryland coarse cereal (finger millet / ragi) cultivators in northern taluks of Chikkaballapura (Bagepalli/Gudibande), high vulnerability to delayed monsoons.",
+    "farmer_query_inspiration": "Bhoomi land records and KCC helpline: Farmers holding mutated land titles through family succession asking if PM-KISAN cut-off of 01.02.2019 bars them.",
+    "statutory_policy_test": "Statutory Inheritance Exemption Test: Factual acquisition date is 2021-08-10 (post-01.02.2019); transfer basis is strictly INHERITANCE_DUE_TO_DEATH following demise of father with verified Death Certificate Reg No. DC-2021-9872, Tahsildar Legal Heir Certificate LND/CR-089/2021-22, and Bhoomi Mutation Register Extract MR-2021-0412 (Form 12); expressly exempt under PM-KISAN Revised Operational Guidelines \u00a73(d) and Clarification \u00a72, which strictly distinguishes succession following death from ineligible transfers via sale deeds, gift deeds, or inter-vivos family partition deeds; satisfies cutoff compliance input (land_ownership_cutoff_pre_feb_2019 = True); PM-KISAN qualifies in Section A (PMKISAN_CUTOFF_DATE_VERIFIED); PMFBY evaluates ELIGIBLE by raw engine for Ragi, but governance routes it to Section B as REQUIRES_VERIFICATION pending Kharif 2026 Gram Panchayat IU notification; Dr. B.R. Ambedkar Ganga Kalyana evaluated as ELIGIBLE by raw engine, but routed to Section B as REQUIRES_VERIFICATION without scoring under governance safeguard due to lack of recorded perennial water source adjacency."
+  },
+  "intended_test_purpose": "Validate PM-KISAN statutory succession exemption following death of landowner; route PMFBY crop insurance to Section B pending official Kharif 2026 GP-level notification check; apply established Ganga Kalyana source-adjacency governance safeguard.",
+  "unresolved_dependencies": [
+    "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification and enrollment cut-off dates for rainfed Ragi in Bagepalli taluk, Chikkaballapura district",
+    "Field verification of land parcel adjacency to a qualifying perennial water source under Dr. B.R. Ambedkar Development Corporation individual irrigation guidelines",
+    "Chikkaballapura district administrative circular confirming rural family income ceiling for affirmative welfare corporation schemes"
+  ]
+}

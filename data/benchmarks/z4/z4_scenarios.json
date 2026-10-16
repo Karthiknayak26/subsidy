@@ -1,0 +1,396 @@
+[
+  {
+    "scenario_id": "S029",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z4",
+    "agro_climatic_zone": "Central Dry Zone",
+    "district": "Chitradurga",
+    "crop_primary": "Groundnut",
+    "crop_secondary": "Redgram",
+    "land_size_acres": 2.0,
+    "land_type": "Dryland (Rainfed)",
+    "social_category": "SC",
+    "farmer_category": "Marginal (< 2.5 acres)",
+    "existing_assets": [],
+    "annual_family_income_lakh": 1.2,
+    "immediate_need": "BOREWELL_IRRIGATION",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "borewell_electric_status": "NONE",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Land Preparation / Pre-Monsoon",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "SC marginal dryland farmer with 2.0 acres rainfed groundnut in Challakere taluk, Chitradurga; facing acute groundwater drought and crop failure; applying for free individual borewell package under Dr. B.R. Ambedkar Development Corporation Ganga Kalyana; need offline application checklist.",
+    "landholding_details": {
+      "total_operational_holding_acres": 2.0,
+      "qualifying_parcel_acres": 2.0,
+      "requested_subsidized_area_ha": null,
+      "land_classification_interval": "[0.0, 2.5) Marginal",
+      "physical_area_consistency": "PASS: 2.0 ac holding matches parcel"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "None (Dryland kushki)",
+      "borewell_electric_status": "NONE",
+      "grid_connection_evidence": "Not applicable \u2014 zero water extraction equipment installed"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": true,
+      "is_pure_tenant_without_land_title": false,
+      "tenure_documentation": "RTC registered pre-February 2019 in Challakere taluk"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "DES Karnataka & NSS 77th Round: Marginal dryland oilseed cultivators in Chitradurga (Challakere/Hiriyur taluks), semi-arid rainfed conditions with high reliance on state welfare borewell packages.",
+      "farmer_query_inspiration": "KCC Karnataka Ganga Kalyana query logs: Marginal SC farmers inquiring about individual borewell eligibility thresholds under Ambedkar Development Corporation.",
+      "statutory_policy_test": "Evaluates Ganga Kalyana Individual Route for SC category (Dr. B.R. Ambedkar Corporation); landholding of 2.0 acres satisfies plains acreage interval [1.5, 5.0]; family income of \u20b91.2 lakh recorded; raw engine evaluates ELIGIBLE (GK_AMBEDKAR_INDIVIDUAL_ROUTE_VALID). CRITICAL GOVERNANCE SAFEGUARD: Official Ambedkar Corporation guidelines describe individual irrigation as applicable to lands adjacent to perennial water sources (rivers/streams/tanks), but S029 lacks recorded source-adjacency evidence; additionally, older district administration pages cite \u20b91.5 lakh rural ceiling vs \u20b92.0 lakh state ceiling. Pending field verification of source-adjacency and current Chitradurga district income order, governance decouples determination to Section B as REQUIRES_VERIFICATION without numerical scoring."
+    },
+    "intended_test_purpose": "Evaluate Ganga Kalyana individual borewell route on marginal SC holding; enforce governance safeguard placing raw ELIGIBLE Ambedkar borewell in Section B pending source-adjacency and income-order verification.",
+    "unresolved_dependencies": [
+      "Field verification of land parcel adjacency to a qualifying perennial water source (river/stream/tank) under Dr. B.R. Ambedkar Development Corporation individual irrigation guidelines",
+      "Chitradurga district administrative order confirming applicable rural family income ceiling (\u20b91.5 lakh vs \u20b92.0 lakh order)",
+      "Dr. B.R. Ambedkar Development Corporation FY 2026-27 Challakere taluk target allocation for individual borewells"
+    ]
+  },
+  {
+    "scenario_id": "S030",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z4",
+    "agro_climatic_zone": "Central Dry Zone",
+    "district": "Davanagere",
+    "crop_primary": "Maize",
+    "crop_secondary": "Paddy",
+    "land_size_acres": 3.8,
+    "land_type": "Irrigated (Canal)",
+    "social_category": "General (OC)",
+    "farmer_category": "Small (2.5-5 acres)",
+    "existing_assets": [
+      "Borewell (Non-energized)"
+    ],
+    "annual_family_income_lakh": 2.2,
+    "immediate_need": "SOLAR_PUMP_INSTALLATION",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "borewell_electric_status": "UNENERGIZED_OFF_GRID",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Sowing / Vegetative",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "Small farmer with 3.8 acres in Harihar taluk, Davanagere; tail-end canal command with highly erratic releases; drilled private borewell 4 months ago but BESCOM electric line is 1.2 km away; applying for 60% subsidy for 5 HP standalone solar pump under PM-KUSUM Component B; need quotation format.",
+    "landholding_details": {
+      "total_operational_holding_acres": 3.8,
+      "qualifying_parcel_acres": 3.8,
+      "requested_subsidized_area_ha": null,
+      "land_classification_interval": "[2.5, 5.0] Small",
+      "physical_area_consistency": "PASS: 3.8 ac holding matches parcel"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "Borewell (Non-energized)",
+      "borewell_electric_status": "UNENERGIZED_OFF_GRID",
+      "grid_connection_evidence": "BESCOM unenergized certificate; off-grid borewell with casing pipe installed"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": true,
+      "is_pure_tenant_without_land_title": false,
+      "tenure_documentation": "RTC registered pre-February 2019 in Harihar taluk"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "Bhadra Canal Command tail-end studies: Davanagere (Harihar/Honnali taluks) cereal cultivators experiencing canal water deficits and turning to off-grid solar pumping.",
+      "farmer_query_inspiration": "KCC Karnataka solar energy logs: Farmers in canal ayacuts with unenergized borewells seeking off-grid solar pump assistance.",
+      "statutory_policy_test": "Benchmark Challenge 1 (Solar Pump vs Krishi Bhagya & Hydrological Gating): Water source 'Borewell (Non-energized)' and status 'UNENERGIZED_OFF_GRID' strictly fire KUSUM_B_WATER_SOURCE_PRESENT and KUSUM_B_OFF_GRID_VERIFIED returning ELIGIBLE for PM-KUSUM Component B; canal land type disqualifies Krishi Bhagya (KRISHI_BHAGYA_NOT_DRYLAND) and Ganga Kalyana (GK_PARENT_NOT_DRYLAND); General category excludes corporation schemes."
+    },
+    "intended_test_purpose": "Evaluate PM-KUSUM Component B qualification on off-grid unenergized borewell; verify strict exclusion of dryland schemes on canal-irrigated holding.",
+    "unresolved_dependencies": [
+      "KREDL/MNRE state centralized vendor portal empanelment and beneficiary quota allocation for Davanagere district"
+    ]
+  },
+  {
+    "scenario_id": "S031",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z4",
+    "agro_climatic_zone": "Central Dry Zone",
+    "district": "Tumakuru",
+    "crop_primary": "Ragi",
+    "crop_secondary": "Fieldbean",
+    "land_size_acres": 1.8,
+    "land_type": "Dryland (Rainfed)",
+    "social_category": "ST",
+    "farmer_category": "Marginal (< 2.5 acres)",
+    "existing_assets": [],
+    "annual_family_income_lakh": 1.4,
+    "immediate_need": "RAINWATER_HARVESTING",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "borewell_electric_status": "NONE",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Standing Crop / Critical Moisture Stress",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "ST marginal dryland farmer with 1.8 acres rainfed ragi in Pavagada taluk, Tumakuru; severe recurring drought; applying for Krishi Honda farm pond under Krishi Bhagya with 90% ST subsidy; also asking about Valmiki corporation borewell scheme eligibility.",
+    "landholding_details": {
+      "total_operational_holding_acres": 1.8,
+      "qualifying_parcel_acres": 1.8,
+      "requested_subsidized_area_ha": null,
+      "land_classification_interval": "[0.0, 2.5) Marginal",
+      "physical_area_consistency": "PASS: 1.8 ac holding matches parcel"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "Rainfed Catchment",
+      "borewell_electric_status": "NONE",
+      "grid_connection_evidence": "Not applicable \u2014 rainfed catchment"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": true,
+      "is_pure_tenant_without_land_title": false,
+      "tenure_documentation": "RTC registered pre-February 2019 in Pavagada taluk"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "DES Karnataka: Arid rainfed ragi and millet tracts in eastern Pavagada/Sira taluks of Tumakuru, severe water table depletion and high farm-pond intervention density.",
+      "farmer_query_inspiration": "KCC Karnataka water conservation query logs: Tribal smallholders in Pavagada seeking Krishi Bhagya farm ponds and Valmiki Corporation borewell assistance.",
+      "statutory_policy_test": "Evaluates Krishi Bhagya farm pond package on marginal dryland ST holding (1.8 ac in [1.0, 12.35] interval in notified rainfed Tumakuru district), confirming statutory scheme eligibility; historical guidelines provided 90% ST subsidy rate, but current FY 2026-27 component rates and financial ceilings remain unverified pending official Government Order; evaluates Ganga Kalyana Valmiki ST Corporation Individual Route where raw engine fires GK_SCH010_VALMIKI_INDIVIDUAL_ROUTE_VALID (1.2 <= 1.8 <= 5.0 ac); CRITICAL SAFEGUARD: SCH010_VALMIKI is provisional in registry, so governance decouples raw ELIGIBLE and routes to Section B as REQUIRES_VERIFICATION without numerical scoring."
+    },
+    "intended_test_purpose": "Evaluate Krishi Bhagya farm pond package on marginal dryland ST holding; qualify subsidy rate as pending current-year GO verification; enforce provisional governance safeguard routing raw ELIGIBLE Valmiki ST borewell to Section B.",
+    "unresolved_dependencies": [
+      "Current FY 2026-27 Government Order confirming exact Krishi Bhagya component-wise subsidy percentage and financial ceiling for ST smallholders in Tumakuru district",
+      "Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation annual circular specifying individual borewell target allocations for Pavagada taluk",
+      "Department of Agriculture Krishi Bhagya target allocation for Tumakuru for FY 2026-27"
+    ]
+  },
+  {
+    "scenario_id": "S032",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z4",
+    "agro_climatic_zone": "Central Dry Zone",
+    "district": "Chitradurga",
+    "crop_primary": "Groundnut",
+    "crop_secondary": "Onion",
+    "land_size_acres": 2.5,
+    "land_type": "Dryland (Rainfed)",
+    "social_category": "General (OC)",
+    "farmer_category": "Small (2.5-5 acres)",
+    "existing_assets": [],
+    "annual_family_income_lakh": 4.8,
+    "immediate_need": "INCOME_SUPPORT",
+    "paid_income_tax_last_assessment_year": true,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "borewell_electric_status": "NONE",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Harvest / Post-Harvest Distress",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "Farmer with exactly 2.5 acres dryland in Hiriyur, Chitradurga; filed ITR-4 last assessment year with taxable business income; facing crop loss; asking why PM-KISAN \u20b96,000 installment was rejected by village accountant; also asking about KCC crop loan eligibility.",
+    "landholding_details": {
+      "total_operational_holding_acres": 2.5,
+      "qualifying_parcel_acres": 2.5,
+      "requested_subsidized_area_ha": null,
+      "land_classification_interval": "[2.5, 5.0] Small (Boundary point: exactly 2.5 acres)",
+      "physical_area_consistency": "PASS: 2.5 ac holding matches parcel"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "Rainfed (None)",
+      "borewell_electric_status": "NONE",
+      "grid_connection_evidence": "Not applicable \u2014 zero water infrastructure"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": true,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": true,
+      "is_pure_tenant_without_land_title": false,
+      "tenure_documentation": "RTC registered pre-February 2019 in Hiriyur taluk"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "NSS 77th Round: Semi-commercial farmers in central Karnataka combining agriculture with non-farm petty enterprise, filing tax returns while holding small parcels.",
+      "farmer_query_inspiration": "KCC Karnataka PM-KISAN exclusion logs: Farmers querying rejection notices on PM-KISAN portal due to income tax payer exclusion matching.",
+      "statutory_policy_test": "Benchmark Challenge 3 (Statutory Exclusion Overrides Stated Need) & Boundary Test: Exactly 2.5 acres is classified as Small [2.5, 5.0] inclusive lower boundary; farmer's immediate need is INCOME_SUPPORT, but statutory tax flag strictly triggers PMKISAN_INCOME_TAX_PAYER_EXCLUSION barring direct cash support; credit channel via Central KCC-MISS remains accessible (KCC_CENTRAL_COMMERCIAL_ELIGIBLE); General Merit excludes corporation borewell schemes."
+    },
+    "intended_test_purpose": "Evaluate PM-KISAN statutory income-tax-payer disqualification overriding stated income support need; test 2.5-acre Small boundary point; verify credit accessibility despite tax exclusion.",
+    "unresolved_dependencies": [
+      "Income Tax Department / PM-KISAN database sync protocol for assessment year 2025-26 tax filings"
+    ]
+  },
+  {
+    "scenario_id": "S033",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z4",
+    "agro_climatic_zone": "Central Dry Zone",
+    "district": "Davanagere",
+    "crop_primary": "Arecanut",
+    "crop_secondary": "Banana",
+    "land_size_acres": 7.5,
+    "land_type": "Irrigated (Borewell)",
+    "social_category": "OBC (2A)",
+    "farmer_category": "Medium (5-10 acres)",
+    "existing_assets": [
+      "Borewell (Grid-connected)"
+    ],
+    "annual_family_income_lakh": 3.8,
+    "immediate_need": "FARM_MECHANIZATION",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Intercultivation / Plantation Maintenance",
+    "season": "Annual 2026",
+    "kcc_query_text_example": "OBC (2A) planter with 7.5 acres borewell-irrigated arecanut in Channagiri taluk, Davanagere; facing acute skilled climber labor shortage; applying for 40-50% subsidy under SMAM for arecanut dehusker and power sprayer; need approved dealer list.",
+    "landholding_details": {
+      "total_operational_holding_acres": 7.5,
+      "qualifying_parcel_acres": 7.5,
+      "requested_subsidized_area_ha": null,
+      "land_classification_interval": "(5.0, 10.0] Medium",
+      "physical_area_consistency": "PASS: 7.5 ac holding matches parcel"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "Borewell (Grid-connected)",
+      "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+      "grid_connection_evidence": "BESCOM energized IP set verified in Channagiri taluk"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": true,
+      "is_pure_tenant_without_land_title": false,
+      "tenure_documentation": "RTC registered pre-February 2019 in Channagiri taluk"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "DES Karnataka & NSS 77th Round: Arecanut plantation economy of Davanagere (Channagiri/Honnali taluks), highly mechanized medium holdings facing labor bottlenecks.",
+      "farmer_query_inspiration": "KCC Karnataka farm mechanization logs: Plantation growers inquiring about SMAM / Rashtriya Krishi Vikas Yojana machinery subsidies for harvest and processing equipment.",
+      "statutory_policy_test": "Evaluates SMAM on medium plantation holding (7.5 ac), verifying absence of prior machinery subsidy (SMAM_NO_PRIOR_SUBSIDY) returning ELIGIBLE; verifies PM-KUSUM B grid-connected disqualification (KUSUM_B_GRID_CONNECTED_DISQUALIFIED) with Component C noted strictly as a related option to verify; confirms Ganga Kalyana exclusion (> 5.0 ac individual ceiling and existing borewell)."
+    },
+    "intended_test_purpose": "Evaluate SMAM plantation mechanization on medium holding; verify grid-connected IP set exclusion from standalone solar schemes.",
+    "unresolved_dependencies": [
+      "Department of Agriculture SMAM portal FY 2026-27 vendor quotation sanction workflow for Channagiri taluk"
+    ]
+  },
+  {
+    "scenario_id": "S034",
+    "benchmark_version": "v1.0.3",
+    "zone_id": "Z4",
+    "agro_climatic_zone": "Central Dry Zone",
+    "district": "Tumakuru",
+    "crop_primary": "Maize",
+    "crop_secondary": "Groundnut",
+    "land_size_acres": 11.0,
+    "land_type": "Irrigated (Borewell)",
+    "social_category": "General (OC)",
+    "farmer_category": "Large (> 10 acres)",
+    "existing_assets": [
+      "Borewell (Grid-connected)"
+    ],
+    "annual_family_income_lakh": 4.2,
+    "immediate_need": "MICRO_IRRIGATION_SUPPORT",
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+    "prior_micro_irrigation_subsidy_years_ago": null,
+    "prior_farm_pond_subsidy_years_ago": null,
+    "prior_machinery_subsidy_years_ago": null,
+    "prior_ganga_kalyana_in_family": false,
+    "community_pool_acres": 0.0,
+    "community_pool_beneficiaries_count": 0,
+    "farming_stage": "Sowing / Land Preparation",
+    "season": "Kharif 2026",
+    "kcc_query_text_example": "Large farmer with 11.0 acres borewell-irrigated land in Tiptur, Tumakuru; expanding commercial maize cultivation; applying for micro-irrigation subsidy under PMKSY-PDMC for 4.45 hectares; need clarification on 5.0 ha statutory ceiling and subsidy slab.",
+    "landholding_details": {
+      "total_operational_holding_acres": 11.0,
+      "qualifying_parcel_acres": 11.0,
+      "requested_subsidized_area_ha": 4.45,
+      "land_classification_interval": "(10.0, +inf) Large",
+      "physical_area_consistency": "PASS: 4.45 ha <= 11.0 ac parcel capacity (4.4515 ha) and <= 5.00 ha ceiling"
+    },
+    "water_and_irrigation": {
+      "operational_water_source": "Borewell (Grid-connected)",
+      "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+      "grid_connection_evidence": "BESCOM energized IP set verified in Tiptur taluk"
+    },
+    "statutory_flags": {
+      "paid_income_tax_last_assessment_year": false,
+      "govt_employee_category": "NONE",
+      "superannuated_pensioner_monthly_amount": 0.0,
+      "pensioner_is_mts_exempt": false,
+      "registered_professional": "NONE",
+      "land_ownership_cutoff_pre_feb_2019": true,
+      "is_pure_tenant_without_land_title": false,
+      "tenure_documentation": "RTC registered pre-February 2019 in Tiptur taluk"
+    },
+    "attribute_provenance": {
+      "empirical_baseline": "DES Karnataka & Agricultural Census: Commercial cereal and oilseed growers in southern Tumakuru (Tiptur/Turuvekere taluks), large holdings adopting water-saving drip infrastructure.",
+      "farmer_query_inspiration": "KCC Karnataka micro-irrigation logs: Large farmers requesting PMKSY-PDMC drip subsidy clarification regarding maximum subsidized area caps and financial ceilings.",
+      "statutory_policy_test": "Benchmark Challenge 8 (Large Holding Area Cap & Boundary Test): Landholding of 11.0 acres is classified as Large (> 10.0 ac); requested subsidized area of 4.45 ha strictly satisfies physical parcel capacity (4.45 ha <= 11.0 * 0.404686 = 4.4515 ha) and national statutory ceiling (4.45 ha <= 5.00 ha); operational borewell satisfies water requirement (PMKSY_WATER_SOURCE_VERIFIED) and land area satisfies ceiling (PMKSY_LAND_RANGE_VALID); returns ELIGIBLE for PMKSY-PDMC; confirms grid connection excludes PM-KUSUM B (Component C noted as related option to verify)."
+    },
+    "intended_test_purpose": "Evaluate PMKSY-PDMC area cap on Large holding (11.0 ac); test requested 4.45 ha against parcel capacity and 5.00 ha ceiling; verify grid-connected exclusion from PM-KUSUM B.",
+    "unresolved_dependencies": [
+      "Department of Agriculture PMKSY-PDMC action plan target allocation for large farmers in Tumakuru district for FY 2026-27"
+    ]
+  }
+]

@@ -1,0 +1,67 @@
+{
+  "scenario_id": "S037",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z5",
+  "agro_climatic_zone": "Eastern Dry Zone",
+  "district": "Bengaluru Rural",
+  "crop_primary": "Mango",
+  "crop_secondary": null,
+  "land_size_acres": 2.5,
+  "land_type": "Irrigated (Borewell)",
+  "social_category": "ST",
+  "farmer_category": "Small (2.5-5 acres)",
+  "existing_assets": [
+    "Borewell (Grid-connected)"
+  ],
+  "annual_family_income_lakh": 1.8,
+  "immediate_need": "MICRO_IRRIGATION_SUPPORT",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Fruit Development / Irrigation",
+  "season": "Summer / Pre-Kharif 2026",
+  "kcc_query_text_example": "ST small orchard farmer with exactly 2.5 acres borewell-irrigated Alphonso mango plantation in Doddaballapura, Bengaluru Rural; applying for drip irrigation subsidy for 1.01 hectares under PMKSY-PDMC; seeking quotation and subsidy rate confirmation for ST category.",
+  "landholding_details": {
+    "total_operational_holding_acres": 2.5,
+    "qualifying_parcel_acres": 2.5,
+    "requested_subsidized_area_ha": 1.01,
+    "land_classification_interval": "[2.5, 5.0] Small",
+    "physical_area_consistency": "PASS: Requested 1.01 ha <= qualifying parcel 2.5 ac (1.0117 ha)"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Borewell (Grid-connected)",
+    "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+    "grid_connection_evidence": "BESCOM rural feeder electricity connection"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Doddaballapura taluk"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "Karnataka State Mango Development and Marketing Corporation & Horticulture Dept: Traditional mango orchard belt in Bengaluru Rural (Devanahalli/Doddaballapura), facing receding water tables and transitioning to micro-irrigation.",
+    "farmer_query_inspiration": "KCC Karnataka PMKSY query logs: ST farmers inquiring about drip irrigation subsidy on exactly 2.5-acre boundary holdings.",
+    "statutory_policy_test": "Boundary Test & Physical Area Cap: Exactly 2.5 acres classified as Small holding ([2.5, 5.0]); requested subsidized area of 1.01 ha strictly satisfies physical capacity constraint (1.01 ha <= 2.5 ac = 1.0117 ha); qualifies for PMKSY-PDMC; PMFBY returns INELIGIBLE by raw engine due to static whitelist exclusion, but mango is insurable under RWBCIS in Karnataka; governance routes PMFBY to Section B as REQUIRES_VERIFICATION without scoring pending RWBCIS notification confirmation; Valmiki ST Ganga Kalyana disqualified due to irrigated land type and existing borewell."
+  },
+  "intended_test_purpose": "Verify 2.5-acre Small holding boundary classification; enforce PMKSY-PDMC physical area cap (1.01 ha <= 2.5 ac); route PMFBY/RWBCIS mango insurance to Section B as REQUIRES_VERIFICATION pending weather-index notification check.",
+  "unresolved_dependencies": [
+    "Verification of applicable RWBCIS horticultural weather-index crop insurance notification for Mango in Bengaluru Rural district (Doddaballapura taluk)",
+    "Horticulture Department Karnataka FY 2026-27 ST supplementary subsidy top-up guidelines for drip irrigation"
+  ]
+}

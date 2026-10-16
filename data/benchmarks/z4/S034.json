@@ -1,0 +1,66 @@
+{
+  "scenario_id": "S034",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z4",
+  "agro_climatic_zone": "Central Dry Zone",
+  "district": "Tumakuru",
+  "crop_primary": "Maize",
+  "crop_secondary": "Groundnut",
+  "land_size_acres": 11.0,
+  "land_type": "Irrigated (Borewell)",
+  "social_category": "General (OC)",
+  "farmer_category": "Large (> 10 acres)",
+  "existing_assets": [
+    "Borewell (Grid-connected)"
+  ],
+  "annual_family_income_lakh": 4.2,
+  "immediate_need": "MICRO_IRRIGATION_SUPPORT",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Sowing / Land Preparation",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "Large farmer with 11.0 acres borewell-irrigated land in Tiptur, Tumakuru; expanding commercial maize cultivation; applying for micro-irrigation subsidy under PMKSY-PDMC for 4.45 hectares; need clarification on 5.0 ha statutory ceiling and subsidy slab.",
+  "landholding_details": {
+    "total_operational_holding_acres": 11.0,
+    "qualifying_parcel_acres": 11.0,
+    "requested_subsidized_area_ha": 4.45,
+    "land_classification_interval": "(10.0, +inf) Large",
+    "physical_area_consistency": "PASS: 4.45 ha <= 11.0 ac parcel capacity (4.4515 ha) and <= 5.00 ha ceiling"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Borewell (Grid-connected)",
+    "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+    "grid_connection_evidence": "BESCOM energized IP set verified in Tiptur taluk"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Tiptur taluk"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "DES Karnataka & Agricultural Census: Commercial cereal and oilseed growers in southern Tumakuru (Tiptur/Turuvekere taluks), large holdings adopting water-saving drip infrastructure.",
+    "farmer_query_inspiration": "KCC Karnataka micro-irrigation logs: Large farmers requesting PMKSY-PDMC drip subsidy clarification regarding maximum subsidized area caps and financial ceilings.",
+    "statutory_policy_test": "Benchmark Challenge 8 (Large Holding Area Cap & Boundary Test): Landholding of 11.0 acres is classified as Large (> 10.0 ac); requested subsidized area of 4.45 ha strictly satisfies physical parcel capacity (4.45 ha <= 11.0 * 0.404686 = 4.4515 ha) and national statutory ceiling (4.45 ha <= 5.00 ha); operational borewell satisfies water requirement (PMKSY_WATER_SOURCE_VERIFIED) and land area satisfies ceiling (PMKSY_LAND_RANGE_VALID); returns ELIGIBLE for PMKSY-PDMC; confirms grid connection excludes PM-KUSUM B (Component C noted as related option to verify)."
+  },
+  "intended_test_purpose": "Evaluate PMKSY-PDMC area cap on Large holding (11.0 ac); test requested 4.45 ha against parcel capacity and 5.00 ha ceiling; verify grid-connected exclusion from PM-KUSUM B.",
+  "unresolved_dependencies": [
+    "Department of Agriculture PMKSY-PDMC action plan target allocation for large farmers in Tumakuru district for FY 2026-27"
+  ]
+}

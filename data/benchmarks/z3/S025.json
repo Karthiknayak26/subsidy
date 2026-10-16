@@ -1,0 +1,67 @@
+{
+  "scenario_id": "S025",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z3",
+  "agro_climatic_zone": "Northern Dry Zone",
+  "district": "Gadag",
+  "crop_primary": "Onion",
+  "crop_secondary": "Chilli",
+  "land_size_acres": 1.5,
+  "land_type": "Irrigated (Borewell)",
+  "social_category": "SC",
+  "farmer_category": "Marginal (< 2.5 acres)",
+  "existing_assets": [
+    "Borewell (Grid-connected)",
+    "Drip Irrigation (Installed)"
+  ],
+  "annual_family_income_lakh": 1.8,
+  "immediate_need": "PROTECTED_HORTICULTURE",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Vegetative / Structure Planning",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "SC marginal farmer in Ron taluk, Gadag with 1.5 acres borewell-irrigated onion and chilli; existing drip installed; heavy sunscald and thrips damaging crops; applying for 50% capital subsidy under MIDH for 1,000 m\u00b2 shade net structure; need DPR guidelines.",
+  "landholding_details": {
+    "total_operational_holding_acres": 1.5,
+    "qualifying_parcel_acres": 1.5,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "[0.0, 2.5) Marginal",
+    "physical_area_consistency": "PASS: 1.5 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Borewell (Grid-connected)",
+    "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+    "grid_connection_evidence": "HESCOM energized IP set verified"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Ron taluk"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "DES Karnataka: Intensive vegetable and spice cultivators in Gadag (Ron/Shirhatti taluks), SC marginal holdings investing in protected cultivation.",
+    "farmer_query_inspiration": "KCC Karnataka horticulture query logs: Smallholders inquiring about MIDH protected cultivation cost norms, polyhouse / shade net unit assistance.",
+    "statutory_policy_test": "Evaluates MIDH Protected Cultivation prerequisites: recognized horticulture crop (Onion), minimum structure land (1.5 ac >= 0.25 ac), and verified pre-existing micro-irrigation facility (Drip Irrigation installed); confirms clean pass for MIDH; verifies PM-KUSUM B disqualification due to grid IP set."
+  },
+  "intended_test_purpose": "Evaluate MIDH Protected Cultivation subsidy on marginal horticultural holding with pre-existing micro-irrigation; verify grid-connected water source disqualification under PM-KUSUM B.",
+  "unresolved_dependencies": [
+    "Department of Horticulture MIDH action plan target allocation for shade net structures in Gadag district"
+  ]
+}

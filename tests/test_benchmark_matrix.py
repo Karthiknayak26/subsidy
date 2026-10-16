@@ -1,14 +1,15 @@
 """
-Unit test for Benchmark v1.0.2 Scenario Assignment Matrix.
-Validates all 8 quota and boundary dimensions:
+Unit test for Benchmark v1.0.4 Scenario Assignment Matrix.
+Validates all 8 quota and boundary dimensions plus statutory succession definitions:
 1. Scenario count and ID continuity (60 scenarios, S011-S070)
 2. Agro-climatic zone distribution (10 zones, 6 each)
 3. Landholding classes (22 Marginal, 20 Small, 12 Medium, 6 Large) and exact boundaries
 4. Social categories (15 SC, 10 ST, 10 OBC, 8 Minority, 17 GM)
 5. Primary needs (6 each across 10 categories)
 6. Tenure statuses (47 Pre-Feb 2019, 4 Post-Feb 2019 Inheritance, 5 Pure Tenant, 4 Unknown Title Status)
-7. Community pool membership (3 Yes: S028, S052, S066; 57 No)
-8. Land types (28 Dryland, 10 Canal-irrigated, 12 Borewell-irrigated, 6 Wetland/valley, 4 Hilly/terraced)
+7. Statutory succession vs. partition definition verification for post-Feb 2019 inheritance (S039, S049, S064, S069)
+8. Community pool membership (3 Yes: S028, S052, S066; 57 No)
+9. Land types (28 Dryland, 10 Canal-irrigated, 12 Borewell-irrigated, 6 Wetland/valley, 4 Hilly/terraced)
 """
 
 import os
@@ -20,9 +21,9 @@ from research.dataset_research.validate_benchmark_matrix import scenarios, valid
 
 
 def test_benchmark_matrix_all_dimensions():
-    """Verify that the benchmark v1.0.2 matrix satisfies all declared quotas."""
+    """Verify that the benchmark v1.0.4 matrix satisfies all declared quotas and statutory rules."""
     success = validate_matrix(scenarios)
-    assert success is True, "Benchmark v1.0.2 assignment matrix failed one or more quota checks."
+    assert success is True, "Benchmark v1.0.4 assignment matrix failed one or more quota checks."
 
 
 def test_boundary_cases_preserved():
@@ -111,4 +112,17 @@ def test_solar_pump_scenario_prerequisites():
             # Off-grid standalone solar pump must be UNENERGIZED_OFF_GRID
             assert s["electric_status"] == "UNENERGIZED_OFF_GRID"
             assert "UNENERGIZED_OFF_GRID" in s["policy"]
+
+
+def test_post_feb_2019_statutory_succession_definitions():
+    """Verify that all 4 post-Feb 2019 inheritance scenarios (S039, S049, S064, S069)
+    explicitly model statutory succession upon death/demise and distinguish from partition deeds (v1.0.4)."""
+    inherit_scenarios = [s for s in scenarios if s["tenure"] == "Post-Feb 2019 Inheritance"]
+    assert len(inherit_scenarios) == 4
+    assert [s["sid"] for s in inherit_scenarios] == ["S039", "S049", "S064", "S069"]
+    for s in inherit_scenarios:
+        pol = s["policy"].lower()
+        assert "death" in pol or "demise" in pol, f"{s['sid']} policy must mention death/demise of landowner"
+        assert "partition" in pol or "distinct from" in pol, f"{s['sid']} policy must distinguish from partition deeds"
+
 

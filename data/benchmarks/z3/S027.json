@@ -1,0 +1,64 @@
+{
+  "scenario_id": "S027",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z3",
+  "agro_climatic_zone": "Northern Dry Zone",
+  "district": "Vijayapura",
+  "crop_primary": "Pomegranate",
+  "crop_secondary": "Bajra",
+  "land_size_acres": 6.5,
+  "land_type": "Dryland (Rainfed)",
+  "social_category": "SC",
+  "farmer_category": "Medium (5-10 acres)",
+  "existing_assets": [],
+  "annual_family_income_lakh": 2.5,
+  "immediate_need": "RAINWATER_HARVESTING",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "NONE",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Standing Crop / Dry-Spell Distress",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "SC farmer with 6.5 acres dryland pomegranate and bajra in Muddebihal taluk, Vijayapura; facing acute dry spells and water distress; applying for Krishi Honda farm pond with 90% SC subsidy under Krishi Bhagya; need taluk office sanction timeline.",
+  "landholding_details": {
+    "total_operational_holding_acres": 6.5,
+    "qualifying_parcel_acres": 6.5,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "(5.0, 10.0] Medium",
+    "physical_area_consistency": "PASS: 6.5 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Rainfed Catchment",
+    "borewell_electric_status": "NONE",
+    "grid_connection_evidence": "Not applicable \u2014 zero water extraction equipment installed"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Muddebihal taluk"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "NSS 77th Round: Medium dryland fruit and millet cultivators in Vijayapura, drought-prone Bayaluseeme tract with high farm-pond adoption.",
+    "farmer_query_inspiration": "KCC Karnataka water conservation query logs: Dryland horticultural growers requesting Krishi Bhagya farm ponds for life-saving protective irrigation.",
+    "statutory_policy_test": "Evaluates Krishi Bhagya on medium dryland holding (6.5 ac within [1.0, 12.35] ceiling); Vijayapura is in verified rainfed dryland districts; SC social category receives 90% subsidy rate norm; Ganga Kalyana individual route disqualified because 6.5 ac > 5.0 ac ceiling (GK_PARENT_EXCEEDS_5_ACRES, GK_AMBEDKAR_INDIVIDUAL_OVER_5_AC)."
+  },
+  "intended_test_purpose": "Evaluate Krishi Bhagya integrated package on medium dryland SC holding; verify Ganga Kalyana individual acreage ceiling exclusion (> 5.0 ac).",
+  "unresolved_dependencies": [
+    "Department of Agriculture Krishi Bhagya taluk target allocation for Muddebihal for FY 2026-27"
+  ]
+}

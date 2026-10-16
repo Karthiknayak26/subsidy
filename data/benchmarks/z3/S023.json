@@ -1,0 +1,68 @@
+{
+  "scenario_id": "S023",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z3",
+  "agro_climatic_zone": "Northern Dry Zone",
+  "district": "Vijayapura",
+  "crop_primary": "Pomegranate",
+  "crop_secondary": null,
+  "land_size_acres": 3.5,
+  "land_type": "Irrigated (Borewell)",
+  "social_category": "Minority (Muslim)",
+  "farmer_category": "Small (2.5-5 acres)",
+  "existing_assets": [
+    "Borewell (Grid-connected)",
+    "Drip Irrigation (Installed)"
+  ],
+  "annual_family_income_lakh": 3.2,
+  "immediate_need": "MICRO_IRRIGATION_SUPPORT",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Orchard Maintenance / Flowering",
+  "season": "Annual 2026",
+  "kcc_query_text_example": "Pomegranate grower in Indi taluk, Vijayapura with 3.5 acres under functional borewell; existing lateral drip lines damaged by hard water salinity; applying for capital subsidy under PMKSY-PDMC for 1.41 ha inline drip replacement; need online portal procedure.",
+  "landholding_details": {
+    "total_operational_holding_acres": 3.5,
+    "qualifying_parcel_acres": 3.5,
+    "requested_subsidized_area_ha": 1.41,
+    "land_classification_interval": "[2.5, 5.0] Small",
+    "physical_area_consistency": "PASS: Requested 1.41 ha strictly within physical parcel capacity of 3.5 acres (1.4164 ha)"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Borewell (Grid-connected)",
+    "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+    "grid_connection_evidence": "HESCOM energized agricultural IP-set connection installed"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Indi taluk, Vijayapura"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "DES Karnataka & Horticulture Department: High-density commercial pomegranate orchards in Vijayapura (Indi/Sindagi taluks), Small farmer category, drip irrigation dependency.",
+    "farmer_query_inspiration": "KCC Karnataka micro-irrigation query records: Drip system replacement, subsidy slabs for Small farmers, and area cap validations under PMKSY.",
+    "statutory_policy_test": "Cross-field physical capacity test: Requested 1.41 ha micro-irrigation area strictly fits within 3.5 ac parcel (3.5 * 0.404686 = 1.4164 ha); grid-connected borewell disqualifies PM-KUSUM B (Component C alternative); Minority category routes to KMDC; clean eligibility for PMKSY-PDMC and MIDH."
+  },
+  "intended_test_purpose": "Verify cross-field physical capacity rule (requested subsidized area <= parcel area); test PMKSY-PDMC qualification with verified water source; verify PM-KUSUM B grid-connected disqualification.",
+  "unresolved_dependencies": [
+    "Department of Horticulture PMKSY-PDMC portal application window for FY 2026-27",
+    "MIP (Micro Irrigation Portal) vendor quotation approval"
+  ]
+}

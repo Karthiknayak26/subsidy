@@ -1,0 +1,66 @@
+{
+  "scenario_id": "S030",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z4",
+  "agro_climatic_zone": "Central Dry Zone",
+  "district": "Davanagere",
+  "crop_primary": "Maize",
+  "crop_secondary": "Paddy",
+  "land_size_acres": 3.8,
+  "land_type": "Irrigated (Canal)",
+  "social_category": "General (OC)",
+  "farmer_category": "Small (2.5-5 acres)",
+  "existing_assets": [
+    "Borewell (Non-energized)"
+  ],
+  "annual_family_income_lakh": 2.2,
+  "immediate_need": "SOLAR_PUMP_INSTALLATION",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "UNENERGIZED_OFF_GRID",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Sowing / Vegetative",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "Small farmer with 3.8 acres in Harihar taluk, Davanagere; tail-end canal command with highly erratic releases; drilled private borewell 4 months ago but BESCOM electric line is 1.2 km away; applying for 60% subsidy for 5 HP standalone solar pump under PM-KUSUM Component B; need quotation format.",
+  "landholding_details": {
+    "total_operational_holding_acres": 3.8,
+    "qualifying_parcel_acres": 3.8,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "[2.5, 5.0] Small",
+    "physical_area_consistency": "PASS: 3.8 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Borewell (Non-energized)",
+    "borewell_electric_status": "UNENERGIZED_OFF_GRID",
+    "grid_connection_evidence": "BESCOM unenergized certificate; off-grid borewell with casing pipe installed"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Harihar taluk"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "Bhadra Canal Command tail-end studies: Davanagere (Harihar/Honnali taluks) cereal cultivators experiencing canal water deficits and turning to off-grid solar pumping.",
+    "farmer_query_inspiration": "KCC Karnataka solar energy logs: Farmers in canal ayacuts with unenergized borewells seeking off-grid solar pump assistance.",
+    "statutory_policy_test": "Benchmark Challenge 1 (Solar Pump vs Krishi Bhagya & Hydrological Gating): Water source 'Borewell (Non-energized)' and status 'UNENERGIZED_OFF_GRID' strictly fire KUSUM_B_WATER_SOURCE_PRESENT and KUSUM_B_OFF_GRID_VERIFIED returning ELIGIBLE for PM-KUSUM Component B; canal land type disqualifies Krishi Bhagya (KRISHI_BHAGYA_NOT_DRYLAND) and Ganga Kalyana (GK_PARENT_NOT_DRYLAND); General category excludes corporation schemes."
+  },
+  "intended_test_purpose": "Evaluate PM-KUSUM Component B qualification on off-grid unenergized borewell; verify strict exclusion of dryland schemes on canal-irrigated holding.",
+  "unresolved_dependencies": [
+    "KREDL/MNRE state centralized vendor portal empanelment and beneficiary quota allocation for Davanagere district"
+  ]
+}

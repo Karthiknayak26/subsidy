@@ -1,12 +1,13 @@
 """
-Validation script for Benchmark v1.0.3 Scenario Assignment Matrix.
-Tests all target quotas:
+Validation script for Benchmark v1.0.4 Scenario Assignment Matrix.
+Tests all target quotas and statutory definitions:
 - Total scenarios: 60 (S011-S070)
 - Zones: 10 zones, 6 each
 - Landholding classes: 22 Marginal, 20 Small, 12 Medium, 6 Large
 - Social categories: 15 SC, 10 ST, 10 OBC, 8 Minority, 17 GM
 - Primary needs: 6 for each of 10 categories
-- Tenure statuses: 47 Pre-Feb 2019, 4 Post-Feb 2019 Inheritance, 5 Pure Tenant, 4 Unknown Title Status
+- Tenure statuses: 47 Pre-Feb 2019, 4 Post-Feb 2019 Statutory Inheritance (succession upon death), 5 Pure Tenant, 4 Unknown Title Status
+- PM-KISAN Statutory Succession Definition Check (v1.0.4): S039, S049, S064, S069 explicitly distinguish succession upon death from ineligible partition/sale/gift deeds
 - Community pool: 3 Yes (S028, S052, S066), 57 No
 - Land types: 28 Dryland, 10 Canal-irrigated, 12 Borewell-irrigated, 6 Wetland/valley, 4 Hilly/terraced
 - Boundaries: 2.5 ac, 5.0 ac, 10.0 ac, 5.0 ha PMKSY, Rs 10k pension
@@ -288,7 +289,7 @@ scenarios = [
         "lclass": "Marginal", "social": "SC", "tenure": "Post-Feb 2019 Inheritance",
         "pool": "No",
         "water_source": "Rainfed (None)", "electric_status": "NONE",
-        "policy": "PM-KISAN inheritance partition exemption test; legal family succession verified"
+        "policy": "PM-KISAN statutory succession exemption test; land title acquired post-cutoff strictly via inheritance following death of landowner (father deceased Aug 2021; Death Cert & Bhoomi mutation Form 12 verified; transfer_basis=INHERITANCE_DUE_TO_DEATH); distinct from post-cutoff partition deeds"
     },
     {
         "sid": "S040", "zone": "Z5", "dist": "Bengaluru Rural", "crop": "Mango",
@@ -382,7 +383,7 @@ scenarios = [
         "lclass": "Small", "social": "GM", "tenure": "Post-Feb 2019 Inheritance",
         "pool": "No",
         "water_source": "Borewell (Grid-connected)", "electric_status": "GRID_CONNECTED_IP_SET",
-        "policy": "MIDH shade-net structure for commercial seed potato; post-2019 inheritance exemption test"
+        "policy": "MIDH shade-net structure for commercial seed potato; post-2019 statutory succession exemption test (transfer_basis=INHERITANCE_DUE_TO_DEATH; father deceased May 2022; Death Cert, legal heir order, Bhoomi mutation Form 16 verified; land_ownership_cutoff_pre_feb_2019=True engine input); distinct from non-qualifying partition deed"
     },
     {
         "sid": "S050", "zone": "Z7", "dist": "Hassan", "crop": "Arecanut",
@@ -521,7 +522,7 @@ scenarios = [
         "lclass": "Medium", "social": "OBC", "tenure": "Post-Feb 2019 Inheritance",
         "pool": "No",
         "water_source": "Canal Command", "electric_status": "NONE",
-        "policy": "SMAM power tiller/paddy transplanter subsidy; medium holding (8.0 ac); post-2019 inheritance partition"
+        "policy": "SMAM power tiller/paddy transplanter subsidy; medium holding (8.0 ac); post-2019 statutory inheritance upon demise of parent (transfer_basis=INHERITANCE_DUE_TO_DEATH, legal heir cert & mutation verified; distinct from ineligible partition deed)"
     },
 
     # --- ZONE 10: Coastal Zone (Dakshina Kannada, Udupi, Uttara Kannada Coast) ---
@@ -568,7 +569,7 @@ scenarios = [
         "lclass": "Large", "social": "Minority", "tenure": "Post-Feb 2019 Inheritance",
         "pool": "No",
         "water_source": "Open Well / Rainfed", "electric_status": "NONE",
-        "policy": "MIDH coastal nursery / shade-net; Large holding (13.0 ac); Minority; post-2019 inheritance exemption test"
+        "policy": "MIDH coastal nursery / shade-net; Large holding (13.0 ac); Minority; post-2019 statutory inheritance upon demise of parent (transfer_basis=INHERITANCE_DUE_TO_DEATH, legal heir cert & mutation verified; distinct from ineligible partition deed)"
     },
     {
         "sid": "S070", "zone": "Z10", "dist": "Udupi", "crop": "Arecanut",
@@ -583,7 +584,7 @@ scenarios = [
 
 def validate_matrix(data):
     print("==================================================")
-    print("BENCHMARK V1.0.3 MATRIX VALIDATION REPORT")
+    print("BENCHMARK V1.0.4 MATRIX VALIDATION REPORT")
     print("==================================================")
     failures = []
     
@@ -687,6 +688,24 @@ def validate_matrix(data):
         print(f"  {t}: {cnt} / {tgt}")
         if cnt != tgt:
             failures.append(f"Tenure status {t} count {cnt} != {tgt}")
+
+    # 7b. Post-Feb 2019 Statutory Succession vs. Partition Definition Check (v1.0.4)
+    inheritance_scenarios = [s for s in data if s["tenure"] == "Post-Feb 2019 Inheritance"]
+    inherit_ids = [s["sid"] for s in inheritance_scenarios]
+    expected_inherit_ids = ["S039", "S049", "S064", "S069"]
+    inherit_ids_pass = (inherit_ids == expected_inherit_ids)
+    print(f"\nPost-Feb 2019 Statutory Inheritance Definitions Check (v1.0.4): {'PASS' if inherit_ids_pass else 'FAIL'}")
+    if not inherit_ids_pass:
+        failures.append(f"Inheritance scenario IDs {inherit_ids} != {expected_inherit_ids}")
+    for s in inheritance_scenarios:
+        pol = s["policy"].lower()
+        has_death = ("death" in pol or "demise" in pol)
+        has_distinction = ("distinct from" in pol or "partition" in pol)
+        if not (has_death and has_distinction):
+            failures.append(f"{s['sid']} policy must distinguish statutory succession upon death from partition deeds")
+            print(f"  {s['sid']}: FAIL - missing statutory succession upon death vs partition distinction")
+        else:
+            print(f"  {s['sid']}: PASS - explicit statutory succession upon demise verified")
 
     # 8. Community Pool: 3 Yes, 57 No
     pool_counter = Counter("Yes" if s["pool"].startswith("Yes") else "No" for s in data)

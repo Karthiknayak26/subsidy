@@ -1,0 +1,68 @@
+{
+  "scenario_id": "S046",
+  "benchmark_version": "v1.0.3",
+  "zone_id": "Z6",
+  "agro_climatic_zone": "Southern Dry Zone",
+  "district": "Chamarajanagar",
+  "crop_primary": "Sugarcane",
+  "crop_secondary": "Banana",
+  "land_size_acres": 7.0,
+  "land_type": "Irrigated (Canal)",
+  "social_category": "General (OC)",
+  "farmer_category": "Medium (5-10 acres)",
+  "existing_assets": [
+    "Canal Sump",
+    "Electric Pump Set"
+  ],
+  "annual_family_income_lakh": 3.4,
+  "immediate_need": "SOIL_HEALTH_AND_FERTILIZER",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "NONE",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Ratoon / Land Preparation",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "General category sugarcane grower with 7.0 acres canal command land in Kollegal, Chamarajanagar; observing declining sugarcane tonnage and soil salinization; applying for Soil Health Card diagnostic testing and micronutrient advisory; inquiring about RSK soil sample collection protocol.",
+  "landholding_details": {
+    "total_operational_holding_acres": 7.0,
+    "qualifying_parcel_acres": 7.0,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "(5.0, 10.0] Medium",
+    "physical_area_consistency": "PASS: 7.0 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Canal Command",
+    "borewell_electric_status": "NONE",
+    "grid_connection_evidence": "Canal network outlet with authorized electric pump lift"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Kollegal taluk"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "Department of Agriculture Chamarajanagar & ICAR KVK: Intensive sugarcane and commercial cultivation in Kollegal/Yelandur taluks experiencing nutrient imbalances and micro-nutrient deficiencies from prolonged monocropping.",
+    "farmer_query_inspiration": "KCC Karnataka Soil Health Card query logs: Medium farmers requesting GPS-based soil sampling and soil health card generation.",
+    "statutory_policy_test": "Universal Access Diagnostic Service: Evaluates Soil Health Card (SHC) on 7.0-acre medium sugarcane holding; qualifies for 100% free soil diagnostic profiling and crop nutrient recommendation (SHC_UNIVERSAL_ACCESS_VERIFIED), directly matching primary need SOIL_HEALTH_AND_FERTILIZER in Section A; PM-KISAN qualifies in Section A; PMKSY-PDMC qualifies in Section A; SMAM qualifies in Section A; PMFBY routed to Section B pending seasonal IU notification; Krishi Bhagya and Ganga Kalyana disqualified due to canal command irrigated land type and General Merit category."
+  },
+  "intended_test_purpose": "Validate Soil Health Card universal entitlement matching primary diagnostic need; enforce irrigated land type and affirmative welfare exclusions for Krishi Bhagya and Ganga Kalyana.",
+  "unresolved_dependencies": [
+    "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Sugarcane in Kollegal taluk, Chamarajanagar district",
+    "Chamarajanagar district RSK soil testing laboratory cycle and sampling schedule for Kharif 2026"
+  ]
+}
