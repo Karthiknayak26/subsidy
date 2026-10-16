@@ -1,0 +1,69 @@
+{
+  "scenario_id": "S057",
+  "benchmark_version": "v1.0.4",
+  "zone_id": "Z8",
+  "agro_climatic_zone": "Northern Transition Zone",
+  "district": "Belagavi",
+  "crop_primary": "Sugarcane",
+  "crop_secondary": "Maize",
+  "land_size_acres": 12.0,
+  "land_type": "Irrigated (Canal)",
+  "social_category": "OBC",
+  "farmer_category": "Large (> 10 acres)",
+  "existing_assets": [
+    "Canal Outlet",
+    "Intermediate Storage Sump",
+    "Tractor (45 HP)"
+  ],
+  "annual_family_income_lakh": 5.5,
+  "immediate_need": "FARM_MECHANIZATION",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "NONE",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Tillering / Grand Growth",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "OBC large sugarcane farmer with 12.0 acres canal command land in Gokak taluk, Belagavi; Ghataprabha right bank canal distributary; owns 45 HP tractor; seeking 40% capital subsidy on tractor-mounted sugarcane stubble shaver, ratoon manager, and rotavator under SMAM; verifying whether large holdings face blanket exclusion.",
+  "landholding_details": {
+    "total_operational_holding_acres": 12.0,
+    "qualifying_parcel_acres": 12.0,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "(10.0, inf) Large",
+    "physical_area_consistency": "PASS: 12.0 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Canal Command & Sump",
+    "borewell_electric_status": "NONE",
+    "grid_connection_evidence": "Ghataprabha canal command outlet with gravity flow to farm storage sump"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Gokak taluk, Belagavi district"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "DES Karnataka & Sugar Commissionerate: Ghataprabha/Malaprabha canal command large sugarcane growers in Gokak/Raibag taluks, adopting mechanized ratoon management and stubble shaving implements.",
+    "farmer_query_inspiration": "KCC Belagavi mechanization logs: Large farmers inquiring about SMAM tiered subsidy rates for specialized cane implements and tractor attachment eligibility.",
+    "statutory_policy_test": "Benchmark Challenge 8 (Scheme-Specific Ceilings on Large Holdings): Large holding of 12.0 acres (> 10.0 ac); evaluated per scheme tier under SMAM; no blanket exclusion applies; qualifies for 40% subsidy tier; Krishi Bhagya disqualified due to canal command; Ganga Kalyana disqualified due to canal land type."
+  },
+  "intended_test_purpose": "Challenge 8: SMAM for large OBC sugarcane canal; no blanket large-farm exclusion; PMKSY-PDMC qualifies in Section A; Krishi Bhagya and Ganga Kalyana disqualified by canal command.",
+  "unresolved_dependencies": [
+    "Verification of GoK Kharif 2026 PMFBY Insurance Unit notification for Sugarcane in Gokak taluk, Belagavi district",
+    "Belagavi District Agriculture Joint Director SMAM FY 2026-27 specialized machinery quota circular"
+  ]
+}

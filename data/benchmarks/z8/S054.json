@@ -1,0 +1,68 @@
+{
+  "scenario_id": "S054",
+  "benchmark_version": "v1.0.4",
+  "zone_id": "Z8",
+  "agro_climatic_zone": "Northern Transition Zone",
+  "district": "Belagavi",
+  "crop_primary": "Chilli",
+  "crop_secondary": "Vegetables",
+  "land_size_acres": 1.5,
+  "land_type": "Wetland/valley",
+  "social_category": "SC",
+  "farmer_category": "Marginal (< 2.5 acres)",
+  "existing_assets": [
+    "Borewell (Grid-connected)",
+    "Drip Irrigation (Installed)"
+  ],
+  "annual_family_income_lakh": 0.95,
+  "immediate_need": "PROTECTED_HORTICULTURE",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Fruiting / Harvest",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "SC marginal chilli farmer with 1.5 acres Krishna river valley wetland in Athani taluk, Belagavi; operational grid-connected borewell and drip network installed; seeking 50% capital subsidy on naturally ventilated polyhouse / shade-net structure under Mission for Integrated Development of Horticulture (MIDH); checking crop insurance notification.",
+  "landholding_details": {
+    "total_operational_holding_acres": 1.5,
+    "qualifying_parcel_acres": 1.5,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "[0.0, 2.5) Marginal",
+    "physical_area_consistency": "PASS: 1.5 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Borewell (Grid-connected)",
+    "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+    "grid_connection_evidence": "HESCOM energized 5 HP IP set with operational drip network"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Athani taluk, Belagavi district"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "Karnataka Horticulture Department & DES: River valley intensive vegetable and spice cultivation in northern Belagavi (Athani/Chikkodi), small and marginal farmers adopting protected structures for high-value Byadagi chilli hybrids.",
+    "farmer_query_inspiration": "KCC Belagavi horticulture queries: SC marginal farmers seeking MIDH shade-net subsidies for chilli cultivation with existing borewell infrastructure.",
+    "statutory_policy_test": "MIDH shade-net qualification for high-value horticultural chilli on marginal holding (1.5 ac >= 0.25 ac threshold); Krishi Bhagya disqualified due to wetland type; Ganga Kalyana disqualified due to existing borewell; PM-KUSUM B disqualified due to grid connection."
+  },
+  "intended_test_purpose": "MIDH shade-net for SC marginal chilli wetland; Krishi Bhagya dryland exclusion; Ganga Kalyana existing-borewell disqualification; PM-KUSUM B grid disqualification.",
+  "unresolved_dependencies": [
+    "Verification of GoK Kharif 2026 PMFBY Insurance Unit notification for Chilli in Athani taluk, Belagavi district",
+    "Belagavi District Horticulture Department MIDH shade-net FY 2026-27 application window confirmation"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "scenario_id": "S058",
+  "benchmark_version": "v1.0.4",
+  "zone_id": "Z8",
+  "agro_climatic_zone": "Northern Transition Zone",
+  "district": "Haveri",
+  "crop_primary": "Soybean",
+  "crop_secondary": "Cotton",
+  "land_size_acres": 12.5,
+  "land_type": "Irrigated (Borewell)",
+  "social_category": "General (OC)",
+  "farmer_category": "Large (> 10 acres)",
+  "existing_assets": [
+    "Borewell (Grid-connected)",
+    "Sprinkler Set (Partial)"
+  ],
+  "annual_family_income_lakh": 7.2,
+  "immediate_need": "MICRO_IRRIGATION_SUPPORT",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Vegetative / Pod Formation",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "General category large farmer with 12.5 acres borewell-irrigated land in Savanur taluk, Haveri; applying for micro-irrigation capital subsidy under PMKSY-PDMC for exactly 5.00 hectares (~12.36 acres); seeking confirmation of 5.00 ha statutory ceiling compliance and vendor quotation requirements.",
+  "landholding_details": {
+    "total_operational_holding_acres": 12.5,
+    "qualifying_parcel_acres": 12.5,
+    "requested_subsidized_area_ha": 5.0,
+    "land_classification_interval": "(10.0, inf) Large",
+    "physical_area_consistency": "PASS: requested 5.00 ha <= 12.5 ac (5.059 ha) qualifying parcel; satisfies PMKSY-PDMC 5.00 ha statutory ceiling"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Borewell (Grid-connected)",
+    "borewell_electric_status": "GRID_CONNECTED_IP_SET",
+    "grid_connection_evidence": "HESCOM energized 10 HP IP set; partial sprinkler network installed"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Savanur taluk, Haveri district"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "DES Karnataka & Haveri Agriculture Department: Commercial soybean-cotton growers in Savanur/Shiggaon taluks, large landholdings investing in precision drip irrigation.",
+    "farmer_query_inspiration": "KCC Haveri micro-irrigation logs: Large farmers requesting PMKSY-PDMC subsidy clarification regarding the maximum 5.00 ha subsidy ceiling and physical parcel accommodation.",
+    "statutory_policy_test": "Benchmark Challenge 8 & Boundary Test: Large holding of 12.5 acres (> 10.0 ac); requested subsidized area of exactly 5.00 ha strictly satisfies physical parcel capacity (5.00 ha <= 12.5 ac * 0.404686 = 5.0586 ha) and statutory ceiling (5.00 ha <= 5.00 ha); operational borewell satisfies water requirement; raw engine INELIGIBLE (PMKSY_LAND_ABOVE_5_HA) preserved; governance presentation qualifies in Section A at 5.00 ha statutory ceiling; confirms grid connection excludes PM-KUSUM B; existing borewell excludes Ganga Kalyana."
+  },
+  "intended_test_purpose": "Challenge 8 and boundary test: PMKSY-PDMC 5.00 ha ceiling at exactly 5.00 ha requested; 12.5 ac / 5.059 ha physical capacity PASS; PMKSY-PDMC qualifies in Section A; Ganga Kalyana and PM-KUSUM B disqualified by existing grid borewell.",
+  "unresolved_dependencies": [
+    "Verification of GoK Kharif 2026 PMFBY Insurance Unit notification for Soybean in Savanur taluk, Haveri district",
+    "Haveri District Agriculture office PMKSY-PDMC FY 2026-27 drip/sprinkler target allocation and empanelled vendor confirmation"
+  ]
+}
