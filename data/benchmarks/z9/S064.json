@@ -1,0 +1,79 @@
+{
+  "scenario_id": "S064",
+  "benchmark_version": "v1.0.4",
+  "zone_id": "Z9",
+  "agro_climatic_zone": "Hilly Zone",
+  "district": "Uttara Kannada",
+  "crop_primary": "Paddy",
+  "crop_secondary": "Groundnut",
+  "land_size_acres": 8.0,
+  "land_type": "Irrigated (Canal)",
+  "social_category": "OBC (2A)",
+  "farmer_category": "Medium (5-10 acres)",
+  "existing_assets": [
+    "Canal Outlet",
+    "Intermediate Storage Sump"
+  ],
+  "annual_family_income_lakh": 3.6,
+  "immediate_need": "FARM_MECHANIZATION",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "NONE",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Harvesting / Land Preparation",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "OBC medium paddy grower with 8.0 acres canal command in Yellapur taluk, Uttara Kannada; acquired land title via registered statutory succession following father's demise in November 2021 (Death Cert DC/UK/2021/8841 and Bhoomi mutation Form 16 MR No. 2022-T209 verified); seeking 40% capital subsidy on power tiller and walk-behind paddy transplanter under SMAM; verifying PM-KISAN succession status.",
+  "landholding_details": {
+    "total_operational_holding_acres": 8.0,
+    "qualifying_parcel_acres": 8.0,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "(5.0, 10.0] Medium",
+    "physical_area_consistency": "PASS: 8.0 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Canal Command",
+    "borewell_electric_status": "NONE",
+    "grid_connection_evidence": "Kali river basin canal distributary gravity flow with farm intermediate storage sump"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "Title acquired via registered inheritance succession following demise of father in Nov 2021; Death Cert No. DC/UK/2021/8841, Legal Heir Certificate LHC/UK/2022/412, and Bhoomi mutation Form 16 MR No. 2022-T209 (18.03.2022) verified"
+  },
+  "statutory_succession_details": {
+    "transfer_basis": "INHERITANCE_DUE_TO_DEATH",
+    "actual_acquisition_date": "2021-11-14",
+    "parent_demise_date": "2021-11-14",
+    "death_certificate_number": "DC/UK/2021/8841",
+    "legal_heir_certificate_number": "LHC/UK/2022/412",
+    "mutation_extract_form_16": "MR No. 2022-T209 (18.03.2022)",
+    "statutory_authority": "PM-KISAN Revised Operational Guidelines Clause 3(d)",
+    "statutory_distinction": "Ownership transferred through inheritance following demise of father; strictly distinct from non-qualifying post-cutoff partition deeds, sale deeds, or gift deeds under Clause 3(d).",
+    "engine_input_interpretation": "land_ownership_cutoff_pre_feb_2019 = True correctly represents statutory compliance under the Clause 3(d) inheritance exception, passing the PMKISAN_CUTOFF_DATE_VERIFIED rule."
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "DES Karnataka & Agriculture Department: Coastal/ghats transitional canal-irrigated paddy growers in Yellapur adopting mechanized transplanters and power tillers to address labor shortages.",
+    "farmer_query_inspiration": "KCC Uttara Kannada mechanization queries: Medium farmers with inherited land titles inquiring about SMAM power tiller subsidies and PM-KISAN succession transfers.",
+    "statutory_policy_test": "Benchmark Design v1.0.4 Section 3.3.1 (PM-KISAN Statutory Succession vs Partition Deed Safeguard): Post-01.02.2019 land title transfer qualifies under PM-KISAN Revised Operational Guidelines Clause 3(d) because ownership was transferred through inheritance resulting from demise of parent (transfer_basis = INHERITANCE_DUE_TO_DEATH; Death Cert and mutation extract verified); strictly distinct from post-cutoff partition deeds which remain statutorily excluded; SMAM power tiller subsidy qualifies in Section A; Krishi Bhagya and Ganga Kalyana disqualified due to canal command."
+  },
+  "intended_test_purpose": "SMAM power tiller/paddy transplanter subsidy; medium holding (8.0 ac); post-2019 statutory inheritance upon demise of parent (transfer_basis=INHERITANCE_DUE_TO_DEATH, legal heir cert & mutation verified; distinct from ineligible partition deed); PM-KISAN qualifies in Section A.",
+  "unresolved_dependencies": [
+    "Verification of GoK Kharif 2026 PMFBY Insurance Unit notification for Paddy in Yellapur taluk, Uttara Kannada district",
+    "Uttara Kannada District Agriculture Joint Director SMAM FY 2026-27 power tiller/transplanter target circular"
+  ]
+}

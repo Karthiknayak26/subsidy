@@ -1,0 +1,68 @@
+{
+  "scenario_id": "S059",
+  "benchmark_version": "v1.0.4",
+  "zone_id": "Z9",
+  "agro_climatic_zone": "Hilly Zone",
+  "district": "Kodagu",
+  "crop_primary": "Coffee",
+  "crop_secondary": "Black Pepper",
+  "land_size_acres": 4.5,
+  "land_type": "Hilly/terraced",
+  "social_category": "General (OC)",
+  "farmer_category": "Small (2.5-5 acres)",
+  "existing_assets": [
+    "Hillside Stream Catchment",
+    "Storage Tank"
+  ],
+  "annual_family_income_lakh": 3.8,
+  "immediate_need": "SOIL_HEALTH_AND_FERTILIZER",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": true,
+  "is_pure_tenant_without_land_title": false,
+  "borewell_electric_status": "NONE",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Berry Development / Intercropping",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "General category small coffee planter with 4.5 acres terraced plantation in Somwarpet taluk, Kodagu; seeking Soil Health Card testing for soil acidity (pH), organic carbon, and customized NPK/lime recommendations; inquiring about soil testing laboratory mobile van schedule.",
+  "landholding_details": {
+    "total_operational_holding_acres": 4.5,
+    "qualifying_parcel_acres": 4.5,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "[2.5, 5.0] Small",
+    "physical_area_consistency": "PASS: 4.5 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Hillside Stream Catchment",
+    "borewell_electric_status": "NONE",
+    "grid_connection_evidence": "Natural gravity-fed mountain stream catchment with intermediate masonry tank; no electrical borewell on terraced slope"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": true,
+    "is_pure_tenant_without_land_title": false,
+    "tenure_documentation": "RTC registered pre-February 2019 in Somwarpet taluk, Kodagu district"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "Coffee Board of India & DES Karnataka: Smallholder Arabica/Robusta coffee plantations in western ghats (Somwarpet/Madikeri), characterized by high soil acidity requiring systematic soil test-based lime application.",
+    "farmer_query_inspiration": "KCC Kodagu plantation logs: Coffee planters inquiring about diagnostic soil health testing facilities and Soil Health Card distribution.",
+    "statutory_policy_test": "Universal diagnostic access under Soil Health Card (SCH009) for plantation coffee in Hilly Zone; Krishi Bhagya disqualified due to hilly/terraced topography and non-notified rainfed district; Ganga Kalyana disqualified due to non-dryland terrain."
+  },
+  "intended_test_purpose": "Soil Health Card soil testing for plantation coffee in Hilly Zone; universal diagnostic access verified in Section A; Krishi Bhagya and Ganga Kalyana terrain exclusions enforced.",
+  "unresolved_dependencies": [
+    "Verification of GoK Kharif 2026 RWBCIS/PMFBY Insurance Unit notification for plantation crops in Somwarpet taluk, Kodagu district",
+    "Kodagu District Agriculture Department Soil Health Card laboratory schedule for Somwarpet taluk"
+  ]
+}
