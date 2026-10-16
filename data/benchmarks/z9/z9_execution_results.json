@@ -2059,13 +2059,15 @@
           "parent_scheme_id": "SCH008",
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
-          "governance_status": "ELIGIBLE",
-          "presentation_section": "Section A (Confirmed Actionable Candidates)",
-          "allow_numerical_scoring": true,
-          "governance_note": "Confirmed verified scheme eligible for clinical 0-3 relevance scoring.",
+          "governance_status": "REQUIRES_VERIFICATION",
+          "presentation_section": "Section B (Unresolved Policy Review / Tenant Crop-Loan Documentation Required)",
+          "allow_numerical_scoring": false,
+          "governance_note": "Governance Tenant Credit Safeguard: Raw engine returns ELIGIBLE under RBI/NABARD tenant farmer KCC guidelines. However, crop-loan documentation for this oral lessee has not been verified. Per Benchmark Challenge 5, qualifying as a borrower category does not establish that this applicant's oral-lease declaration, JLG formation evidence, or commercial bank tenancy documentation has been confirmed. SCH008_CENTRAL is routed to Section B (REQUIRES_VERIFICATION) with numerical scoring disabled pending Lead District Bank / Commercial bank verification of tenant crop-loan documentation for Sirsi taluk.",
           "reason": "Qualifies for Central KCC-MISS via Commercial Banks/RRBs (4.0% effective interest up to Rs. 3 Lakh upon prompt repayment).",
           "disqualifying_factors": [],
-          "missing_verifications": [],
+          "missing_verifications": [
+            "Tenant crop-loan documentation verification: oral lease declaration, village panchayat certificate, or registered Joint Liability Group (JLG) formation evidence for Sirsi taluk, Uttara Kannada"
+          ],
           "rule_keys_fired": [
             "KCC_CENTRAL_COMMERCIAL_ELIGIBLE"
           ],

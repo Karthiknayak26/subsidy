@@ -57,9 +57,9 @@
   "attribute_provenance": {
     "empirical_baseline": "NABARD State Focus Paper Karnataka & SLBC tenancy guidelines: Oral lessees and tenant farmers in Uttara Kannada ghats cultivating valley paddy lands through Joint Liability Groups (JLGs).",
     "farmer_query_inspiration": "KCC Uttara Kannada credit queries: Pure tenant farmers inquiring about KCC crop loan eligibility without title deeds.",
-    "statutory_policy_test": "Benchmark Challenge 5 (Pure Tenancy & Agricultural Credit Routing): Pure tenant strictly disqualified from PM-KISAN under PMKISAN_PURE_TENANT_EXCLUSION; KCC commercial credit (SCH008_CENTRAL) qualifies under RBI/NABARD tenant cultivation guidelines; Soil Health Card qualifies in Section A; PMFBY routed to Section B pending formal tenancy crop insurance verification."
+    "statutory_policy_test": "Benchmark Challenge 5 (Pure Tenancy & Agricultural Credit Routing): Pure tenant strictly disqualified from PM-KISAN under PMKISAN_PURE_TENANT_EXCLUSION; KCC commercial credit (SCH008_CENTRAL) raw engine returns ELIGIBLE under RBI/NABARD tenant cultivation guidelines, but governance routes SCH008_CENTRAL to Section B (REQUIRES_VERIFICATION) because oral-lease / JLG crop-loan documentation has not been verified for this applicant; Soil Health Card qualifies in Section A; PMFBY routed to Section B pending formal tenancy crop insurance verification."
   },
-  "intended_test_purpose": "Challenge 5: Hill zone valley paddy pure tenant; PM-KISAN statutorily excluded; KCC tenant route qualifies in Section A; PMFBY routed to Section B pending lease verification.",
+  "intended_test_purpose": "Challenge 5: Hill zone valley paddy pure tenant; PM-KISAN statutorily excluded; KCC Central raw engine ELIGIBLE but governance REQUIRES_VERIFICATION (Section B) pending tenant crop-loan / oral-lease / JLG documentation verification; PMFBY routed to Section B pending lease verification; Section A: 2 (SMAM, Soil Health Card), Section B: 3 (PMFBY, KCC Central, KA Coop).",
   "unresolved_dependencies": [
     "Verification of GoK Kharif 2026 PMFBY Insurance Unit notification and tenant declaration protocol for Paddy in Sirsi taluk, Uttara Kannada district",
     "Lead District Bank / Commercial bank PACS tenant crop loan documentation verification for Sirsi taluk"

@@ -146,7 +146,7 @@ def test_zone_z9_parent_suppression_and_actionable_reconciliation(z9_execution_r
     expected_breakdowns = {
         "S059": {"sa": 4, "sb": 2, "dq": 9, "total": 15},
         "S060": {"sa": 4, "sb": 2, "dq": 9, "total": 15},
-        "S061": {"sa": 3, "sb": 2, "dq": 10, "total": 15},
+        "S061": {"sa": 2, "sb": 3, "dq": 10, "total": 15},
         "S062": {"sa": 3, "sb": 3, "dq": 9, "total": 15},
         "S063": {"sa": 6, "sb": 2, "dq": 7, "total": 15},
         "S064": {"sa": 5, "sb": 2, "dq": 8, "total": 15},
@@ -273,7 +273,12 @@ def test_zone_z9_s060_rainwater_harvesting_terrain_exclusions(z9_execution_resul
 
 
 def test_zone_z9_s061_pure_tenancy_routing(z9_execution_results, z9_profiles):
-    """Verify S061 SC pure tenant in Uttara Kannada is excluded from PM-KISAN but qualifies for KCC Central."""
+    """Verify S061 SC pure tenant in Uttara Kannada is excluded from PM-KISAN.
+    KCC Central raw engine is ELIGIBLE under RBI/NABARD tenant guidelines, but
+    governance routes it to Section B (REQUIRES_VERIFICATION) because tenant
+    crop-loan documentation (oral-lease / JLG evidence) has not been verified.
+    Section A: 2 (SMAM, Soil Health Card); Section B: 3 (PMFBY, KCC Central, KA Coop).
+    """
     s061_res = next(r for r in z9_execution_results["results"] if r["scenario_id"] == "S061")
     acts = {d["scheme_id"]: d for d in s061_res["actionable_determinations"]}
 
@@ -284,17 +289,42 @@ def test_zone_z9_s061_pure_tenancy_routing(z9_execution_results, z9_profiles):
     assert pmk["presentation_section"].startswith("Disqualified")
     assert "PMKISAN_PURE_TENANT_EXCLUSION" in pmk["rule_keys_fired"]
 
-    # Central KCC qualifies in Section A under institutional tenant guidelines
+    # Central KCC: raw engine ELIGIBLE (borrower category qualifies), but governance
+    # routes to Section B because oral-lease / JLG crop-loan documentation is unverified.
     kcc = acts["SCH008_CENTRAL"]
-    assert kcc["raw_engine_status"] == "ELIGIBLE"
-    assert kcc["governance_status"] == "ELIGIBLE"
-    assert kcc["presentation_section"].startswith("Section A")
-    assert kcc["allow_numerical_scoring"] is True
+    assert kcc["raw_engine_status"] == "ELIGIBLE", (
+        "Raw engine must preserve ELIGIBLE for SCH008_CENTRAL (tenant borrower category)"
+    )
+    assert kcc["governance_status"] == "REQUIRES_VERIFICATION", (
+        "Governance must route SCH008_CENTRAL to REQUIRES_VERIFICATION pending documentation"
+    )
+    assert kcc["presentation_section"].startswith("Section B"), (
+        "SCH008_CENTRAL must appear in Section B, not Section A"
+    )
+    assert kcc["allow_numerical_scoring"] is False
+    assert len(kcc["missing_verifications"]) > 0
+    assert any("tenant" in mv.lower() or "oral" in mv.lower() or "JLG" in mv or "crop-loan" in mv.lower()
+               for mv in kcc["missing_verifications"]), (
+        "missing_verifications must reference tenant crop-loan / oral-lease / JLG documentation"
+    )
 
     # Ganga Kalyana Ambedkar Corporation is disqualified (requires clear land title + dryland)
     gk_amb = acts["SCH010_AMBEDKAR"]
     assert gk_amb["raw_engine_status"] == "INELIGIBLE"
     assert gk_amb["governance_status"] == "INELIGIBLE"
+
+    # Section B must contain PMFBY, KCC Central, and KA Coop (total 3)
+    sb_schemes = {d["scheme_id"] for d in acts.values() if d["presentation_section"].startswith("Section B")}
+    assert "SCH002" in sb_schemes, "PMFBY must be in Section B"
+    assert "SCH008_CENTRAL" in sb_schemes, "KCC Central must be in Section B"
+    assert "SCH008_KA_COOP" in sb_schemes, "KA Coop must be in Section B"
+    assert len(sb_schemes) == 3, f"Expected 3 Section B schemes, got {len(sb_schemes)}: {sb_schemes}"
+
+    # Section A must contain only SMAM and Soil Health Card (total 2)
+    sa_schemes = {d["scheme_id"] for d in acts.values() if d["presentation_section"].startswith("Section A")}
+    assert "SCH004" in sa_schemes, "SMAM must be in Section A"
+    assert "SCH009" in sa_schemes, "Soil Health Card must be in Section A"
+    assert len(sa_schemes) == 2, f"Expected 2 Section A schemes, got {len(sa_schemes)}: {sa_schemes}"
 
     # Profile verifies pure tenancy flag
     p = z9_profiles["S061"]
