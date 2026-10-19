@@ -56,7 +56,7 @@
   },
   "attribute_provenance": {
     "empirical_baseline": "Coconut Development Board & Directorate of Horticulture Karnataka: Coastal laterite soils in Bantwal/Mangaluru taluks prone to severe leaching of potassium and micro-nutrients during heavy monsoon, requiring annual soil test-based nutrient management.",
-    "farmer_query_inspiration": "KCC Dakshina Kannada horticulture logs: Large plantation owners seeking comprehensive soil health analysis and micronutrient advisory for yellowing leaves in palms.",
+    "farmer_query_inspiration": "Synthetic benchmark query formulation inspired by Kisan Call Centre (KCC) Karnataka advisory themes and Department of Agriculture field extension logs: Large plantation owners seeking comprehensive soil health analysis and micronutrient advisory for yellowing leaves in palms.",
     "statutory_policy_test": "Universal diagnostic access under Soil Health Card (SCH009) for large coastal plantation; PM-KISAN qualifies in Section A; Krishi Bhagya disqualified due to non-notified coastal district; Ganga Kalyana disqualified due to General Merit category; PMKSY-PDMC disqualified due to holding exceeding 5.0 ha ceiling and lack of operational water source."
   },
   "intended_test_purpose": "Soil Health Card universal diagnostic service for large coastal plantation (14.0 ac); GM category; verifies Section A access to SHC, PM-KISAN, and SMAM; confirms district and category exclusions for Krishi Bhagya and Ganga Kalyana.",

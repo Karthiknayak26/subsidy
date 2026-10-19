@@ -4,7 +4,7 @@ Validates schema compliance, assignment matrix consistency, universal Soil Healt
 Challenge 7 community borewell pooling safeguard with corporation rules and beneficiary threshold verification (S066),
 Cashew weather-based crop insurance (RWBCIS) and Valmiki Corporation individual borewell provisional quarantine (S067),
 Challenge 5 pure tenant statutory exclusion from PM-KISAN with KCC institutional credit routing to Section B (S068),
-PM-KISAN statutory inheritance succession (Clause 3(d)) vs post-cutoff partition deed regression safeguard,
+PM-KISAN statutory inheritance succession (§§5.2–5.3.3(i)) vs post-cutoff partition deed regression safeguard,
 MIDH protected horticulture, and off-grid solar pump replacement (S069),
 Challenge 8 & Challenge 4 area limit (4.80 ha) physical capacity verification, explicit 7-year lock-in history,
 and UNKNOWN title three-valued logic preservation in Section B for PM-KISAN and PMKSY-PDMC (S070),
@@ -19,11 +19,13 @@ from src.eligibility.models import (
     EligibilityStatus,
     AvailabilityState,
     BorewellElectricStatus,
-    GovtEmployeeCategory
+    GovtEmployeeCategory,
+    SchemeDetermination
 )
 from src.eligibility.engine import EligibilityEngine
 from src.eligibility.availability import AvailabilityFilter
 from research.dataset_research.validate_benchmark_matrix import scenarios
+from scripts.run_benchmark_z10_execution import apply_governance_safeguard
 
 WORKSPACE_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 Z10_DIR = os.path.join(WORKSPACE_ROOT, "data", "benchmarks", "z10")
@@ -283,9 +285,13 @@ def test_zone_z10_s066_community_borewell_safeguard(z10_execution_results, z10_p
     """
     Verify S066 SC medium arecanut farmer with community borewell pooling:
     - 4 SC farmers pooling 14.0 contiguous dryland acres, qualifying parcel 3.5 ac.
-    - Raw engine evaluates ELIGIBLE (GK_AMBEDKAR_COMMUNITY_ROUTE_VALID).
-    - Governance safeguard decouples determination to Section B as REQUIRES_VERIFICATION
-      with scoring disabled until applicable corporation rules and beneficiary thresholds are verified.
+    - Raw engine evaluates ELIGIBLE (GK_AMBEDKAR_COMMUNITY_ROUTE_VALID): Ambedkar Corporation
+      encoded rule mandates >= 3 beneficiaries on 8.0-15.0 acres pooled dryland, which S066 satisfies.
+      It does NOT fail the beneficiary threshold.
+    - Governance safeguard conservatively keeps determination in Section B as REQUIRES_VERIFICATION
+      with scoring disabled pending verification of current administrative circular instructions,
+      field verification of registered joint consent deed / boundary alignment, and Mines & Geology
+      groundwater clearance (do not confuse with non-Ambedkar 2-beneficiary threshold).
     - Abstract parent SCH010 is suppressed from actionable recommendations.
     - Section A: 4 (PM-KISAN, SMAM, Central KCC, Soil Health Card).
     - Section B: 3 (PMFBY, KA Coop, Ambedkar Community Borewell).
@@ -306,15 +312,17 @@ def test_zone_z10_s066_community_borewell_safeguard(z10_execution_results, z10_p
     assert amb["raw_engine_status"] == "ELIGIBLE", "Raw engine must evaluate community route as ELIGIBLE"
     assert "GK_AMBEDKAR_COMMUNITY_ROUTE_VALID" in amb["rule_keys_fired"]
     assert amb["governance_status"] == "REQUIRES_VERIFICATION", (
-        "Governance safeguard must place determination in REQUIRES_VERIFICATION pending threshold verification"
+        "Governance safeguard must place determination in REQUIRES_VERIFICATION pending administrative circular confirmation"
     )
     assert amb["presentation_section"].startswith("Section B"), (
         "Ambedkar community borewell must appear in Section B, not Section A"
     )
     assert amb["allow_numerical_scoring"] is False, "Scoring must be disabled"
     assert len(amb["missing_verifications"]) > 0
-    assert any("beneficiary" in mv.lower() or "threshold" in mv.lower() or "corporation" in mv.lower()
+    assert any("circular" in mv.lower() or "consent" in mv.lower() or "groundwater" in mv.lower()
                for mv in amb["missing_verifications"])
+    assert "GK_AMBEDKAR_COMMUNITY_ROUTE_VALID" in amb["governance_note"]
+    assert "8.0-15.0 acres" in amb["governance_note"]
 
     # Abstract parent SCH010 must be suppressed from actionable recommendations
     assert "SCH010" not in acts, "Abstract parent SCH010 must be suppressed when SCH010_AMBEDKAR is actionable"
@@ -409,10 +417,11 @@ def test_zone_z10_s068_pure_tenancy_routing(z10_execution_results, z10_profiles)
 def test_zone_z10_s069_statutory_inheritance_midh_kusum(z10_execution_results, z10_profiles):
     """
     Verify S069 Large Minority Coconut grower in Dakshina Kannada:
-    - Post-Feb 2019 statutory succession (Clause 3(d)): transfer_basis=INHERITANCE_DUE_TO_DEATH,
-      actual acquisition date 2022-04-12, death cert DC/DK/2022/6104, legal heir LHC/DK/2022/339,
-      Bhoomi mutation Form 16 MR No. 2022-T771. Distinct from ineligible partition deeds.
-    - PM-KISAN qualifies in Section A.
+    - Post-Feb 2019 statutory succession under PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i):
+      transfer_basis=INHERITANCE_DUE_TO_DEATH, parent demise date 2022-04-12, actual acquisition date 2022-04-12,
+      death cert DC/DK/2022/6104, legal heir LHC/DK/2022/339, Bhoomi mutation Form 16 MR No. 2022-T771.
+      Strictly distinct from non-qualifying partition, sale, and gift deeds under §5.3.3(ii).
+    - PM-KISAN qualifies in Section A with verified succession evidence.
     - MIDH qualifies in Section A for shaded nursery / protected horticulture with installed drip.
     - PM-KUSUM Component B qualifies in Section A for off-grid open well replacing diesel pump.
     - SMAM, Central KCC, Soil Health Card qualify in Section A (Total Section A = 6).
@@ -427,18 +436,22 @@ def test_zone_z10_s069_statutory_inheritance_midh_kusum(z10_execution_results, z
     ssd = p["statutory_succession_details"]
     assert ssd["transfer_basis"] == "INHERITANCE_DUE_TO_DEATH"
     assert ssd["actual_acquisition_date"] == "2022-04-12"
+    assert ssd["parent_demise_date"] == "2022-04-12"
     assert ssd["death_certificate_number"] == "DC/DK/2022/6104"
     assert ssd["legal_heir_certificate_number"] == "LHC/DK/2022/339"
     assert ssd["mutation_extract_form_16"] == "MR No. 2022-T771 (22.06.2022)"
-    assert "Clause 3(d)" in ssd["statutory_authority"]
+    assert "5.2" in ssd["statutory_authority"] and "5.3.3(i)" in ssd["statutory_authority"]
+    assert "5.3.3(ii)" in ssd["statutory_distinction"]
     assert "partition" in ssd["statutory_distinction"].lower()
 
-    # 2. PM-KISAN qualifies in Section A
+    # 2. PM-KISAN qualifies in Section A with explicit succession note
     pmk = acts["SCH001"]
     assert pmk["raw_engine_status"] == "ELIGIBLE"
     assert pmk["governance_status"] == "ELIGIBLE"
     assert pmk["presentation_section"].startswith("Section A")
     assert "PMKISAN_CUTOFF_DATE_VERIFIED" in pmk["rule_keys_fired"]
+    assert "5.3.3(i)" in pmk["governance_note"]
+    assert "5.3.3(ii)" in pmk["governance_note"]
 
     # 3. MIDH protected horticulture qualifies in Section A
     midh = acts["SCH007"]
@@ -462,16 +475,89 @@ def test_zone_z10_s069_statutory_inheritance_midh_kusum(z10_execution_results, z
     assert sa_schemes == {"SCH001", "SCH004", "SCH006", "SCH007", "SCH008_CENTRAL", "SCH009"}
 
 
+def test_zone_z10_s069_inheritance_negative_cases(z10_profiles):
+    """
+    Verify statutory succession safeguard enforcement under PM-KISAN Revised Operational Guidelines:
+    - §§5.2–5.3.3(i): Valid succession upon demise of parent with verified evidence qualifies in Section A.
+    - §5.3.3(ii): Post-cutoff transfers via partition, sale deed, or gift deed are statutorily
+      excluded and routed to Disqualified Candidates as INELIGIBLE.
+    - Missing succession evidence (e.g. missing death cert or legal heir order) is held in Section B
+      as REQUIRES_VERIFICATION pending regularization.
+    """
+    base_profile = json.loads(json.dumps(z10_profiles["S069"]))
+
+    det = SchemeDetermination(
+        scheme_id="SCH001",
+        scheme_name="Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+        status=EligibilityStatus.ELIGIBLE,
+        reason="Qualifies for PM-KISAN",
+        disqualifying_factors=[],
+        missing_verifications=[],
+        rule_keys_fired=["PMKISAN_LAND_SIZE_POSITIVE", "PMKISAN_CUTOFF_DATE_VERIFIED"],
+        record_type="STANDALONE",
+        parent_scheme_id=None
+    )
+
+    # Negative Case 1: Post-cutoff partition deed -> INELIGIBLE / Disqualified under §5.3.3(ii)
+    p_partition = json.loads(json.dumps(base_profile))
+    p_partition["statutory_succession_details"]["transfer_basis"] = "POST_CUTOFF_PARTITION"
+    res_partition = apply_governance_safeguard(det, "S069", p_partition, False)
+    assert res_partition["governance_status"] == "INELIGIBLE"
+    assert res_partition["presentation_section"].startswith("Disqualified")
+    assert res_partition["allow_numerical_scoring"] is False
+    assert any("5.3.3(ii)" in df for df in res_partition["disqualifying_factors"])
+
+    # Negative Case 2: Sale deed -> INELIGIBLE / Disqualified under §5.3.3(ii)
+    p_sale = json.loads(json.dumps(base_profile))
+    p_sale["statutory_succession_details"]["transfer_basis"] = "SALE_DEED"
+    res_sale = apply_governance_safeguard(det, "S069", p_sale, False)
+    assert res_sale["governance_status"] == "INELIGIBLE"
+    assert res_sale["presentation_section"].startswith("Disqualified")
+    assert res_sale["allow_numerical_scoring"] is False
+    assert any("5.3.3(ii)" in df for df in res_sale["disqualifying_factors"])
+
+    # Negative Case 3: Gift deed -> INELIGIBLE / Disqualified under §5.3.3(ii)
+    p_gift = json.loads(json.dumps(base_profile))
+    p_gift["statutory_succession_details"]["transfer_basis"] = "GIFT_DEED"
+    res_gift = apply_governance_safeguard(det, "S069", p_gift, False)
+    assert res_gift["governance_status"] == "INELIGIBLE"
+    assert res_gift["presentation_section"].startswith("Disqualified")
+    assert res_gift["allow_numerical_scoring"] is False
+    assert any("5.3.3(ii)" in df for df in res_gift["disqualifying_factors"])
+
+    # Negative Case 4: Missing death certificate -> REQUIRES_VERIFICATION in Section B
+    p_missing_death = json.loads(json.dumps(base_profile))
+    p_missing_death["statutory_succession_details"]["death_certificate_number"] = ""
+    res_missing_death = apply_governance_safeguard(det, "S069", p_missing_death, False)
+    assert res_missing_death["governance_status"] == "REQUIRES_VERIFICATION"
+    assert res_missing_death["presentation_section"].startswith("Section B")
+    assert res_missing_death["allow_numerical_scoring"] is False
+    assert len(res_missing_death["missing_verifications"]) > 0
+
+    # Negative Case 5: Missing mutation extract -> REQUIRES_VERIFICATION in Section B
+    p_missing_mutation = json.loads(json.dumps(base_profile))
+    p_missing_mutation["statutory_succession_details"]["mutation_extract_form_16"] = ""
+    res_missing_mutation = apply_governance_safeguard(det, "S069", p_missing_mutation, False)
+    assert res_missing_mutation["governance_status"] == "REQUIRES_VERIFICATION"
+    assert res_missing_mutation["presentation_section"].startswith("Section B")
+    assert res_missing_mutation["allow_numerical_scoring"] is False
+    assert len(res_missing_mutation["missing_verifications"]) > 0
+
+
 def test_zone_z10_s070_unknown_title_and_area_limit(z10_execution_results, z10_profiles):
     """
     Verify S070 Large SC arecanut farmer in Udupi:
     - Large holding 12.5 acres (> 10.0 ac); requested subsidized area 4.80 ha <= 12.5 ac * 0.404686 = 5.0586 ha
       physical parcel capacity PASS; <= 5.00 ha PMKSY ceiling PASS.
-    - Explicit first-time applicant declaration: prior_micro_irrigation_subsidy_years_ago is None
-      (mapped to PMKSY_NO_PRIOR_SUBSIDY), satisfying 7-year lock-in restriction.
+    - Official PMKSY-PDMC 2023 Guidelines §7.9 wording: assistance capped at 5.0 hectares "per beneficiary"
+      (not "per beneficiary family").
+    - Explicit raw-engine vs governance discrepancy: raw engine checks operational holding against 12.35 ac
+      (PMKSY_LAND_ABOVE_5_HA), while governance evaluates requested subsidized area (4.80 ha <= 5.059 ha physical
+      parcel and <= 5.00 ha ceiling).
     - Land title record date is UNKNOWN (land_ownership_cutoff_pre_feb_2019 = None):
       PM-KISAN and PMKSY-PDMC preserve three-valued logic in Section B as REQUIRES_VERIFICATION
-      with scoring disabled pending title regularization.
+      with scoring disabled pending title regularization, distinguishing PM-KISAN's 01.02.2019 cut-off date
+      check from PMKSY's title and layout documentation requirements.
     - Section A: 3 (SMAM, Central KCC, Soil Health Card).
     - Section B: 4 (PM-KISAN, PMFBY, PMKSY-PDMC, KA Coop).
     - Disqualified: 8. Total Actionable: 15.
@@ -489,12 +575,13 @@ def test_zone_z10_s070_unknown_title_and_area_limit(z10_execution_results, z10_p
     max_phys_ha = 12.5 * 0.40468564224
     assert 4.8 <= max_phys_ha
 
-    # 2. Explicit prior subsidy history
+    # 2. Explicit prior subsidy history and §7.9 "per beneficiary" wording
     assert "prior_subsidy_history" in p
     psh = p["prior_subsidy_history"]
     assert psh["interpretation"] == "EXPLICIT_NO_PRIOR_SUBSIDY"
     assert "7-year" in psh["statutory_clauses"]["section_7_10_repeat_subsidy_restriction"]
-    assert "5.0 hectares" in psh["statutory_clauses"]["section_7_9_area_ceiling"]
+    assert "5.0 hectares per beneficiary" in psh["statutory_clauses"]["section_7_9_area_ceiling"]
+    assert "per beneficiary family" not in psh["statutory_clauses"]["section_7_9_area_ceiling"]
 
     # 3. PMKSY-PDMC: raw INELIGIBLE (land > 12.35 ac), governance Section B (REQUIRES_VERIFICATION)
     pdmc = acts["SCH003"]
@@ -505,6 +592,10 @@ def test_zone_z10_s070_unknown_title_and_area_limit(z10_execution_results, z10_p
     assert pdmc["allow_numerical_scoring"] is False
     assert len(pdmc["missing_verifications"]) > 0
     assert any("title" in mv.lower() or "mutation" in mv.lower() for mv in pdmc["missing_verifications"])
+    # Verify explicit discrepancy note and §7.9 per beneficiary citation
+    assert "PMKSY_LAND_ABOVE_5_HA" in pdmc["governance_note"]
+    assert "per beneficiary" in pdmc["governance_note"]
+    assert "not per beneficiary family" in pdmc["governance_note"]
 
     # 4. PM-KISAN: raw REQUIRES_VERIFICATION (UNKNOWN cut-off date), governance Section B
     pmk = acts["SCH001"]
@@ -513,6 +604,9 @@ def test_zone_z10_s070_unknown_title_and_area_limit(z10_execution_results, z10_p
     assert pmk["governance_status"] == "REQUIRES_VERIFICATION"
     assert pmk["presentation_section"].startswith("Section B")
     assert pmk["allow_numerical_scoring"] is False
+    # Distinguish PM-KISAN's 01.02.2019 cutoff from PMKSY's layout/boundary checks
+    assert any("01.02.2019" in mv for mv in pmk["missing_verifications"])
+    assert any("boundaries" in mv or "layout" in mv for mv in pdmc["missing_verifications"])
 
     # 5. Grid-connected borewell excludes PM-KUSUM Component B
     kusum = acts["SCH006"]

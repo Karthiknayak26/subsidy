@@ -56,7 +56,7 @@
   },
   "attribute_provenance": {
     "empirical_baseline": "Directorate of Cashew Research (Puttur) & AIC of India: Rainfed cashew plantations in Belthangady/Puttur highly vulnerable to weather risks during flowering and fruit-set stages, covered under weather-indexed insurance (RWBCIS).",
-    "farmer_query_inspiration": "KCC Dakshina Kannada crop insurance logs: Tribal marginal cashew growers inquiring about weather-based insurance enrollment cut-off dates and claim triggers.",
+    "farmer_query_inspiration": "Synthetic benchmark query formulation inspired by Kisan Call Centre (KCC) Karnataka advisory themes and AIC crop insurance queries: Tribal marginal cashew growers inquiring about weather-based insurance enrollment cut-off dates and claim triggers.",
     "statutory_policy_test": "Cashew crop insurance under RWBCIS; raw engine returns INELIGIBLE (PMFBY_NON_NOTIFIED_CROP) due to static PMFBY crop whitelist; governance decouples determination and routes SCH002 to Section B as REQUIRES_VERIFICATION pending seasonal Hobli-level RWBCIS notification; ST marginal dryland qualifies for Valmiki Corporation individual borewell (GK_SCH010_VALMIKI_INDIVIDUAL_ROUTE_VALID, coastal threshold 1.0-5.0 ac), but SCH010_VALMIKI is quarantined in Section B as a provisional scheme; parent SCH010 suppressed; PM-KISAN, SMAM, and KCC Central qualify in Section A."
   },
   "intended_test_purpose": "PMFBY/RWBCIS cashew crop insurance in coastal plantation belt; ST marginal farmer; raw PMFBY INELIGIBLE routed to Section B pending seasonal notification; SCH010_VALMIKI individual route valid but quarantined in Section B; parent SCH010 suppressed; PM-KISAN qualifies in Section A.",

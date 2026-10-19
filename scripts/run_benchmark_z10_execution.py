@@ -15,18 +15,26 @@ Preserves all frozen invariants:
   to active application availability.
 - Special Governance Conditions:
   1. S066 Community Borewell Safeguard (Challenge 7):
-     The benchmark requires at least three beneficiaries, while the frozen engine's
-     non-Ambedkar community route accepts two. Keep the determination in Section B
-     with scoring disabled until the applicable corporation rules and beneficiary threshold are verified.
-  2. S069 Statutory Inheritance Succession (PM-KISAN Clause 3(d)):
-     transfer_basis = INHERITANCE_DUE_TO_DEATH; actual acquisition date 2022-04-12;
-     Death Certificate, Legal Heir Order, and Bhoomi mutation Form 16 verified;
-     mapped to land_ownership_cutoff_pre_feb_2019 = True; strictly distinct from
-     post-cutoff partition deeds, sale deeds, and gift deeds.
+     In the raw engine, the Ambedkar Corporation community route requires at least three
+     beneficiaries on 8.0-15.0 acres pooled dryland (GK_AMBEDKAR_COMMUNITY_ROUTE_VALID), which
+     S066 satisfies with 4 SC beneficiaries pooling 14.0 acres. Governance conservatively keeps
+     the determination in Section B with scoring disabled pending confirmation of current
+     administrative circular instructions, registered joint consent deed verification, and
+     Mines & Geology groundwater safety clearance (do not confuse with non-Ambedkar 2-beneficiary threshold).
+  2. S069 Statutory Inheritance Succession (PM-KISAN Guidelines §§5.2–5.3.3(i) vs §5.3.3(ii)):
+     Governance safeguard explicitly gates Section A on verified INHERITANCE_DUE_TO_DEATH evidence
+     (actual acquisition date 2022-04-12, parent demise date 2022-04-12, Death Cert DC/DK/2022/6104,
+     Legal Heir Order LHC/DK/2022/339, Bhoomi mutation Form 16 MR No. 2022-T771).
+     Distinguishes statutory succession upon death (§5.3.3(i)) from non-qualifying post-cutoff sale,
+     partition, and gift transfers under §5.3.3(ii).
   3. S070 Unknown Title & Area Limit (Challenge 8 & Challenge 4):
-     Preserve three-valued eligibility for missing title evidence (land_ownership_cutoff_pre_feb_2019 = None)
-     and verify the requested 4.80 hectares against the qualifying parcel's physical capacity (12.5 ac = 5.059 ha);
-     PMKSY-PDMC and PM-KISAN placed in Section B with scoring disabled pending title certification.
+     PMKSY-PDMC Guidelines 2023 §7.9 wording: assistance capped at 5.0 ha per beneficiary.
+     Explicit raw-engine vs governance discrepancy: raw engine compares total operational holding
+     against 12.35 ac (PMKSY_LAND_ABOVE_5_HA), whereas governance evaluates the requested subsidized
+     parcel (4.80 ha <= 5.059 ha parcel capacity and <= 5.00 ha ceiling). Missing title evidence
+     (land_ownership_cutoff_pre_feb_2019 = None) preserves three-valued logic in Section B with scoring
+     disabled for PM-KISAN and PMKSY-PDMC pending RTC certification, distinguishing PM-KISAN's
+     01.02.2019 cutoff from PMKSY's title and layout documentation requirements.
   4. S068 Pure Tenancy Handling (Challenge 5):
      Statutorily excluded from PM-KISAN under PMKISAN_PURE_TENANT_EXCLUSION; KCC commercial
      credit (SCH008_CENTRAL) routed to Section B pending oral lease/tenant crop loan documentation.
@@ -120,7 +128,7 @@ ZONE_Z10_PROFILES: List[Dict[str, Any]] = [
         },
         "attribute_provenance": {
             "empirical_baseline": "Coconut Development Board & Directorate of Horticulture Karnataka: Coastal laterite soils in Bantwal/Mangaluru taluks prone to severe leaching of potassium and micro-nutrients during heavy monsoon, requiring annual soil test-based nutrient management.",
-            "farmer_query_inspiration": "KCC Dakshina Kannada horticulture logs: Large plantation owners seeking comprehensive soil health analysis and micronutrient advisory for yellowing leaves in palms.",
+            "farmer_query_inspiration": "Synthetic benchmark query formulation inspired by Kisan Call Centre (KCC) Karnataka advisory themes and Department of Agriculture field extension logs: Large plantation owners seeking comprehensive soil health analysis and micronutrient advisory for yellowing leaves in palms.",
             "statutory_policy_test": "Universal diagnostic access under Soil Health Card (SCH009) for large coastal plantation; PM-KISAN qualifies in Section A; Krishi Bhagya disqualified due to non-notified coastal district; Ganga Kalyana disqualified due to General Merit category; PMKSY-PDMC disqualified due to holding exceeding 5.0 ha ceiling and lack of operational water source."
         },
         "intended_test_purpose": "Soil Health Card universal diagnostic service for large coastal plantation (14.0 ac); GM category; verifies Section A access to SHC, PM-KISAN, and SMAM; confirms district and category exclusions for Krishi Bhagya and Ganga Kalyana.",
@@ -185,14 +193,14 @@ ZONE_Z10_PROFILES: List[Dict[str, Any]] = [
         },
         "attribute_provenance": {
             "empirical_baseline": "DES Karnataka & Dr. B.R. Ambedkar Development Corporation: Rainfed laterite foothills in Karkala taluk, Udupi district, where small/medium SC farmers pool contiguous dryland holdings to satisfy the 8.0-15.0 acres threshold for community lift/borewell schemes.",
-            "farmer_query_inspiration": "KCC Udupi Ganga Kalyana queries: Medium SC dryland farmers with holdings > 5.0 acres pooling land with contiguous neighbors to access community borewell packages.",
-            "statutory_policy_test": "Benchmark Challenge 7 & Special Governance Condition (Community Beneficiary Discrepancy & Corporation Rules): Individual dryland holding (5.5 ac) exceeds 5.0 acres individual ceiling; community pool route valid with 4 SC farmers pooling 14.0 acres contiguous dryland, qualifying parcel 3.5 acres; raw engine evaluates ELIGIBLE (GK_AMBEDKAR_COMMUNITY_ROUTE_VALID). CRITICAL GOVERNANCE SAFEGUARD: The benchmark design specification requires at least 3 beneficiaries, while the frozen engine's non-Ambedkar community route accepts 2; furthermore, field verification of parcel contiguity, groundwater clearance, and corporation administrative rules is required; governance strictly decouples determination to Section B as REQUIRES_VERIFICATION without numerical scoring pending corporation circular confirmation and joint consent deed verification; abstract parent SCH010 is suppressed from visible recommendations; PM-KISAN, SMAM, and KCC Central qualify in Section A; PMFBY routed to Section B pending seasonal IU notification."
+            "farmer_query_inspiration": "Synthetic benchmark query formulation inspired by Kisan Call Centre (KCC) Karnataka advisory themes and Ambedkar Corporation field queries: Medium SC dryland farmers with holdings > 5.0 acres pooling land with contiguous neighbors to access community borewell packages.",
+            "statutory_policy_test": "Benchmark Challenge 7 & Special Governance Condition (Ambedkar Corporation Community Borewell Safeguard): Individual dryland holding (5.5 ac) exceeds 5.0 acres individual ceiling; community pool route valid with 4 SC farmers pooling 14.0 acres contiguous dryland, qualifying parcel 3.5 acres; raw engine evaluates ELIGIBLE (GK_AMBEDKAR_COMMUNITY_ROUTE_VALID) because Dr. B.R. Ambedkar Development Corporation rules require >= 3 beneficiaries (unlike other corporation routes which encode 2). CRITICAL GOVERNANCE SAFEGUARD: While the encoded Ambedkar threshold rule passes, governance conservatively decouples determination to Section B as REQUIRES_VERIFICATION without numerical scoring pending confirmation of current FY 2026-27 administrative circular instructions (published guidelines describe 8-15 acres community lift irrigation, while administrative instructions and local procedures must be confirmed), field verification of registered joint consent deed and contiguous boundary alignment, and Mines & Geology groundwater safety clearance; abstract parent SCH010 is suppressed from visible recommendations; PM-KISAN, SMAM, and KCC Central qualify in Section A; PMFBY routed to Section B pending seasonal IU notification."
         },
-        "intended_test_purpose": "Challenge 7 community borewell pooling: Individual holding 5.5 ac exceeds 5.0 ac individual Ambedkar ceiling; community pool route valid with 4 SC farmers, 14.0 ac pooled contiguous dryland, qualifying parcel 3.5 ac; governance safeguard keeps determination in Section B with scoring disabled pending corporation circular and contiguity verification; parent SCH010 suppressed.",
+        "intended_test_purpose": "Challenge 7 community borewell pooling: Individual holding 5.5 ac exceeds 5.0 ac individual Ambedkar ceiling; community pool route valid with 4 SC farmers, 14.0 ac pooled contiguous dryland, qualifying parcel 3.5 ac (raw engine ELIGIBLE); governance safeguard conservatively keeps determination in Section B with scoring disabled pending corporation circular instructions, boundary consent, and groundwater clearances; parent SCH010 suppressed.",
         "unresolved_dependencies": [
-            "Confirmation of Dr. B.R. Ambedkar Development Corporation FY 2026-27 community borewell administrative guidelines and beneficiary threshold (benchmark specification >= 3 vs encoded rule >= 2)",
-            "Field verification of registered joint consent deed and contiguous boundary alignment for the 14.0-acre pooled block in Karkala taluk",
-            "Mines and Geology Department groundwater safety and hydrogeological feasibility clearance for Karkala taluk",
+            "Verification of current Dr. B.R. Ambedkar Development Corporation FY 2026-27 administrative circular instructions and operational community borewell guidelines for Karkala taluk",
+            "Field verification of registered joint consent deed, mutual water-sharing agreement, and contiguous boundary alignment for the 14.0-acre pooled block in Karkala taluk",
+            "Mines and Geology Department hydrogeological feasibility and groundwater safety clearance for Karkala taluk",
             "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Arecanut in Karkala taluk, Udupi district"
         ]
     },
@@ -252,7 +260,7 @@ ZONE_Z10_PROFILES: List[Dict[str, Any]] = [
         },
         "attribute_provenance": {
             "empirical_baseline": "Directorate of Cashew Research (Puttur) & AIC of India: Rainfed cashew plantations in Belthangady/Puttur highly vulnerable to weather risks during flowering and fruit-set stages, covered under weather-indexed insurance (RWBCIS).",
-            "farmer_query_inspiration": "KCC Dakshina Kannada crop insurance logs: Tribal marginal cashew growers inquiring about weather-based insurance enrollment cut-off dates and claim triggers.",
+            "farmer_query_inspiration": "Synthetic benchmark query formulation inspired by Kisan Call Centre (KCC) Karnataka advisory themes and AIC crop insurance queries: Tribal marginal cashew growers inquiring about weather-based insurance enrollment cut-off dates and claim triggers.",
             "statutory_policy_test": "Cashew crop insurance under RWBCIS; raw engine returns INELIGIBLE (PMFBY_NON_NOTIFIED_CROP) due to static PMFBY crop whitelist; governance decouples determination and routes SCH002 to Section B as REQUIRES_VERIFICATION pending seasonal Hobli-level RWBCIS notification; ST marginal dryland qualifies for Valmiki Corporation individual borewell (GK_SCH010_VALMIKI_INDIVIDUAL_ROUTE_VALID, coastal threshold 1.0-5.0 ac), but SCH010_VALMIKI is quarantined in Section B as a provisional scheme; parent SCH010 suppressed; PM-KISAN, SMAM, and KCC Central qualify in Section A."
         },
         "intended_test_purpose": "PMFBY/RWBCIS cashew crop insurance in coastal plantation belt; ST marginal farmer; raw PMFBY INELIGIBLE routed to Section B pending seasonal notification; SCH010_VALMIKI individual route valid but quarantined in Section B; parent SCH010 suppressed; PM-KISAN qualifies in Section A.",
@@ -318,7 +326,7 @@ ZONE_Z10_PROFILES: List[Dict[str, Any]] = [
         },
         "attribute_provenance": {
             "empirical_baseline": "NABARD & Lead District Bank (Canara Bank Udupi): Coastal wetland paddy cultivation in Kundapura/Brahmavara taluks with significant tenant farming relying on PACS/RRB crop loans without formal RTC title deeds.",
-            "farmer_query_inspiration": "KCC Udupi tenant credit queries: Pure tenant farmers cultivating coastal khazan/wetland paddy inquiring about KCC crop loans and tenant cultivation certificates.",
+            "farmer_query_inspiration": "Synthetic benchmark query formulation inspired by Kisan Call Centre (KCC) Karnataka advisory themes and Lead District Bank tenant credit queries: Pure tenant farmers cultivating coastal khazan/wetland paddy inquiring about KCC crop loans and tenant cultivation certificates.",
             "statutory_policy_test": "Benchmark Challenge 5 (Pure Tenancy & Agricultural Credit Routing): Pure tenant strictly disqualified from PM-KISAN under PMKISAN_PURE_TENANT_EXCLUSION; KCC commercial credit qualifies under raw engine (KCC_CENTRAL_COMMERCIAL_ELIGIBLE) pursuant to RBI/NABARD guidelines for oral lessees, but governance routes SCH008_CENTRAL to Section B as REQUIRES_VERIFICATION without numerical scoring pending oral tenancy documentation / bank tenant crop-loan verification; PMFBY routed to Section B pending seasonal IU notification and tenant declaration verification; SMAM and Soil Health Card qualify in Section A."
         },
         "intended_test_purpose": "Challenge 5 pure tenant coastal wetland paddy; strictly excluded from PM-KISAN; KCC Central raw ELIGIBLE but routed to Section B pending tenant loan documentation; PMFBY routed to Section B; SMAM and SHC in Section A.",
@@ -389,16 +397,16 @@ ZONE_Z10_PROFILES: List[Dict[str, Any]] = [
             "death_certificate_number": "DC/DK/2022/6104",
             "legal_heir_certificate_number": "LHC/DK/2022/339",
             "mutation_extract_form_16": "MR No. 2022-T771 (22.06.2022)",
-            "statutory_authority": "PM-KISAN Revised Operational Guidelines Clause 3(d)",
-            "statutory_distinction": "Ownership transferred through inheritance resulting from demise of parent; strictly distinct from non-qualifying post-cutoff partition deeds, sale deeds, or gift deeds under Clause 3(d).",
-            "engine_input_interpretation": "land_ownership_cutoff_pre_feb_2019 = True correctly represents statutory compliance under the Clause 3(d) inheritance exception, passing the PMKISAN_CUTOFF_DATE_VERIFIED rule."
+            "statutory_authority": "PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i)",
+            "statutory_distinction": "Ownership transferred through inheritance resulting from demise of parent (§5.2 and §5.3.3(i)); strictly distinct from post-cutoff sale, partition, or gift deeds which are excluded under §5.3.3(ii).",
+            "engine_input_interpretation": "land_ownership_cutoff_pre_feb_2019 = True correctly represents statutory compliance under the §§5.2–5.3.3(i) inheritance exception, passing the PMKISAN_CUTOFF_DATE_VERIFIED rule."
         },
         "attribute_provenance": {
             "empirical_baseline": "Directorate of Horticulture Karnataka & MIDH Cell: Commercial coconut and cocoa nurseries in Puttur taluk adopting shade-net protected cultivation structures for raising quality planting material, combined with off-grid open well solar pumping.",
-            "farmer_query_inspiration": "KCC Dakshina Kannada MIDH queries: Large horticulture plantation owners with inherited titles inquiring about MIDH nursery subsidies, solar water pumping, and PM-KISAN succession registration.",
-            "statutory_policy_test": "Benchmark Design v1.0.4 Section 3.3.1 (PM-KISAN Statutory Succession vs Partition Deed Safeguard): Post-01.02.2019 land title transfer qualifies under PM-KISAN Revised Operational Guidelines Clause 3(d) because ownership was transferred through inheritance resulting from demise of parent (transfer_basis = INHERITANCE_DUE_TO_DEATH; Death Cert and mutation extract verified); strictly distinct from post-cutoff partition deeds which remain statutorily excluded; MIDH qualifies in Section A with installed drip irrigation; PM-KUSUM B qualifies in Section A for off-grid open well; SMAM and KCC Central qualify in Section A; PMFBY routed to Section B pending seasonal notification."
+            "farmer_query_inspiration": "Synthetic benchmark query formulation inspired by Kisan Call Centre (KCC) Karnataka advisory themes and MIDH horticulture queries: Large horticulture plantation owners with inherited titles inquiring about MIDH nursery subsidies, solar water pumping, and PM-KISAN succession registration.",
+            "statutory_policy_test": "Benchmark Design v1.0.4 Section 3.3.1 (PM-KISAN Statutory Succession vs Partition Deed Safeguard): Post-01.02.2019 land title transfer qualifies under PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i) because ownership was transferred through inheritance resulting from demise of parent (transfer_basis = INHERITANCE_DUE_TO_DEATH; Death Cert DC/DK/2022/6104, Legal Heir Order LHC/DK/2022/339, and Bhoomi mutation Form 16 MR No. 2022-T771 verified); strictly distinct from post-cutoff sale, partition, or gift deeds which remain statutorily excluded under §5.3.3(ii); MIDH qualifies in Section A with installed drip irrigation; PM-KUSUM B qualifies in Section A for off-grid open well; SMAM and KCC Central qualify in Section A; PMFBY routed to Section B pending seasonal notification."
         },
-        "intended_test_purpose": "MIDH coastal nursery / shade-net; Large holding (13.0 ac); Minority; post-2019 statutory inheritance upon demise of parent (transfer_basis=INHERITANCE_DUE_TO_DEATH, legal heir cert & mutation verified; distinct from ineligible partition deed); PM-KISAN, MIDH, PM-KUSUM B, and SMAM qualify in Section A.",
+        "intended_test_purpose": "MIDH coastal nursery / shade-net; Large holding (13.0 ac); Minority; post-2019 statutory inheritance upon demise of parent under PM-KISAN §§5.2–5.3.3(i) (transfer_basis=INHERITANCE_DUE_TO_DEATH, legal heir cert & mutation verified; distinct from ineligible partition, sale, and gift deeds under §5.3.3(ii)); PM-KISAN, MIDH, PM-KUSUM B, and SMAM qualify in Section A.",
         "unresolved_dependencies": [
             "Verification of GoK Kharif 2026 RWBCIS/Coconut Palm Insurance Scheme notification for Puttur taluk, Dakshina Kannada district",
             "Dakshina Kannada District Horticulture Department MIDH FY 2026-27 nursery and shade-net target circular"
@@ -454,7 +462,7 @@ ZONE_Z10_PROFILES: List[Dict[str, Any]] = [
             "factual_declaration": "First-time micro-irrigation applicant; applicant and beneficiary family have never previously availed micro-irrigation capital assistance on this parcel or any other holding.",
             "regulatory_framework": "PMKSY-PDMC Revised Operational Guidelines 2023",
             "statutory_clauses": {
-                "section_7_9_area_ceiling": "Section 7.9: Financial assistance is limited to 5.0 hectares per beneficiary family (either in contiguous or distributed parcels). S070 requests exactly 4.80 ha within a 12.5 ac (5.059 ha) parcel.",
+                "section_7_9_area_ceiling": "Section 7.9: Financial assistance is limited to 5.0 hectares per beneficiary (either in contiguous or distributed parcels). S070 requests exactly 4.80 ha within a 12.5 ac (5.059 ha) parcel.",
                 "section_7_10_repeat_subsidy_restriction": "Section 7.10: Assistance restrictions apply to beneficiaries who have already received micro-irrigation subsidy, imposing a mandatory 7-year lock-in period before becoming eligible again. Because applicant has never availed micro-irrigation subsidy, this 7-year repeat-assistance restriction is fully satisfied.",
                 "engine_mapping": "prior_micro_irrigation_subsidy_years_ago = None strictly represents confirmed zero prior subsidy, firing rule PMKSY_NO_PRIOR_SUBSIDY."
             }
@@ -471,18 +479,233 @@ ZONE_Z10_PROFILES: List[Dict[str, Any]] = [
         },
         "attribute_provenance": {
             "empirical_baseline": "DES Karnataka & Horticulture Department Udupi: Valley arecanut gardens in coastal Udupi transitioning from flood/basin irrigation to precision micro-sprinklers/drip, requiring verified land records and layout maps for subsidized installation.",
-            "farmer_query_inspiration": "KCC Udupi micro-irrigation logs: Large farmers requesting subsidy ceiling guidance for 4.80 ha drip installation while mutation extract is pending.",
-            "statutory_policy_test": "Benchmark Challenge 8 & Challenge 4 (Area Limit & Unknown Title Handling): Large holding of 12.5 acres (> 10.0 ac); requested subsidized area of 4.80 ha strictly satisfies physical parcel capacity (4.80 ha <= 12.5 ac * 0.404686 = 5.0586 ha) and statutory ceiling (4.80 ha <= 5.00 ha) under PMKSY-PDMC Guidelines 2023 §7.9; 7-year repeat restriction satisfied by explicit first-time applicant declaration (null mapped to PMKSY_NO_PRIOR_SUBSIDY); operational borewell satisfies water source; raw engine evaluates INELIGIBLE (PMKSY_LAND_ABOVE_5_HA); CRITICAL GOVERNANCE SAFEGUARD: Because land title record date is UNKNOWN (land_ownership_cutoff_pre_feb_2019 = None), three-valued logic is strictly preserved: governance places determination in Section B as REQUIRES_VERIFICATION without numerical scoring pending title regularization; PM-KISAN similarly preserves REQUIRES_VERIFICATION in Section B; SMAM and KCC Central qualify in Section A; grid connection excludes PM-KUSUM B; existing borewell and wetland topography exclude Ganga Kalyana."
+            "farmer_query_inspiration": "Synthetic benchmark query formulation inspired by Kisan Call Centre (KCC) Karnataka advisory themes and micro-irrigation extension queries: Large farmers requesting subsidy ceiling guidance for 4.80 ha drip installation while mutation extract is pending.",
+            "statutory_policy_test": "Benchmark Challenge 8 & Challenge 4 (Area Limit & Unknown Title Handling): Large holding of 12.5 acres (> 10.0 ac); requested subsidized area of 4.80 ha strictly satisfies physical parcel capacity (4.80 ha <= 12.5 ac * 0.404686 = 5.0586 ha) and statutory ceiling (4.80 ha <= 5.00 ha) under PMKSY-PDMC Guidelines 2023 §7.9 (assistance capped at 5.0 ha per beneficiary); 7-year repeat restriction satisfied by explicit first-time applicant declaration (null mapped to PMKSY_NO_PRIOR_SUBSIDY). RAW-ENGINE VS GOVERNANCE DISCREPANCY: The raw engine compares total operational holding against 12.35 ac and returns INELIGIBLE (PMKSY_LAND_ABOVE_5_HA). However, §7.9 caps the subsidized assistance area rather than imposing a blanket disqualification on the entire holding. CRITICAL GOVERNANCE SAFEGUARD: Because land title record date is UNKNOWN (land_ownership_cutoff_pre_feb_2019 = None), three-valued logic is strictly preserved: governance places determination in Section B as REQUIRES_VERIFICATION without numerical scoring pending title regularization. PM-KISAN similarly preserves REQUIRES_VERIFICATION in Section B due to the 01.02.2019 cut-off date check, distinguished from PMKSY's title and layout documentation requirements. SMAM and KCC Central qualify in Section A; grid connection excludes PM-KUSUM B; existing borewell and wetland topography exclude Ganga Kalyana."
         },
-        "intended_test_purpose": "Challenge 8 and Challenge 4: Large holding (12.5 ac); PMKSY-PDMC requested 4.80 ha <= 12.5 ac (5.059 ha) and <= 5.00 ha ceiling; title status UNKNOWN -> preserve three-valued logic in Section B for PMKSY-PDMC and PM-KISAN without numerical scoring; SMAM and KCC Central qualify in Section A.",
+        "intended_test_purpose": "Challenge 8 and Challenge 4: Large holding (12.5 ac); PMKSY-PDMC requested 4.80 ha <= 12.5 ac (5.059 ha) and <= 5.00 ha ceiling (§7.9 per beneficiary cap); raw INELIGIBLE preserved while governance evaluates parcel request; title status UNKNOWN -> preserve three-valued logic in Section B for PMKSY-PDMC and PM-KISAN without numerical scoring; SMAM and KCC Central qualify in Section A.",
         "unresolved_dependencies": [
             "Revenue Department certification of land ownership record date / RTC mutation order for Udupi taluk",
-            "Verification of physical parcel boundaries and micro-irrigation layout for 4.80 ha within 12.5 ac parcel",
+            "Verification of physical parcel boundaries, possession certificate, and micro-irrigation layout for 4.80 ha within 12.5 ac parcel",
             "Verification of GoK Kharif 2026 PMFBY Insurance Unit notification for Arecanut in Udupi taluk, Udupi district",
             "Udupi District Agriculture Office PMKSY-PDMC FY 2026-27 micro-irrigation target allocation and vendor empanelment"
         ]
     }
 ]
+
+
+def apply_governance_safeguard(
+    d: SchemeDetermination,
+    sid: str,
+    profile: Dict[str, Any],
+    is_prov: bool
+) -> Dict[str, Any]:
+    """
+    Applies explicit governance presentation safeguards, decoupling statutory eligibility
+    from administrative review sections, and enforcing statutory succession evidence gates.
+    """
+    missing_verifications = list(d.missing_verifications)
+    disqualifying_factors = list(d.disqualifying_factors)
+    gov_status = d.status.value
+    presentation_section = "Disqualified / Non-Actionable Candidates"
+    allow_scoring = False
+    gov_note = d.reason
+
+    # --- GOVERNANCE CASE 1: PMFBY / RWBCIS Crop Insurance Governance Audit across S065–S070 ---
+    if d.scheme_id == "SCH002":
+        gov_status = "REQUIRES_VERIFICATION"
+        presentation_section = "Section B (Unresolved Policy Review / Seasonal Notification Required)"
+        allow_scoring = False
+        if sid == "S065":
+            missing_verifications = [
+                "Verification of GoK Kharif 2026 RWBCIS / Coconut Palm Insurance Scheme Insurance Unit notification for Coconut in Bantwal taluk, Dakshina Kannada district"
+            ]
+            gov_note = "Raw engine returned INELIGIBLE because Coconut is absent from static crop whitelist. In coastal districts, Coconut is covered under Weather Based Crop Insurance (RWBCIS) and Coconut Palm Insurance Scheme. Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal scheme notification confirmation."
+        elif sid == "S066":
+            missing_verifications = [
+                "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Arecanut in Karkala taluk, Udupi district"
+            ]
+            gov_note = "Raw engine returned ELIGIBLE based on static crop whitelist for Arecanut, but commercial crop insurance claims require verified Kharif 2026 Gram Panchayat Insurance Unit notification. Governance presentation routes to Section B as REQUIRES_VERIFICATION."
+        elif sid == "S067":
+            missing_verifications = [
+                "Verification of GoK Kharif 2026 RWBCIS Insurance Unit (Hobli level) notification for Cashew in Belthangady taluk, Dakshina Kannada district"
+            ]
+            gov_note = "Raw engine returned INELIGIBLE due to static PMFBY crop whitelist, but Cashew is covered under weather-based crop insurance (RWBCIS) in Dakshina Kannada. Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal notification confirmation."
+        elif sid == "S068":
+            missing_verifications = [
+                "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Paddy in Kundapura taluk, Udupi district",
+                "Tenant farmer cultivation agreement / oral lessee verification for PMFBY enrollment"
+            ]
+            gov_note = "Raw engine returned ELIGIBLE based on static crop whitelist for Paddy, but applicant is a pure tenant. Tenancy proof and seasonal Insurance Unit notification require verification. Governance routes to Section B as REQUIRES_VERIFICATION."
+        elif sid == "S069":
+            missing_verifications = [
+                "Verification of GoK Kharif 2026 RWBCIS / Coconut Palm Insurance Scheme Insurance Unit notification for Coconut in Puttur taluk, Dakshina Kannada district"
+            ]
+            gov_note = "Raw engine returned INELIGIBLE due to static PMFBY crop whitelist, but Coconut is covered under weather-based scheme in Dakshina Kannada. Governance routes to Section B as REQUIRES_VERIFICATION."
+        elif sid == "S070":
+            missing_verifications = [
+                "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Arecanut in Udupi taluk, Udupi district",
+                "Revenue Department certification of land title record date / mutation extract for Udupi taluk"
+            ]
+            gov_note = "Raw engine returned ELIGIBLE based on static crop whitelist, but land title cut-off date is UNKNOWN and commercial crop insurance claims require verified Kharif 2026 Gram Panchayat Insurance Unit notification. Governance presentation routes to Section B as REQUIRES_VERIFICATION."
+
+    # --- GOVERNANCE CASE 2: S066 Community Borewell Scheme Safeguard ---
+    elif sid == "S066" and d.scheme_id == "SCH010_AMBEDKAR":
+        gov_status = "REQUIRES_VERIFICATION"
+        presentation_section = "Section B (Unresolved Policy Review / Community Corporation Rules Required)"
+        allow_scoring = False
+        missing_verifications = [
+            "Verification of current Dr. B.R. Ambedkar Development Corporation FY 2026-27 administrative circular instructions and operational community borewell guidelines for Karkala taluk",
+            "Field verification of registered joint consent deed, mutual water-sharing agreement, and contiguous boundary alignment for the 14.0-acre pooled block in Karkala taluk",
+            "Mines and Geology Department hydrogeological feasibility and groundwater safety clearance for Karkala taluk"
+        ]
+        gov_note = (
+            "Raw engine evaluated ELIGIBLE (GK_AMBEDKAR_COMMUNITY_ROUTE_VALID) because Dr. B.R. Ambedkar "
+            "Development Corporation community route encodes >= 3 beneficiaries on 8.0-15.0 acres pooled dryland "
+            "and S066 provides 4 contiguous SC beneficiaries with 14.0 acres (qualifying parcel 3.5 ac). "
+            "Governance conservatively decouples determination to Section B as REQUIRES_VERIFICATION with numerical "
+            "scoring disabled pending field verification of registered joint consent deed, contiguous boundary alignment, "
+            "Mines and Geology groundwater safety clearance, and confirmation of current administrative circular instructions."
+        )
+
+    # --- GOVERNANCE CASE 3: S068 Pure Tenancy Agricultural Credit Routing (Challenge 5) ---
+    elif sid == "S068" and d.scheme_id == "SCH001":
+        gov_status = "INELIGIBLE"
+        presentation_section = "Disqualified / Non-Actionable Candidates"
+        allow_scoring = False
+        gov_note = "Pure tenant farmer without recorded land ownership title is statutorily excluded from PM-KISAN (PMKISAN_PURE_TENANT_EXCLUSION). Placed in Disqualified Candidates."
+    elif sid == "S068" and d.scheme_id == "SCH008_CENTRAL":
+        gov_status = "REQUIRES_VERIFICATION"
+        presentation_section = "Section B (Unresolved Policy Review / Tenant Crop-Loan Documentation Required)"
+        allow_scoring = False
+        missing_verifications = [
+            "Commercial bank / Karnataka Gramin Bank verification of oral lessee / tenant crop-loan eligibility documentation in Kundapura taluk, Udupi district",
+            "Lead District Bank Udupi / NABARD scale of finance tenant farmer certification"
+        ]
+        gov_note = "Raw engine returned ELIGIBLE under RBI/NABARD tenant borrower category, but oral tenancy documentation and bank tenant crop-loan eligibility require verification. Governance safeguard routes determination to Section B as REQUIRES_VERIFICATION without numerical scoring."
+
+    # --- GOVERNANCE CASE 4: Statutory Succession Safeguard (PM-KISAN Revised Guidelines §§5.2–5.3.3(i) vs §5.3.3(ii)) ---
+    elif d.scheme_id == "SCH001" and "statutory_succession_details" in profile:
+        ssd = profile.get("statutory_succession_details", {})
+        transfer_basis = ssd.get("transfer_basis")
+        has_death_cert = bool(ssd.get("death_certificate_number"))
+        has_legal_heir = bool(ssd.get("legal_heir_certificate_number"))
+        has_mutation = bool(ssd.get("mutation_extract_form_16"))
+        has_demise_date = bool(ssd.get("parent_demise_date"))
+        
+        # Check for genuine statutory succession upon death vs non-qualifying partition/sale/gift
+        if transfer_basis == "INHERITANCE_DUE_TO_DEATH" and has_death_cert and has_legal_heir and has_mutation and has_demise_date:
+            gov_status = "ELIGIBLE"
+            presentation_section = "Section A (Confirmed Actionable Candidates)"
+            allow_scoring = True
+            missing_verifications = []
+            gov_note = (
+                "Statutory Inheritance Compliance: Title acquired post-01.02.2019 strictly satisfies "
+                "PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i) exception because ownership was "
+                "transferred through inheritance resulting from demise of parent (transfer_basis = "
+                f"INHERITANCE_DUE_TO_DEATH; parent deceased {ssd.get('parent_demise_date')}; Death Cert "
+                f"{ssd.get('death_certificate_number')}, Legal Heir Order {ssd.get('legal_heir_certificate_number')}, "
+                f"and Bhoomi mutation Form 16 {ssd.get('mutation_extract_form_16')} verified). Strictly distinct "
+                "from non-qualifying post-cutoff sale, partition, or gift deeds under §5.3.3(ii). "
+                "Raw engine evaluated ELIGIBLE (PMKISAN_CUTOFF_DATE_VERIFIED) and confirmed in Section A."
+            )
+        elif transfer_basis in ["PARTITION", "POST_CUTOFF_PARTITION", "SALE_DEED", "GIFT_DEED"]:
+            gov_status = "INELIGIBLE"
+            presentation_section = "Disqualified / Non-Actionable Candidates"
+            allow_scoring = False
+            disqualifying_factors = [
+                f"Post-01.02.2019 land title transfer based on {transfer_basis} is statutorily excluded "
+                "from PM-KISAN under Operational Guidelines §5.3.3(ii). Only succession upon death (§5.3.3(i)) qualifies."
+            ]
+            gov_note = (
+                f"Statutory Transfer Exclusion: Land title transfer basis '{transfer_basis}' is explicitly excluded "
+                "from PM-KISAN benefits under Revised Operational Guidelines §5.3.3(ii). Even with registered deed, "
+                "transfers through partition, sale, or gift executed after 01.02.2019 do not qualify for the death-succession exception."
+            )
+        else:
+            gov_status = "REQUIRES_VERIFICATION"
+            presentation_section = "Section B (Unresolved Statutory Evidence / Land Title Required)"
+            allow_scoring = False
+            missing_verifications = [
+                "Complete statutory inheritance documentation (Death Certificate, Legal Heir Certificate, and Revenue Mutation extract)"
+            ]
+            gov_note = (
+                "Inheritance documentation incomplete: Post-cutoff title transfer requires verification of parent death certificate, "
+                "legal heir order, and Bhoomi mutation extract under PM-KISAN Guidelines §§5.2–5.3.3(i)."
+            )
+
+    # --- GOVERNANCE CASE 5: S070 Unknown Land Title & Area Limit (Challenge 8 & Challenge 4) ---
+    elif sid == "S070" and d.scheme_id == "SCH001":
+        gov_status = "REQUIRES_VERIFICATION"
+        presentation_section = "Section B (Unresolved Statutory Evidence / Land Title Required)"
+        allow_scoring = False
+        missing_verifications = [
+            "Verification of land ownership title record date (must be on or before 01.02.2019 or statutory succession upon death under §§5.1–5.3)",
+            "Revenue Department certification of land ownership record date / inheritance mutation order on RTC for Udupi taluk"
+        ]
+        gov_note = "Raw engine returned REQUIRES_VERIFICATION due to explicit UNKNOWN tenure cut-off date (land_ownership_cutoff_pre_feb_2019 = None). In strict adherence to Challenge 4 safeguards, missing title evidence must remain REQUIRES_VERIFICATION and never silently default to eligibility or ineligibility. Placed in Section B without scoring."
+    elif sid == "S070" and d.scheme_id == "SCH003":
+        gov_status = "REQUIRES_VERIFICATION"
+        presentation_section = "Section B (Unresolved Statutory Evidence / Land Title Required)"
+        allow_scoring = False
+        missing_verifications = [
+            "Revenue Department certification of land ownership title record date / mutation extract for Udupi taluk",
+            "Verification of physical parcel boundaries, possession certificate, and micro-irrigation layout for 4.80 ha within 12.5 ac parcel"
+        ]
+        gov_note = (
+            "Raw Engine vs Governance Discrepancy & Area Validation: Raw engine returned INELIGIBLE (PMKSY_LAND_ABOVE_5_HA) "
+            "because its encoded static rule checks operational holding against 12.35 ac. However, under Section 7.9 of the "
+            "PMKSY-PDMC Revised Operational Guidelines 2023, financial assistance is limited to 5.0 hectares per beneficiary "
+            "(not per beneficiary family). S070 requests 4.80 ha, which is strictly within the physical capacity of the "
+            "12.5-acre parcel (5.059 ha) and within the 5.00 ha assistance ceiling under §7.9; the 5.0 ha assistance cap does not "
+            "render the entire holding ineligible. However, because land title record date is UNKNOWN (land_ownership_cutoff_pre_feb_2019 = None), "
+            "PMKSY-PDMC requires verified land title (RTC) and possession/boundary documentation (distinguished from PM-KISAN's "
+            "01.02.2019 cut-off date check). Governance preserves three-valued logic by placing determination in Section B as "
+            "REQUIRES_VERIFICATION without numerical scoring pending title regularization."
+        )
+
+    # --- GOVERNANCE CASE 6: Provisional Schemes ---
+    elif is_prov and d.status == EligibilityStatus.ELIGIBLE:
+        gov_status = "REQUIRES_VERIFICATION"
+        presentation_section = "Section B (Provisional Schemes / Qualitative Review Only)"
+        allow_scoring = False
+        missing_verifications = [f"Administrative circular verification for provisional scheme {d.scheme_id}"]
+        gov_note = "Raw engine returned ELIGIBLE based on encoded rules, but scheme record is PROVISIONAL in registry. Governance safeguard places determination in Section B as REQUIRES_VERIFICATION without numerical scoring."
+    elif is_prov and d.status == EligibilityStatus.REQUIRES_VERIFICATION:
+        gov_status = "REQUIRES_VERIFICATION"
+        presentation_section = "Section B (Provisional Schemes / Qualitative Review Only)"
+        allow_scoring = False
+        if not missing_verifications:
+            missing_verifications = [f"Administrative circular and Government Order verification for provisional scheme {d.scheme_id}"]
+        gov_note = "Provisional scheme requiring administrative or Government Order verification."
+    elif d.status == EligibilityStatus.ELIGIBLE:
+        gov_status = "ELIGIBLE"
+        presentation_section = "Section A (Confirmed Actionable Candidates)"
+        allow_scoring = True
+        gov_note = "Confirmed verified scheme eligible for clinical 0-3 relevance scoring."
+    else:
+        gov_status = d.status.value
+        presentation_section = "Disqualified / Non-Actionable Candidates"
+        allow_scoring = False
+        gov_note = "Statutorily disqualified under verified criteria."
+
+    return {
+        "scheme_id": d.scheme_id,
+        "scheme_name": d.scheme_name,
+        "record_type": d.record_type,
+        "parent_scheme_id": d.parent_scheme_id,
+        "status": d.status.value,
+        "raw_engine_status": d.status.value,
+        "governance_status": gov_status,
+        "presentation_section": presentation_section,
+        "allow_numerical_scoring": allow_scoring,
+        "governance_note": gov_note,
+        "reason": d.reason,
+        "disqualifying_factors": disqualifying_factors,
+        "missing_verifications": missing_verifications,
+        "rule_keys_fired": d.rule_keys_fired,
+        "availability_state": d.availability_state.value,
+        "is_provisional": is_prov
+    }
 
 
 def run_execution() -> Dict[str, Any]:
@@ -560,146 +783,8 @@ def run_execution() -> Dict[str, Any]:
         actionable_serializable = []
         for d in actionable_determinations:
             is_prov = d.scheme_id in PROVISIONAL_SCHEMES
-            missing_verifications = list(d.missing_verifications)
-            disqualifying_factors = list(d.disqualifying_factors)
-            
-            # --- GOVERNANCE CASE 1: PMFBY / RWBCIS Crop Insurance Governance Audit across S065–S070 ---
-            if d.scheme_id == "SCH002":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Unresolved Policy Review / Seasonal Notification Required)"
-                allow_scoring = False
-                if sid == "S065":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 RWBCIS / Coconut Palm Insurance Scheme Insurance Unit notification for Coconut in Bantwal taluk, Dakshina Kannada district"
-                    ]
-                    gov_note = "Raw engine returned INELIGIBLE because Coconut is absent from static crop whitelist. In coastal districts, Coconut is covered under Weather Based Crop Insurance (RWBCIS) and Coconut Palm Insurance Scheme. Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal scheme notification confirmation."
-                elif sid == "S066":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Arecanut in Karkala taluk, Udupi district"
-                    ]
-                    gov_note = "Raw engine returned ELIGIBLE based on static crop whitelist for Arecanut, but commercial crop insurance claims require verified Kharif 2026 Gram Panchayat Insurance Unit notification. Governance presentation routes to Section B as REQUIRES_VERIFICATION."
-                elif sid == "S067":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 RWBCIS Insurance Unit (Hobli level) notification for Cashew in Belthangady taluk, Dakshina Kannada district"
-                    ]
-                    gov_note = "Raw engine returned INELIGIBLE due to static PMFBY crop whitelist, but Cashew is covered under weather-based crop insurance (RWBCIS) in Dakshina Kannada. Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal notification confirmation."
-                elif sid == "S068":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Paddy in Kundapura taluk, Udupi district",
-                        "Tenant farmer cultivation agreement / oral lessee verification for PMFBY enrollment"
-                    ]
-                    gov_note = "Raw engine returned ELIGIBLE based on static crop whitelist for Paddy, but applicant is a pure tenant. Tenancy proof and seasonal Insurance Unit notification require verification. Governance routes to Section B as REQUIRES_VERIFICATION."
-                elif sid == "S069":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 RWBCIS / Coconut Palm Insurance Scheme Insurance Unit notification for Coconut in Puttur taluk, Dakshina Kannada district"
-                    ]
-                    gov_note = "Raw engine returned INELIGIBLE due to static PMFBY crop whitelist, but Coconut is covered under weather-based scheme in Dakshina Kannada. Governance routes to Section B as REQUIRES_VERIFICATION."
-                elif sid == "S070":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Arecanut in Udupi taluk, Udupi district",
-                        "Revenue Department certification of land title record date / mutation extract for Udupi taluk"
-                    ]
-                    gov_note = "Raw engine returned ELIGIBLE based on static crop whitelist, but land title cut-off date is UNKNOWN and commercial crop insurance claims require verified Kharif 2026 Gram Panchayat Insurance Unit notification. Governance presentation routes to Section B as REQUIRES_VERIFICATION."
-
-            # --- GOVERNANCE CASE 2: S066 Community Borewell Scheme Safeguard ---
-            elif sid == "S066" and d.scheme_id == "SCH010_AMBEDKAR":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Unresolved Policy Review / Community Corporation Rules Required)"
-                allow_scoring = False
-                missing_verifications = [
-                    "Confirmation of Dr. B.R. Ambedkar Development Corporation community borewell minimum beneficiary threshold (benchmark specification >= 3 vs encoded rule >= 2)",
-                    "Field verification of registered joint consent deed and contiguous boundary alignment for the 14.0-acre pooled block in Karkala taluk",
-                    "Mines and Geology Department groundwater safety and hydrogeological feasibility clearance for Karkala taluk"
-                ]
-                gov_note = "Benchmark Challenge 7 & Special Governance Condition (Community Beneficiary Discrepancy & Corporation Rules): Individual dryland holding (5.5 ac) exceeds 5.0 ac individual ceiling; community pool route valid with 4 SC farmers, 14.0 ac pooled contiguous dryland, qualifying parcel 3.5 ac (GK_AMBEDKAR_COMMUNITY_ROUTE_VALID). CRITICAL GOVERNANCE SAFEGUARD: The benchmark requires at least three beneficiaries, while the frozen engine's non-Ambedkar community route accepts two. Keep the determination in Section B with scoring disabled until the applicable corporation rules and beneficiary threshold are verified."
-
-            # --- GOVERNANCE CASE 3: S068 Pure Tenancy Agricultural Credit Routing (Challenge 5) ---
-            elif sid == "S068" and d.scheme_id == "SCH001":
-                gov_status = "INELIGIBLE"
-                presentation_section = "Disqualified / Non-Actionable Candidates"
-                allow_scoring = False
-                gov_note = "Pure tenant farmer without recorded land ownership title is statutorily excluded from PM-KISAN (PMKISAN_PURE_TENANT_EXCLUSION). Placed in Disqualified Candidates."
-            elif sid == "S068" and d.scheme_id == "SCH008_CENTRAL":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Unresolved Policy Review / Tenant Crop-Loan Documentation Required)"
-                allow_scoring = False
-                missing_verifications = [
-                    "Commercial bank / Karnataka Gramin Bank verification of oral lessee / tenant crop-loan eligibility documentation in Kundapura taluk, Udupi district",
-                    "Lead District Bank Udupi / NABARD scale of finance tenant farmer certification"
-                ]
-                gov_note = "Raw engine returned ELIGIBLE under RBI/NABARD tenant borrower category, but oral tenancy documentation and bank tenant crop-loan eligibility require verification. Governance safeguard routes determination to Section B as REQUIRES_VERIFICATION without numerical scoring."
-
-            # --- GOVERNANCE CASE 4: S069 Statutory Succession (Clause 3(d)) ---
-            elif sid == "S069" and d.scheme_id == "SCH001":
-                gov_status = "ELIGIBLE"
-                presentation_section = "Section A (Confirmed Actionable Candidates)"
-                allow_scoring = True
-                missing_verifications = []
-                gov_note = "Statutory Inheritance Compliance: Title acquired post-01.02.2019 strictly satisfies PM-KISAN Revised Operational Guidelines Clause 3(d) exception because ownership was transferred through inheritance resulting from demise of parent (transfer_basis = INHERITANCE_DUE_TO_DEATH; mother deceased April 2022; Death Cert DC/DK/2022/6104, Legal Heir Order LHC/DK/2022/339, and Bhoomi mutation Form 16 MR No. 2022-T771 verified). Strictly distinct from non-qualifying partition deeds, sale deeds, or gift deeds. Raw engine evaluated ELIGIBLE (PMKISAN_CUTOFF_DATE_VERIFIED) and confirmed in Section A."
-
-            # --- GOVERNANCE CASE 5: S070 Unknown Land Title & Area Limit (Challenge 8 & Challenge 4) ---
-            elif sid == "S070" and d.scheme_id == "SCH001":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Unresolved Statutory Evidence / Land Title Required)"
-                allow_scoring = False
-                missing_verifications = [
-                    "Verification of land ownership title record date (must be on or before 01.02.2019 or statutory succession upon death)",
-                    "Revenue Department certification of land ownership record date / inheritance mutation order on RTC for Udupi taluk"
-                ]
-                gov_note = "Raw engine returned REQUIRES_VERIFICATION due to explicit UNKNOWN tenure cut-off date (land_ownership_cutoff_pre_feb_2019 = None). In strict adherence to Challenge 4 safeguards, missing title evidence must remain REQUIRES_VERIFICATION and never silently default to eligibility or ineligibility. Placed in Section B without scoring."
-            elif sid == "S070" and d.scheme_id == "SCH003":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Unresolved Statutory Evidence / Land Title Required)"
-                allow_scoring = False
-                missing_verifications = [
-                    "Revenue Department certification of land ownership record date / mutation extract for Udupi taluk",
-                    "Verification of physical parcel boundaries and micro-irrigation layout for 4.80 ha within 12.5 ac parcel"
-                ]
-                gov_note = "Raw engine returned INELIGIBLE due to static landholding threshold (> 12.35 ac / 5.0 ha), but requested subsidized area is 4.80 ha, which is strictly within the physical capacity of the 12.5-acre parcel (5.059 ha) and within the 5.00 ha statutory ceiling under PMKSY-PDMC Guidelines 2023 §7.9. However, because land title record date is UNKNOWN (land_ownership_cutoff_pre_feb_2019 = None), three-valued logic is preserved: governance places determination in Section B as REQUIRES_VERIFICATION without numerical scoring pending land title certification."
-
-            # --- GOVERNANCE CASE 6: Provisional Schemes ---
-            elif is_prov and d.status == EligibilityStatus.ELIGIBLE:
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Provisional Schemes / Qualitative Review Only)"
-                allow_scoring = False
-                missing_verifications = [f"Administrative circular verification for provisional scheme {d.scheme_id}"]
-                gov_note = "Raw engine returned ELIGIBLE based on encoded rules, but scheme record is PROVISIONAL in registry. Governance safeguard places determination in Section B as REQUIRES_VERIFICATION without numerical scoring."
-            elif is_prov and d.status == EligibilityStatus.REQUIRES_VERIFICATION:
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Provisional Schemes / Qualitative Review Only)"
-                allow_scoring = False
-                if not missing_verifications:
-                    missing_verifications = [f"Administrative circular and Government Order verification for provisional scheme {d.scheme_id}"]
-                gov_note = "Provisional scheme requiring administrative or Government Order verification."
-            elif d.status == EligibilityStatus.ELIGIBLE:
-                gov_status = "ELIGIBLE"
-                presentation_section = "Section A (Confirmed Actionable Candidates)"
-                allow_scoring = True
-                gov_note = "Confirmed verified scheme eligible for clinical 0-3 relevance scoring."
-            else:
-                gov_status = d.status.value
-                presentation_section = "Disqualified / Non-Actionable Candidates"
-                allow_scoring = False
-                gov_note = "Statutorily disqualified under verified criteria."
-
-            actionable_serializable.append({
-                "scheme_id": d.scheme_id,
-                "scheme_name": d.scheme_name,
-                "record_type": d.record_type,
-                "parent_scheme_id": d.parent_scheme_id,
-                "status": d.status.value,
-                "raw_engine_status": d.status.value,
-                "governance_status": gov_status,
-                "presentation_section": presentation_section,
-                "allow_numerical_scoring": allow_scoring,
-                "governance_note": gov_note,
-                "reason": d.reason,
-                "disqualifying_factors": disqualifying_factors,
-                "missing_verifications": missing_verifications,
-                "rule_keys_fired": d.rule_keys_fired,
-                "availability_state": d.availability_state.value,
-                "is_provisional": is_prov
-            })
+            item_dict = apply_governance_safeguard(d, sid, profile, is_prov)
+            actionable_serializable.append(item_dict)
             
         execution_results.append({
             "scenario_id": sid,
@@ -796,7 +881,7 @@ def generate_scenario_markdown(profile: Dict[str, Any], actionable: List[Dict[st
         ssd = profile["statutory_succession_details"]
         lines.extend([
             "",
-            "## Statutory Succession & Inheritance Details (PM-KISAN Clause 3(d))",
+            "## Statutory Succession & Inheritance Details (PM-KISAN Guidelines §§5.2–5.3.3(i))",
             f"- **Transfer Basis:** `{ssd['transfer_basis']}`",
             f"- **Actual Acquisition Date:** {ssd['actual_acquisition_date']}",
             f"- **Parent Demise Date:** {ssd['parent_demise_date']}",
@@ -861,9 +946,9 @@ def generate_execution_report(execution_output: Dict[str, Any]) -> str:
     doc.append("5. **Operational Availability Safeguard:** Eligibility verified in Section A does **NOT** equate to active application window availability. All determinations carry availability state `Availability unknown — confirmation required`.\n")
     doc.append("6. **Crop Insurance Decoupling (PMFBY/RWBCIS):** Static whitelist results from the raw engine are decoupled from governance presentation across all six scenarios. Unverified seasonal Insurance Unit (Gram Panchayat/Hobli level) notifications are strictly routed to Section B as `REQUIRES_VERIFICATION` with numerical scoring disabled.\n")
     doc.append("7. **Provisional Schemes Quarantine:** Corporation schemes (`SCH008_KA_COOP`, `SCH010_VALMIKI`) are strictly quarantined in Section B without clinical scoring.\n")
-    doc.append("8. **S066 Community Borewell Scheme Safeguard (Challenge 7):** The benchmark requires at least three beneficiaries, while the frozen engine's non-Ambedkar community route accepts two. S066 features 4 SC farmers pooling 14.0 contiguous dryland acres (qualifying parcel 3.5 ac), evaluating raw ELIGIBLE (`GK_AMBEDKAR_COMMUNITY_ROUTE_VALID`). Governance strictly decouples determination to Section B as `REQUIRES_VERIFICATION` with scoring disabled until applicable corporation rules and beneficiary thresholds are verified; parent `SCH010` is suppressed.\n")
-    doc.append("9. **S069 Statutory Inheritance Succession (PM-KISAN Clause 3(d)):** Ownership acquired post-01.02.2019 is strictly verified under `transfer_basis = INHERITANCE_DUE_TO_DEATH` resulting from parent demise (April 2022), supported by registered death certificate, legal heir order, and Bhoomi mutation extract. Distinct from ineligible post-cutoff partition, sale, and gift deeds; qualifies for PM-KISAN in Section A.\n")
-    doc.append("10. **S070 Unknown Land Title & Area Limit (Challenge 8 & Challenge 4):** Land title cut-off date is UNKNOWN (`land_ownership_cutoff_pre_feb_2019 = None`), strictly preserving three-valued logic in Section B (`REQUIRES_VERIFICATION`) for PM-KISAN and PMKSY-PDMC without scoring. Requested subsidized area (4.80 ha) is verified against the 12.5-acre parcel's physical capacity (5.059 ha) and the 5.00 ha PMKSY ceiling, with explicit first-time applicant status satisfying the 7-year lock-in restriction.\n")
+    doc.append("8. **S066 Community Borewell Scheme Safeguard (Challenge 7):** S066 features 4 SC farmers pooling 14.0 contiguous dryland acres (qualifying parcel 3.5 ac), evaluating raw ELIGIBLE (`GK_AMBEDKAR_COMMUNITY_ROUTE_VALID`) because Ambedkar Corporation rules require >= 3 beneficiaries on 8.0-15.0 acres pooled dryland. Governance conservatively decouples determination to Section B as `REQUIRES_VERIFICATION` with scoring disabled pending confirmation of current administrative circular instructions, registered boundary alignment, and groundwater clearances; parent `SCH010` is suppressed.\n")
+    doc.append("9. **S069 Statutory Inheritance Succession (PM-KISAN Guidelines §§5.2–5.3.3(i)):** Ownership acquired post-01.02.2019 is strictly verified under `transfer_basis = INHERITANCE_DUE_TO_DEATH` resulting from parent demise (April 2022), supported by registered death certificate, legal heir order, and Bhoomi mutation extract. Gated explicitly by governance check; distinct from post-cutoff sale, partition, and gift transfers under §5.3.3(ii); qualifies for PM-KISAN in Section A.\n")
+    doc.append("10. **S070 Unknown Land Title & Area Limit (Challenge 8 & Challenge 4):** Land title cut-off date is UNKNOWN (`land_ownership_cutoff_pre_feb_2019 = None`), strictly preserving three-valued logic in Section B (`REQUIRES_VERIFICATION`) for PM-KISAN and PMKSY-PDMC without scoring. Requested subsidized area (4.80 ha) is verified against the 12.5-acre parcel's physical capacity (5.059 ha) and the 5.00 ha PMKSY ceiling (§7.9 per beneficiary cap), with explicit first-time applicant status satisfying the 7-year lock-in restriction. Raw engine operational holding check (> 12.35 ac) vs governance subsidized parcel override explicitly recorded.\n")
     doc.append("11. **S068 Pure Tenancy Routing (Challenge 5):** Pure tenant without recorded title is statutorily excluded from PM-KISAN (`PMKISAN_PURE_TENANT_EXCLUSION`); KCC commercial credit (`SCH008_CENTRAL`) routes to Section B as `REQUIRES_VERIFICATION` without scoring pending oral lease / tenant crop loan documentation verification.\n\n")
     
     doc.append("## 2. Zone Z10 Scenario Input Overview (S065–S070)\n\n")

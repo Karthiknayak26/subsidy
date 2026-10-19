@@ -56,7 +56,7 @@
   },
   "attribute_provenance": {
     "empirical_baseline": "NABARD & Lead District Bank (Canara Bank Udupi): Coastal wetland paddy cultivation in Kundapura/Brahmavara taluks with significant tenant farming relying on PACS/RRB crop loans without formal RTC title deeds.",
-    "farmer_query_inspiration": "KCC Udupi tenant credit queries: Pure tenant farmers cultivating coastal khazan/wetland paddy inquiring about KCC crop loans and tenant cultivation certificates.",
+    "farmer_query_inspiration": "Synthetic benchmark query formulation inspired by Kisan Call Centre (KCC) Karnataka advisory themes and Lead District Bank tenant credit queries: Pure tenant farmers cultivating coastal khazan/wetland paddy inquiring about KCC crop loans and tenant cultivation certificates.",
     "statutory_policy_test": "Benchmark Challenge 5 (Pure Tenancy & Agricultural Credit Routing): Pure tenant strictly disqualified from PM-KISAN under PMKISAN_PURE_TENANT_EXCLUSION; KCC commercial credit qualifies under raw engine (KCC_CENTRAL_COMMERCIAL_ELIGIBLE) pursuant to RBI/NABARD guidelines for oral lessees, but governance routes SCH008_CENTRAL to Section B as REQUIRES_VERIFICATION without numerical scoring pending oral tenancy documentation / bank tenant crop-loan verification; PMFBY routed to Section B pending seasonal IU notification and tenant declaration verification; SMAM and Soil Health Card qualify in Section A."
   },
   "intended_test_purpose": "Challenge 5 pure tenant coastal wetland paddy; strictly excluded from PM-KISAN; KCC Central raw ELIGIBLE but routed to Section B pending tenant loan documentation; PMFBY routed to Section B; SMAM and SHC in Section A.",

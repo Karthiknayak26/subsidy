@@ -17,9 +17,9 @@ This report documents the rule-validation and governance audit of the tenth and 
 5. **Operational Availability Safeguard:** Eligibility verified in Section A does **NOT** equate to active application window availability. All determinations carry availability state `Availability unknown — confirmation required`.
 6. **Crop Insurance Decoupling (PMFBY/RWBCIS):** Static whitelist results from the raw engine are decoupled from governance presentation across all six scenarios. Unverified seasonal Insurance Unit (Gram Panchayat/Hobli level) notifications are strictly routed to Section B as `REQUIRES_VERIFICATION` with numerical scoring disabled.
 7. **Provisional Schemes Quarantine:** Corporation schemes (`SCH008_KA_COOP`, `SCH010_VALMIKI`) are strictly quarantined in Section B without clinical scoring.
-8. **S066 Community Borewell Scheme Safeguard (Challenge 7):** The benchmark requires at least three beneficiaries, while the frozen engine's non-Ambedkar community route accepts two. S066 features 4 SC farmers pooling 14.0 contiguous dryland acres (qualifying parcel 3.5 ac), evaluating raw ELIGIBLE (`GK_AMBEDKAR_COMMUNITY_ROUTE_VALID`). Governance strictly decouples determination to Section B as `REQUIRES_VERIFICATION` with scoring disabled until applicable corporation rules and beneficiary thresholds are verified; parent `SCH010` is suppressed.
-9. **S069 Statutory Inheritance Succession (PM-KISAN Clause 3(d)):** Ownership acquired post-01.02.2019 is strictly verified under `transfer_basis = INHERITANCE_DUE_TO_DEATH` resulting from parent demise (April 2022), supported by registered death certificate, legal heir order, and Bhoomi mutation extract. Distinct from ineligible post-cutoff partition, sale, and gift deeds; qualifies for PM-KISAN in Section A.
-10. **S070 Unknown Land Title & Area Limit (Challenge 8 & Challenge 4):** Land title cut-off date is UNKNOWN (`land_ownership_cutoff_pre_feb_2019 = None`), strictly preserving three-valued logic in Section B (`REQUIRES_VERIFICATION`) for PM-KISAN and PMKSY-PDMC without scoring. Requested subsidized area (4.80 ha) is verified against the 12.5-acre parcel's physical capacity (5.059 ha) and the 5.00 ha PMKSY ceiling, with explicit first-time applicant status satisfying the 7-year lock-in restriction.
+8. **S066 Community Borewell Scheme Safeguard (Challenge 7):** S066 features 4 SC farmers pooling 14.0 contiguous dryland acres (qualifying parcel 3.5 ac), evaluating raw ELIGIBLE (`GK_AMBEDKAR_COMMUNITY_ROUTE_VALID`) because Ambedkar Corporation rules require >= 3 beneficiaries on 8.0-15.0 acres pooled dryland. Governance conservatively decouples determination to Section B as `REQUIRES_VERIFICATION` with scoring disabled pending confirmation of current administrative circular instructions, registered boundary alignment, and groundwater clearances; parent `SCH010` is suppressed.
+9. **S069 Statutory Inheritance Succession (PM-KISAN Guidelines §§5.2–5.3.3(i)):** Ownership acquired post-01.02.2019 is strictly verified under `transfer_basis = INHERITANCE_DUE_TO_DEATH` resulting from parent demise (April 2022), supported by registered death certificate, legal heir order, and Bhoomi mutation extract. Gated explicitly by governance check; distinct from post-cutoff sale, partition, and gift transfers under §5.3.3(ii); qualifies for PM-KISAN in Section A.
+10. **S070 Unknown Land Title & Area Limit (Challenge 8 & Challenge 4):** Land title cut-off date is UNKNOWN (`land_ownership_cutoff_pre_feb_2019 = None`), strictly preserving three-valued logic in Section B (`REQUIRES_VERIFICATION`) for PM-KISAN and PMKSY-PDMC without scoring. Requested subsidized area (4.80 ha) is verified against the 12.5-acre parcel's physical capacity (5.059 ha) and the 5.00 ha PMKSY ceiling (§7.9 per beneficiary cap), with explicit first-time applicant status satisfying the 7-year lock-in restriction. Raw engine operational holding check (> 12.35 ac) vs governance subsidized parcel override explicitly recorded.
 11. **S068 Pure Tenancy Routing (Challenge 5):** Pure tenant without recorded title is statutorily excluded from PM-KISAN (`PMKISAN_PURE_TENANT_EXCLUSION`); KCC commercial credit (`SCH008_CENTRAL`) routes to Section B as `REQUIRES_VERIFICATION` without scoring pending oral lease / tenant crop loan documentation verification.
 
 ## 2. Zone Z10 Scenario Input Overview (S065–S070)
@@ -80,7 +80,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 
 ### 4.6 Scenario S066: Udupi — Arecanut (5.5 ac, SC)
 
-- **Context & Need:** Challenge 7 community borewell pooling: Individual holding 5.5 ac exceeds 5.0 ac individual Ambedkar ceiling; community pool route valid with 4 SC farmers, 14.0 ac pooled contiguous dryland, qualifying parcel 3.5 ac; governance safeguard keeps determination in Section B with scoring disabled pending corporation circular and contiguity verification; parent SCH010 suppressed.
+- **Context & Need:** Challenge 7 community borewell pooling: Individual holding 5.5 ac exceeds 5.0 ac individual Ambedkar ceiling; community pool route valid with 4 SC farmers, 14.0 ac pooled contiguous dryland, qualifying parcel 3.5 ac (raw engine ELIGIBLE); governance safeguard conservatively keeps determination in Section B with scoring disabled pending corporation circular instructions, boundary consent, and groundwater clearances; parent SCH010 suppressed.
 - **Physical Area Consistency:** `PASS: 3.5 ac qualifying parcel within 5.5 ac operational holding; 14.0 ac pooled contiguous block`
 - **Water Infrastructure:** None (Dryland kushki) (`NONE`)
 - **Statutory Flags:** Tenure=`RTC registered pre-February 2019 in Karkala taluk; registered joint consent deed with 3 contiguous SC neighbors`, Income Tax=`False`, Govt Employee=`NONE`
@@ -97,7 +97,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 | `SCH008_CENTRAL` | Kisan Credit Card - Modified Interest Subvention Scheme (Central KCC-MISS via Commercial Banks / RRBs) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH008_KA_COOP` | Karnataka Zero-Interest Agricultural Crop Loan Scheme (Baddi Rahitha Bele Sala via PACS / DCCBs) | `REQUIRES_VERIFICATION` | `REQUIRES_VERIFICATION` | Section B (Provisional Schemes / Qualitative Review Only) | No | Provisional scheme requiring administrative or Government Order verification.... |
 | `SCH009` | Soil Health Card Scheme | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
-| `SCH010_AMBEDKAR` | Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Community Corporation Rules Required) | No | Benchmark Challenge 7 & Special Governance Condition (Community Beneficiary Disc... |
+| `SCH010_AMBEDKAR` | Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Community Corporation Rules Required) | No | Raw engine evaluated ELIGIBLE (GK_AMBEDKAR_COMMUNITY_ROUTE_VALID) because Dr. B.... |
 | `SCH010_VALMIKI` | Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST) | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
 | `SCH010_DEVARAJ_URS` | Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC) | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
 | `SCH010_KMDC` | Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC) | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
@@ -153,7 +153,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 
 ### 4.9 Scenario S069: Dakshina Kannada — Coconut (13.0 ac, Minority)
 
-- **Context & Need:** MIDH coastal nursery / shade-net; Large holding (13.0 ac); Minority; post-2019 statutory inheritance upon demise of parent (transfer_basis=INHERITANCE_DUE_TO_DEATH, legal heir cert & mutation verified; distinct from ineligible partition deed); PM-KISAN, MIDH, PM-KUSUM B, and SMAM qualify in Section A.
+- **Context & Need:** MIDH coastal nursery / shade-net; Large holding (13.0 ac); Minority; post-2019 statutory inheritance upon demise of parent under PM-KISAN §§5.2–5.3.3(i) (transfer_basis=INHERITANCE_DUE_TO_DEATH, legal heir cert & mutation verified; distinct from ineligible partition, sale, and gift deeds under §5.3.3(ii)); PM-KISAN, MIDH, PM-KUSUM B, and SMAM qualify in Section A.
 - **Physical Area Consistency:** `PASS: 13.0 ac holding matches parcel`
 - **Water Infrastructure:** Open Well / Rainfed (`NONE`)
 - **Statutory Flags:** Tenure=`Title acquired via registered inheritance succession following demise of mother in April 2022; Death Cert No. DC/DK/2022/6104, Legal Heir Certificate LHC/DK/2022/339, and Bhoomi mutation Form 16 MR No. 2022-T771 (22.06.2022) verified`, Income Tax=`False`, Govt Employee=`NONE`
@@ -178,7 +178,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 
 ### 4.0 Scenario S070: Udupi — Arecanut (12.5 ac, SC)
 
-- **Context & Need:** Challenge 8 and Challenge 4: Large holding (12.5 ac); PMKSY-PDMC requested 4.80 ha <= 12.5 ac (5.059 ha) and <= 5.00 ha ceiling; title status UNKNOWN -> preserve three-valued logic in Section B for PMKSY-PDMC and PM-KISAN without numerical scoring; SMAM and KCC Central qualify in Section A.
+- **Context & Need:** Challenge 8 and Challenge 4: Large holding (12.5 ac); PMKSY-PDMC requested 4.80 ha <= 12.5 ac (5.059 ha) and <= 5.00 ha ceiling (§7.9 per beneficiary cap); raw INELIGIBLE preserved while governance evaluates parcel request; title status UNKNOWN -> preserve three-valued logic in Section B for PMKSY-PDMC and PM-KISAN without numerical scoring; SMAM and KCC Central qualify in Section A.
 - **Physical Area Consistency:** `PASS: requested 4.80 ha <= 12.5 ac (5.059 ha) qualifying parcel; satisfies PMKSY-PDMC 5.00 ha statutory ceiling`
 - **Water Infrastructure:** Borewell (Grid-connected) (`GRID_CONNECTED_IP_SET`)
 - **Statutory Flags:** Tenure=`Ancestral land title partition deed pending formal mutation on Bhoomi portal in Udupi taluk; record date unverified (UNKNOWN)`, Income Tax=`False`, Govt Employee=`NONE`
@@ -187,7 +187,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 |:---|:---|:---:|:---:|:---|:---:|:---|
 | `SCH001` | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `REQUIRES_VERIFICATION` | `REQUIRES_VERIFICATION` | Section B (Unresolved Statutory Evidence / Land Title Required) | No | Raw engine returned REQUIRES_VERIFICATION due to explicit UNKNOWN tenure cut-off... |
 | `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned ELIGIBLE based on static crop whitelist, but land title cut-... |
-| `SCH003` | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `INELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Statutory Evidence / Land Title Required) | No | Raw engine returned INELIGIBLE due to static landholding threshold (> 12.35 ac /... |
+| `SCH003` | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `INELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Statutory Evidence / Land Title Required) | No | Raw Engine vs Governance Discrepancy & Area Validation: Raw engine returned INEL... |
 | `SCH004` | Sub-Mission on Agricultural Mechanization (SMAM) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH005` | Krishi Bhagya Yojana | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
 | `SCH006` | PM-KUSUM Component B (Standalone Solar Agriculture Pumps) | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
@@ -210,9 +210,9 @@ The following verification dependencies remain active and are enforced across Zo
 - Bantwal Taluk Agriculture Office Soil Health Card sample collection and mobile laboratory schedule
 
 ### S066 (Udupi — Arecanut)
-- Confirmation of Dr. B.R. Ambedkar Development Corporation FY 2026-27 community borewell administrative guidelines and beneficiary threshold (benchmark specification >= 3 vs encoded rule >= 2)
-- Field verification of registered joint consent deed and contiguous boundary alignment for the 14.0-acre pooled block in Karkala taluk
-- Mines and Geology Department groundwater safety and hydrogeological feasibility clearance for Karkala taluk
+- Verification of current Dr. B.R. Ambedkar Development Corporation FY 2026-27 administrative circular instructions and operational community borewell guidelines for Karkala taluk
+- Field verification of registered joint consent deed, mutual water-sharing agreement, and contiguous boundary alignment for the 14.0-acre pooled block in Karkala taluk
+- Mines and Geology Department hydrogeological feasibility and groundwater safety clearance for Karkala taluk
 - Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Arecanut in Karkala taluk, Udupi district
 
 ### S067 (Dakshina Kannada — Cashew)
@@ -231,7 +231,7 @@ The following verification dependencies remain active and are enforced across Zo
 
 ### S070 (Udupi — Arecanut)
 - Revenue Department certification of land ownership record date / RTC mutation order for Udupi taluk
-- Verification of physical parcel boundaries and micro-irrigation layout for 4.80 ha within 12.5 ac parcel
+- Verification of physical parcel boundaries, possession certificate, and micro-irrigation layout for 4.80 ha within 12.5 ac parcel
 - Verification of GoK Kharif 2026 PMFBY Insurance Unit notification for Arecanut in Udupi taluk, Udupi district
 - Udupi District Agriculture Office PMKSY-PDMC FY 2026-27 micro-irrigation target allocation and vendor empanelment
 
