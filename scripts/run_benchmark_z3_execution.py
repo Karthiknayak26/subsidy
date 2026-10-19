@@ -31,11 +31,12 @@ from src.eligibility.models import (
 )
 from src.eligibility.engine import EligibilityEngine
 from src.eligibility.availability import AvailabilityFilter
+from src.eligibility.governance import apply_governance_safeguard, PROVISIONAL_SCHEMES
 
 ZONE_Z3_PROFILES: List[Dict[str, Any]] = [
     {
         "scenario_id": "S023",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z3",
         "agro_climatic_zone": "Northern Dry Zone",
         "district": "Vijayapura",
@@ -100,7 +101,7 @@ ZONE_Z3_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S024",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z3",
         "agro_climatic_zone": "Northern Dry Zone",
         "district": "Bagalkot",
@@ -164,7 +165,7 @@ ZONE_Z3_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S025",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z3",
         "agro_climatic_zone": "Northern Dry Zone",
         "district": "Gadag",
@@ -228,7 +229,7 @@ ZONE_Z3_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S026",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z3",
         "agro_climatic_zone": "Northern Dry Zone",
         "district": "Koppal",
@@ -292,7 +293,7 @@ ZONE_Z3_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S027",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z3",
         "agro_climatic_zone": "Northern Dry Zone",
         "district": "Vijayapura",
@@ -356,7 +357,7 @@ ZONE_Z3_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S028",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z3",
         "agro_climatic_zone": "Northern Dry Zone",
         "district": "Bagalkot",
@@ -484,92 +485,8 @@ def run_execution() -> Dict[str, Any]:
         actionable_serializable = []
         for d in actionable_determinations:
             is_prov = d.scheme_id in PROVISIONAL_SCHEMES
-            
-            missing_verifications = list(d.missing_verifications)
-            disqualifying_factors = list(d.disqualifying_factors)
-            
-            # Case 1: PMFBY on Pomegranate in S023 and S027 (Priority 1)
-            if sid in ["S023", "S027"] and d.scheme_id == "SCH002":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Unresolved Policy Review / Seasonal Notification Required)"
-                allow_scoring = False
-                missing_verifications = ["Verification of Kharif/Rabi 2026 GoK PMFBY/RWBCIS insurance unit notification for Pomegranate in Vijayapura district/taluk"]
-                gov_note = "Raw engine returned INELIGIBLE due to static crop list omission, but pomegranate is insurable under PMFBY/RWBCIS in Karnataka. Governance presentation routes to REQUIRES_VERIFICATION pending official seasonal notification."
-
-            # Case 2: Pure Tenant Central KCC in S026 (Priority 3)
-            elif sid == "S026" and d.scheme_id == "SCH008_CENTRAL":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Unverified Documentation / Oral Lease Review)"
-                allow_scoring = False
-                missing_verifications = ["Tenant farmer crop loan documentation (Bank oral lease declaration / JLG membership verification)"]
-                gov_note = "Raw engine returned ELIGIBLE based on operational landholding, but farmer is a pure tenant on an oral lease without registered title. Governance presentation routes to REQUIRES_VERIFICATION pending bank oral-lease declaration or JLG membership verification."
-
-            # Case 3: Provisional Devaraj Urs community route in S028 (Priority 2 & Safeguard)
-            elif sid == "S028" and d.scheme_id == "SCH010_DEVARAJ_URS":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Provisional Schemes / Qualitative Review Only)"
-                allow_scoring = False
-                missing_verifications = [
-                    "Verification of D. Devaraj Urs Corporation FY 2026-27 Government Order & operational circulars",
-                    "Joint deed registration and revenue survey verification for 9.0 ac pooled parcel",
-                    "Statutory confirmation of minimum community beneficiary threshold (2 vs 3 beneficiaries)"
-                ]
-                gov_note = "Raw engine returned ELIGIBLE based on encoded community route rules (9.0 ac, 3 beneficiaries), but scheme record is PROVISIONAL in registry. Governance safeguard places determination in Section B as REQUIRES_VERIFICATION without numerical scoring."
-
-            # Case 4: Bagalkot location normalization in S028 Krishi Bhagya (Priority 4)
-            elif sid == "S028" and d.scheme_id == "SCH005":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Unresolved Location-Policy Review / Taluk Verification Required)"
-                allow_scoring = False
-                missing_verifications = [
-                    "District/taluk normalization verification ('Bagalkote' engine constant vs 'Bagalkot' district)",
-                    "Verification of notified dryland taluk status for Bilagi taluk under GoK Krishi Bhagya guidelines"
-                ]
-                gov_note = "Raw engine returned INELIGIBLE due to string-matching mismatch ('Bagalkote' vs 'Bagalkot'). Bagalkot is officially a notified Bayaluseeme dryland district under GoK Krishi Bhagya guidelines. Governance presentation routes to REQUIRES_VERIFICATION pending taluk-level notification check."
-
-            # Case 5: Other Provisional schemes (e.g. SCH008_KA_COOP, SCH010_VALMIKI)
-            elif is_prov and d.status == EligibilityStatus.ELIGIBLE:
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Provisional Schemes / Qualitative Review Only)"
-                allow_scoring = False
-                missing_verifications = [f"Administrative circular verification for provisional scheme {d.scheme_id}"]
-                gov_note = "Raw engine returned ELIGIBLE based on encoded rules, but scheme record is PROVISIONAL in registry. Governance safeguard places determination in Section B as REQUIRES_VERIFICATION without numerical scoring."
-            elif is_prov and d.status == EligibilityStatus.REQUIRES_VERIFICATION:
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Provisional Schemes / Qualitative Review Only)"
-                allow_scoring = False
-                if not missing_verifications:
-                    missing_verifications = [f"Administrative circular and Government Order verification for provisional scheme {d.scheme_id}"]
-                gov_note = "Provisional scheme requiring administrative or Government Order verification."
-            elif d.status == EligibilityStatus.ELIGIBLE:
-                gov_status = "ELIGIBLE"
-                presentation_section = "Section A (Confirmed Actionable Candidates)"
-                allow_scoring = True
-                gov_note = "Confirmed verified scheme eligible for clinical 0-3 relevance scoring."
-            else:
-                gov_status = d.status.value
-                presentation_section = "Disqualified / Non-Actionable Candidates"
-                allow_scoring = False
-                gov_note = "Statutorily disqualified under verified criteria."
-
-            actionable_serializable.append({
-                "scheme_id": d.scheme_id,
-                "scheme_name": d.scheme_name,
-                "record_type": d.record_type,
-                "parent_scheme_id": d.parent_scheme_id,
-                "status": d.status.value,
-                "raw_engine_status": d.status.value,
-                "governance_status": gov_status,
-                "presentation_section": presentation_section,
-                "allow_numerical_scoring": allow_scoring,
-                "governance_note": gov_note,
-                "reason": d.reason,
-                "disqualifying_factors": disqualifying_factors,
-                "missing_verifications": missing_verifications,
-                "rule_keys_fired": d.rule_keys_fired,
-                "availability_state": d.availability_state.value,
-                "is_provisional": is_prov
-            })
+            item_dict = apply_governance_safeguard(d, sid, profile, is_prov)
+            actionable_serializable.append(item_dict)
             
         execution_results.append({
             "scenario": profile,
@@ -579,7 +496,7 @@ def run_execution() -> Dict[str, Any]:
         
     return {
         "execution_date": "2026-10-15",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone": "Z3",
         "scenarios_evaluated": len(execution_results),
         "results": execution_results
@@ -669,7 +586,7 @@ def generate_execution_report_markdown(exec_data: Dict[str, Any]) -> str:
     doc = []
     doc.append("# Deliverable: Zone Z3 Execution Report (Scenarios S023–S028)\n\n")
     doc.append("**Project:** ML-Based Personalized Government Scheme and Subsidy Recommendation System for Farmers (Karnataka Context)  \n")
-    doc.append("**Milestone:** Benchmark v1.0.3 — Zone Z3 Scenario Generation & Rule-Validation Audit  \n")
+    doc.append("**Milestone:** Benchmark v1.0.4 — Zone Z3 Scenario Generation & Rule-Validation Audit  \n")
     doc.append("**Zone:** Zone Z3 — Northern Dry Zone (Vijayapura, Bagalkot, Gadag, Koppal)  \n")
     doc.append("**Execution Date:** October 2026  \n")
     doc.append("**Engine Version:** Deterministic Eligibility Engine v1.2 (Frozen Commit `7724fa7`)  \n")
@@ -681,7 +598,7 @@ def generate_execution_report_markdown(exec_data: Dict[str, Any]) -> str:
     doc.append("This report documents the rule-validation and governance audit of the third batch of six benchmark scenarios (S023–S028) representing the **Northern Dry Zone (Zone Z3)**. In strict adherence to project invariants:\n\n")
     doc.append("1. **Zero Modifications to Frozen Engine:** The deterministic eligibility engine (`src/eligibility/engine.py`) and scheme master (`scheme_database/processed/scheme_master.json`) were executed byte-for-byte without altering any rule.\n")
     doc.append("2. **Zero Synthetic Annotations:** No machine learning models were trained, no synthetic ratings were fabricated, and no expert scores were predicted.\n")
-    doc.append("3. **100% Assignment Table Fidelity:** Every scenario preserves its assigned district, crop, land size, land type, social category, tenure status, and primary policy challenge from `benchmark-design-v1.0.3`.\n")
+    doc.append("3. **100% Assignment Table Fidelity:** Every scenario preserves its assigned district, crop, land size, land type, social category, tenure status, and primary policy challenge from `benchmark-design-v1.0.4`.\n")
     doc.append("4. **Cross-Field Physical Area Consistency (S023):** Scenario S023 requested 1.41 ha micro-irrigation on a 3.5-acre parcel. The physical capacity check ($1.41 \\text{ ha} \\le 3.5 \\times 0.404686 = 1.4164 \\text{ ha}$) passes cleanly.\n")
     doc.append("5. **Pure Tenant Governance Decoupling (Challenge 5, S026):** S026 evaluates a pure tenant without recorded title, triggering raw engine disqualification under PM-KISAN (`PMKISAN_PURE_TENANT_EXCLUSION`). For Central KCC-MISS, while the raw engine returned ELIGIBLE, the governance presentation places it in **Section B as `REQUIRES_VERIFICATION`** because bank oral-lease tenant documentation or JLG membership is not on file.\n")
     doc.append("6. **PMFBY Pomegranate Crop-Notification Policy Audit (S023 & S027):** For commercial pomegranate, the raw engine returned INELIGIBLE (`PMFBY_NON_NOTIFIED_CROP`) due to omission from the engine's static whitelist. The governance presentation classifies PMFBY as **Section B `REQUIRES_VERIFICATION`** rather than a confirmed legal exclusion, preserving the raw result while logging seasonal notification verification.\n")

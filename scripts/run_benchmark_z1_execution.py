@@ -30,11 +30,12 @@ from src.eligibility.models import (
 )
 from src.eligibility.engine import EligibilityEngine
 from src.eligibility.availability import AvailabilityFilter
+from src.eligibility.governance import apply_governance_safeguard, PROVISIONAL_SCHEMES
 
 ZONE_Z1_PROFILES: List[Dict[str, Any]] = [
     {
         "scenario_id": "S011",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z1",
         "agro_climatic_zone": "North Eastern Transition Zone",
         "district": "Bidar",
@@ -99,7 +100,7 @@ ZONE_Z1_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S012",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z1",
         "agro_climatic_zone": "North Eastern Transition Zone",
         "district": "Kalaburagi",
@@ -163,7 +164,7 @@ ZONE_Z1_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S013",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z1",
         "agro_climatic_zone": "North Eastern Transition Zone",
         "district": "Bidar",
@@ -227,7 +228,7 @@ ZONE_Z1_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S014",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z1",
         "agro_climatic_zone": "North Eastern Transition Zone",
         "district": "Kalaburagi",
@@ -292,7 +293,7 @@ ZONE_Z1_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S015",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z1",
         "agro_climatic_zone": "North Eastern Transition Zone",
         "district": "Bidar",
@@ -356,7 +357,7 @@ ZONE_Z1_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S016",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z1",
         "agro_climatic_zone": "North Eastern Transition Zone",
         "district": "Kalaburagi",
@@ -468,6 +469,8 @@ def run_execution() -> Dict[str, Any]:
                 "record_type": d.record_type,
                 "parent_scheme_id": d.parent_scheme_id,
                 "status": d.status.value,
+                "raw_engine_status": d.status.value,
+                "is_provisional": d.scheme_id in PROVISIONAL_SCHEMES,
                 "reason": d.reason,
                 "disqualifying_factors": d.disqualifying_factors,
                 "missing_verifications": d.missing_verifications,
@@ -478,18 +481,9 @@ def run_execution() -> Dict[str, Any]:
             
         actionable_serializable = []
         for d in actionable_determinations:
-            actionable_serializable.append({
-                "scheme_id": d.scheme_id,
-                "scheme_name": d.scheme_name,
-                "record_type": d.record_type,
-                "parent_scheme_id": d.parent_scheme_id,
-                "status": d.status.value,
-                "reason": d.reason,
-                "disqualifying_factors": d.disqualifying_factors,
-                "missing_verifications": d.missing_verifications,
-                "rule_keys_fired": d.rule_keys_fired,
-                "availability_state": d.availability_state.value
-            })
+            is_prov = d.scheme_id in PROVISIONAL_SCHEMES
+            item_dict = apply_governance_safeguard(d, sid, profile, is_prov)
+            actionable_serializable.append(item_dict)
             
         execution_results.append({
             "scenario": profile,
@@ -499,7 +493,7 @@ def run_execution() -> Dict[str, Any]:
         
     return {
         "execution_date": "2026-10-15",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone": "Z1",
         "scenarios_evaluated": len(execution_results),
         "results": execution_results
@@ -589,7 +583,7 @@ def generate_execution_report_markdown(exec_data: Dict[str, Any]) -> str:
     doc = []
     doc.append("# Deliverable 3: Zone Z1 Execution Report (Scenarios S011–S016)\n\n")
     doc.append("**Project:** ML-Based Personalized Government Scheme and Subsidy Recommendation System for Farmers (Karnataka Context)  \n")
-    doc.append("**Milestone:** Benchmark v1.0.3 — Zone Z1 Scenario Generation & Rule-Validation Audit  \n")
+    doc.append("**Milestone:** Benchmark v1.0.4 — Zone Z1 Scenario Generation & Rule-Validation Audit  \n")
     doc.append("**Zone:** Zone Z1 — North Eastern Transition Zone (Bidar & Kalaburagi)  \n")
     doc.append("**Execution Date:** October 2026  \n")
     doc.append("**Engine Version:** Deterministic Eligibility Engine v1.2 (Frozen Commit `7724fa7`)  \n")
@@ -601,7 +595,7 @@ def generate_execution_report_markdown(exec_data: Dict[str, Any]) -> str:
     doc.append("This report documents the rigorous rule-validation of the first batch of six benchmark scenarios (S011–S016) representing the **North Eastern Transition Zone (Zone Z1)**. In strict adherence to the project invariants:\n\n")
     doc.append("1. **Zero Modifications to Frozen Engine:** The eligibility engine (`src/eligibility/engine.py`) and scheme master (`scheme_database/processed/scheme_master.json`) were executed byte-for-byte without altering any rule to force passing.\n")
     doc.append("2. **Zero Synthetic Annotations:** No machine learning models were trained, no synthetic ratings were fabricated, and no expert scores were predicted. These scenarios are validated deterministically before independent expert annotation.\n")
-    doc.append("3. **100% Assignment Table Fidelity:** Every scenario preserves its assigned district, crop, land size, land type, social category, tenure status, and primary policy challenge from `benchmark-design-v1.0.3`.\n")
+    doc.append("3. **100% Assignment Table Fidelity:** Every scenario preserves its assigned district, crop, land size, land type, social category, tenure status, and primary policy challenge from `benchmark-design-v1.0.4`.\n")
     doc.append("4. **Parent Deduplication Enforced:** Abstract parent records (`SCH008`, `SCH010`) are automatically suppressed from actionable recommendations when their concrete child implementations are actionable.\n")
     doc.append("5. **Explicit Separation of Eligibility vs Availability:** Statutory qualifications are evaluated via Three-Valued Logic (`ELIGIBLE`, `INELIGIBLE`, `REQUIRES_VERIFICATION`), while operational availability is maintained in four separate states.\n\n")
     doc.append("---\n\n")

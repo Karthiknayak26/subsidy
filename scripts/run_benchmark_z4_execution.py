@@ -31,11 +31,12 @@ from src.eligibility.models import (
 )
 from src.eligibility.engine import EligibilityEngine
 from src.eligibility.availability import AvailabilityFilter
+from src.eligibility.governance import apply_governance_safeguard, PROVISIONAL_SCHEMES
 
 ZONE_Z4_PROFILES: List[Dict[str, Any]] = [
     {
         "scenario_id": "S029",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z4",
         "agro_climatic_zone": "Central Dry Zone",
         "district": "Chitradurga",
@@ -101,7 +102,7 @@ ZONE_Z4_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S030",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z4",
         "agro_climatic_zone": "Central Dry Zone",
         "district": "Davanagere",
@@ -165,7 +166,7 @@ ZONE_Z4_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S031",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z4",
         "agro_climatic_zone": "Central Dry Zone",
         "district": "Tumakuru",
@@ -231,7 +232,7 @@ ZONE_Z4_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S032",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z4",
         "agro_climatic_zone": "Central Dry Zone",
         "district": "Chitradurga",
@@ -295,7 +296,7 @@ ZONE_Z4_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S033",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z4",
         "agro_climatic_zone": "Central Dry Zone",
         "district": "Davanagere",
@@ -359,7 +360,7 @@ ZONE_Z4_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S034",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z4",
         "agro_climatic_zone": "Central Dry Zone",
         "district": "Tumakuru",
@@ -487,76 +488,8 @@ def run_execution() -> Dict[str, Any]:
         actionable_serializable = []
         for d in actionable_determinations:
             is_prov = d.scheme_id in PROVISIONAL_SCHEMES
-            
-            missing_verifications = list(d.missing_verifications)
-            disqualifying_factors = list(d.disqualifying_factors)
-            
-            # Case 1: Ambedkar Corporation in S029 (Priority 1: Missing Perennial Water Source Adjacency & Unresolved Income Ceiling)
-            if sid == "S029" and d.scheme_id == "SCH010_AMBEDKAR":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Unresolved Field Evidence / Administrative Order Verification Required)"
-                allow_scoring = False
-                missing_verifications = [
-                    "Field verification of land parcel adjacency to a qualifying perennial water source (river/stream/tank) as required under Dr. B.R. Ambedkar Corporation individual irrigation guidelines",
-                    "Administrative verification of applicable Chitradurga district annual family income ceiling (₹1.5 lakh rural vs ₹2.0 lakh state ceiling order)"
-                ]
-                gov_note = "Raw engine returned ELIGIBLE based on demographic land interval [1.5, 5.0] ac and encoded income ceiling, but parcel lacks recorded evidence of perennial water source adjacency, and the applicable Chitradurga district income order requires administrative confirmation. Governance presentation routes to REQUIRES_VERIFICATION in Section B without numerical scoring."
-
-            # Case 2: Provisional Valmiki ST borewell in S031 (Governance Safeguard)
-            elif sid == "S031" and d.scheme_id == "SCH010_VALMIKI":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Provisional Schemes / Qualitative Review Only)"
-                allow_scoring = False
-                missing_verifications = [
-                    "Administrative circular and Government Order verification for provisional scheme SCH010_VALMIKI",
-                    "Verification of Karnataka Maharshi Valmiki ST Development Corporation FY 2026-27 individual borewell sanction norms in Tumakuru district"
-                ]
-                gov_note = "Raw engine returned ELIGIBLE based on encoded rules, but scheme record is PROVISIONAL in registry. Governance safeguard places determination in Section B as REQUIRES_VERIFICATION without numerical scoring."
-
-            # Case 3: Other Provisional schemes (e.g. SCH008_KA_COOP, SCH010_DEVARAJ_URS, SCH010_KMDC)
-            elif is_prov and d.status == EligibilityStatus.ELIGIBLE:
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Provisional Schemes / Qualitative Review Only)"
-                allow_scoring = False
-                missing_verifications = [f"Administrative circular verification for provisional scheme {d.scheme_id}"]
-                gov_note = "Raw engine returned ELIGIBLE based on encoded rules, but scheme record is PROVISIONAL in registry. Governance safeguard places determination in Section B as REQUIRES_VERIFICATION without numerical scoring."
-            elif is_prov and d.status == EligibilityStatus.REQUIRES_VERIFICATION:
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Provisional Schemes / Qualitative Review Only)"
-                allow_scoring = False
-                if not missing_verifications:
-                    missing_verifications = [f"Administrative circular and Government Order verification for provisional scheme {d.scheme_id}"]
-                gov_note = "Provisional scheme requiring administrative or Government Order verification."
-            elif d.status == EligibilityStatus.ELIGIBLE:
-                gov_status = "ELIGIBLE"
-                presentation_section = "Section A (Confirmed Actionable Candidates)"
-                allow_scoring = True
-                gov_note = "Confirmed verified scheme eligible for clinical 0-3 relevance scoring."
-            else:
-                gov_status = d.status.value
-                presentation_section = "Disqualified / Non-Actionable Candidates"
-                allow_scoring = False
-                gov_note = "Statutorily disqualified under verified criteria."
-
-            actionable_serializable.append({
-                "scheme_id": d.scheme_id,
-                "scheme_name": d.scheme_name,
-                "record_type": d.record_type,
-                "parent_scheme_id": d.parent_scheme_id,
-                "status": d.status.value,
-                "raw_engine_status": d.status.value,
-                "governance_status": gov_status,
-                "presentation_section": presentation_section,
-                "allow_numerical_scoring": allow_scoring,
-                "governance_note": gov_note,
-                "reason": d.reason,
-                "disqualifying_factors": disqualifying_factors,
-                "missing_verifications": missing_verifications,
-                "rule_keys_fired": d.rule_keys_fired,
-                "availability_state": d.availability_state.value,
-                "is_provisional": is_prov
-            })
-            
+            item_dict = apply_governance_safeguard(d, sid, profile, is_prov)
+            actionable_serializable.append(item_dict)
         execution_results.append({
             "scenario": profile,
             "raw_determinations": raw_serializable,
@@ -565,7 +498,7 @@ def run_execution() -> Dict[str, Any]:
         
     return {
         "execution_date": "2026-10-16",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone": "Z4",
         "scenarios_evaluated": len(execution_results),
         "results": execution_results
@@ -655,7 +588,7 @@ def generate_execution_report_markdown(exec_data: Dict[str, Any]) -> str:
     doc = []
     doc.append("# Deliverable: Zone Z4 Execution Report (Scenarios S029–S034)\n\n")
     doc.append("**Project:** ML-Based Personalized Government Scheme and Subsidy Recommendation System for Farmers (Karnataka Context)  \n")
-    doc.append("**Milestone:** Benchmark v1.0.3 — Zone Z4 Scenario Generation & Rule-Validation Audit  \n")
+    doc.append("**Milestone:** Benchmark v1.0.4 — Zone Z4 Scenario Generation & Rule-Validation Audit  \n")
     doc.append("**Zone:** Zone Z4 — Central Dry Zone (Chitradurga, Davanagere, Tumakuru)  \n")
     doc.append("**Execution Date:** October 2026  \n")
     doc.append("**Engine Version:** Deterministic Eligibility Engine v1.2 (Frozen Commit `7724fa7`)  \n")
@@ -667,7 +600,7 @@ def generate_execution_report_markdown(exec_data: Dict[str, Any]) -> str:
     doc.append("This report documents the rule-validation and governance audit of the fourth batch of six benchmark scenarios (S029–S034) representing the **Central Dry Zone (Zone Z4)**. In strict adherence to project invariants:\n\n")
     doc.append("1. **Zero Modifications to Frozen Engine:** The deterministic eligibility engine (`src/eligibility/engine.py`) and scheme master (`scheme_database/processed/scheme_master.json`) were executed byte-for-byte without altering any rule.\n")
     doc.append("2. **Zero Synthetic Annotations:** No machine learning models were trained, no synthetic ratings were fabricated, and no expert scores were predicted.\n")
-    doc.append("3. **100% Assignment Table Fidelity:** Every scenario preserves its assigned district, crop, land size, land type, social category, tenure status, and primary policy challenge from `benchmark-design-v1.0.3`.\n")
+    doc.append("3. **100% Assignment Table Fidelity:** Every scenario preserves its assigned district, crop, land size, land type, social category, tenure status, and primary policy challenge from `benchmark-design-v1.0.4`.\n")
     doc.append("4. **Ambedkar Corporation Governance Safeguard (S029):** Evaluates Ganga Kalyana individual borewell under Dr. B.R. Ambedkar Corporation (`SCH010_AMBEDKAR`). The raw engine evaluates `ELIGIBLE` (`GK_AMBEDKAR_INDIVIDUAL_ROUTE_VALID`), but official guidelines describe individual irrigation as applicable to lands adjacent to perennial water sources, which is unrecorded in `S029.json`. Furthermore, Chitradurga rural income ceiling orders (₹1.5 L vs ₹2.0 L) require administrative verification. Governance strictly routes `SCH010_AMBEDKAR` to **Section B as `REQUIRES_VERIFICATION`** without numerical scoring.\n")
     doc.append("5. **Solar Pump vs Hydrological Gating (Challenge 1, S030):** Off-grid unenergized borewell qualifies cleanly for PM-KUSUM Component B (`KUSUM_B_WATER_SOURCE_PRESENT`, `KUSUM_B_OFF_GRID_VERIFIED`), while canal-irrigated status strictly excludes dryland rainwater harvesting (Krishi Bhagya).\n")
     doc.append("6. **Krishi Bhagya Subsidy Rate Qualification & Valmiki ST Safeguard (S031):** S031 qualifies for Krishi Bhagya scheme access, but the historical 90% ST subsidy rate is treated as unverified pending the official FY 2026-27 Government Order. Valmiki ST individual borewell raw engine is `ELIGIBLE`, but governance decouples it to **Section B as `REQUIRES_VERIFICATION`** due to provisional registry status.\n")

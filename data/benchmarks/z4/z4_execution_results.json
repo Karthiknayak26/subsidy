@@ -1,13 +1,13 @@
 {
   "execution_date": "2026-10-16",
-  "benchmark_version": "v1.0.3",
+  "benchmark_version": "v1.0.4",
   "zone": "Z4",
   "scenarios_evaluated": 6,
   "results": [
     {
       "scenario": {
         "scenario_id": "S029",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z4",
         "agro_climatic_zone": "Central Dry Zone",
         "district": "Chitradurga",
@@ -406,13 +406,15 @@
           "parent_scheme_id": null,
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
-          "governance_status": "ELIGIBLE",
-          "presentation_section": "Section A (Confirmed Actionable Candidates)",
-          "allow_numerical_scoring": true,
-          "governance_note": "Confirmed verified scheme eligible for clinical 0-3 relevance scoring.",
+          "governance_status": "REQUIRES_VERIFICATION",
+          "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
+          "allow_numerical_scoring": false,
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Groundnut, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Groundnut. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
-          "missing_verifications": [],
+          "missing_verifications": [
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Groundnut in Chitradurga district"
+          ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
@@ -692,7 +694,7 @@
     {
       "scenario": {
         "scenario_id": "S030",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z4",
         "agro_climatic_zone": "Central Dry Zone",
         "district": "Davanagere",
@@ -1114,13 +1116,15 @@
           "parent_scheme_id": null,
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
-          "governance_status": "ELIGIBLE",
-          "presentation_section": "Section A (Confirmed Actionable Candidates)",
-          "allow_numerical_scoring": true,
-          "governance_note": "Confirmed verified scheme eligible for clinical 0-3 relevance scoring.",
+          "governance_status": "REQUIRES_VERIFICATION",
+          "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
+          "allow_numerical_scoring": false,
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Maize, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Maize. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
-          "missing_verifications": [],
+          "missing_verifications": [
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Maize in Davanagere district"
+          ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
@@ -1440,7 +1444,7 @@
     {
       "scenario": {
         "scenario_id": "S031",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z4",
         "agro_climatic_zone": "Central Dry Zone",
         "district": "Tumakuru",
@@ -1839,13 +1843,15 @@
           "parent_scheme_id": null,
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
-          "governance_status": "ELIGIBLE",
-          "presentation_section": "Section A (Confirmed Actionable Candidates)",
-          "allow_numerical_scoring": true,
-          "governance_note": "Confirmed verified scheme eligible for clinical 0-3 relevance scoring.",
+          "governance_status": "REQUIRES_VERIFICATION",
+          "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
+          "allow_numerical_scoring": false,
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Ragi, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Ragi. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
-          "missing_verifications": [],
+          "missing_verifications": [
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Ragi in Tumakuru district"
+          ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
@@ -2125,7 +2131,7 @@
     {
       "scenario": {
         "scenario_id": "S032",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z4",
         "agro_climatic_zone": "Central Dry Zone",
         "district": "Chitradurga",
@@ -2530,13 +2536,15 @@
           "parent_scheme_id": null,
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
-          "governance_status": "ELIGIBLE",
-          "presentation_section": "Section A (Confirmed Actionable Candidates)",
-          "allow_numerical_scoring": true,
-          "governance_note": "Confirmed verified scheme eligible for clinical 0-3 relevance scoring.",
+          "governance_status": "REQUIRES_VERIFICATION",
+          "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
+          "allow_numerical_scoring": false,
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Groundnut, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Groundnut. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
-          "missing_verifications": [],
+          "missing_verifications": [
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Groundnut in Chitradurga district"
+          ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
@@ -2837,7 +2845,7 @@
     {
       "scenario": {
         "scenario_id": "S033",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z4",
         "agro_climatic_zone": "Central Dry Zone",
         "district": "Davanagere",
@@ -3262,13 +3270,15 @@
           "parent_scheme_id": null,
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
-          "governance_status": "ELIGIBLE",
-          "presentation_section": "Section A (Confirmed Actionable Candidates)",
-          "allow_numerical_scoring": true,
-          "governance_note": "Confirmed verified scheme eligible for clinical 0-3 relevance scoring.",
+          "governance_status": "REQUIRES_VERIFICATION",
+          "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
+          "allow_numerical_scoring": false,
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Arecanut, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Arecanut. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
-          "missing_verifications": [],
+          "missing_verifications": [
+            "Verification of GoK Kharif 2026 RWBCIS/PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Arecanut in Davanagere district"
+          ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
@@ -3591,7 +3601,7 @@
     {
       "scenario": {
         "scenario_id": "S034",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z4",
         "agro_climatic_zone": "Central Dry Zone",
         "district": "Tumakuru",
@@ -4021,13 +4031,15 @@
           "parent_scheme_id": null,
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
-          "governance_status": "ELIGIBLE",
-          "presentation_section": "Section A (Confirmed Actionable Candidates)",
-          "allow_numerical_scoring": true,
-          "governance_note": "Confirmed verified scheme eligible for clinical 0-3 relevance scoring.",
+          "governance_status": "REQUIRES_VERIFICATION",
+          "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
+          "allow_numerical_scoring": false,
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Maize, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Maize. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
-          "missing_verifications": [],
+          "missing_verifications": [
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Maize in Tumakuru district"
+          ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],

@@ -1,13 +1,13 @@
 {
   "execution_date": "2026-10-16",
-  "benchmark_version": "v1.0.3",
+  "benchmark_version": "v1.0.4",
   "zone": "Z5",
   "scenarios_evaluated": 6,
   "results": [
     {
       "scenario": {
         "scenario_id": "S035",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z5",
         "agro_climatic_zone": "Eastern Dry Zone",
         "district": "Kolar",
@@ -430,11 +430,11 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist, but commercial vegetable insurance is subject to seasonal notification and Insurance Unit delineation under PMFBY/RWBCIS. Governance presentation routes to REQUIRES_VERIFICATION in Section B pending seasonal notification verification.",
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Tomato, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Tomato. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Verification of GoK Rabi 2026-27 PMFBY/RWBCIS Insurance Unit (Gram Panchayat/Hobli level) notification for Tomato in Kolar district"
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Tomato in Kolar district"
           ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
@@ -750,7 +750,7 @@
     {
       "scenario": {
         "scenario_id": "S036",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z5",
         "agro_climatic_zone": "Eastern Dry Zone",
         "district": "Chikkaballapura",
@@ -1180,13 +1180,13 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned INELIGIBLE due to absence from static agricultural crop whitelist, but static omission does not establish legal exclusion or absence of dedicated sericulture coverage. Governance presentation routes to REQUIRES_VERIFICATION in Section B without numerical scoring pending notification confirmation.",
+          "governance_note": "Raw engine returned INELIGIBLE because Mulberry is absent from static crop whitelist. In this agro-climatic zone, Mulberry is covered under weather-based (RWBCIS) or special plantation insurance schemes. Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal scheme notification confirmation.",
           "reason": "Ineligible for PMFBY: Primary crop 'Mulberry' is not among notified food, oilseed, or commercial crops in Karnataka insurance units.",
           "disqualifying_factors": [
             "Primary crop 'Mulberry' is not among notified food, oilseed, or commercial crops in Karnataka insurance units."
           ],
           "missing_verifications": [
-            "Verification of applicable crop insurance notification or dedicated sericulture insurance scheme guidelines for Mulberry in Chikkaballapura district for Kharif 2026"
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Mulberry in Chikkaballapura district"
           ],
           "rule_keys_fired": [
             "PMFBY_NON_NOTIFIED_CROP"
@@ -1507,7 +1507,7 @@
     {
       "scenario": {
         "scenario_id": "S037",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z5",
         "agro_climatic_zone": "Eastern Dry Zone",
         "district": "Bengaluru Rural",
@@ -1933,13 +1933,13 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned INELIGIBLE due to absence from static PMFBY crop whitelist, but perennial mango orchards in Bengaluru Rural are insured under Restructured Weather Based Crop Insurance Scheme (RWBCIS). Governance presentation routes to REQUIRES_VERIFICATION in Section B without numerical scoring pending RWBCIS notification confirmation.",
+          "governance_note": "Raw engine returned INELIGIBLE because Mango is absent from static crop whitelist. In this agro-climatic zone, Mango is covered under weather-based (RWBCIS) or special plantation insurance schemes. Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal scheme notification confirmation.",
           "reason": "Ineligible for PMFBY: Primary crop 'Mango' is not among notified food, oilseed, or commercial crops in Karnataka insurance units.",
           "disqualifying_factors": [
             "Primary crop 'Mango' is not among notified food, oilseed, or commercial crops in Karnataka insurance units."
           ],
           "missing_verifications": [
-            "Verification of applicable RWBCIS horticultural weather-index crop insurance notification for Mango in Bengaluru Rural district (Doddaballapura taluk)"
+            "Verification of GoK Kharif 2026 RWBCIS/PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Mango in Bengaluru Rural district"
           ],
           "rule_keys_fired": [
             "PMFBY_NON_NOTIFIED_CROP"
@@ -2258,7 +2258,7 @@
     {
       "scenario": {
         "scenario_id": "S038",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z5",
         "agro_climatic_zone": "Eastern Dry Zone",
         "district": "Kolar",
@@ -2665,11 +2665,11 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist, but rainfed tomato insurance is subject to seasonal notification and Insurance Unit delineation under PMFBY/RWBCIS. Governance presentation routes to REQUIRES_VERIFICATION in Section B pending seasonal notification verification.",
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Tomato, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Tomato. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Verification of GoK Kharif 2026 PMFBY/RWBCIS Insurance Unit (Gram Panchayat/Hobli level) notification for Tomato in Kolar district (Bangarapet taluk)"
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Tomato in Kolar district"
           ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
@@ -2972,7 +2972,18 @@
     {
       "scenario": {
         "scenario_id": "S039",
-        "benchmark_version": "v1.0.3",
+        "statutory_succession_details": {
+          "transfer_basis": "INHERITANCE_DUE_TO_DEATH",
+          "actual_acquisition_date": "2021-08-10",
+          "parent_demise_date": "2021-08-10",
+          "death_certificate_number": "DC-2021-9872",
+          "legal_heir_certificate_number": "LND/CR-089/2021-22",
+          "mutation_extract_form_16": "MR-2021-0412 (Form 12)",
+          "statutory_authority": "PM-KISAN Revised Operational Guidelines \u00a7\u00a75.2\u20135.3.3(i)",
+          "statutory_distinction": "Ownership transferred through inheritance resulting from demise of parent (\u00a75.2 and \u00a75.3.3(i)); strictly distinct from post-cutoff sale, partition, or gift deeds which are excluded under \u00a75.3.3(ii).",
+          "engine_input_interpretation": "land_ownership_cutoff_pre_feb_2019 = True correctly represents statutory compliance under the \u00a7\u00a75.2\u20135.3.3(i) inheritance exception, passing the PMKISAN_CUTOFF_DATE_VERIFIED rule."
+        },
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z5",
         "agro_climatic_zone": "Eastern Dry Zone",
         "district": "Chikkaballapura",
@@ -3359,7 +3370,7 @@
           "governance_status": "ELIGIBLE",
           "presentation_section": "Section A (Confirmed Actionable Candidates)",
           "allow_numerical_scoring": true,
-          "governance_note": "Confirmed verified scheme eligible for clinical 0-3 relevance scoring.",
+          "governance_note": "Statutory Inheritance Compliance: Title acquired post-01.02.2019 strictly satisfies PM-KISAN Revised Operational Guidelines \u00a7\u00a75.2\u20135.3.3(i) exception because ownership was transferred through inheritance resulting from demise of parent (transfer_basis = INHERITANCE_DUE_TO_DEATH; parent deceased 2021-08-10; Death Cert DC-2021-9872, Legal Heir Order LND/CR-089/2021-22, and Bhoomi mutation Form 16 MR-2021-0412 (Form 12) verified). Strictly distinct from non-qualifying post-cutoff sale, partition, or gift deeds under \u00a75.3.3(ii). Raw engine evaluated ELIGIBLE (PMKISAN_CUTOFF_DATE_VERIFIED) and confirmed in Section A.",
           "reason": "Qualifies for PM-KISAN: Landholding family registered in land records with no disqualifying exclusions.",
           "disqualifying_factors": [],
           "missing_verifications": [],
@@ -3383,11 +3394,11 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist, but PMFBY claims and coverage are strictly contingent upon the notified Insurance Unit (Gram Panchayat) order for Kharif 2026. Governance presentation routes to REQUIRES_VERIFICATION in Section B pending official portal notification confirmation.",
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Ragi, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Ragi. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification and enrollment cut-off dates for rainfed Ragi in Bagepalli taluk, Chikkaballapura district"
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Ragi in Chikkaballapura district"
           ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
@@ -3670,7 +3681,7 @@
     {
       "scenario": {
         "scenario_id": "S040",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z5",
         "agro_climatic_zone": "Eastern Dry Zone",
         "district": "Bengaluru Rural",
@@ -4097,13 +4108,13 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned INELIGIBLE due to absence from static PMFBY crop whitelist, but mango orchards in Bengaluru Rural are administered under RWBCIS. Governance presentation routes to REQUIRES_VERIFICATION in Section B without numerical scoring pending RWBCIS notification confirmation.",
+          "governance_note": "Raw engine returned INELIGIBLE because Mango is absent from static crop whitelist. In this agro-climatic zone, Mango is covered under weather-based (RWBCIS) or special plantation insurance schemes. Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal scheme notification confirmation.",
           "reason": "Ineligible for PMFBY: Primary crop 'Mango' is not among notified food, oilseed, or commercial crops in Karnataka insurance units.",
           "disqualifying_factors": [
             "Primary crop 'Mango' is not among notified food, oilseed, or commercial crops in Karnataka insurance units."
           ],
           "missing_verifications": [
-            "Verification of applicable RWBCIS horticultural weather-index crop insurance notification for Mango in Bengaluru Rural district (Hosakote taluk)"
+            "Verification of GoK Kharif 2026 RWBCIS/PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Mango in Bengaluru Rural district"
           ],
           "rule_keys_fired": [
             "PMFBY_NON_NOTIFIED_CROP"

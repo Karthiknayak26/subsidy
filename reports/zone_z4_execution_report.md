@@ -1,7 +1,7 @@
 # Deliverable: Zone Z4 Execution Report (Scenarios S029–S034)
 
 **Project:** ML-Based Personalized Government Scheme and Subsidy Recommendation System for Farmers (Karnataka Context)  
-**Milestone:** Benchmark v1.0.3 — Zone Z4 Scenario Generation & Rule-Validation Audit  
+**Milestone:** Benchmark v1.0.4 — Zone Z4 Scenario Generation & Rule-Validation Audit  
 **Zone:** Zone Z4 — Central Dry Zone (Chitradurga, Davanagere, Tumakuru)  
 **Execution Date:** October 2026  
 **Engine Version:** Deterministic Eligibility Engine v1.2 (Frozen Commit `7724fa7`)  
@@ -16,7 +16,7 @@ This report documents the rule-validation and governance audit of the fourth bat
 
 1. **Zero Modifications to Frozen Engine:** The deterministic eligibility engine (`src/eligibility/engine.py`) and scheme master (`scheme_database/processed/scheme_master.json`) were executed byte-for-byte without altering any rule.
 2. **Zero Synthetic Annotations:** No machine learning models were trained, no synthetic ratings were fabricated, and no expert scores were predicted.
-3. **100% Assignment Table Fidelity:** Every scenario preserves its assigned district, crop, land size, land type, social category, tenure status, and primary policy challenge from `benchmark-design-v1.0.3`.
+3. **100% Assignment Table Fidelity:** Every scenario preserves its assigned district, crop, land size, land type, social category, tenure status, and primary policy challenge from `benchmark-design-v1.0.4`.
 4. **Ambedkar Corporation Governance Safeguard (S029):** Evaluates Ganga Kalyana individual borewell under Dr. B.R. Ambedkar Corporation (`SCH010_AMBEDKAR`). The raw engine evaluates `ELIGIBLE` (`GK_AMBEDKAR_INDIVIDUAL_ROUTE_VALID`), but official guidelines describe individual irrigation as applicable to lands adjacent to perennial water sources, which is unrecorded in `S029.json`. Furthermore, Chitradurga rural income ceiling orders (₹1.5 L vs ₹2.0 L) require administrative verification. Governance strictly routes `SCH010_AMBEDKAR` to **Section B as `REQUIRES_VERIFICATION`** without numerical scoring.
 5. **Solar Pump vs Hydrological Gating (Challenge 1, S030):** Off-grid unenergized borewell qualifies cleanly for PM-KUSUM Component B (`KUSUM_B_WATER_SOURCE_PRESENT`, `KUSUM_B_OFF_GRID_VERIFIED`), while canal-irrigated status strictly excludes dryland rainwater harvesting (Krishi Bhagya).
 6. **Krishi Bhagya Subsidy Rate Qualification & Valmiki ST Safeguard (S031):** S031 qualifies for Krishi Bhagya scheme access, but the historical 90% ST subsidy rate is treated as unverified pending the official FY 2026-27 Government Order. Valmiki ST individual borewell raw engine is `ELIGIBLE`, but governance decouples it to **Section B as `REQUIRES_VERIFICATION`** due to provisional registry status.
@@ -47,13 +47,13 @@ This report documents the rule-validation and governance audit of the fourth bat
 - **Agro-Climatic Zone:** Central Dry Zone (Z4)  
 - **Stated Need:** `BOREWELL_IRRIGATION`  
 - **Farmer Query:** *"SC marginal dryland farmer with 2.0 acres rainfed groundnut in Challakere taluk, Chitradurga; facing acute groundwater drought and crop failure; applying for free individual borewell package under Dr. B.R. Ambedkar Development Corporation Ganga Kalyana; need offline application checklist."*  
-- **Governance Outcome Summary:** **6 ELIGIBLE (Section A)** | **6 INELIGIBLE** | **2 REQUIRES_VERIFICATION (Section B)**  
+- **Governance Outcome Summary:** **5 ELIGIBLE (Section A)** | **6 INELIGIBLE** | **3 REQUIRES_VERIFICATION (Section B)**  
 - **Visible Scheme Denominator Reconciliation:** Displaying **14 actionable schemes** out of **16 raw evaluations** (2 abstract parent records suppressed: `SCH008`, `SCH010`).  
 
 | Scheme ID | Resolved Scheme Name | Record Type | Raw Engine Status | Governance Presentation Status | Presentation Section | Rule Keys Fired | Missing Verifications / Disqualifications |
 |---|---|---|---|---|---|---|---|
 | **SCH001** | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `PMKISAN_LAND_SIZE_POSITIVE`<br>`PMKISAN_CUTOFF_DATE_VERIFIED`<br>`PMKISAN_NO_INCOME_TAX_PAID`<br>`PMKISAN_PENSION_UNDER_10K_OR_NONE`<br>`PMKISAN_NO_PROFESSIONAL_EXCLUSION` | None (Fully Verified) |
-| **SCH002** | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `PMFBY_NOTIFIED_CROP_VERIFIED` | None (Fully Verified) |
+| **SCH002** | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `STANDALONE` | `ELIGIBLE` | **`REQUIRES_VERIFICATION`** | Section B (Unresolved Policy Review / Seasonal Notification Required) | `PMFBY_NOTIFIED_CROP_VERIFIED` | **Missing:** Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Groundnut in Chitradurga district |
 | **SCH003** | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `STANDALONE` | `INELIGIBLE` | **`INELIGIBLE`** | Disqualified / Non-Actionable Candidates | `PMKSY_LAND_RANGE_VALID`<br>`PMKSY_NO_WATER_SOURCE`<br>`PMKSY_NO_PRIOR_SUBSIDY` | **Disq:** Must possess an assured operational water source with pump machinery. |
 | **SCH004** | Sub-Mission on Agricultural Mechanization (SMAM) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `SMAM_NO_PRIOR_SUBSIDY` | None (Fully Verified) |
 | **SCH005** | Krishi Bhagya Yojana | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `KRISHI_BHAGYA_DRYLAND_VERIFIED`<br>`KRISHI_BHAGYA_DISTRICT_NOTIFIED`<br>`KRISHI_BHAGYA_ACREAGE_VALID` | None (Fully Verified) |
@@ -72,13 +72,13 @@ This report documents the rule-validation and governance audit of the fourth bat
 - **Agro-Climatic Zone:** Central Dry Zone (Z4)  
 - **Stated Need:** `SOLAR_PUMP_INSTALLATION`  
 - **Farmer Query:** *"Small farmer with 3.8 acres in Harihar taluk, Davanagere; tail-end canal command with highly erratic releases; drilled private borewell 4 months ago but BESCOM electric line is 1.2 km away; applying for 60% subsidy for 5 HP standalone solar pump under PM-KUSUM Component B; need quotation format."*  
-- **Governance Outcome Summary:** **7 ELIGIBLE (Section A)** | **7 INELIGIBLE** | **1 REQUIRES_VERIFICATION (Section B)**  
+- **Governance Outcome Summary:** **6 ELIGIBLE (Section A)** | **7 INELIGIBLE** | **2 REQUIRES_VERIFICATION (Section B)**  
 - **Visible Scheme Denominator Reconciliation:** Displaying **15 actionable schemes** out of **16 raw evaluations** (1 abstract parent records suppressed: `SCH008`).  
 
 | Scheme ID | Resolved Scheme Name | Record Type | Raw Engine Status | Governance Presentation Status | Presentation Section | Rule Keys Fired | Missing Verifications / Disqualifications |
 |---|---|---|---|---|---|---|---|
 | **SCH001** | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `PMKISAN_LAND_SIZE_POSITIVE`<br>`PMKISAN_CUTOFF_DATE_VERIFIED`<br>`PMKISAN_NO_INCOME_TAX_PAID`<br>`PMKISAN_PENSION_UNDER_10K_OR_NONE`<br>`PMKISAN_NO_PROFESSIONAL_EXCLUSION` | None (Fully Verified) |
-| **SCH002** | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `PMFBY_NOTIFIED_CROP_VERIFIED` | None (Fully Verified) |
+| **SCH002** | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `STANDALONE` | `ELIGIBLE` | **`REQUIRES_VERIFICATION`** | Section B (Unresolved Policy Review / Seasonal Notification Required) | `PMFBY_NOTIFIED_CROP_VERIFIED` | **Missing:** Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Maize in Davanagere district |
 | **SCH003** | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `PMKSY_LAND_RANGE_VALID`<br>`PMKSY_WATER_SOURCE_VERIFIED`<br>`PMKSY_NO_PRIOR_SUBSIDY` | None (Fully Verified) |
 | **SCH004** | Sub-Mission on Agricultural Mechanization (SMAM) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `SMAM_NO_PRIOR_SUBSIDY` | None (Fully Verified) |
 | **SCH005** | Krishi Bhagya Yojana | `STANDALONE` | `INELIGIBLE` | **`INELIGIBLE`** | Disqualified / Non-Actionable Candidates | `KRISHI_BHAGYA_NOT_DRYLAND`<br>`KRISHI_BHAGYA_DISTRICT_NOTIFIED`<br>`KRISHI_BHAGYA_ACREAGE_VALID` | **Disq:** Krishi Bhagya is strictly restricted to dryland rainfed holdings (current land_type: Irrigated (Canal)). |
@@ -98,13 +98,13 @@ This report documents the rule-validation and governance audit of the fourth bat
 - **Agro-Climatic Zone:** Central Dry Zone (Z4)  
 - **Stated Need:** `RAINWATER_HARVESTING`  
 - **Farmer Query:** *"ST marginal dryland farmer with 1.8 acres rainfed ragi in Pavagada taluk, Tumakuru; severe recurring drought; applying for Krishi Honda farm pond under Krishi Bhagya with 90% ST subsidy; also asking about Valmiki corporation borewell scheme eligibility."*  
-- **Governance Outcome Summary:** **6 ELIGIBLE (Section A)** | **6 INELIGIBLE** | **2 REQUIRES_VERIFICATION (Section B)**  
+- **Governance Outcome Summary:** **5 ELIGIBLE (Section A)** | **6 INELIGIBLE** | **3 REQUIRES_VERIFICATION (Section B)**  
 - **Visible Scheme Denominator Reconciliation:** Displaying **14 actionable schemes** out of **16 raw evaluations** (2 abstract parent records suppressed: `SCH008`, `SCH010`).  
 
 | Scheme ID | Resolved Scheme Name | Record Type | Raw Engine Status | Governance Presentation Status | Presentation Section | Rule Keys Fired | Missing Verifications / Disqualifications |
 |---|---|---|---|---|---|---|---|
 | **SCH001** | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `PMKISAN_LAND_SIZE_POSITIVE`<br>`PMKISAN_CUTOFF_DATE_VERIFIED`<br>`PMKISAN_NO_INCOME_TAX_PAID`<br>`PMKISAN_PENSION_UNDER_10K_OR_NONE`<br>`PMKISAN_NO_PROFESSIONAL_EXCLUSION` | None (Fully Verified) |
-| **SCH002** | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `PMFBY_NOTIFIED_CROP_VERIFIED` | None (Fully Verified) |
+| **SCH002** | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `STANDALONE` | `ELIGIBLE` | **`REQUIRES_VERIFICATION`** | Section B (Unresolved Policy Review / Seasonal Notification Required) | `PMFBY_NOTIFIED_CROP_VERIFIED` | **Missing:** Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Ragi in Tumakuru district |
 | **SCH003** | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `STANDALONE` | `INELIGIBLE` | **`INELIGIBLE`** | Disqualified / Non-Actionable Candidates | `PMKSY_LAND_RANGE_VALID`<br>`PMKSY_NO_WATER_SOURCE`<br>`PMKSY_NO_PRIOR_SUBSIDY` | **Disq:** Must possess an assured operational water source with pump machinery. |
 | **SCH004** | Sub-Mission on Agricultural Mechanization (SMAM) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `SMAM_NO_PRIOR_SUBSIDY` | None (Fully Verified) |
 | **SCH005** | Krishi Bhagya Yojana | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `KRISHI_BHAGYA_DRYLAND_VERIFIED`<br>`KRISHI_BHAGYA_DISTRICT_NOTIFIED`<br>`KRISHI_BHAGYA_ACREAGE_VALID` | None (Fully Verified) |
@@ -123,13 +123,13 @@ This report documents the rule-validation and governance audit of the fourth bat
 - **Agro-Climatic Zone:** Central Dry Zone (Z4)  
 - **Stated Need:** `INCOME_SUPPORT`  
 - **Farmer Query:** *"Farmer with exactly 2.5 acres dryland in Hiriyur, Chitradurga; filed ITR-4 last assessment year with taxable business income; facing crop loss; asking why PM-KISAN ₹6,000 installment was rejected by village accountant; also asking about KCC crop loan eligibility."*  
-- **Governance Outcome Summary:** **5 ELIGIBLE (Section A)** | **9 INELIGIBLE** | **1 REQUIRES_VERIFICATION (Section B)**  
+- **Governance Outcome Summary:** **4 ELIGIBLE (Section A)** | **9 INELIGIBLE** | **2 REQUIRES_VERIFICATION (Section B)**  
 - **Visible Scheme Denominator Reconciliation:** Displaying **15 actionable schemes** out of **16 raw evaluations** (1 abstract parent records suppressed: `SCH008`).  
 
 | Scheme ID | Resolved Scheme Name | Record Type | Raw Engine Status | Governance Presentation Status | Presentation Section | Rule Keys Fired | Missing Verifications / Disqualifications |
 |---|---|---|---|---|---|---|---|
 | **SCH001** | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `STANDALONE` | `INELIGIBLE` | **`INELIGIBLE`** | Disqualified / Non-Actionable Candidates | `PMKISAN_LAND_SIZE_POSITIVE`<br>`PMKISAN_CUTOFF_DATE_VERIFIED`<br>`PMKISAN_PAID_INCOME_TAX_EXCLUSION`<br>`PMKISAN_PENSION_UNDER_10K_OR_NONE`<br>`PMKISAN_NO_PROFESSIONAL_EXCLUSION` | **Disq:** Member of the scheme-defined farmer family paid income tax in the last assessment year. |
-| **SCH002** | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `PMFBY_NOTIFIED_CROP_VERIFIED` | None (Fully Verified) |
+| **SCH002** | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `STANDALONE` | `ELIGIBLE` | **`REQUIRES_VERIFICATION`** | Section B (Unresolved Policy Review / Seasonal Notification Required) | `PMFBY_NOTIFIED_CROP_VERIFIED` | **Missing:** Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Groundnut in Chitradurga district |
 | **SCH003** | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `STANDALONE` | `INELIGIBLE` | **`INELIGIBLE`** | Disqualified / Non-Actionable Candidates | `PMKSY_LAND_RANGE_VALID`<br>`PMKSY_NO_WATER_SOURCE`<br>`PMKSY_NO_PRIOR_SUBSIDY` | **Disq:** Must possess an assured operational water source with pump machinery. |
 | **SCH004** | Sub-Mission on Agricultural Mechanization (SMAM) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `SMAM_NO_PRIOR_SUBSIDY` | None (Fully Verified) |
 | **SCH005** | Krishi Bhagya Yojana | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `KRISHI_BHAGYA_DRYLAND_VERIFIED`<br>`KRISHI_BHAGYA_DISTRICT_NOTIFIED`<br>`KRISHI_BHAGYA_ACREAGE_VALID` | None (Fully Verified) |
@@ -149,13 +149,13 @@ This report documents the rule-validation and governance audit of the fourth bat
 - **Agro-Climatic Zone:** Central Dry Zone (Z4)  
 - **Stated Need:** `FARM_MECHANIZATION`  
 - **Farmer Query:** *"OBC (2A) planter with 7.5 acres borewell-irrigated arecanut in Channagiri taluk, Davanagere; facing acute skilled climber labor shortage; applying for 40-50% subsidy under SMAM for arecanut dehusker and power sprayer; need approved dealer list."*  
-- **Governance Outcome Summary:** **6 ELIGIBLE (Section A)** | **8 INELIGIBLE** | **1 REQUIRES_VERIFICATION (Section B)**  
+- **Governance Outcome Summary:** **5 ELIGIBLE (Section A)** | **8 INELIGIBLE** | **2 REQUIRES_VERIFICATION (Section B)**  
 - **Visible Scheme Denominator Reconciliation:** Displaying **15 actionable schemes** out of **16 raw evaluations** (1 abstract parent records suppressed: `SCH008`).  
 
 | Scheme ID | Resolved Scheme Name | Record Type | Raw Engine Status | Governance Presentation Status | Presentation Section | Rule Keys Fired | Missing Verifications / Disqualifications |
 |---|---|---|---|---|---|---|---|
 | **SCH001** | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `PMKISAN_LAND_SIZE_POSITIVE`<br>`PMKISAN_CUTOFF_DATE_VERIFIED`<br>`PMKISAN_NO_INCOME_TAX_PAID`<br>`PMKISAN_PENSION_UNDER_10K_OR_NONE`<br>`PMKISAN_NO_PROFESSIONAL_EXCLUSION` | None (Fully Verified) |
-| **SCH002** | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `PMFBY_NOTIFIED_CROP_VERIFIED` | None (Fully Verified) |
+| **SCH002** | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `STANDALONE` | `ELIGIBLE` | **`REQUIRES_VERIFICATION`** | Section B (Unresolved Policy Review / Seasonal Notification Required) | `PMFBY_NOTIFIED_CROP_VERIFIED` | **Missing:** Verification of GoK Kharif 2026 RWBCIS/PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Arecanut in Davanagere district |
 | **SCH003** | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `PMKSY_LAND_RANGE_VALID`<br>`PMKSY_WATER_SOURCE_VERIFIED`<br>`PMKSY_NO_PRIOR_SUBSIDY` | None (Fully Verified) |
 | **SCH004** | Sub-Mission on Agricultural Mechanization (SMAM) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `SMAM_NO_PRIOR_SUBSIDY` | None (Fully Verified) |
 | **SCH005** | Krishi Bhagya Yojana | `STANDALONE` | `INELIGIBLE` | **`INELIGIBLE`** | Disqualified / Non-Actionable Candidates | `KRISHI_BHAGYA_NOT_DRYLAND`<br>`KRISHI_BHAGYA_DISTRICT_NOTIFIED`<br>`KRISHI_BHAGYA_ACREAGE_VALID` | **Disq:** Krishi Bhagya is strictly restricted to dryland rainfed holdings (current land_type: Irrigated (Borewell)). |
@@ -175,13 +175,13 @@ This report documents the rule-validation and governance audit of the fourth bat
 - **Agro-Climatic Zone:** Central Dry Zone (Z4)  
 - **Stated Need:** `MICRO_IRRIGATION_SUPPORT`  
 - **Farmer Query:** *"Large farmer with 11.0 acres borewell-irrigated land in Tiptur, Tumakuru; expanding commercial maize cultivation; applying for micro-irrigation subsidy under PMKSY-PDMC for 4.45 hectares; need clarification on 5.0 ha statutory ceiling and subsidy slab."*  
-- **Governance Outcome Summary:** **6 ELIGIBLE (Section A)** | **8 INELIGIBLE** | **1 REQUIRES_VERIFICATION (Section B)**  
+- **Governance Outcome Summary:** **5 ELIGIBLE (Section A)** | **8 INELIGIBLE** | **2 REQUIRES_VERIFICATION (Section B)**  
 - **Visible Scheme Denominator Reconciliation:** Displaying **15 actionable schemes** out of **16 raw evaluations** (1 abstract parent records suppressed: `SCH008`).  
 
 | Scheme ID | Resolved Scheme Name | Record Type | Raw Engine Status | Governance Presentation Status | Presentation Section | Rule Keys Fired | Missing Verifications / Disqualifications |
 |---|---|---|---|---|---|---|---|
 | **SCH001** | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `PMKISAN_LAND_SIZE_POSITIVE`<br>`PMKISAN_CUTOFF_DATE_VERIFIED`<br>`PMKISAN_NO_INCOME_TAX_PAID`<br>`PMKISAN_PENSION_UNDER_10K_OR_NONE`<br>`PMKISAN_NO_PROFESSIONAL_EXCLUSION` | None (Fully Verified) |
-| **SCH002** | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `PMFBY_NOTIFIED_CROP_VERIFIED` | None (Fully Verified) |
+| **SCH002** | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `STANDALONE` | `ELIGIBLE` | **`REQUIRES_VERIFICATION`** | Section B (Unresolved Policy Review / Seasonal Notification Required) | `PMFBY_NOTIFIED_CROP_VERIFIED` | **Missing:** Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Maize in Tumakuru district |
 | **SCH003** | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `PMKSY_LAND_RANGE_VALID`<br>`PMKSY_WATER_SOURCE_VERIFIED`<br>`PMKSY_NO_PRIOR_SUBSIDY` | None (Fully Verified) |
 | **SCH004** | Sub-Mission on Agricultural Mechanization (SMAM) | `STANDALONE` | `ELIGIBLE` | **`ELIGIBLE`** | Section A (Confirmed Actionable Candidates) | `SMAM_NO_PRIOR_SUBSIDY` | None (Fully Verified) |
 | **SCH005** | Krishi Bhagya Yojana | `STANDALONE` | `INELIGIBLE` | **`INELIGIBLE`** | Disqualified / Non-Actionable Candidates | `KRISHI_BHAGYA_NOT_DRYLAND`<br>`KRISHI_BHAGYA_DISTRICT_NOTIFIED`<br>`KRISHI_BHAGYA_ACREAGE_VALID` | **Disq:** Krishi Bhagya is strictly restricted to dryland rainfed holdings (current land_type: Irrigated (Borewell)). |

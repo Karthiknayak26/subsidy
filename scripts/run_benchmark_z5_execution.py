@@ -31,6 +31,7 @@ from src.eligibility.models import (
 )
 from src.eligibility.engine import EligibilityEngine
 from src.eligibility.availability import AvailabilityFilter
+from src.eligibility.governance import apply_governance_safeguard, PROVISIONAL_SCHEMES
 
 PROVISIONAL_SCHEMES = {
     "SCH008_KA_COOP",
@@ -42,7 +43,7 @@ PROVISIONAL_SCHEMES = {
 ZONE_Z5_PROFILES: List[Dict[str, Any]] = [
     {
         "scenario_id": "S035",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z5",
         "agro_climatic_zone": "Eastern Dry Zone",
         "district": "Kolar",
@@ -108,7 +109,7 @@ ZONE_Z5_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S036",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z5",
         "agro_climatic_zone": "Eastern Dry Zone",
         "district": "Chikkaballapura",
@@ -174,7 +175,7 @@ ZONE_Z5_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S037",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z5",
         "agro_climatic_zone": "Eastern Dry Zone",
         "district": "Bengaluru Rural",
@@ -239,7 +240,7 @@ ZONE_Z5_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S038",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z5",
         "agro_climatic_zone": "Eastern Dry Zone",
         "district": "Kolar",
@@ -305,7 +306,18 @@ ZONE_Z5_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S039",
-        "benchmark_version": "v1.0.3",
+        "statutory_succession_details": {
+            "transfer_basis": "INHERITANCE_DUE_TO_DEATH",
+            "actual_acquisition_date": "2021-08-10",
+            "parent_demise_date": "2021-08-10",
+            "death_certificate_number": "DC-2021-9872",
+            "legal_heir_certificate_number": "LND/CR-089/2021-22",
+            "mutation_extract_form_16": "MR-2021-0412 (Form 12)",
+            "statutory_authority": "PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i)",
+            "statutory_distinction": "Ownership transferred through inheritance resulting from demise of parent (§5.2 and §5.3.3(i)); strictly distinct from post-cutoff sale, partition, or gift deeds which are excluded under §5.3.3(ii).",
+            "engine_input_interpretation": "land_ownership_cutoff_pre_feb_2019 = True correctly represents statutory compliance under the §§5.2–5.3.3(i) inheritance exception, passing the PMKISAN_CUTOFF_DATE_VERIFIED rule."
+        },
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z5",
         "agro_climatic_zone": "Eastern Dry Zone",
         "district": "Chikkaballapura",
@@ -378,7 +390,7 @@ ZONE_Z5_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S040",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z5",
         "agro_climatic_zone": "Eastern Dry Zone",
         "district": "Bengaluru Rural",
@@ -519,100 +531,8 @@ def run_execution() -> Dict[str, Any]:
         actionable_serializable = []
         for d in actionable_determinations:
             is_prov = d.scheme_id in PROVISIONAL_SCHEMES
-            missing_verifications = list(d.missing_verifications)
-            disqualifying_factors = list(d.disqualifying_factors)
-            
-            # Case 1: PMFBY / RWBCIS Crop Insurance Governance Audit across S035–S040
-            if d.scheme_id == "SCH002":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Unresolved Policy Review / Seasonal Notification Required)"
-                allow_scoring = False
-                if sid == "S035":
-                    missing_verifications = [
-                        "Verification of GoK Rabi 2026-27 PMFBY/RWBCIS Insurance Unit (Gram Panchayat/Hobli level) notification for Tomato in Kolar district"
-                    ]
-                    gov_note = "Raw engine returned ELIGIBLE based on static crop whitelist, but commercial vegetable insurance is subject to seasonal notification and Insurance Unit delineation under PMFBY/RWBCIS. Governance presentation routes to REQUIRES_VERIFICATION in Section B pending seasonal notification verification."
-                elif sid == "S036":
-                    missing_verifications = [
-                        "Verification of applicable crop insurance notification or dedicated sericulture insurance scheme guidelines for Mulberry in Chikkaballapura district for Kharif 2026"
-                    ]
-                    gov_note = "Raw engine returned INELIGIBLE due to absence from static agricultural crop whitelist, but static omission does not establish legal exclusion or absence of dedicated sericulture coverage. Governance presentation routes to REQUIRES_VERIFICATION in Section B without numerical scoring pending notification confirmation."
-                elif sid == "S037":
-                    missing_verifications = [
-                        "Verification of applicable RWBCIS horticultural weather-index crop insurance notification for Mango in Bengaluru Rural district (Doddaballapura taluk)"
-                    ]
-                    gov_note = "Raw engine returned INELIGIBLE due to absence from static PMFBY crop whitelist, but perennial mango orchards in Bengaluru Rural are insured under Restructured Weather Based Crop Insurance Scheme (RWBCIS). Governance presentation routes to REQUIRES_VERIFICATION in Section B without numerical scoring pending RWBCIS notification confirmation."
-                elif sid == "S038":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 PMFBY/RWBCIS Insurance Unit (Gram Panchayat/Hobli level) notification for Tomato in Kolar district (Bangarapet taluk)"
-                    ]
-                    gov_note = "Raw engine returned ELIGIBLE based on static crop whitelist, but rainfed tomato insurance is subject to seasonal notification and Insurance Unit delineation under PMFBY/RWBCIS. Governance presentation routes to REQUIRES_VERIFICATION in Section B pending seasonal notification verification."
-                elif sid == "S039":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification and enrollment cut-off dates for rainfed Ragi in Bagepalli taluk, Chikkaballapura district"
-                    ]
-                    gov_note = "Raw engine returned ELIGIBLE based on static crop whitelist, but PMFBY claims and coverage are strictly contingent upon the notified Insurance Unit (Gram Panchayat) order for Kharif 2026. Governance presentation routes to REQUIRES_VERIFICATION in Section B pending official portal notification confirmation."
-                elif sid == "S040":
-                    missing_verifications = [
-                        "Verification of applicable RWBCIS horticultural weather-index crop insurance notification for Mango in Bengaluru Rural district (Hosakote taluk)"
-                    ]
-                    gov_note = "Raw engine returned INELIGIBLE due to absence from static PMFBY crop whitelist, but mango orchards in Bengaluru Rural are administered under RWBCIS. Governance presentation routes to REQUIRES_VERIFICATION in Section B without numerical scoring pending RWBCIS notification confirmation."
-
-            # Case 2: Ambedkar Corporation in S039 (Perennial Source Adjacency & Income Order Governance Safeguard)
-            elif sid == "S039" and d.scheme_id == "SCH010_AMBEDKAR":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Unresolved Field Evidence / Administrative Order Verification Required)"
-                allow_scoring = False
-                missing_verifications = [
-                    "Field verification of land parcel adjacency to a qualifying perennial water source (river/stream/tank) as required under Dr. B.R. Ambedkar Corporation individual irrigation guidelines",
-                    "Administrative verification of applicable Chikkaballapura district annual family income ceiling (rural vs state ceiling order)"
-                ]
-                gov_note = "Raw engine returned ELIGIBLE based on demographic land interval [1.5, 5.0] ac and encoded income ceiling, but parcel lacks recorded evidence of perennial water source adjacency, and the applicable district income order requires administrative confirmation. Governance presentation routes to REQUIRES_VERIFICATION in Section B without numerical scoring."
-
-            # Case 3: Provisional schemes (e.g. SCH008_KA_COOP, SCH010_VALMIKI, SCH010_DEVARAJ_URS, SCH010_KMDC)
-            elif is_prov and d.status == EligibilityStatus.ELIGIBLE:
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Provisional Schemes / Qualitative Review Only)"
-                allow_scoring = False
-                missing_verifications = [f"Administrative circular verification for provisional scheme {d.scheme_id}"]
-                gov_note = "Raw engine returned ELIGIBLE based on encoded rules, but scheme record is PROVISIONAL in registry. Governance safeguard places determination in Section B as REQUIRES_VERIFICATION without numerical scoring."
-            elif is_prov and d.status == EligibilityStatus.REQUIRES_VERIFICATION:
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Provisional Schemes / Qualitative Review Only)"
-                allow_scoring = False
-                if not missing_verifications:
-                    missing_verifications = [f"Administrative circular and Government Order verification for provisional scheme {d.scheme_id}"]
-                gov_note = "Provisional scheme requiring administrative or Government Order verification."
-            elif d.status == EligibilityStatus.ELIGIBLE:
-                gov_status = "ELIGIBLE"
-                presentation_section = "Section A (Confirmed Actionable Candidates)"
-                allow_scoring = True
-                gov_note = "Confirmed verified scheme eligible for clinical 0-3 relevance scoring."
-            else:
-                gov_status = d.status.value
-                presentation_section = "Disqualified / Non-Actionable Candidates"
-                allow_scoring = False
-                gov_note = "Statutorily disqualified under verified criteria."
-
-            actionable_serializable.append({
-                "scheme_id": d.scheme_id,
-                "scheme_name": d.scheme_name,
-                "record_type": d.record_type,
-                "parent_scheme_id": d.parent_scheme_id,
-                "status": d.status.value,
-                "raw_engine_status": d.status.value,
-                "governance_status": gov_status,
-                "presentation_section": presentation_section,
-                "allow_numerical_scoring": allow_scoring,
-                "governance_note": gov_note,
-                "reason": d.reason,
-                "disqualifying_factors": disqualifying_factors,
-                "missing_verifications": missing_verifications,
-                "rule_keys_fired": d.rule_keys_fired,
-                "availability_state": d.availability_state.value,
-                "is_provisional": is_prov
-            })
-            
+            item_dict = apply_governance_safeguard(d, sid, profile, is_prov)
+            actionable_serializable.append(item_dict)
         execution_results.append({
             "scenario": profile,
             "raw_determinations": raw_serializable,
@@ -621,7 +541,7 @@ def run_execution() -> Dict[str, Any]:
         
     return {
         "execution_date": "2026-10-16",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone": "Z5",
         "scenarios_evaluated": len(execution_results),
         "results": execution_results
@@ -711,7 +631,7 @@ def generate_execution_report_markdown(exec_data: Dict[str, Any]) -> str:
     doc = []
     doc.append("# Deliverable: Zone Z5 Execution Report (Scenarios S035–S040)\n\n")
     doc.append("**Project:** ML-Based Personalized Government Scheme and Subsidy Recommendation System for Farmers (Karnataka Context)  \n")
-    doc.append("**Milestone:** Benchmark v1.0.3 — Zone Z5 Scenario Generation & Rule-Validation Audit  \n")
+    doc.append("**Milestone:** Benchmark v1.0.4 — Zone Z5 Scenario Generation & Rule-Validation Audit  \n")
     doc.append("**Zone:** Zone Z5 — Eastern Dry Zone (Kolar, Chikkaballapura, Bengaluru Rural)  \n")
     doc.append("**Execution Date:** October 2026  \n")
     doc.append("**Engine Version:** Deterministic Eligibility Engine v1.2 (Frozen Commit `7724fa7`)  \n")
@@ -723,7 +643,7 @@ def generate_execution_report_markdown(exec_data: Dict[str, Any]) -> str:
     doc.append("This report documents the rule-validation and governance audit of the fifth batch of six benchmark scenarios (S035–S040) representing the **Eastern Dry Zone (Zone Z5)**. In strict adherence to project invariants:\n\n")
     doc.append("1. **Zero Modifications to Frozen Engine:** The deterministic eligibility engine (`src/eligibility/engine.py`) and scheme master (`scheme_database/processed/scheme_master.json`) were executed byte-for-byte without altering any rule.\n")
     doc.append("2. **Zero Synthetic Annotations:** No machine learning models were trained, no synthetic ratings were fabricated, and no expert scores were predicted.\n")
-    doc.append("3. **100% Assignment Table Fidelity:** Every scenario preserves its assigned district, crop, land size, land type, social category, tenure status, and primary policy challenge from `benchmark-design-v1.0.3`.\n")
+    doc.append("3. **100% Assignment Table Fidelity:** Every scenario preserves its assigned district, crop, land size, land type, social category, tenure status, and primary policy challenge from `benchmark-design-v1.0.4`.\n")
     doc.append("4. **Crop Insurance (PMFBY / RWBCIS) Comprehensive Governance Audit across S035–S040:** Official PMFBY guidelines separate coverage by season, notification, district, insurance unit (IU), crop, and scheme (yield-based PMFBY vs weather-index RWBCIS). A static engine crop whitelist does not establish current legal coverage or exclusion. In accordance with governance standards:\n")
     doc.append("   - **S036 (Mulberry):** Static whitelist exclusion is preserved as raw `INELIGIBLE`, but routed to **Section B as `REQUIRES_VERIFICATION`** without scoring pending official confirmation of sericulture insurance circulars.\n")
     doc.append("   - **S037 & S040 (Mango):** Static whitelist exclusion is preserved as raw `INELIGIBLE`, but routed to **Section B as `REQUIRES_VERIFICATION`** without scoring pending confirmation of official RWBCIS weather-index notifications in Bengaluru Rural.\n")

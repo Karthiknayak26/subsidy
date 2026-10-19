@@ -1,13 +1,13 @@
 {
   "execution_date": "2026-10-16",
-  "benchmark_version": "v1.0.3",
+  "benchmark_version": "v1.0.4",
   "zone": "Z6",
   "scenarios_evaluated": 6,
   "results": [
     {
       "scenario": {
         "scenario_id": "S041",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z6",
         "agro_climatic_zone": "Southern Dry Zone",
         "district": "Mandya",
@@ -433,11 +433,11 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist, but commercial crop insurance is subject to seasonal notification and Insurance Unit delineation under PMFBY. Governance presentation routes to REQUIRES_VERIFICATION in Section B pending seasonal notification verification.",
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Sugarcane, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Sugarcane. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Sugarcane in Mandya district"
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Sugarcane in Mandya district"
           ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
@@ -756,7 +756,7 @@
     {
       "scenario": {
         "scenario_id": "S042",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z6",
         "agro_climatic_zone": "Southern Dry Zone",
         "district": "Mysuru",
@@ -1151,7 +1151,7 @@
           "governance_status": "INELIGIBLE",
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
-          "governance_note": "Statutorily disqualified under verified criteria.",
+          "governance_note": "Pure tenant farmer without recorded land ownership title is statutorily excluded from PM-KISAN (PMKISAN_PURE_TENANT_EXCLUSION). Placed in Disqualified Candidates.",
           "reason": "Disqualified under PM-KISAN exclusion criteria: Pure tenant farmers / sharecroppers without recorded land title are statutorily ineligible.",
           "disqualifying_factors": [
             "Pure tenant farmers / sharecroppers without recorded land title are statutorily ineligible."
@@ -1180,12 +1180,12 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist, but applicant is a pure tenant on oral lease without registered title. Governance presentation routes to REQUIRES_VERIFICATION in Section B without scoring pending tenant documentation and seasonal IU notification verification.",
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Paddy, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Paddy. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Verification of tenant farmer crop declaration / sowing certificate from Village Accountant for Paddy in T. Narasipura taluk",
-            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Paddy in Mysuru district"
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Paddy in Mysuru district",
+            "Tenant farmer cultivation agreement / oral lessee verification for PMFBY enrollment"
           ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
@@ -1317,13 +1317,15 @@
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
           "governance_status": "REQUIRES_VERIFICATION",
-          "presentation_section": "Section B (Unverified Documentation / Oral Lease Review)",
+          "presentation_section": "Section B (Unresolved Policy Review / Tenant Crop-Loan Documentation Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on operational landholding, but farmer is a pure tenant on an oral lease without registered title. Governance presentation routes to REQUIRES_VERIFICATION in Section B pending bank oral-lease declaration or JLG membership verification.",
+          "governance_note": "Raw engine returned ELIGIBLE under RBI/NABARD tenant borrower category, but oral tenancy documentation and bank tenant crop-loan eligibility require verification. Governance safeguard routes determination to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for Central KCC-MISS via Commercial Banks/RRBs (4.0% effective interest up to Rs. 3 Lakh upon prompt repayment).",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Tenant farmer crop loan documentation (Bank oral lease declaration / Joint Liability Group JLG membership verification)"
+            "Tenant farmer crop loan documentation (Bank oral lease declaration / Joint Liability Group JLG membership verification)",
+            "Commercial bank / RRB verification of oral lessee / tenant crop-loan eligibility documentation in Mysuru district",
+            "Lead District Bank Mysuru / NABARD scale of finance tenant farmer certification"
           ],
           "rule_keys_fired": [
             "KCC_CENTRAL_COMMERCIAL_ELIGIBLE"
@@ -1498,7 +1500,7 @@
     {
       "scenario": {
         "scenario_id": "S043",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z6",
         "agro_climatic_zone": "Southern Dry Zone",
         "district": "Chamarajanagar",
@@ -1901,13 +1903,13 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist, but horticultural crop insurance requires seasonal Insurance Unit notification confirmation under PMFBY/RWBCIS. Governance routes to Section B as REQUIRES_VERIFICATION.",
+          "governance_note": "Raw engine returned INELIGIBLE because Banana is absent from static crop whitelist. In this agro-climatic zone, Banana is covered under weather-based (RWBCIS) or special plantation insurance schemes. Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal scheme notification confirmation.",
           "reason": "Ineligible for PMFBY: Primary crop 'Banana' is not among notified food, oilseed, or commercial crops in Karnataka insurance units.",
           "disqualifying_factors": [
             "Primary crop 'Banana' is not among notified food, oilseed, or commercial crops in Karnataka insurance units."
           ],
           "missing_verifications": [
-            "Verification of GoK Kharif 2026 PMFBY/RWBCIS Insurance Unit (Gram Panchayat/Hobli level) notification for Banana in Chamarajanagar district"
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Banana in Chamarajanagar district"
           ],
           "rule_keys_fired": [
             "PMFBY_NON_NOTIFIED_CROP"
@@ -2188,7 +2190,7 @@
     {
       "scenario": {
         "scenario_id": "S044",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z6",
         "agro_climatic_zone": "Southern Dry Zone",
         "district": "Mandya",
@@ -2583,7 +2585,7 @@
           "governance_status": "INELIGIBLE",
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
-          "governance_note": "Statutorily disqualified under verified criteria.",
+          "governance_note": "Pure tenant farmer without recorded land ownership title is statutorily excluded from PM-KISAN (PMKISAN_PURE_TENANT_EXCLUSION). Placed in Disqualified Candidates.",
           "reason": "Disqualified under PM-KISAN exclusion criteria: Pure tenant farmers / sharecroppers without recorded land title are statutorily ineligible.",
           "disqualifying_factors": [
             "Pure tenant farmers / sharecroppers without recorded land title are statutorily ineligible."
@@ -2612,12 +2614,12 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist, but applicant is a pure tenant without registered title deed. Governance routes to Section B as REQUIRES_VERIFICATION without scoring pending tenant documentation and IU notification verification.",
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Paddy, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Paddy. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Verification of tenant farmer oral lease declaration / JLG certificate for Malavalli taluk",
-            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Paddy in Mandya district"
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Paddy in Mandya district",
+            "Tenant farmer cultivation agreement / oral lessee verification for PMFBY enrollment"
           ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
@@ -2749,13 +2751,15 @@
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
           "governance_status": "REQUIRES_VERIFICATION",
-          "presentation_section": "Section B (Unverified Documentation / Oral Lease Review)",
+          "presentation_section": "Section B (Unresolved Policy Review / Tenant Crop-Loan Documentation Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on operational landholding, but farmer is a pure tenant on an oral lease without registered title. Governance presentation routes to REQUIRES_VERIFICATION in Section B pending bank oral-lease declaration or JLG membership verification.",
+          "governance_note": "Raw engine returned ELIGIBLE under RBI/NABARD tenant borrower category, but oral tenancy documentation and bank tenant crop-loan eligibility require verification. Governance safeguard routes determination to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for Central KCC-MISS via Commercial Banks/RRBs (4.0% effective interest up to Rs. 3 Lakh upon prompt repayment).",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Tenant farmer crop loan documentation (Bank oral lease declaration / Joint Liability Group JLG membership verification)"
+            "Tenant farmer crop loan documentation (Bank oral lease declaration / Joint Liability Group JLG membership verification)",
+            "Commercial bank / RRB verification of oral lessee / tenant crop-loan eligibility documentation in Mandya district",
+            "Lead District Bank Mandya / NABARD scale of finance tenant farmer certification"
           ],
           "rule_keys_fired": [
             "KCC_CENTRAL_COMMERCIAL_ELIGIBLE"
@@ -2930,7 +2934,7 @@
     {
       "scenario": {
         "scenario_id": "S045",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z6",
         "agro_climatic_zone": "Southern Dry Zone",
         "district": "Mysuru",
@@ -3333,11 +3337,11 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist, but PMFBY claims are strictly contingent upon notified Gram Panchayat Insurance Unit orders for Kharif 2026. Governance routes to Section B as REQUIRES_VERIFICATION.",
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Ragi, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Ragi. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification and enrollment cut-off dates for rainfed Ragi in H.D. Kote taluk, Mysuru district"
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Ragi in Mysuru district"
           ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
@@ -3531,7 +3535,7 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Field Evidence / Administrative Order Verification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on demographic land interval [1.5, 5.0] ac and encoded income ceiling, but parcel lacks recorded evidence of perennial water source adjacency and the applicable Mysuru rural family income ceiling (recorded income \u20b91.10 L evaluated against unverified rural \u20b91.50 L vs state \u20b92.00 L ceiling order) remains an unverified administrative policy dependency. Governance presentation routes to REQUIRES_VERIFICATION in Section B without numerical scoring.",
+          "governance_note": "Raw engine returned ELIGIBLE based on demographic land interval [1.5, 5.0] ac and encoded income ceiling, but parcel lacks recorded evidence of perennial water source adjacency and the applicable Mysuru rural family income ceiling remains an unverified administrative policy dependency. Governance presentation routes to REQUIRES_VERIFICATION in Section B without numerical scoring.",
           "reason": "Qualifies for Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC) under Individual Borewell Route. 100% subsidized borewell, pump, and electrification package.",
           "disqualifying_factors": [],
           "missing_verifications": [
@@ -3618,7 +3622,7 @@
     {
       "scenario": {
         "scenario_id": "S046",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z6",
         "agro_climatic_zone": "Southern Dry Zone",
         "district": "Chamarajanagar",
@@ -4042,11 +4046,11 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist, but commercial crop insurance requires seasonal Insurance Unit notification verification. Governance routes to Section B as REQUIRES_VERIFICATION.",
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Sugarcane, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Sugarcane. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Sugarcane in Kollegal taluk, Chamarajanagar district"
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Sugarcane in Chamarajanagar district"
           ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"

@@ -63,6 +63,7 @@ from src.eligibility.models import (
 )
 from src.eligibility.engine import EligibilityEngine
 from src.eligibility.availability import AvailabilityFilter
+from src.eligibility.governance import apply_governance_safeguard, PROVISIONAL_SCHEMES
 
 PROVISIONAL_SCHEMES = {
     "SCH008_KA_COOP",

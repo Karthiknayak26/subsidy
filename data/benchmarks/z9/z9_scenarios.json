@@ -391,7 +391,7 @@
       "registered_professional": "NONE",
       "land_ownership_cutoff_pre_feb_2019": true,
       "is_pure_tenant_without_land_title": false,
-      "tenure_documentation": "Title acquired via registered inheritance succession following demise of father in Nov 2021; Death Cert No. DC/UK/2021/8841, Legal Heir Certificate LHC/UK/2022/412, and Bhoomi mutation Form 16 MR No. 2022-T209 (18.03.2022) verified"
+      "tenure_documentation": "Title acquired via registered inheritance succession following demise of father in Nov 2021; Death Cert No. DC/UK/2021/8841, Legal Heir Certificate LHC/UK/2022/412, and Bhoomi mutation Form 16 MR No. 2022-T209 (18.03.2022) verified under PM-KISAN Revised Operational Guidelines \u00a7\u00a75.2\u20135.3.3(i)"
     },
     "statutory_succession_details": {
       "transfer_basis": "INHERITANCE_DUE_TO_DEATH",
@@ -400,9 +400,9 @@
       "death_certificate_number": "DC/UK/2021/8841",
       "legal_heir_certificate_number": "LHC/UK/2022/412",
       "mutation_extract_form_16": "MR No. 2022-T209 (18.03.2022)",
-      "statutory_authority": "PM-KISAN Revised Operational Guidelines Clause 3(d)",
-      "statutory_distinction": "Ownership transferred through inheritance following demise of father; strictly distinct from non-qualifying post-cutoff partition deeds, sale deeds, or gift deeds under Clause 3(d).",
-      "engine_input_interpretation": "land_ownership_cutoff_pre_feb_2019 = True correctly represents statutory compliance under the Clause 3(d) inheritance exception, passing the PMKISAN_CUTOFF_DATE_VERIFIED rule."
+      "statutory_authority": "PM-KISAN Revised Operational Guidelines \u00a7\u00a75.2\u20135.3.3(i)",
+      "statutory_distinction": "Ownership transferred through inheritance resulting from demise of parent (\u00a75.2 and \u00a75.3.3(i)); strictly distinct from post-cutoff sale, partition, or gift deeds which are excluded under \u00a75.3.3(ii).",
+      "engine_input_interpretation": "land_ownership_cutoff_pre_feb_2019 = True correctly represents statutory compliance under the \u00a7\u00a75.2\u20135.3.3(i) inheritance exception, passing the PMKISAN_CUTOFF_DATE_VERIFIED rule."
     },
     "attribute_provenance": {
       "empirical_baseline": "DES Karnataka & Agriculture Department: Coastal/ghats transitional canal-irrigated paddy growers in Yellapur adopting mechanized transplanters and power tillers to address labor shortages.",

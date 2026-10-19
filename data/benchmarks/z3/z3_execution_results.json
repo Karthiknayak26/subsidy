@@ -1,13 +1,13 @@
 {
   "execution_date": "2026-10-15",
-  "benchmark_version": "v1.0.3",
+  "benchmark_version": "v1.0.4",
   "zone": "Z3",
   "scenarios_evaluated": 6,
   "results": [
     {
       "scenario": {
         "scenario_id": "S023",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z3",
         "agro_climatic_zone": "Northern Dry Zone",
         "district": "Vijayapura",
@@ -431,13 +431,13 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned INELIGIBLE due to static crop list omission, but pomegranate is insurable under PMFBY/RWBCIS in Karnataka. Governance presentation routes to REQUIRES_VERIFICATION pending official seasonal notification.",
+          "governance_note": "Raw engine returned INELIGIBLE because Pomegranate is absent from static crop whitelist. In this agro-climatic zone, Pomegranate is covered under weather-based (RWBCIS) or special plantation insurance schemes. Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal scheme notification confirmation.",
           "reason": "Ineligible for PMFBY: Primary crop 'Pomegranate' is not among notified food, oilseed, or commercial crops in Karnataka insurance units.",
           "disqualifying_factors": [
             "Primary crop 'Pomegranate' is not among notified food, oilseed, or commercial crops in Karnataka insurance units."
           ],
           "missing_verifications": [
-            "Verification of Kharif/Rabi 2026 GoK PMFBY/RWBCIS insurance unit notification for Pomegranate in Vijayapura district/taluk"
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Pomegranate in Vijayapura district"
           ],
           "rule_keys_fired": [
             "PMFBY_NON_NOTIFIED_CROP"
@@ -753,7 +753,7 @@
     {
       "scenario": {
         "scenario_id": "S024",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z3",
         "agro_climatic_zone": "Northern Dry Zone",
         "district": "Bagalkot",
@@ -1172,13 +1172,15 @@
           "parent_scheme_id": null,
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
-          "governance_status": "ELIGIBLE",
-          "presentation_section": "Section A (Confirmed Actionable Candidates)",
-          "allow_numerical_scoring": true,
-          "governance_note": "Confirmed verified scheme eligible for clinical 0-3 relevance scoring.",
+          "governance_status": "REQUIRES_VERIFICATION",
+          "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
+          "allow_numerical_scoring": false,
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Maize, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Maize. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
-          "missing_verifications": [],
+          "missing_verifications": [
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Maize in Bagalkot district"
+          ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
@@ -1495,7 +1497,7 @@
     {
       "scenario": {
         "scenario_id": "S025",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z3",
         "agro_climatic_zone": "Northern Dry Zone",
         "district": "Gadag",
@@ -1913,13 +1915,15 @@
           "parent_scheme_id": null,
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
-          "governance_status": "ELIGIBLE",
-          "presentation_section": "Section A (Confirmed Actionable Candidates)",
-          "allow_numerical_scoring": true,
-          "governance_note": "Confirmed verified scheme eligible for clinical 0-3 relevance scoring.",
+          "governance_status": "REQUIRES_VERIFICATION",
+          "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
+          "allow_numerical_scoring": false,
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Onion, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Onion. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
-          "missing_verifications": [],
+          "missing_verifications": [
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Onion in Gadag district"
+          ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
@@ -2234,7 +2238,7 @@
     {
       "scenario": {
         "scenario_id": "S026",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z3",
         "agro_climatic_zone": "Northern Dry Zone",
         "district": "Koppal",
@@ -2630,7 +2634,7 @@
           "governance_status": "INELIGIBLE",
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
-          "governance_note": "Statutorily disqualified under verified criteria.",
+          "governance_note": "Pure tenant farmer without recorded land ownership title is statutorily excluded from PM-KISAN (PMKISAN_PURE_TENANT_EXCLUSION). Placed in Disqualified Candidates.",
           "reason": "Disqualified under PM-KISAN exclusion criteria: Pure tenant farmers / sharecroppers without recorded land title are statutorily ineligible.",
           "disqualifying_factors": [
             "Pure tenant farmers / sharecroppers without recorded land title are statutorily ineligible."
@@ -2654,13 +2658,16 @@
           "parent_scheme_id": null,
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
-          "governance_status": "ELIGIBLE",
-          "presentation_section": "Section A (Confirmed Actionable Candidates)",
-          "allow_numerical_scoring": true,
-          "governance_note": "Confirmed verified scheme eligible for clinical 0-3 relevance scoring.",
+          "governance_status": "REQUIRES_VERIFICATION",
+          "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
+          "allow_numerical_scoring": false,
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Bengalgram, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Bengalgram. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
-          "missing_verifications": [],
+          "missing_verifications": [
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Bengalgram in Koppal district",
+            "Tenant farmer cultivation agreement / oral lessee verification for PMFBY enrollment"
+          ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
@@ -2789,13 +2796,15 @@
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
           "governance_status": "REQUIRES_VERIFICATION",
-          "presentation_section": "Section B (Unverified Documentation / Oral Lease Review)",
+          "presentation_section": "Section B (Unresolved Policy Review / Tenant Crop-Loan Documentation Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on operational landholding, but farmer is a pure tenant on an oral lease without registered title. Governance presentation routes to REQUIRES_VERIFICATION pending bank oral-lease declaration or JLG membership verification.",
+          "governance_note": "Raw engine returned ELIGIBLE under RBI/NABARD tenant borrower category, but oral tenancy documentation and bank tenant crop-loan eligibility require verification. Governance safeguard routes determination to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for Central KCC-MISS via Commercial Banks/RRBs (4.0% effective interest up to Rs. 3 Lakh upon prompt repayment).",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Tenant farmer crop loan documentation (Bank oral lease declaration / JLG membership verification)"
+            "Tenant farmer crop loan documentation (Bank oral lease declaration / Joint Liability Group JLG membership verification)",
+            "Commercial bank / RRB verification of oral lessee / tenant crop-loan eligibility documentation in Koppal district",
+            "Lead District Bank Koppal / NABARD scale of finance tenant farmer certification"
           ],
           "rule_keys_fired": [
             "KCC_CENTRAL_COMMERCIAL_ELIGIBLE"
@@ -2974,7 +2983,7 @@
     {
       "scenario": {
         "scenario_id": "S027",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z3",
         "agro_climatic_zone": "Northern Dry Zone",
         "district": "Vijayapura",
@@ -3382,13 +3391,13 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned INELIGIBLE due to static crop list omission, but pomegranate is insurable under PMFBY/RWBCIS in Karnataka. Governance presentation routes to REQUIRES_VERIFICATION pending official seasonal notification.",
+          "governance_note": "Raw engine returned INELIGIBLE because Pomegranate is absent from static crop whitelist. In this agro-climatic zone, Pomegranate is covered under weather-based (RWBCIS) or special plantation insurance schemes. Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal scheme notification confirmation.",
           "reason": "Ineligible for PMFBY: Primary crop 'Pomegranate' is not among notified food, oilseed, or commercial crops in Karnataka insurance units.",
           "disqualifying_factors": [
             "Primary crop 'Pomegranate' is not among notified food, oilseed, or commercial crops in Karnataka insurance units."
           ],
           "missing_verifications": [
-            "Verification of Kharif/Rabi 2026 GoK PMFBY/RWBCIS insurance unit notification for Pomegranate in Vijayapura district/taluk"
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Pomegranate in Vijayapura district"
           ],
           "rule_keys_fired": [
             "PMFBY_NON_NOTIFIED_CROP"
@@ -3692,7 +3701,7 @@
     {
       "scenario": {
         "scenario_id": "S028",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z3",
         "agro_climatic_zone": "Northern Dry Zone",
         "district": "Bagalkot",
@@ -4090,13 +4099,15 @@
           "parent_scheme_id": null,
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
-          "governance_status": "ELIGIBLE",
-          "presentation_section": "Section A (Confirmed Actionable Candidates)",
-          "allow_numerical_scoring": true,
-          "governance_note": "Confirmed verified scheme eligible for clinical 0-3 relevance scoring.",
+          "governance_status": "REQUIRES_VERIFICATION",
+          "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
+          "allow_numerical_scoring": false,
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Onion, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Onion. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
-          "missing_verifications": [],
+          "missing_verifications": [
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Onion in Bagalkot district"
+          ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],

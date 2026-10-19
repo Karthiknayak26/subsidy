@@ -30,11 +30,12 @@ from src.eligibility.models import (
 )
 from src.eligibility.engine import EligibilityEngine
 from src.eligibility.availability import AvailabilityFilter
+from src.eligibility.governance import apply_governance_safeguard, PROVISIONAL_SCHEMES
 
 ZONE_Z2_PROFILES: List[Dict[str, Any]] = [
     {
         "scenario_id": "S017",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z2",
         "agro_climatic_zone": "North Eastern Dry Zone",
         "district": "Yadgir",
@@ -99,7 +100,7 @@ ZONE_Z2_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S018",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z2",
         "agro_climatic_zone": "North Eastern Dry Zone",
         "district": "Raichur",
@@ -164,7 +165,7 @@ ZONE_Z2_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S019",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z2",
         "agro_climatic_zone": "North Eastern Dry Zone",
         "district": "Kalaburagi",
@@ -229,7 +230,7 @@ ZONE_Z2_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S020",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z2",
         "agro_climatic_zone": "North Eastern Dry Zone",
         "district": "Yadgir",
@@ -294,7 +295,7 @@ ZONE_Z2_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S021",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z2",
         "agro_climatic_zone": "North Eastern Dry Zone",
         "district": "Raichur",
@@ -359,7 +360,7 @@ ZONE_Z2_PROFILES: List[Dict[str, Any]] = [
     },
     {
         "scenario_id": "S022",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z2",
         "agro_climatic_zone": "North Eastern Dry Zone",
         "district": "Kalaburagi",
@@ -471,6 +472,8 @@ def run_execution() -> Dict[str, Any]:
                 "record_type": d.record_type,
                 "parent_scheme_id": d.parent_scheme_id,
                 "status": d.status.value,
+                "raw_engine_status": d.status.value,
+                "is_provisional": d.scheme_id in PROVISIONAL_SCHEMES,
                 "reason": d.reason,
                 "disqualifying_factors": d.disqualifying_factors,
                 "missing_verifications": d.missing_verifications,
@@ -481,18 +484,9 @@ def run_execution() -> Dict[str, Any]:
             
         actionable_serializable = []
         for d in actionable_determinations:
-            actionable_serializable.append({
-                "scheme_id": d.scheme_id,
-                "scheme_name": d.scheme_name,
-                "record_type": d.record_type,
-                "parent_scheme_id": d.parent_scheme_id,
-                "status": d.status.value,
-                "reason": d.reason,
-                "disqualifying_factors": d.disqualifying_factors,
-                "missing_verifications": d.missing_verifications,
-                "rule_keys_fired": d.rule_keys_fired,
-                "availability_state": d.availability_state.value
-            })
+            is_prov = d.scheme_id in PROVISIONAL_SCHEMES
+            item_dict = apply_governance_safeguard(d, sid, profile, is_prov)
+            actionable_serializable.append(item_dict)
             
         execution_results.append({
             "scenario": profile,
@@ -502,7 +496,7 @@ def run_execution() -> Dict[str, Any]:
         
     return {
         "execution_date": "2026-10-15",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone": "Z2",
         "scenarios_evaluated": len(execution_results),
         "results": execution_results
@@ -592,7 +586,7 @@ def generate_execution_report_markdown(exec_data: Dict[str, Any]) -> str:
     doc = []
     doc.append("# Deliverable: Zone Z2 Execution Report (Scenarios S017–S022)\n\n")
     doc.append("**Project:** ML-Based Personalized Government Scheme and Subsidy Recommendation System for Farmers (Karnataka Context)  \n")
-    doc.append("**Milestone:** Benchmark v1.0.3 — Zone Z2 Scenario Generation & Rule-Validation Audit  \n")
+    doc.append("**Milestone:** Benchmark v1.0.4 — Zone Z2 Scenario Generation & Rule-Validation Audit  \n")
     doc.append("**Zone:** Zone Z2 — North Eastern Dry Zone (Kalaburagi, Yadgir, Raichur)  \n")
     doc.append("**Execution Date:** October 2026  \n")
     doc.append("**Engine Version:** Deterministic Eligibility Engine v1.2 (Frozen Commit `7724fa7`)  \n")
@@ -604,7 +598,7 @@ def generate_execution_report_markdown(exec_data: Dict[str, Any]) -> str:
     doc.append("This report documents the rigorous rule-validation of the second batch of six benchmark scenarios (S017–S022) representing the **North Eastern Dry Zone (Zone Z2)**. In strict adherence to the project invariants:\n\n")
     doc.append("1. **Zero Modifications to Frozen Engine:** The eligibility engine (`src/eligibility/engine.py`) and scheme master (`scheme_database/processed/scheme_master.json`) were executed byte-for-byte without altering any rule to force passing.\n")
     doc.append("2. **Zero Synthetic Annotations:** No machine learning models were trained, no synthetic ratings were fabricated, and no expert scores were predicted. These scenarios are validated deterministically before independent expert annotation.\n")
-    doc.append("3. **100% Assignment Table Fidelity:** Every scenario preserves its assigned district, crop, land size, land type, social category, tenure status, and primary policy challenge from `benchmark-design-v1.0.3`.\n")
+    doc.append("3. **100% Assignment Table Fidelity:** Every scenario preserves its assigned district, crop, land size, land type, social category, tenure status, and primary policy challenge from `benchmark-design-v1.0.4`.\n")
     doc.append("4. **Exact Statutory Boundary Testing (Challenge 3):** Scenario `S018` rigorously tests the PM-KISAN pensioner exclusion threshold at exactly ₹10,000/month. The frozen engine fires `PMKISAN_PENSION_OVER_10K_EXCLUSION`, returning `INELIGIBLE` for a non-MTS pensioner despite 2.0 acres of registered landholding.\n")
     doc.append("5. **Three-Valued Logic & Explicit UNKNOWN Attributes (Challenge 4):** Scenario `S020` models unconfirmed borewell grid electricity (`borewell_electric_status = UNKNOWN`) and unknown family tax assessment (`paid_income_tax_last_assessment_year = None`). The frozen engine strictly returns `REQUIRES_VERIFICATION` for both PM-KUSUM Component B (`KUSUM_B_GRID_STATUS_UNKNOWN`) and PM-KISAN (`PMKISAN_INCOME_TAX_UNKNOWN`) without silent default imputation.\n")
     doc.append("6. **Parent Deduplication Enforced:** Abstract parent records (`SCH008`, `SCH010`) are automatically suppressed from actionable recommendations when their concrete child implementations are actionable.\n")

@@ -442,14 +442,14 @@ ZONE_Z9_PROFILES: List[Dict[str, Any]] = [
             "death_certificate_number": "DC/UK/2021/8841",
             "legal_heir_certificate_number": "LHC/UK/2022/412",
             "mutation_extract_form_16": "MR No. 2022-T209 (18.03.2022)",
-            "statutory_authority": "PM-KISAN Revised Operational Guidelines Clause 3(d)",
-            "statutory_distinction": "Ownership transferred through inheritance following demise of father; strictly distinct from non-qualifying post-cutoff partition deeds, sale deeds, or gift deeds under Clause 3(d).",
-            "engine_input_interpretation": "land_ownership_cutoff_pre_feb_2019 = True correctly represents statutory compliance under the Clause 3(d) inheritance exception, passing the PMKISAN_CUTOFF_DATE_VERIFIED rule."
+            "statutory_authority": "PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i)",
+            "statutory_distinction": "Ownership transferred through inheritance following demise of father; strictly distinct from non-qualifying post-cutoff partition deeds, sale deeds, or gift deeds under PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i).",
+            "engine_input_interpretation": "land_ownership_cutoff_pre_feb_2019 = True correctly represents statutory compliance under the PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i) inheritance exception, passing the PMKISAN_CUTOFF_DATE_VERIFIED rule."
         },
         "attribute_provenance": {
             "empirical_baseline": "DES Karnataka & Agriculture Department: Coastal/ghats transitional canal-irrigated paddy growers in Yellapur adopting mechanized transplanters and power tillers to address labor shortages.",
             "farmer_query_inspiration": "KCC Uttara Kannada mechanization queries: Medium farmers with inherited land titles inquiring about SMAM power tiller subsidies and PM-KISAN succession transfers.",
-            "statutory_policy_test": "Benchmark Design v1.0.4 Section 3.3.1 (PM-KISAN Statutory Succession vs Partition Deed Safeguard): Post-01.02.2019 land title transfer qualifies under PM-KISAN Revised Operational Guidelines Clause 3(d) because ownership was transferred through inheritance resulting from demise of parent (transfer_basis = INHERITANCE_DUE_TO_DEATH; Death Cert and mutation extract verified); strictly distinct from post-cutoff partition deeds which remain statutorily excluded; SMAM power tiller subsidy qualifies in Section A; Krishi Bhagya and Ganga Kalyana disqualified due to canal command."
+            "statutory_policy_test": "Benchmark Design v1.0.4 Section 3.3.1 (PM-KISAN Statutory Succession vs Partition Deed Safeguard): Post-01.02.2019 land title transfer qualifies under PM-KISAN Revised Operational Guidelines PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i) because ownership was transferred through inheritance resulting from demise of parent (transfer_basis = INHERITANCE_DUE_TO_DEATH; Death Cert and mutation extract verified); strictly distinct from post-cutoff partition deeds which remain statutorily excluded; SMAM power tiller subsidy qualifies in Section A; Krishi Bhagya and Ganga Kalyana disqualified due to canal command."
         },
         "intended_test_purpose": "SMAM power tiller/paddy transplanter subsidy; medium holding (8.0 ac); post-2019 statutory inheritance upon demise of parent (transfer_basis=INHERITANCE_DUE_TO_DEATH, legal heir cert & mutation verified; distinct from ineligible partition deed); PM-KISAN qualifies in Section A.",
         "unresolved_dependencies": [
@@ -586,13 +586,13 @@ def run_execution() -> Dict[str, Any]:
                 ]
                 gov_note = "Raw engine returned REQUIRES_VERIFICATION due to explicit UNKNOWN tenure cut-off date (land_ownership_cutoff_pre_feb_2019 = None). In strict adherence to Challenge 4 safeguards, missing title evidence must remain REQUIRES_VERIFICATION and never silently default to eligibility or ineligibility. Placed in Section B without scoring."
 
-            # --- GOVERNANCE CASE 3: S064 Statutory Succession (Clause 3(d)) ---
+            # --- GOVERNANCE CASE 3: S064 Statutory Succession (PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i)) ---
             elif sid == "S064" and d.scheme_id == "SCH001":
                 gov_status = "ELIGIBLE"
                 presentation_section = "Section A (Confirmed Actionable Candidates)"
                 allow_scoring = True
                 missing_verifications = []
-                gov_note = "Statutory Inheritance Compliance: Title acquired post-01.02.2019 strictly satisfies PM-KISAN Revised Operational Guidelines Clause 3(d) exception because ownership was transferred through inheritance resulting from demise of parent (transfer_basis = INHERITANCE_DUE_TO_DEATH; father deceased Nov 2021; Death Cert DC/UK/2021/8841 and Bhoomi mutation Form 16 MR No. 2022-T209 verified). Strictly distinct from non-qualifying partition deeds. Raw engine evaluated ELIGIBLE (PMKISAN_CUTOFF_DATE_VERIFIED) and confirmed in Section A."
+                gov_note = "Statutory Inheritance Compliance: Title acquired post-01.02.2019 strictly satisfies PM-KISAN Revised Operational Guidelines PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i) exception because ownership was transferred through inheritance resulting from demise of parent (transfer_basis = INHERITANCE_DUE_TO_DEATH; father deceased Nov 2021; Death Cert DC/UK/2021/8841 and Bhoomi mutation Form 16 MR No. 2022-T209 verified). Strictly distinct from non-qualifying partition deeds. Raw engine evaluated ELIGIBLE (PMKISAN_CUTOFF_DATE_VERIFIED) and confirmed in Section A."
 
             # --- GOVERNANCE CASE 4: S063 Solar Pump Prerequisite Verification ---
             elif sid == "S063" and d.scheme_id == "SCH006":
@@ -748,7 +748,7 @@ def generate_scenario_markdown(profile: Dict[str, Any], actionable: List[Dict[st
         ssd = profile["statutory_succession_details"]
         lines.extend([
             "",
-            "## Statutory Succession & Inheritance Details (PM-KISAN Clause 3(d))",
+            "## Statutory Succession & Inheritance Details (PM-KISAN PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i))",
             f"- **Transfer Basis:** `{ssd['transfer_basis']}`",
             f"- **Actual Acquisition Date:** {ssd['actual_acquisition_date']}",
             f"- **Parent Demise Date:** {ssd['parent_demise_date']}",
@@ -801,7 +801,7 @@ def generate_execution_report(execution_output: Dict[str, Any]) -> str:
     doc.append("6. **Crop Insurance Decoupling (PMFBY/RWBCIS):** Static whitelist results from the raw engine are decoupled from governance presentation across all six scenarios. Unverified seasonal Insurance Unit (Gram Panchayat/Hobli level) notifications are strictly routed to Section B as `REQUIRES_VERIFICATION` with numerical scoring disabled.\n")
     doc.append("7. **Provisional Schemes Quarantine:** Corporation schemes (`SCH008_KA_COOP`) are strictly quarantined in Section B without clinical scoring.\n")
     doc.append("8. **Challenge 4: Three-Valued Logic & Unknown Title Handling (S062):** Missing land title cut-off date (`land_ownership_cutoff_pre_feb_2019 = None`) strictly returns `REQUIRES_VERIFICATION` in PM-KISAN (`PMKISAN_CUTOFF_DATE_UNKNOWN`) and routes title-dependent schemes to Section B. Universal diagnostic access for Soil Health Card (`SCH009`) is preserved in Section A.\n")
-    doc.append("9. **S064 Statutory Inheritance Succession (Clause 3(d)):** Ownership acquired post-01.02.2019 is strictly verified under `transfer_basis = INHERITANCE_DUE_TO_DEATH` resulting from parent demise (Nov 2021), supported by registered death certificate, legal heir order, and Bhoomi mutation extract. Distinct from ineligible post-cutoff partition deeds; qualifies for PM-KISAN in Section A.\n")
+    doc.append("9. **S064 Statutory Inheritance Succession (PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i)):** Ownership acquired post-01.02.2019 is strictly verified under `transfer_basis = INHERITANCE_DUE_TO_DEATH` resulting from parent demise (Nov 2021), supported by registered death certificate, legal heir order, and Bhoomi mutation extract. Distinct from ineligible post-cutoff partition deeds; qualifies for PM-KISAN in Section A.\n")
     doc.append("10. **S063 Solar Pump Prerequisites & Boundary Test:** Landholding is exactly 2.5 acres (boundary value classified as Small [2.5, 5.0]). Operational water source verified as `Borewell (Non-energized)` and electric status as `UNENERGIZED_OFF_GRID`, qualifying for PM-KUSUM Component B in Section A.\n")
     doc.append("11. **S061 Pure Tenancy Routing (Challenge 5):** Pure tenant without title deed is statutorily excluded from PM-KISAN (`PMKISAN_PURE_TENANT_EXCLUSION`), but qualifies for institutional crop loan credit under KCC (`SCH008_CENTRAL`) tenant guidelines.\n\n")
     

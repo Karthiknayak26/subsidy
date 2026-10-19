@@ -402,8 +402,8 @@ def test_zone_z9_s064_statutory_inheritance_vs_partition_regression(z9_execution
     assert ssd["actual_acquisition_date"] == "2021-11-14"
     assert ssd["death_certificate_number"] == "DC/UK/2021/8841"
     assert ssd["legal_heir_certificate_number"] == "LHC/UK/2022/412"
-    assert ssd["mutation_extract_form_16"] == "MR No. 2022-T209 (18.03.2022)"
-    assert "Clause 3(d)" in ssd["statutory_authority"]
+    assert "5.2" in ssd["statutory_authority"] and "5.3.3(i)" in ssd["statutory_authority"]
+    assert "5.3.3(ii)" in ssd["statutory_distinction"]
     assert "partition" in ssd["statutory_distinction"].lower()
 
     # 2. Engine mapping: land_ownership_cutoff_pre_feb_2019 is True

@@ -1,13 +1,13 @@
 {
   "execution_date": "2026-10-16",
-  "benchmark_version": "v1.0.3",
+  "benchmark_version": "v1.0.4",
   "zone": "Z7",
   "scenarios_evaluated": 6,
   "results": [
     {
       "scenario": {
         "scenario_id": "S047",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z7",
         "agro_climatic_zone": "Southern Transition Zone",
         "district": "Hassan",
@@ -433,11 +433,11 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist, but commercial crop insurance is subject to seasonal notification and Insurance Unit delineation under PMFBY. Governance presentation routes to REQUIRES_VERIFICATION in Section B pending seasonal notification verification.",
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Maize, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Maize. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Maize in Hassan district"
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Maize in Hassan district"
           ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
@@ -756,7 +756,7 @@
     {
       "scenario": {
         "scenario_id": "S048",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z7",
         "agro_climatic_zone": "Southern Transition Zone",
         "district": "Shivamogga",
@@ -1160,14 +1160,14 @@
           "status": "REQUIRES_VERIFICATION",
           "raw_engine_status": "REQUIRES_VERIFICATION",
           "governance_status": "REQUIRES_VERIFICATION",
-          "presentation_section": "Section B (Unresolved Statutory Evidence / Title Regularization Required)",
+          "presentation_section": "Section B (Unresolved Statutory Evidence / Land Title Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned REQUIRES_VERIFICATION due to explicit UNKNOWN tenure cut-off date and UNKNOWN monthly pension amount. Governance presentation places in Section B without scoring.",
+          "governance_note": "Raw engine returned REQUIRES_VERIFICATION due to explicit UNKNOWN tenure cut-off date (land_ownership_cutoff_pre_feb_2019 = None). In strict adherence to Challenge 4 safeguards, missing title evidence must remain REQUIRES_VERIFICATION and never silently default to eligibility or ineligibility. Placed in Section B without scoring.",
           "reason": "Requires verification of statutory documents: Verification of land ownership title record date (must be on or before 01.02.2019 or inherited).; Verification of monthly pension amount for family members.",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Verification of land ownership title record date (must be on or before 01.02.2019 or succession)",
-            "Verification of monthly pension amount and Class IV / MTS exemption status for family members"
+            "Verification of land ownership title record date (must be on or before 01.02.2019 or statutory succession upon death under \u00a7\u00a75.1\u20135.3)",
+            "Revenue Department certification of land ownership record date / inheritance mutation order on RTC for Shivamogga district"
           ],
           "rule_keys_fired": [
             "PMKISAN_LAND_SIZE_POSITIVE",
@@ -1189,13 +1189,13 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned INELIGIBLE because Ginger is not in the engine's static whitelist, but spice crops are notified under RWBCIS / PMFBY in Malnad districts. Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal scheme notification confirmation.",
+          "governance_note": "Raw engine returned INELIGIBLE because Ginger is absent from static crop whitelist. In this agro-climatic zone, Ginger is covered under weather-based (RWBCIS) or special plantation insurance schemes. Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal scheme notification confirmation.",
           "reason": "Ineligible for PMFBY: Primary crop 'Ginger' is not among notified food, oilseed, or commercial crops in Karnataka insurance units.",
           "disqualifying_factors": [
             "Primary crop 'Ginger' is not among notified food, oilseed, or commercial crops in Karnataka insurance units."
           ],
           "missing_verifications": [
-            "Verification of GoK Kharif 2026 PMFBY/RWBCIS Insurance Unit (Gram Panchayat/Hobli level) notification for Ginger in Shivamogga district"
+            "Verification of GoK Kharif 2026 RWBCIS/PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Ginger in Shivamogga district"
           ],
           "rule_keys_fired": [
             "PMFBY_NON_NOTIFIED_CROP"
@@ -1307,7 +1307,7 @@
           "reason": "Qualifies for MIDH Protected Cultivation subsidy (50% cost norm for Polyhouse / Shade Net up to 4,000 m\u00b2).",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Revenue Department certification of land ownership record date / inheritance mutation order on RTC for Shikaripura taluk"
+            "Revenue Department certification of land ownership record date / inheritance mutation order on RTC for Shivamogga district"
           ],
           "rule_keys_fired": [
             "MIDH_HORTICULTURE_CROP_VERIFIED",
@@ -1514,7 +1514,18 @@
     {
       "scenario": {
         "scenario_id": "S049",
-        "benchmark_version": "v1.0.3",
+        "statutory_succession_details": {
+          "transfer_basis": "INHERITANCE_DUE_TO_DEATH",
+          "actual_acquisition_date": "2022-06-14",
+          "parent_demise_date": "2022-05-15",
+          "death_certificate_number": "DC-2022-4419",
+          "legal_heir_certificate_number": "LND/CR-104/2022-23",
+          "mutation_extract_form_16": "MR-2022-0815 (Form 16)",
+          "statutory_authority": "PM-KISAN Revised Operational Guidelines \u00a7\u00a75.2\u20135.3.3(i)",
+          "statutory_distinction": "Ownership transferred through inheritance resulting from demise of parent (\u00a75.2 and \u00a75.3.3(i)); strictly distinct from post-cutoff sale, partition, or gift deeds which are excluded under \u00a75.3.3(ii).",
+          "engine_input_interpretation": "land_ownership_cutoff_pre_feb_2019 = True correctly represents statutory compliance under the \u00a7\u00a75.2\u20135.3.3(i) inheritance exception, passing the PMKISAN_CUTOFF_DATE_VERIFIED rule."
+        },
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z7",
         "agro_climatic_zone": "Southern Transition Zone",
         "district": "Chikkamagaluru",
@@ -1927,7 +1938,7 @@
           "governance_status": "ELIGIBLE",
           "presentation_section": "Section A (Confirmed Actionable Candidates)",
           "allow_numerical_scoring": true,
-          "governance_note": "Confirmed verified scheme eligible for clinical 0-3 relevance scoring.",
+          "governance_note": "Statutory Inheritance Compliance: Title acquired post-01.02.2019 strictly satisfies PM-KISAN Revised Operational Guidelines \u00a7\u00a75.2\u20135.3.3(i) exception because ownership was transferred through inheritance resulting from demise of parent (transfer_basis = INHERITANCE_DUE_TO_DEATH; parent deceased 2022-05-15; Death Cert DC-2022-4419, Legal Heir Order LND/CR-104/2022-23, and Bhoomi mutation Form 16 MR-2022-0815 (Form 16) verified). Strictly distinct from non-qualifying post-cutoff sale, partition, or gift deeds under \u00a75.3.3(ii). Raw engine evaluated ELIGIBLE (PMKISAN_CUTOFF_DATE_VERIFIED) and confirmed in Section A.",
           "reason": "Qualifies for PM-KISAN: Landholding family registered in land records with no disqualifying exclusions.",
           "disqualifying_factors": [],
           "missing_verifications": [],
@@ -1951,13 +1962,13 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned INELIGIBLE because Potato is absent from the static whitelist, but horticultural crop insurance requires seasonal Insurance Unit notification confirmation under PMFBY/RWBCIS. Governance routes to Section B as REQUIRES_VERIFICATION.",
+          "governance_note": "Raw engine returned INELIGIBLE because Potato is absent from static crop whitelist. In this agro-climatic zone, Potato is covered under weather-based (RWBCIS) or special plantation insurance schemes. Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal scheme notification confirmation.",
           "reason": "Ineligible for PMFBY: Primary crop 'Potato' is not among notified food, oilseed, or commercial crops in Karnataka insurance units.",
           "disqualifying_factors": [
             "Primary crop 'Potato' is not among notified food, oilseed, or commercial crops in Karnataka insurance units."
           ],
           "missing_verifications": [
-            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Potato in Chikkamagaluru district"
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Potato in Chikkamagaluru district"
           ],
           "rule_keys_fired": [
             "PMFBY_NON_NOTIFIED_CROP"
@@ -2278,7 +2289,7 @@
     {
       "scenario": {
         "scenario_id": "S050",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z7",
         "agro_climatic_zone": "Southern Transition Zone",
         "district": "Hassan",
@@ -2701,11 +2712,11 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist, but commercial plantation crop insurance requires seasonal Insurance Unit notification verification. Governance routes to Section B as REQUIRES_VERIFICATION.",
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Arecanut, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Arecanut. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Verification of GoK Kharif 2026 PMFBY/RWBCIS Insurance Unit (Gram Panchayat/Hobli level) notification for Arecanut in Hassan district"
+            "Verification of GoK Kharif 2026 RWBCIS/PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Arecanut in Hassan district"
           ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
@@ -3021,7 +3032,7 @@
     {
       "scenario": {
         "scenario_id": "S051",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z7",
         "agro_climatic_zone": "Southern Transition Zone",
         "district": "Shivamogga",
@@ -3435,11 +3446,11 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist, but PMFBY claims are strictly contingent upon notified Gram Panchayat Insurance Unit orders for Kharif 2026. Governance routes to Section B as REQUIRES_VERIFICATION.",
+          "governance_note": "Raw engine returned ELIGIBLE based on static crop whitelist for Maize, but commercial crop insurance claims strictly require verified Kharif 2026 Insurance Unit notification orders. Governance presentation routes to Section B as REQUIRES_VERIFICATION without numerical scoring.",
           "reason": "Qualifies for PMFBY crop insurance for Maize. Premium subsidized by Center & State; claim indemnity contingent upon surveyed loss.",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for rainfed Maize in Bhadravati taluk, Shivamogga district"
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Maize in Shivamogga district"
           ],
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
@@ -3748,7 +3759,7 @@
     {
       "scenario": {
         "scenario_id": "S052",
-        "benchmark_version": "v1.0.3",
+        "benchmark_version": "v1.0.4",
         "zone_id": "Z7",
         "agro_climatic_zone": "Southern Transition Zone",
         "district": "Chikkamagaluru",
@@ -4155,13 +4166,13 @@
           "governance_status": "REQUIRES_VERIFICATION",
           "presentation_section": "Section B (Unresolved Policy Review / Seasonal Notification Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned INELIGIBLE due to static whitelist, but potato insurance coverage requires seasonal notification verification under PMFBY/RWBCIS. Governance routes to Section B as REQUIRES_VERIFICATION.",
+          "governance_note": "Raw engine returned INELIGIBLE because Potato is absent from static crop whitelist. In this agro-climatic zone, Potato is covered under weather-based (RWBCIS) or special plantation insurance schemes. Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal scheme notification confirmation.",
           "reason": "Ineligible for PMFBY: Primary crop 'Potato' is not among notified food, oilseed, or commercial crops in Karnataka insurance units.",
           "disqualifying_factors": [
             "Primary crop 'Potato' is not among notified food, oilseed, or commercial crops in Karnataka insurance units."
           ],
           "missing_verifications": [
-            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Potato in Kadur taluk, Chikkamagaluru district"
+            "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Potato in Chikkamagaluru district"
           ],
           "rule_keys_fired": [
             "PMFBY_NON_NOTIFIED_CROP"

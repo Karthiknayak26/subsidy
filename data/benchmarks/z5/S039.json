@@ -1,6 +1,17 @@
 {
   "scenario_id": "S039",
-  "benchmark_version": "v1.0.3",
+  "statutory_succession_details": {
+    "transfer_basis": "INHERITANCE_DUE_TO_DEATH",
+    "actual_acquisition_date": "2021-08-10",
+    "parent_demise_date": "2021-08-10",
+    "death_certificate_number": "DC-2021-9872",
+    "legal_heir_certificate_number": "LND/CR-089/2021-22",
+    "mutation_extract_form_16": "MR-2021-0412 (Form 12)",
+    "statutory_authority": "PM-KISAN Revised Operational Guidelines \u00a7\u00a75.2\u20135.3.3(i)",
+    "statutory_distinction": "Ownership transferred through inheritance resulting from demise of parent (\u00a75.2 and \u00a75.3.3(i)); strictly distinct from post-cutoff sale, partition, or gift deeds which are excluded under \u00a75.3.3(ii).",
+    "engine_input_interpretation": "land_ownership_cutoff_pre_feb_2019 = True correctly represents statutory compliance under the \u00a7\u00a75.2\u20135.3.3(i) inheritance exception, passing the PMKISAN_CUTOFF_DATE_VERIFIED rule."
+  },
+  "benchmark_version": "v1.0.4",
   "zone_id": "Z5",
   "agro_climatic_zone": "Eastern Dry Zone",
   "district": "Chikkaballapura",
