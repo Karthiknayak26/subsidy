@@ -1,0 +1,68 @@
+{
+  "scenario_id": "S068",
+  "benchmark_version": "v1.0.4",
+  "zone_id": "Z10",
+  "agro_climatic_zone": "Coastal Zone",
+  "district": "Udupi",
+  "crop_primary": "Paddy",
+  "crop_secondary": "Pulses",
+  "land_size_acres": 1.5,
+  "land_type": "Wetland/valley",
+  "social_category": "Minority",
+  "farmer_category": "Marginal (< 2.5 acres)",
+  "existing_assets": [
+    "Wetland Inflow Drainage Sump"
+  ],
+  "annual_family_income_lakh": 0.95,
+  "immediate_need": "PRODUCTION_CREDIT",
+  "paid_income_tax_last_assessment_year": false,
+  "govt_employee_category": "NONE",
+  "superannuated_pensioner_monthly_amount": 0.0,
+  "pensioner_is_mts_exempt": false,
+  "registered_professional": "NONE",
+  "land_ownership_cutoff_pre_feb_2019": null,
+  "is_pure_tenant_without_land_title": true,
+  "borewell_electric_status": "NONE",
+  "prior_micro_irrigation_subsidy_years_ago": null,
+  "prior_farm_pond_subsidy_years_ago": null,
+  "prior_machinery_subsidy_years_ago": null,
+  "prior_ganga_kalyana_in_family": false,
+  "community_pool_acres": 0.0,
+  "community_pool_beneficiaries_count": 0,
+  "farming_stage": "Transplanting / Tillering",
+  "season": "Kharif 2026",
+  "kcc_query_text_example": "Minority marginal tenant farmer cultivating 1.5 acres coastal wetland paddy in Kundapura taluk, Udupi; operates under informal oral lease agreement with village panchayat certificate (no registered land title); seeking crop loan under Kisan Credit Card (KCC) through regional rural bank; inquiring about tenant crop loan documentation and PMFBY enrollment.",
+  "landholding_details": {
+    "total_operational_holding_acres": 1.5,
+    "qualifying_parcel_acres": 1.5,
+    "requested_subsidized_area_ha": null,
+    "land_classification_interval": "[0.0, 2.5) Marginal",
+    "physical_area_consistency": "PASS: 1.5 ac holding matches parcel"
+  },
+  "water_and_irrigation": {
+    "operational_water_source": "Wetland Inflow",
+    "borewell_electric_status": "NONE",
+    "grid_connection_evidence": "Natural coastal wetland tidal/stream inflow drainage sump; no energized pump"
+  },
+  "statutory_flags": {
+    "paid_income_tax_last_assessment_year": false,
+    "govt_employee_category": "NONE",
+    "superannuated_pensioner_monthly_amount": 0.0,
+    "pensioner_is_mts_exempt": false,
+    "registered_professional": "NONE",
+    "land_ownership_cutoff_pre_feb_2019": null,
+    "is_pure_tenant_without_land_title": true,
+    "tenure_documentation": "Informal lease agreement / oral tenancy with village panchayat certificate in Kundapura taluk; no recorded title (Pure Tenant)"
+  },
+  "attribute_provenance": {
+    "empirical_baseline": "NABARD & Lead District Bank (Canara Bank Udupi): Coastal wetland paddy cultivation in Kundapura/Brahmavara taluks with significant tenant farming relying on PACS/RRB crop loans without formal RTC title deeds.",
+    "farmer_query_inspiration": "KCC Udupi tenant credit queries: Pure tenant farmers cultivating coastal khazan/wetland paddy inquiring about KCC crop loans and tenant cultivation certificates.",
+    "statutory_policy_test": "Benchmark Challenge 5 (Pure Tenancy & Agricultural Credit Routing): Pure tenant strictly disqualified from PM-KISAN under PMKISAN_PURE_TENANT_EXCLUSION; KCC commercial credit qualifies under raw engine (KCC_CENTRAL_COMMERCIAL_ELIGIBLE) pursuant to RBI/NABARD guidelines for oral lessees, but governance routes SCH008_CENTRAL to Section B as REQUIRES_VERIFICATION without numerical scoring pending oral tenancy documentation / bank tenant crop-loan verification; PMFBY routed to Section B pending seasonal IU notification and tenant declaration verification; SMAM and Soil Health Card qualify in Section A."
+  },
+  "intended_test_purpose": "Challenge 5 pure tenant coastal wetland paddy; strictly excluded from PM-KISAN; KCC Central raw ELIGIBLE but routed to Section B pending tenant loan documentation; PMFBY routed to Section B; SMAM and SHC in Section A.",
+  "unresolved_dependencies": [
+    "Commercial bank / Karnataka Gramin Bank verification of oral lessee / tenant crop-loan eligibility documentation in Kundapura taluk, Udupi district",
+    "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification and tenant cultivation declaration protocol for Paddy in Kundapura taluk",
+    "Lead District Bank Udupi tenant farmer scale of finance certification"
+  ]
+}
