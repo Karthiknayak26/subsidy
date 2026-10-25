@@ -224,55 +224,149 @@ def evaluate_model_acceptance_criteria(
     }
 
 
+from src.evaluation.benchmark_candidates import FROZEN_BENCHMARK_SECTION_A_CANDIDATES
+
+
 def evaluate_standalone_ranking_system(
     rankings_by_scenario: Dict[str, Sequence[str]],
-    consensus_labels_by_scenario: Dict[str, Dict[str, float]],
-    scenario_to_zone_map: Optional[Dict[str, int]] = None
+    consensus_labels_by_scenario: Dict[str, Dict[str, int]],
+    scenario_to_zone_map: Optional[Dict[str, int]] = None,
+    allow_top_k: bool = False
 ) -> Dict[str, Any]:
     """
     Evaluates a single ranking system (e.g. the frozen deterministic heuristic baseline)
     independently against frozen consensus relevance ground truth for Benchmark v1.0.4.
     
-    Computes per-scenario and zone-level NDCG@3 and MRR according to the pre-registered standards.
+    STRICT CONTROLS ENFORCED:
+    1. Rejects missing/extra benchmark scenario keys (strictly S011-S070).
+    2. Enforces exact frozen scenario-to-zone mapping and strict integer zone types (Z1-Z10).
+    3. Validates consensus labels: every scenario must have labels for exactly all
+       expected Section A candidates, and every label must be an integer in {0, 1, 2, 3}.
+    4. Validates rankings:
+       - No duplicate scheme IDs.
+       - No unknown scheme IDs.
+       - Unless allow_top_k is True, must contain each expected Section A candidate exactly once.
+       - If allow_top_k is True, must be a non-empty subset of valid Section A candidates.
+    5. Calculates IDCG@3 from ALL eligible Section A candidate labels, preventing
+       distortion when partial top-k recommendation lists are evaluated.
     """
     if scenario_to_zone_map is None:
         scenario_to_zone_map = FROZEN_BENCHMARK_ZONE_MAP
     
-    EXPECTED_SCENARIOS = {f"S{i:03d}" for i in range(11, 71)}
+    EXPECTED_SCENARIOS = {f"S{i:03d}": None for i in range(11, 71)}
+    expected_keys = set(EXPECTED_SCENARIOS.keys())
     
-    if set(rankings_by_scenario.keys()) != EXPECTED_SCENARIOS:
-        missing = EXPECTED_SCENARIOS - set(rankings_by_scenario.keys())
-        extra = set(rankings_by_scenario.keys()) - EXPECTED_SCENARIOS
+    # 1. Validate scenario keys
+    ranking_keys = set(rankings_by_scenario.keys())
+    if ranking_keys != expected_keys:
+        missing = expected_keys - ranking_keys
+        extra = ranking_keys - expected_keys
         raise ValueError(
             f"Rankings scenario keys mismatch Benchmark v1.0.4. Missing: {sorted(missing)}, Extra: {sorted(extra)}"
         )
     
-    if set(consensus_labels_by_scenario.keys()) != EXPECTED_SCENARIOS:
-        missing = EXPECTED_SCENARIOS - set(consensus_labels_by_scenario.keys())
-        extra = set(consensus_labels_by_scenario.keys()) - EXPECTED_SCENARIOS
+    consensus_keys = set(consensus_labels_by_scenario.keys())
+    if consensus_keys != expected_keys:
+        missing = expected_keys - consensus_keys
+        extra = consensus_keys - expected_keys
         raise ValueError(
             f"Consensus labels scenario keys mismatch Benchmark v1.0.4. Missing: {sorted(missing)}, Extra: {sorted(extra)}"
         )
 
+    zone_map_keys = set(scenario_to_zone_map.keys())
+    if zone_map_keys != expected_keys:
+        missing = expected_keys - zone_map_keys
+        extra = zone_map_keys - expected_keys
+        raise ValueError(
+            f"Scenario-to-zone map keys mismatch Benchmark v1.0.4. Missing: {sorted(missing)}, Extra: {sorted(extra)}"
+        )
+
+    # 2. Strict Zone Validation
+    zone_scenario_counts: Dict[int, int] = {z: 0 for z in range(1, 11)}
+    for sid in sorted(expected_keys):
+        zone = scenario_to_zone_map[sid]
+        if isinstance(zone, bool) or not isinstance(zone, int):
+            raise ValueError(
+                f"Invalid zone ID type for scenario {sid}: {zone!r} ({type(zone).__name__}). Must be integer."
+            )
+        if zone not in range(1, 11):
+            raise ValueError(f"Invalid zone ID: {zone} for scenario {sid}. Must be integer between 1 and 10.")
+        expected_zone = FROZEN_BENCHMARK_ZONE_MAP[sid]
+        if zone != expected_zone:
+            raise ValueError(
+                f"Scenario {sid} is assigned to zone {zone}, expected zone {expected_zone} per Benchmark v1.0.4 specification."
+            )
+        zone_scenario_counts[zone] += 1
+
+    for z in range(1, 11):
+        if zone_scenario_counts[z] != 6:
+            raise ValueError(
+                f"Zone Z{z} has {zone_scenario_counts[z]} scenarios; expected exactly 6 scenarios for Benchmark v1.0.4."
+            )
+
+    # 3. Candidate-Set and Score Integrity Validation
     ndcg_by_scenario: Dict[str, float] = {}
     mrr_by_scenario: Dict[str, float] = {}
     zone_ndcg: Dict[int, List[float]] = {z: [] for z in range(1, 11)}
     zone_mrr: Dict[int, List[float]] = {z: [] for z in range(1, 11)}
 
-    for sid in sorted(EXPECTED_SCENARIOS):
+    for sid in sorted(expected_keys):
+        expected_cands = FROZEN_BENCHMARK_SECTION_A_CANDIDATES[sid]
+        expected_set = set(expected_cands)
+        labels = consensus_labels_by_scenario[sid]
+        ranked_schemes = rankings_by_scenario[sid]
         zone = scenario_to_zone_map[sid]
-        if zone != FROZEN_BENCHMARK_ZONE_MAP[sid]:
+
+        # Validate consensus labels candidate set
+        label_set = set(labels.keys())
+        if label_set != expected_set:
+            missing_labels = sorted(expected_set - label_set)
+            extra_labels = sorted(label_set - expected_set)
             raise ValueError(
-                f"Scenario {sid} is assigned to zone {zone}, expected zone {FROZEN_BENCHMARK_ZONE_MAP[sid]}"
+                f"Scenario {sid} consensus labels mismatch expected Section A candidates. "
+                f"Missing: {missing_labels}, Extra: {extra_labels}"
             )
 
-        ranked_schemes = rankings_by_scenario[sid]
-        labels = consensus_labels_by_scenario[sid]
+        # Validate consensus label score values: integer in {0, 1, 2, 3}
+        for scheme_id, score in labels.items():
+            if isinstance(score, bool) or not isinstance(score, int) or score not in (0, 1, 2, 3):
+                raise ValueError(
+                    f"Invalid consensus relevance score for scenario {sid}, scheme {scheme_id}: {score!r}. "
+                    f"Must be an integer in {{0, 1, 2, 3}}."
+                )
 
-        # Extract ordered score vector for candidate schemes
-        score_vector = [float(labels.get(scheme_id, 0.0)) for scheme_id in ranked_schemes]
-        
-        ndcg_val = compute_ndcg_at_k(score_vector, k=3)
+        # Validate rankings
+        if not isinstance(ranked_schemes, Sequence) or isinstance(ranked_schemes, (str, bytes)):
+            raise ValueError(f"Scenario {sid} ranking must be a sequence of scheme IDs, got {type(ranked_schemes).__name__}.")
+
+        if len(ranked_schemes) != len(set(ranked_schemes)):
+            raise ValueError(f"Scenario {sid} ranking contains duplicate scheme IDs: {ranked_schemes}")
+
+        unknown_schemes = sorted(set(ranked_schemes) - expected_set)
+        if unknown_schemes:
+            raise ValueError(f"Scenario {sid} ranking contains unknown scheme IDs: {unknown_schemes}")
+
+        if not allow_top_k:
+            if set(ranked_schemes) != expected_set:
+                missing_candidates = sorted(expected_set - set(ranked_schemes))
+                raise ValueError(
+                    f"Scenario {sid} ranking must contain each expected Section A candidate exactly once. "
+                    f"Missing: {missing_candidates}"
+                )
+        else:
+            if len(ranked_schemes) == 0:
+                raise ValueError(f"Scenario {sid} ranking cannot be empty.")
+
+        # Compute DCG@3 on the provided ranking
+        score_vector = [float(labels[scheme_id]) for scheme_id in ranked_schemes]
+        dcg_val = compute_dcg_at_k(score_vector, k=3)
+
+        # IDCG@3 is strictly computed from ALL Section A candidates for this scenario
+        all_candidate_scores = [float(labels[c]) for c in expected_cands]
+        ideal_scores = sorted(all_candidate_scores, reverse=True)
+        idcg_val = compute_dcg_at_k(ideal_scores, k=3)
+
+        ndcg_val = (dcg_val / idcg_val) if idcg_val > 0.0 else 0.0
         mrr_val = compute_mrr(score_vector, threshold=2.0)
 
         ndcg_by_scenario[sid] = ndcg_val
@@ -294,4 +388,5 @@ def evaluate_standalone_ranking_system(
         "zone_mean_ndcg3": zone_mean_ndcg,
         "zone_mean_mrr": zone_mean_mrr
     }
+
 

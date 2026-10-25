@@ -202,23 +202,145 @@ def test_acceptance_criteria_metric_values_validation():
         evaluate_model_acceptance_criteria(valid_base, corrupted_bool, valid_zone_map)
 
 
-def test_evaluate_standalone_ranking_system():
-    """Verify evaluate_standalone_ranking_system accurately computes per-scenario and zone baseline metrics."""
-    from src.evaluation.metrics import evaluate_standalone_ranking_system, FROZEN_BENCHMARK_ZONE_MAP
+def test_evaluate_standalone_ranking_system_full_and_topk():
+    """Verify evaluate_standalone_ranking_system computes accurate metrics for both full and top-k rankings."""
+    from src.evaluation.metrics import (
+        evaluate_standalone_ranking_system,
+        FROZEN_BENCHMARK_SECTION_A_CANDIDATES,
+        FROZEN_BENCHMARK_ZONE_MAP
+    )
 
-    dummy_rankings = {f"S{i:03d}": ["SCH001", "SCH004", "SCH005"] for i in range(11, 71)}
-    dummy_labels = {f"S{i:03d}": {"SCH001": 3.0, "SCH004": 2.0, "SCH005": 1.0} for i in range(11, 71)}
+    # Build canonical consensus labels (all integer scores in {0, 1, 2, 3})
+    valid_labels = {}
+    full_rankings = {}
+    top3_rankings = {}
 
-    res = evaluate_standalone_ranking_system(dummy_rankings, dummy_labels)
+    for sid in [f"S{i:03d}" for i in range(11, 71)]:
+        cands = list(FROZEN_BENCHMARK_SECTION_A_CANDIDATES[sid])
+        # Assign descending integer scores
+        sc_map = {}
+        for idx, cid in enumerate(cands):
+            sc_map[cid] = max(0, 3 - idx)
+        valid_labels[sid] = sc_map
+        full_rankings[sid] = cands  # perfect full ranking
+        top3_rankings[sid] = cands[:3]  # perfect top-3 ranking
 
-    assert math.isclose(res["global_mean_ndcg3"], 1.0, rel_tol=1e-5)
-    assert math.isclose(res["global_mean_mrr"], 1.0, rel_tol=1e-5)
-    assert len(res["ndcg3_by_scenario"]) == 60
-    assert len(res["mrr_by_scenario"]) == 60
-    assert len(res["zone_mean_ndcg3"]) == 10
-    assert len(res["zone_mean_mrr"]) == 10
+    # 1. Full ranking evaluation
+    res_full = evaluate_standalone_ranking_system(full_rankings, valid_labels, allow_top_k=False)
+    assert math.isclose(res_full["global_mean_ndcg3"], 1.0, rel_tol=1e-5)
+    assert math.isclose(res_full["global_mean_mrr"], 1.0, rel_tol=1e-5)
+    assert len(res_full["ndcg3_by_scenario"]) == 60
+    assert len(res_full["mrr_by_scenario"]) == 60
+    assert len(res_full["zone_mean_ndcg3"]) == 10
     for z in range(1, 11):
-        assert math.isclose(res["zone_mean_ndcg3"][z], 1.0, rel_tol=1e-5)
+        assert math.isclose(res_full["zone_mean_ndcg3"][z], 1.0, rel_tol=1e-5)
+
+    # 2. Top-3 ranking evaluation with IDCG from all candidate labels
+    res_top3 = evaluate_standalone_ranking_system(top3_rankings, valid_labels, allow_top_k=True)
+    assert math.isclose(res_top3["global_mean_ndcg3"], 1.0, rel_tol=1e-5)
+    assert math.isclose(res_top3["global_mean_mrr"], 1.0, rel_tol=1e-5)
+
+
+def test_evaluate_standalone_idcg_computed_from_all_candidates():
+    """Verify IDCG is computed from all Section A candidates, properly penalizing sub-optimal top-3."""
+    from src.evaluation.metrics import evaluate_standalone_ranking_system, FROZEN_BENCHMARK_SECTION_A_CANDIDATES
+
+    # Create scenario labels where top candidate has score 3, but ranking supplies bottom 3 candidates
+    valid_labels = {}
+    suboptimal_top3 = {}
+
+    for sid in [f"S{i:03d}" for i in range(11, 71)]:
+        cands = list(FROZEN_BENCHMARK_SECTION_A_CANDIDATES[sid])
+        sc_map = {cid: 0 for cid in cands}
+        # First candidate is highly relevant (3), others are 0 or 1
+        sc_map[cands[0]] = 3
+        if len(cands) > 1:
+            sc_map[cands[1]] = 1
+        valid_labels[sid] = sc_map
+        # System omitted the score-3 candidate and returns worst candidates
+        suboptimal_top3[sid] = cands[1:4] if len(cands) >= 4 else cands[1:]
+
+    res = evaluate_standalone_ranking_system(suboptimal_top3, valid_labels, allow_top_k=True)
+    # NDCG should be substantially lower than 1.0 because ideal DCG includes the omitted score-3 candidate
+    assert res["global_mean_ndcg3"] < 0.60
+
+
+def test_evaluate_standalone_candidate_set_negative_tests():
+    """Verify negative validation paths: missing candidates, unknown schemes, duplicates, invalid scores, malformed zones."""
+    from src.evaluation.metrics import evaluate_standalone_ranking_system, FROZEN_BENCHMARK_SECTION_A_CANDIDATES
+
+    valid_labels = {}
+    valid_rankings = {}
+    for sid in [f"S{i:03d}" for i in range(11, 71)]:
+        cands = list(FROZEN_BENCHMARK_SECTION_A_CANDIDATES[sid])
+        valid_labels[sid] = {cid: 2 for cid in cands}
+        valid_rankings[sid] = list(cands)
+
+    # 1. Missing candidate in ranking when allow_top_k=False
+    bad_rankings = dict(valid_rankings)
+    bad_rankings["S011"] = valid_rankings["S011"][:-1]
+    with pytest.raises(ValueError, match=r"Scenario S011 ranking must contain each expected Section A candidate exactly once\. Missing:"):
+        evaluate_standalone_ranking_system(bad_rankings, valid_labels, allow_top_k=False)
+
+    # 2. Unknown scheme ID in ranking
+    bad_rankings_unknown = dict(valid_rankings)
+    bad_rankings_unknown["S011"] = list(valid_rankings["S011"]) + ["SCH999_UNKNOWN"]
+    with pytest.raises(ValueError, match=r"Scenario S011 ranking contains unknown scheme IDs: \['SCH999_UNKNOWN'\]"):
+        evaluate_standalone_ranking_system(bad_rankings_unknown, valid_labels, allow_top_k=False)
+
+    # 3. Duplicate scheme ID in ranking
+    bad_rankings_dup = dict(valid_rankings)
+    bad_rankings_dup["S011"] = [valid_rankings["S011"][0]] + list(valid_rankings["S011"])
+    with pytest.raises(ValueError, match=r"Scenario S011 ranking contains duplicate scheme IDs"):
+        evaluate_standalone_ranking_system(bad_rankings_dup, valid_labels, allow_top_k=False)
+
+    # 4. Missing candidate in consensus labels
+    bad_labels_missing = dict(valid_labels)
+    bad_labels_missing["S011"] = {k: v for k, v in valid_labels["S011"].items() if k != "SCH001"}
+    with pytest.raises(ValueError, match=r"Scenario S011 consensus labels mismatch expected Section A candidates\. Missing: \['SCH001'\]"):
+        evaluate_standalone_ranking_system(valid_rankings, bad_labels_missing)
+
+    # 5. Unknown scheme in consensus labels
+    bad_labels_unknown = dict(valid_labels)
+    bad_labels_unknown["S011"] = dict(valid_labels["S011"])
+    bad_labels_unknown["S011"]["SCH999_FAKE"] = 2
+    with pytest.raises(ValueError, match=r"Scenario S011 consensus labels mismatch expected Section A candidates.*Extra: \['SCH999_FAKE'\]"):
+        evaluate_standalone_ranking_system(valid_rankings, bad_labels_unknown)
+
+    # 6. Invalid consensus score: non-integer float (2.5)
+    bad_labels_float = dict(valid_labels)
+    bad_labels_float["S011"] = dict(valid_labels["S011"])
+    bad_labels_float["S011"]["SCH001"] = 2.5
+    with pytest.raises(ValueError, match=r"Invalid consensus relevance score for scenario S011, scheme SCH001: 2\.5"):
+        evaluate_standalone_ranking_system(valid_rankings, bad_labels_float)
+
+    # 7. Invalid consensus score: boolean True
+    bad_labels_bool = dict(valid_labels)
+    bad_labels_bool["S011"] = dict(valid_labels["S011"])
+    bad_labels_bool["S011"]["SCH001"] = True
+    with pytest.raises(ValueError, match=r"Invalid consensus relevance score for scenario S011, scheme SCH001: True"):
+        evaluate_standalone_ranking_system(valid_rankings, bad_labels_bool)
+
+    # 8. Invalid consensus score: out of range (4)
+    bad_labels_high = dict(valid_labels)
+    bad_labels_high["S011"] = dict(valid_labels["S011"])
+    bad_labels_high["S011"]["SCH001"] = 4
+    with pytest.raises(ValueError, match=r"Invalid consensus relevance score for scenario S011, scheme SCH001: 4"):
+        evaluate_standalone_ranking_system(valid_rankings, bad_labels_high)
+
+    # 9. Malformed zone mapping: boolean zone ID
+    valid_zone_map = {f"S{i:03d}": (i - 11) // 6 + 1 for i in range(11, 71)}
+    bad_zone_bool = dict(valid_zone_map)
+    bad_zone_bool["S011"] = True
+    with pytest.raises(ValueError, match=r"Invalid zone ID type for scenario S011: True \(bool\)\. Must be integer\."):
+        evaluate_standalone_ranking_system(valid_rankings, valid_labels, bad_zone_bool)
+
+    # 10. Malformed zone mapping: zone swap
+    swapped_zone = dict(valid_zone_map)
+    swapped_zone["S011"] = 2
+    with pytest.raises(ValueError, match=r"Scenario S011 is assigned to zone 2, expected zone 1"):
+        evaluate_standalone_ranking_system(valid_rankings, valid_labels, swapped_zone)
+
 
 
 

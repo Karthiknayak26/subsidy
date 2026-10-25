@@ -20,6 +20,7 @@ import hashlib
 import json
 import os
 import shutil
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Set, Tuple
@@ -162,6 +163,23 @@ def ingest_annotations(
     if not e2_path.exists():
         raise FileNotFoundError(f"E2 submission file not found: {e2_path}")
 
+    # 1. Pre-validation raw intake: preserve received files immediately for auditability
+    intake_dir = archive_dir / "intake"
+    intake_dir.mkdir(parents=True, exist_ok=True)
+    ts_intake = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S_%f")
+    unique_intake = uuid.uuid4().hex[:8]
+    e1_intake = intake_dir / f"E1_raw_intake_{ts_intake}_{unique_intake}.csv"
+    e2_intake = intake_dir / f"E2_raw_intake_{ts_intake}_{unique_intake}.csv"
+
+    with open(e1_path, "rb") as f_in, open(e1_intake, "xb") as f_out:
+        f_out.write(f_in.read())
+    with open(e2_path, "rb") as f_in, open(e2_intake, "xb") as f_out:
+        f_out.write(f_in.read())
+
+    print(f"[INTAKE PRESERVED] Pre-validation raw intake saved:")
+    print(f"  - E1: {e1_intake.name}")
+    print(f"  - E2: {e2_intake.name}")
+
     print(f"[INGESTION] Validating E1 submission: {e1_path.name}")
     with open(e1_path, "r", encoding="utf-8") as f:
         e1_raw = list(csv.DictReader(f))
@@ -177,27 +195,32 @@ def ingest_annotations(
     print(f"[SUCCESS] Both submissions passed structural and domain validation (283 rows each).")
 
     if dry_run:
-        print("[DRY RUN] Ingestion validation completed successfully. No files written.")
+        print("[DRY RUN] Ingestion validation completed successfully. No output files written.")
         return {"status": "DRY_RUN_PASSED"}
 
-    # 1. Immutable Archival
+    # 2. Immutable Archival with collision-resistant naming and exclusive file creation
     archive_dir.mkdir(parents=True, exist_ok=True)
-    ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-    e1_archive = archive_dir / f"E1_raw_submission_{ts}.csv"
-    e2_archive = archive_dir / f"E2_raw_submission_{ts}.csv"
+    ts_archive = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S_%f")
+    unique_archive = uuid.uuid4().hex[:8]
+    e1_archive = archive_dir / f"E1_raw_submission_{ts_archive}_{unique_archive}.csv"
+    e2_archive = archive_dir / f"E2_raw_submission_{ts_archive}_{unique_archive}.csv"
 
-    shutil.copy2(e1_path, e1_archive)
-    shutil.copy2(e2_path, e2_archive)
+    with open(e1_path, "rb") as f_in, open(e1_archive, "xb") as f_out:
+        f_out.write(f_in.read())
+    with open(e2_path, "rb") as f_in, open(e2_archive, "xb") as f_out:
+        f_out.write(f_in.read())
 
     e1_sha = compute_sha256(e1_archive)
     e2_sha = compute_sha256(e2_archive)
 
-    manifest_file = archive_dir / f"manifest_{ts}.json"
+    manifest_file = archive_dir / f"manifest_{ts_archive}_{unique_archive}.json"
     manifest_data = {
-        "timestamp_utc": ts,
+        "timestamp_utc": ts_archive,
         "benchmark_version": "v1.0.4",
         "scenarios": "S011-S070",
         "row_count": 283,
+        "e1_intake": e1_intake.name,
+        "e2_intake": e2_intake.name,
         "e1_submission": {"path": e1_archive.name, "sha256": e1_sha},
         "e2_submission": {"path": e2_archive.name, "sha256": e2_sha}
     }

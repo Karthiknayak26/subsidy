@@ -3,7 +3,7 @@
 ## Project: ML-Based Personalized Government Scheme and Subsidy Recommendation System for Farmers
 
 [![Status: Phase 5 Expert Annotation](https://img.shields.io/badge/Status-Phase_5:_Expert_Annotation_(Benchmark_v1.0.4_Frozen)-blue.svg)](#part-11--repository-audit-status-matrix--gap-analysis)
-[![Tests: 190 Passing](https://img.shields.io/badge/Tests-190_Passed_(0_Failures)-brightgreen.svg)](#part-8--automated-test-suite--code-coverage-audit)
+[![Tests: 203 Passing](https://img.shields.io/badge/Tests-203_Passed_(0_Failures)-brightgreen.svg)](#part-8--automated-test-suite--code-coverage-audit)
 [![Architecture: Decoupled Filter-Ranker](https://img.shields.io/badge/Architecture-Decoupled_Rule_Engine_%2B_Availability_%2B_ML_Ranker-orange.svg)](#part-3--repository-architecture-reconstruction)
 [![Ground Truth: Verified Official Sources](https://img.shields.io/badge/Ground_Truth-Official_Gazette_%26_Govt_Portals-darkgreen.svg)](#part-4--data-pipeline-trace-from-raw-data-to-registry)
 
@@ -637,13 +637,17 @@ Defined in `research/dataset_research/case_b_scenario_spec.md` and evaluated in 
 
 ### 8.1 Live Test Suite Results
 Executed via `pytest tests/` on October 25, 2026:
-- **Total Tests:** **190 passed in 1.61 seconds** across 16 test suites:
+- **Total Tests:** **203 passed in 1.79 seconds** across 18 test suites:
   - `tests/test_eligibility_engine.py` (56 tests)
   - `tests/test_benchmark_matrix.py` (11 tests)
   - `tests/test_zone_z1_scenarios.py` through `tests/test_zone_z10_scenarios.py` (100 tests)
   - `tests/test_benchmark_annotation_packets.py` (5 tests)
-  - `tests/test_evaluation_metrics.py` (11 tests)
+  - `tests/test_evaluation_metrics.py` (13 tests — expanded with standalone evaluator validation)
   - `tests/test_ingest_benchmark_annotations.py` (7 tests)
+  - `tests/test_compute_benchmark_agreement.py` (11 tests — new benchmark agreement runner)
+- **New Modules Committed:**
+  - `scripts/compute_benchmark_agreement.py`: Benchmark v1.0.4 inter-rater reliability runner with genuine Ordinal Krippendorff's Alpha
+  - `src/evaluation/benchmark_candidates.py`: Frozen Section A candidate-set mapping (283 pairs, 60 scenarios)
 - **Benchmark Validators:**
   - `research/dataset_research/validate_benchmark_artifacts.py`: 60/60 scenarios & artifacts pass
   - `research/dataset_research/validate_benchmark_matrix.py`: All dimensions & constraints pass

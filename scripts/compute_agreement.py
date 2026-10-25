@@ -140,53 +140,64 @@ def quadratic_weighted_kappa(rater1_scores: List[int], rater2_scores: List[int],
 
 def krippendorffs_alpha_ordinal(ratings_matrix: np.ndarray) -> float:
     """
-    Compute Krippendorff's Alpha with ordinal distance function.
+    Compute Krippendorff's Alpha with standard ordinal distance function
+    (Krippendorff 2004/2011, CASRAI standard).
+    
+    Uses category cumulative marginal frequencies:
+        delta^2(g, h) = ( sum_{k=g}^h n_k - (n_g + n_h)/2 )^2
 
     ratings_matrix: shape (n_raters, n_items)
                     np.nan for missing values.
     """
-    n_raters, n_items = ratings_matrix.shape
+    arr = np.asarray(ratings_matrix, dtype=float)
+    valid_vals = arr[~np.isnan(arr)]
+    if len(valid_vals) == 0:
+        return float("nan")
 
-    # Ordinal distance squared: d(i,j) = (rank_i - rank_j)^2 / normalisation
-    # Here we treat scores as interval-ordinal (0,1,2,3) -> use squared difference
-    def ordinal_distance_sq(a: float, b: float) -> float:
-        return (a - b) ** 2
+    categories = np.sort(np.unique(valid_vals))
+    m = len(categories)
+    if m <= 1:
+        return 1.0
 
-    # Compute observed disagreement D_o
-    D_o = 0.0
-    n_pairs_o = 0
-    for item in range(n_items):
-        col = ratings_matrix[:, item]
+    cat_to_idx = {c: i for i, c in enumerate(categories)}
+    n_raters, n_items = arr.shape
+    C = np.zeros((m, m), dtype=float)
+
+    for j in range(n_items):
+        col = arr[:, j]
         valid = col[~np.isnan(col)]
-        if len(valid) < 2:
+        m_u = len(valid)
+        if m_u < 2:
             continue
-        for a, b in combinations(valid, 2):
-            D_o += ordinal_distance_sq(a, b)
-            n_pairs_o += 1
+        weight = 1.0 / (m_u - 1)
+        for k in range(m_u):
+            for l in range(m_u):
+                if k != l:
+                    ik = cat_to_idx[valid[k]]
+                    il = cat_to_idx[valid[l]]
+                    C[ik, il] += weight
 
-    if n_pairs_o == 0:
-        return float("nan")
-    D_o /= n_pairs_o
-
-    # Collect all valid values across all cells
-    all_values = ratings_matrix[~np.isnan(ratings_matrix)]
-    n_values = len(all_values)
-
-    if n_values < 2:
+    n_k = np.sum(C, axis=1)
+    n = np.sum(n_k)
+    if n <= 1:
         return float("nan")
 
-    # Compute expected disagreement D_e
-    D_e = 0.0
-    n_pairs_e = 0
-    for a, b in combinations(all_values, 2):
-        D_e += ordinal_distance_sq(a, b)
-        n_pairs_e += 1
-    D_e /= n_pairs_e if n_pairs_e > 0 else 1
+    delta_sq = np.zeros((m, m), dtype=float)
+    for g in range(m):
+        for h in range(g + 1, m):
+            inner_sum = np.sum(n_k[g : h + 1]) - (n_k[g] + n_k[h]) / 2.0
+            d2 = inner_sum ** 2
+            delta_sq[g, h] = d2
+            delta_sq[h, g] = d2
 
-    if D_e == 0:
-        return 1.0 if D_o == 0 else float("nan")
+    observed_disagreement = np.sum(C * delta_sq)
+    expected_disagreement = np.sum(np.outer(n_k, n_k) * delta_sq) / (n - 1)
 
-    return 1.0 - D_o / D_e
+    if expected_disagreement == 0:
+        return 1.0 if observed_disagreement == 0 else float("nan")
+
+    return 1.0 - (observed_disagreement / expected_disagreement)
+
 
 
 # ---------------------------------------------------------------------------
