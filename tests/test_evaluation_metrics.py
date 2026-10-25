@@ -96,3 +96,34 @@ def test_acceptance_criteria_gate_logic():
     assert res_fail_zone["gate3_passed_zone_non_regression"] is False
     assert res_fail_zone["overall_accepted"] is False
     assert 3 in res_fail_zone["regressed_zones"]
+
+
+def test_acceptance_criteria_validation_fail_closed():
+    """Verify acceptance gate fails closed when inputs, scenario keys, or zones are malformed."""
+    valid_zone_map = {f"S{i:03d}": (i - 11) // 6 + 1 for i in range(11, 71)}
+    valid_base = {f"S{i:03d}": 0.60 for i in range(11, 71)}
+    valid_model = {f"S{i:03d}": 0.68 for i in range(11, 71)}
+
+    # 1. Missing scenario in baseline (59 scenarios)
+    incomplete_base = {k: v for k, v in valid_base.items() if k != "S011"}
+    with pytest.raises(ValueError, match="Baseline scenario keys mismatch"):
+        evaluate_model_acceptance_criteria(incomplete_base, valid_model, valid_zone_map)
+
+    # 2. Missing scenario in model
+    incomplete_model = {k: v for k, v in valid_model.items() if k != "S070"}
+    with pytest.raises(ValueError, match="Model scenario keys mismatch"):
+        evaluate_model_acceptance_criteria(valid_base, incomplete_model, valid_zone_map)
+
+    # 3. Invalid zone ID (e.g. Zone 11)
+    bad_zone_map = dict(valid_zone_map)
+    bad_zone_map["S011"] = 11
+    with pytest.raises(ValueError, match="Invalid zone ID: 11"):
+        evaluate_model_acceptance_criteria(valid_base, valid_model, bad_zone_map)
+
+    # 4. Empty/missing zone (e.g. S065-S070 mapped to Zone 9 instead of Zone 10, leaving Zone 10 with 0 scenarios)
+    missing_z10_map = dict(valid_zone_map)
+    for sid in [f"S{i:03d}" for i in range(65, 71)]:
+        missing_z10_map[sid] = 9  # Zone 9 gets 12 scenarios, Zone 10 gets 0
+    with pytest.raises(ValueError, match=r"Zone Z\d+ has \d+ scenarios; expected exactly 6 scenarios"):
+        evaluate_model_acceptance_criteria(valid_base, valid_model, missing_z10_map)
+

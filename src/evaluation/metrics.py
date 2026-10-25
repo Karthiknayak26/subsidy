@@ -114,25 +114,66 @@ def evaluate_model_acceptance_criteria(
     2. Two-sided paired permutation test p < 0.050 (B=10,000)
     3. Zone-level mean Delta NDCG@3_z >= 0.000 for all 10 zones (Z1-Z10).
     """
-    scenarios = sorted(baseline_ndcg_by_scenario.keys())
-    assert len(scenarios) == 60, f"Expected 60 scenarios, got {len(scenarios)}"
+    EXPECTED_SCENARIOS = {f"S{i:03d}" for i in range(11, 71)}
+    
+    # 1. Validate exact scenario key sets
+    base_keys = set(baseline_ndcg_by_scenario.keys())
+    if base_keys != EXPECTED_SCENARIOS:
+        missing = EXPECTED_SCENARIOS - base_keys
+        extra = base_keys - EXPECTED_SCENARIOS
+        raise ValueError(
+            f"Baseline scenario keys mismatch Benchmark v1.0.4. Missing: {sorted(missing)}, Extra: {sorted(extra)}"
+        )
+    
+    model_keys = set(model_ndcg_by_scenario.keys())
+    if model_keys != EXPECTED_SCENARIOS:
+        missing = EXPECTED_SCENARIOS - model_keys
+        extra = model_keys - EXPECTED_SCENARIOS
+        raise ValueError(
+            f"Model scenario keys mismatch Benchmark v1.0.4. Missing: {sorted(missing)}, Extra: {sorted(extra)}"
+        )
+    
+    zone_keys = set(scenario_to_zone_map.keys())
+    if zone_keys != EXPECTED_SCENARIOS:
+        missing = EXPECTED_SCENARIOS - zone_keys
+        extra = zone_keys - EXPECTED_SCENARIOS
+        raise ValueError(
+            f"Scenario-to-zone map keys mismatch Benchmark v1.0.4. Missing: {sorted(missing)}, Extra: {sorted(extra)}"
+        )
     
     diffs = []
     zone_diffs: Dict[int, List[float]] = {z: [] for z in range(1, 11)}
     
-    for sid in scenarios:
+    # 2. Validate zone IDs and populate per-scenario and per-zone deltas
+    for sid in sorted(EXPECTED_SCENARIOS):
         b_val = baseline_ndcg_by_scenario[sid]
         m_val = model_ndcg_by_scenario[sid]
         delta = m_val - b_val
         diffs.append(delta)
         
         zone = scenario_to_zone_map[sid]
+        if zone not in zone_diffs:
+            raise ValueError(f"Invalid zone ID: {zone} for scenario {sid}. Must be integer 1 to 10.")
         zone_diffs[zone].append(delta)
+    
+    # 3. Fail closed on missing or uneven zone scenario allocations (must be exactly 6 per zone)
+    for z in range(1, 11):
+        count = len(zone_diffs[z])
+        if count != 6:
+            raise ValueError(
+                f"Zone Z{z} has {count} scenarios; expected exactly 6 scenarios for Benchmark v1.0.4."
+            )
     
     global_mean_delta, p_value = paired_permutation_test(diffs, n_permutations=10000, seed=42)
     
-    zone_means = {z: float(np.mean(zone_diffs[z])) for z in range(1, 11)}
-    zone_regressions = {z: m for z, m in zone_means.items() if m < 0.0}
+    zone_means = {}
+    zone_regressions = {}
+    for z in range(1, 11):
+        z_mean = float(np.mean(zone_diffs[z]))
+        zone_means[z] = z_mean
+        # Fail closed: reject if mean is negative OR NaN
+        if math.isnan(z_mean) or z_mean < 0.0:
+            zone_regressions[z] = z_mean
     
     gate1_passed = bool(global_mean_delta >= 0.050)
     gate2_passed = bool(p_value < 0.050)
