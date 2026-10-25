@@ -103,6 +103,11 @@ def paired_permutation_test(
     return obs_mean, p_value
 
 
+FROZEN_BENCHMARK_ZONE_MAP: Dict[str, int] = {
+    f"S{i:03d}": (i - 11) // 6 + 1 for i in range(11, 71)
+}
+
+
 def evaluate_model_acceptance_criteria(
     baseline_ndcg_by_scenario: Dict[str, float],
     model_ndcg_by_scenario: Dict[str, float],
@@ -144,7 +149,7 @@ def evaluate_model_acceptance_criteria(
     diffs = []
     zone_diffs: Dict[int, List[float]] = {z: [] for z in range(1, 11)}
     
-    # 2. Validate zone IDs and populate per-scenario and per-zone deltas
+    # 2. Validate zone ID types, ranges, and exact benchmark zone assignments
     for sid in sorted(EXPECTED_SCENARIOS):
         b_val = baseline_ndcg_by_scenario[sid]
         m_val = model_ndcg_by_scenario[sid]
@@ -152,8 +157,23 @@ def evaluate_model_acceptance_criteria(
         diffs.append(delta)
         
         zone = scenario_to_zone_map[sid]
-        if zone not in zone_diffs:
-            raise ValueError(f"Invalid zone ID: {zone} for scenario {sid}. Must be integer 1 to 10.")
+        
+        # Gap A hardening: Reject booleans, floats, strings, and non-integer types
+        if isinstance(zone, bool) or not isinstance(zone, int):
+            raise ValueError(
+                f"Invalid zone ID type for scenario {sid}: {zone!r} ({type(zone).__name__}). Must be integer."
+            )
+        
+        if zone not in range(1, 11):
+            raise ValueError(f"Invalid zone ID: {zone} for scenario {sid}. Must be integer between 1 and 10.")
+        
+        # Gap B hardening: Validate exact frozen scenario-to-zone assignment
+        expected_zone = FROZEN_BENCHMARK_ZONE_MAP[sid]
+        if zone != expected_zone:
+            raise ValueError(
+                f"Scenario {sid} is assigned to zone {zone}, expected zone {expected_zone} per Benchmark v1.0.4 specification."
+            )
+        
         zone_diffs[zone].append(delta)
     
     # 3. Fail closed on missing or uneven zone scenario allocations (must be exactly 6 per zone)

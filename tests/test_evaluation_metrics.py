@@ -124,6 +124,44 @@ def test_acceptance_criteria_validation_fail_closed():
     missing_z10_map = dict(valid_zone_map)
     for sid in [f"S{i:03d}" for i in range(65, 71)]:
         missing_z10_map[sid] = 9  # Zone 9 gets 12 scenarios, Zone 10 gets 0
-    with pytest.raises(ValueError, match=r"Zone Z\d+ has \d+ scenarios; expected exactly 6 scenarios"):
+    with pytest.raises(ValueError, match=r"Scenario S\d+ is assigned to zone 9, expected zone 10"):
         evaluate_model_acceptance_criteria(valid_base, valid_model, missing_z10_map)
+
+
+def test_acceptance_criteria_zone_id_strict_types():
+    """Verify Gap A: zone IDs must strictly be integers (reject bool True/False, float 1.0, etc.)."""
+    valid_zone_map = {f"S{i:03d}": (i - 11) // 6 + 1 for i in range(11, 71)}
+    valid_base = {f"S{i:03d}": 0.60 for i in range(11, 71)}
+    valid_model = {f"S{i:03d}": 0.68 for i in range(11, 71)}
+
+    # Test True (which in Python compares equal to 1)
+    bool_map = dict(valid_zone_map)
+    bool_map["S011"] = True
+    with pytest.raises(ValueError, match=r"Invalid zone ID type for scenario S011: True \(bool\)\. Must be integer\."):
+        evaluate_model_acceptance_criteria(valid_base, valid_model, bool_map)
+
+    # Test float 1.0 (which compares equal to 1)
+    float_map = dict(valid_zone_map)
+    float_map["S011"] = 1.0
+    with pytest.raises(ValueError, match=r"Invalid zone ID type for scenario S011: 1\.0 \(float\)\. Must be integer\."):
+        evaluate_model_acceptance_criteria(valid_base, valid_model, float_map)
+
+
+def test_acceptance_criteria_balanced_but_incorrect_zone_swap():
+    """Verify Gap B: swapping 6 scenarios between Zone 1 and Zone 2 is strictly rejected."""
+    valid_zone_map = {f"S{i:03d}": (i - 11) // 6 + 1 for i in range(11, 71)}
+    valid_base = {f"S{i:03d}": 0.60 for i in range(11, 71)}
+    valid_model = {f"S{i:03d}": 0.68 for i in range(11, 71)}
+
+    # Swap Zone 1 (S011-S016) and Zone 2 (S017-S022) assignments
+    # Counts remain exactly 6 per zone, but mappings are wrong
+    swapped_map = dict(valid_zone_map)
+    for sid in [f"S{i:03d}" for i in range(11, 17)]:
+        swapped_map[sid] = 2
+    for sid in [f"S{i:03d}" for i in range(17, 23)]:
+        swapped_map[sid] = 1
+
+    with pytest.raises(ValueError, match=r"Scenario S011 is assigned to zone 2, expected zone 1 per Benchmark v1\.0\.4 specification\."):
+        evaluate_model_acceptance_criteria(valid_base, valid_model, swapped_map)
+
 
