@@ -3,7 +3,7 @@
 ## Project: ML-Based Personalized Government Scheme and Subsidy Recommendation System for Farmers
 
 [![Status: Phase 5 Expert Annotation](https://img.shields.io/badge/Status-Phase_5:_Expert_Annotation_(Benchmark_v1.0.4_Frozen)-blue.svg)](#part-11--repository-audit-status-matrix--gap-analysis)
-[![Tests: 206 Passing](https://img.shields.io/badge/Tests-206_Passed_(0_Failures)-brightgreen.svg)](#part-8--automated-test-suite--code-coverage-audit)
+[![Tests: 208 Passing](https://img.shields.io/badge/Tests-208_Passed_(0_Failures)-brightgreen.svg)](#part-8--automated-test-suite--code-coverage-audit)
 [![Architecture: Decoupled Filter-Ranker](https://img.shields.io/badge/Architecture-Decoupled_Rule_Engine_%2B_Availability_%2B_ML_Ranker-orange.svg)](#part-3--repository-architecture-reconstruction)
 [![Ground Truth: Verified Official Sources](https://img.shields.io/badge/Ground_Truth-Official_Gazette_%26_Govt_Portals-darkgreen.svg)](#part-4--data-pipeline-trace-from-raw-data-to-registry)
 

@@ -1,0 +1,16 @@
+{
+  "timestamp_utc": "20261025_130127_805168",
+  "benchmark_version": "v1.0.4",
+  "scenarios": "S011-S070",
+  "row_count": 283,
+  "e1_intake": "E1_raw_intake_20261025_130127_800568_643d37ce.csv",
+  "e2_intake": "E2_raw_intake_20261025_130127_800568_643d37ce.csv",
+  "e1_submission": {
+    "path": "E1_raw_submission_20261025_130127_805168_b8a9e008.csv",
+    "sha256": "80c08aebbcb3cb1f097f894bff6285fc5eba9e0267de364b7e2c745da1319585"
+  },
+  "e2_submission": {
+    "path": "E2_raw_submission_20261025_130127_805168_b8a9e008.csv",
+    "sha256": "75d6a683967e67aa8976c4a9cb11e8395de41f8a32b6a06b42ab2f6e73f16f41"
+  }
+}
