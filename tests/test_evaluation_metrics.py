@@ -165,3 +165,41 @@ def test_acceptance_criteria_balanced_but_incorrect_zone_swap():
         evaluate_model_acceptance_criteria(valid_base, valid_model, swapped_map)
 
 
+def test_acceptance_criteria_metric_values_validation():
+    """Verify evaluator rejects out-of-range, non-finite, boolean, and non-numeric NDCG@3 values."""
+    valid_zone_map = {f"S{i:03d}": (i - 11) // 6 + 1 for i in range(11, 71)}
+    valid_base = {f"S{i:03d}": 0.60 for i in range(11, 71)}
+    valid_model = {f"S{i:03d}": 0.68 for i in range(11, 71)}
+
+    # 1. Out of range: model score > 1.0 (e.g. 5.60)
+    corrupted_high = dict(valid_model)
+    corrupted_high["S011"] = 5.60
+    with pytest.raises(ValueError, match=r"Invalid model NDCG@3 value for scenario S011: 5\.6.*Must be a finite float in \[0\.0, 1\.0\]"):
+        evaluate_model_acceptance_criteria(valid_base, corrupted_high, valid_zone_map)
+
+    # 2. Out of range: baseline score < 0.0 (e.g. -0.10)
+    corrupted_low = dict(valid_base)
+    corrupted_low["S011"] = -0.10
+    with pytest.raises(ValueError, match=r"Invalid baseline NDCG@3 value for scenario S011: -0\.1.*Must be a finite float in \[0\.0, 1\.0\]"):
+        evaluate_model_acceptance_criteria(corrupted_low, valid_model, valid_zone_map)
+
+    # 3. Non-finite: NaN in model
+    corrupted_nan = dict(valid_model)
+    corrupted_nan["S011"] = float("nan")
+    with pytest.raises(ValueError, match=r"Invalid model NDCG@3 value for scenario S011: nan.*Must be a finite float in \[0\.0, 1\.0\]"):
+        evaluate_model_acceptance_criteria(valid_base, corrupted_nan, valid_zone_map)
+
+    # 4. Non-finite: inf in baseline
+    corrupted_inf = dict(valid_base)
+    corrupted_inf["S011"] = float("inf")
+    with pytest.raises(ValueError, match=r"Invalid baseline NDCG@3 value for scenario S011: inf.*Must be a finite float in \[0\.0, 1\.0\]"):
+        evaluate_model_acceptance_criteria(corrupted_inf, valid_model, valid_zone_map)
+
+    # 5. Boolean value (True)
+    corrupted_bool = dict(valid_model)
+    corrupted_bool["S011"] = True
+    with pytest.raises(ValueError, match=r"Invalid model NDCG@3 value for scenario S011: True.*Must be a finite float in \[0\.0, 1\.0\]"):
+        evaluate_model_acceptance_criteria(valid_base, corrupted_bool, valid_zone_map)
+
+
+

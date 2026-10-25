@@ -149,11 +149,22 @@ def evaluate_model_acceptance_criteria(
     diffs = []
     zone_diffs: Dict[int, List[float]] = {z: [] for z in range(1, 11)}
     
-    # 2. Validate zone ID types, ranges, and exact benchmark zone assignments
+    # 2. Validate metric values, zone ID types, ranges, and exact benchmark zone assignments
     for sid in sorted(EXPECTED_SCENARIOS):
         b_val = baseline_ndcg_by_scenario[sid]
         m_val = model_ndcg_by_scenario[sid]
-        delta = m_val - b_val
+        
+        # Metric value integrity: must be finite numeric values in [0.0, 1.0] (reject bool, NaN, inf, <0, >1)
+        if isinstance(b_val, bool) or not isinstance(b_val, (int, float)) or not math.isfinite(b_val) or not (0.0 <= b_val <= 1.0):
+            raise ValueError(
+                f"Invalid baseline NDCG@3 value for scenario {sid}: {b_val!r}. Must be a finite float in [0.0, 1.0]."
+            )
+        if isinstance(m_val, bool) or not isinstance(m_val, (int, float)) or not math.isfinite(m_val) or not (0.0 <= m_val <= 1.0):
+            raise ValueError(
+                f"Invalid model NDCG@3 value for scenario {sid}: {m_val!r}. Must be a finite float in [0.0, 1.0]."
+            )
+
+        delta = float(m_val) - float(b_val)
         diffs.append(delta)
         
         zone = scenario_to_zone_map[sid]
