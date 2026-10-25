@@ -44,13 +44,7 @@ from src.eligibility.models import (
 )
 from src.eligibility.engine import EligibilityEngine
 from src.eligibility.availability import AvailabilityFilter
-
-PROVISIONAL_SCHEMES = {
-    "SCH008_KA_COOP",
-    "SCH010_VALMIKI",
-    "SCH010_DEVARAJ_URS",
-    "SCH010_KMDC"
-}
+from src.eligibility.governance import apply_governance_safeguard, PROVISIONAL_SCHEMES
 
 ZONE_Z8_PROFILES: List[Dict[str, Any]] = [
     {
@@ -534,134 +528,8 @@ def run_execution() -> Dict[str, Any]:
         actionable_serializable = []
         for d in actionable_determinations:
             is_prov = d.scheme_id in PROVISIONAL_SCHEMES
-            missing_verifications = list(d.missing_verifications)
-            disqualifying_factors = list(d.disqualifying_factors)
-            
-            # --- GOVERNANCE CASE 1: PMFBY / RWBCIS Crop Insurance Governance Audit across S053–S058 ---
-            if d.scheme_id == "SCH002":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Unresolved Policy Review / Seasonal Notification Required)"
-                allow_scoring = False
-                if sid == "S053":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Soybean in Dharwad district"
-                    ]
-                    gov_note = "Raw engine returned ELIGIBLE based on static crop whitelist, but commercial crop insurance is subject to seasonal notification and Insurance Unit delineation under PMFBY. Governance presentation routes to REQUIRES_VERIFICATION in Section B pending seasonal notification verification."
-                elif sid == "S054":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 PMFBY/RWBCIS Insurance Unit (Gram Panchayat/Hobli level) notification for Chilli in Belagavi district"
-                    ]
-                    gov_note = "Raw engine returned INELIGIBLE because Chilli is absent from the engine's static whitelist, but spice crops are notified under RWBCIS / PMFBY in northern Karnataka districts. Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal scheme notification confirmation."
-                elif sid == "S055":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Cotton in Haveri district"
-                    ]
-                    gov_note = "Raw engine returned ELIGIBLE based on static crop whitelist, but cotton insurance coverage requires seasonal Insurance Unit notification confirmation under PMFBY. Governance routes to Section B as REQUIRES_VERIFICATION."
-                elif sid == "S056":
-                    missing_verifications = [
-                        "Verification of GoK Rabi 2026-27 PMFBY Insurance Unit (Gram Panchayat/Hobli level) notification for Wheat in Dharwad district"
-                    ]
-                    gov_note = "Raw engine returned ELIGIBLE based on static crop whitelist, but commercial food crop insurance requires seasonal Insurance Unit notification verification. Governance routes to Section B as REQUIRES_VERIFICATION."
-                elif sid == "S057":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Sugarcane in Belagavi district"
-                    ]
-                    gov_note = "Raw engine returned ELIGIBLE based on static crop whitelist, but commercial sugarcane insurance is subject to seasonal notification and Insurance Unit delineation under PMFBY. Governance routes to Section B as REQUIRES_VERIFICATION."
-                elif sid == "S058":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Soybean in Haveri district"
-                    ]
-                    gov_note = "Raw engine returned ELIGIBLE based on static crop whitelist, but PMFBY claims are strictly contingent upon notified Gram Panchayat Insurance Unit orders for Kharif 2026. Governance routes to Section B as REQUIRES_VERIFICATION."
-
-            # --- GOVERNANCE CASE 2: S056 Challenge 4: Unknown Land Title Status ---
-            elif sid == "S056" and d.scheme_id == "SCH001":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Unresolved Statutory Evidence / Land Title Required)"
-                allow_scoring = False
-                missing_verifications = [
-                    "Verification of land ownership title record date (must be on or before 01.02.2019 or statutory succession upon death)",
-                    "Revenue Department certification of land ownership record date / inheritance mutation order on RTC for Kalghatgi taluk"
-                ]
-                gov_note = "Raw engine returned REQUIRES_VERIFICATION due to explicit UNKNOWN tenure cut-off date (land_ownership_cutoff_pre_feb_2019 = None). In strict adherence to Challenge 4 safeguards, missing title evidence must remain REQUIRES_VERIFICATION and never silently default to eligibility or ineligibility. Placed in Section B without scoring."
-
-            elif sid == "S056" and d.scheme_id == "SCH005":
-                # Krishi Bhagya on S056: Title-dependent capital scheme
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Unresolved Field Evidence / Land Title Required)"
-                allow_scoring = False
-                missing_verifications = [
-                    "Revenue Department certification of land ownership title / RTC extract for Kalghatgi taluk before farm pond excavation subsidy approval"
-                ]
-                gov_note = "Raw engine returned ELIGIBLE based on rainfed dryland and acreage in notified Dharwad taluk, but applicant's land title record date is UNKNOWN. In accordance with Challenge 4 safeguards, title-dependent capital subsidy schemes are routed to Section B as REQUIRES_VERIFICATION without scoring until title documentation is evidenced."
-
-            elif sid == "S056" and d.scheme_id == "SCH010_VALMIKI":
-                # Valmiki Corporation on S056: ST category, but title UNKNOWN + provisional corporation scheme
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Provisional Scheme / Land Title Required)"
-                allow_scoring = False
-                missing_verifications = [
-                    "Administrative circular and Government Order verification for provisional scheme SCH010_VALMIKI",
-                    "Revenue Department certification of land ownership title deed / RTC extract for Kalghatgi taluk",
-                    "Field verification of perennial water source adjacency and hydrogeological feasibility clearance"
-                ]
-                gov_note = "Raw engine returned ELIGIBLE based on ST social category, dryland acreage, and zero existing borewells. However, scheme is PROVISIONAL in registry, perennial water source adjacency is unverified, and land title status is UNKNOWN. Governance presentation strictly places determination in Section B as REQUIRES_VERIFICATION with numerical scoring disabled."
-
-            # --- GOVERNANCE CASE 3: S058 Challenge 8 & Boundary Test: Large Holding PMKSY-PDMC Area Cap ---
-            elif sid == "S058" and d.scheme_id == "SCH003":
-                # Raw engine returned INELIGIBLE because s.land_size_acres (12.5 ac) > 12.35 ac.
-                # Under statutory PMKSY-PDMC operational guidelines and Benchmark Challenge 8, large farmers
-                # are not blanket excluded; financial assistance is capped at 5.00 ha per beneficiary family.
-                # Applicant requested exactly 5.00 ha, cleanly accommodated by the 12.5 ac (5.059 ha) parcel.
-                # Assured water source (operational grid-connected borewell) and 7-year lock-in verified.
-                gov_status = "ELIGIBLE"
-                presentation_section = "Section A (Confirmed Actionable Candidates)"
-                allow_scoring = True
-                missing_verifications = []
-                gov_note = "Governance Area Capping & Prior Subsidy Determination: Raw engine returned INELIGIBLE due to total landholding (12.5 ac > 12.35 ac) exceeding 5.0 ha. Under statutory PMKSY-PDMC Revised Operational Guidelines 2023 Section 7.9 and Benchmark Challenge 8, financial assistance is capped at 5.00 ha per beneficiary family rather than blanket disqualifying large holdings. Applicant requested exactly 5.00 ha, cleanly accommodated by the 12.5-acre qualifying parcel (5.00 ha <= 5.059 ha physical capacity). Furthermore, per Section 7.10, the scenario factually confirms first-time applicant status (no prior micro-irrigation subsidy availed), satisfying the 7-year repeat-assistance restriction (engine rule PMKSY_NO_PRIOR_SUBSIDY). Operational water source verified. Qualified in Section A for clinical relevance scoring against primary need MICRO_IRRIGATION_SUPPORT."
-
-            # --- GOVERNANCE CASE 4: Provisional Corporation Schemes ---
-            elif is_prov and d.status == EligibilityStatus.ELIGIBLE:
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Provisional Schemes / Qualitative Review Only)"
-                allow_scoring = False
-                missing_verifications = [f"Administrative circular verification for provisional scheme {d.scheme_id}"]
-                gov_note = "Raw engine returned ELIGIBLE based on encoded rules, but scheme record is PROVISIONAL in registry. Governance safeguard places determination in Section B as REQUIRES_VERIFICATION without numerical scoring."
-            elif is_prov and d.status == EligibilityStatus.REQUIRES_VERIFICATION:
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Provisional Schemes / Qualitative Review Only)"
-                allow_scoring = False
-                if not missing_verifications:
-                    missing_verifications = [f"Administrative circular and Government Order verification for provisional scheme {d.scheme_id}"]
-                gov_note = "Provisional scheme requiring administrative or Government Order verification."
-            elif d.status == EligibilityStatus.ELIGIBLE:
-                gov_status = "ELIGIBLE"
-                presentation_section = "Section A (Confirmed Actionable Candidates)"
-                allow_scoring = True
-                gov_note = "Confirmed verified scheme eligible for clinical 0-3 relevance scoring."
-            else:
-                gov_status = d.status.value
-                presentation_section = "Disqualified / Non-Actionable Candidates"
-                allow_scoring = False
-                gov_note = "Statutorily disqualified under verified criteria."
-
-            actionable_serializable.append({
-                "scheme_id": d.scheme_id,
-                "scheme_name": d.scheme_name,
-                "record_type": d.record_type,
-                "parent_scheme_id": d.parent_scheme_id,
-                "status": d.status.value,
-                "raw_engine_status": d.status.value,
-                "governance_status": gov_status,
-                "presentation_section": presentation_section,
-                "allow_numerical_scoring": allow_scoring,
-                "governance_note": gov_note,
-                "reason": d.reason,
-                "disqualifying_factors": disqualifying_factors,
-                "missing_verifications": missing_verifications,
-                "rule_keys_fired": d.rule_keys_fired,
-                "availability_state": d.availability_state.value,
-                "is_provisional": is_prov
-            })
+            item_dict = apply_governance_safeguard(d, sid, profile, is_prov)
+            actionable_serializable.append(item_dict)
             
         execution_results.append({
             "scenario_id": sid,

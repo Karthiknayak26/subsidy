@@ -61,7 +61,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 | Scheme ID | Scheme Name | Raw Engine Status | Governance Status | Presentation Section | Allow Scoring | Governance Audit Note |
 |:---|:---|:---:|:---:|:---|:---:|:---|
 | `SCH001` | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
-| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned ELIGIBLE based on static crop whitelist, but commercial crop... |
+| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned ELIGIBLE based on static crop whitelist for Soybean, but com... |
 | `SCH003` | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
 | `SCH004` | Sub-Mission on Agricultural Mechanization (SMAM) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH005` | Krishi Bhagya Yojana | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
@@ -86,7 +86,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 | Scheme ID | Scheme Name | Raw Engine Status | Governance Status | Presentation Section | Allow Scoring | Governance Audit Note |
 |:---|:---|:---:|:---:|:---|:---:|:---|
 | `SCH001` | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
-| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned INELIGIBLE because Chilli is absent from the engine's static... |
+| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned ELIGIBLE based on static crop whitelist for Chilli, but comm... |
 | `SCH003` | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH004` | Sub-Mission on Agricultural Mechanization (SMAM) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH005` | Krishi Bhagya Yojana | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
@@ -111,7 +111,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 | Scheme ID | Scheme Name | Raw Engine Status | Governance Status | Presentation Section | Allow Scoring | Governance Audit Note |
 |:---|:---|:---:|:---:|:---|:---:|:---|
 | `SCH001` | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
-| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned ELIGIBLE based on static crop whitelist, but cotton insuranc... |
+| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned ELIGIBLE based on static crop whitelist for Cotton, but comm... |
 | `SCH003` | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
 | `SCH004` | Sub-Mission on Agricultural Mechanization (SMAM) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH005` | Krishi Bhagya Yojana | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
@@ -136,7 +136,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 | Scheme ID | Scheme Name | Raw Engine Status | Governance Status | Presentation Section | Allow Scoring | Governance Audit Note |
 |:---|:---|:---:|:---:|:---|:---:|:---|
 | `SCH001` | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `REQUIRES_VERIFICATION` | `REQUIRES_VERIFICATION` | Section B (Unresolved Statutory Evidence / Land Title Required) | No | Raw engine returned REQUIRES_VERIFICATION due to explicit UNKNOWN tenure cut-off... |
-| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `INELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned ELIGIBLE based on static crop whitelist, but commercial food... |
+| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `INELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned INELIGIBLE because Wheat is absent from static crop whitelis... |
 | `SCH003` | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
 | `SCH004` | Sub-Mission on Agricultural Mechanization (SMAM) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH005` | Krishi Bhagya Yojana | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Field Evidence / Land Title Required) | No | Raw engine returned ELIGIBLE based on rainfed dryland and acreage in notified Dh... |
@@ -160,7 +160,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 | Scheme ID | Scheme Name | Raw Engine Status | Governance Status | Presentation Section | Allow Scoring | Governance Audit Note |
 |:---|:---|:---:|:---:|:---|:---:|:---|
 | `SCH001` | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
-| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned ELIGIBLE based on static crop whitelist, but commercial suga... |
+| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned ELIGIBLE based on static crop whitelist for Sugarcane, but c... |
 | `SCH003` | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH004` | Sub-Mission on Agricultural Mechanization (SMAM) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH005` | Krishi Bhagya Yojana | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
@@ -185,7 +185,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 | Scheme ID | Scheme Name | Raw Engine Status | Governance Status | Presentation Section | Allow Scoring | Governance Audit Note |
 |:---|:---|:---:|:---:|:---|:---:|:---|
 | `SCH001` | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
-| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned ELIGIBLE based on static crop whitelist, but PMFBY claims ar... |
+| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned ELIGIBLE based on static crop whitelist for Soybean, but com... |
 | `SCH003` | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `INELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Governance Area Capping & Prior Subsidy Determination: Raw engine returned INELI... |
 | `SCH004` | Sub-Mission on Agricultural Mechanization (SMAM) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH005` | Krishi Bhagya Yojana | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |

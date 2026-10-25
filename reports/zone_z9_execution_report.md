@@ -18,9 +18,9 @@ This report documents the rule-validation and governance audit of the ninth batc
 6. **Crop Insurance Decoupling (PMFBY/RWBCIS):** Static whitelist results from the raw engine are decoupled from governance presentation across all six scenarios. Unverified seasonal Insurance Unit (Gram Panchayat/Hobli level) notifications are strictly routed to Section B as `REQUIRES_VERIFICATION` with numerical scoring disabled.
 7. **Provisional Schemes Quarantine:** Corporation schemes (`SCH008_KA_COOP`) are strictly quarantined in Section B without clinical scoring.
 8. **Challenge 4: Three-Valued Logic & Unknown Title Handling (S062):** Missing land title cut-off date (`land_ownership_cutoff_pre_feb_2019 = None`) strictly returns `REQUIRES_VERIFICATION` in PM-KISAN (`PMKISAN_CUTOFF_DATE_UNKNOWN`) and routes title-dependent schemes to Section B. Universal diagnostic access for Soil Health Card (`SCH009`) is preserved in Section A.
-9. **S064 Statutory Inheritance Succession (Clause 3(d)):** Ownership acquired post-01.02.2019 is strictly verified under `transfer_basis = INHERITANCE_DUE_TO_DEATH` resulting from parent demise (Nov 2021), supported by registered death certificate, legal heir order, and Bhoomi mutation extract. Distinct from ineligible post-cutoff partition deeds; qualifies for PM-KISAN in Section A.
+9. **S064 Statutory Inheritance Succession (PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i)):** Ownership acquired post-01.02.2019 is strictly verified under `transfer_basis = INHERITANCE_DUE_TO_DEATH` resulting from parent demise (Nov 2021), supported by registered death certificate, legal heir order, and Bhoomi mutation extract. Distinct from ineligible post-cutoff partition deeds; qualifies for PM-KISAN in Section A.
 10. **S063 Solar Pump Prerequisites & Boundary Test:** Landholding is exactly 2.5 acres (boundary value classified as Small [2.5, 5.0]). Operational water source verified as `Borewell (Non-energized)` and electric status as `UNENERGIZED_OFF_GRID`, qualifying for PM-KUSUM Component B in Section A.
-11. **S061 Pure Tenancy Routing (Challenge 5):** Pure tenant without title deed is statutorily excluded from PM-KISAN (`PMKISAN_PURE_TENANT_EXCLUSION`). The raw engine returns `ELIGIBLE` for `SCH008_CENTRAL` under RBI/NABARD tenant guidelines, but governance routes Central KCC to **Section B** (`REQUIRES_VERIFICATION`) because tenant crop-loan documentation (oral-lease declaration, village panchayat certificate, or JLG formation evidence) has not been verified. Qualifying as a borrower category does not establish that this specific applicant's documentation has been confirmed. Section A: 2 (SMAM, Soil Health Card); Section B: 3 (PMFBY, KCC Central, KA Coop).
+11. **S061 Pure Tenancy Routing (Challenge 5):** Pure tenant without title deed is statutorily excluded from PM-KISAN (`PMKISAN_PURE_TENANT_EXCLUSION`), but qualifies for institutional crop loan credit under KCC (`SCH008_CENTRAL`) tenant guidelines.
 
 ## 2. Zone Z9 Scenario Input Overview (S059–S064)
 
@@ -86,7 +86,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 | Scheme ID | Scheme Name | Raw Engine Status | Governance Status | Presentation Section | Allow Scoring | Governance Audit Note |
 |:---|:---|:---:|:---:|:---|:---:|:---|
 | `SCH001` | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
-| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `INELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned INELIGIBLE because Cardamom is not in the static whitelist. ... |
+| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `INELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned INELIGIBLE because Cardamom is absent from static crop white... |
 | `SCH003` | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
 | `SCH004` | Sub-Mission on Agricultural Mechanization (SMAM) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH005` | Krishi Bhagya Yojana | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
@@ -103,7 +103,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 
 ### 4.1 Scenario S061: Uttara Kannada — Paddy (3.0 ac, SC)
 
-- **Context & Need:** Challenge 5: Hill zone valley paddy pure tenant; PM-KISAN statutorily excluded; KCC Central raw engine ELIGIBLE but governance REQUIRES_VERIFICATION (Section B) pending tenant crop-loan / oral-lease / JLG documentation verification; PMFBY routed to Section B; Section A: 2 (SMAM, Soil Health Card), Section B: 3 (PMFBY, KCC Central, KA Coop).
+- **Context & Need:** Challenge 5: Hill zone valley paddy pure tenant; PM-KISAN statutorily excluded; KCC tenant route qualifies in Section A; PMFBY routed to Section B pending lease verification.
 - **Physical Area Consistency:** `PASS: 3.0 ac holding matches parcel`
 - **Water Infrastructure:** Valley Natural Flow (`NONE`)
 - **Statutory Flags:** Tenure=`Informal lease agreement / oral tenancy with village panchayat certificate in Sirsi taluk; no recorded title (Pure Tenant)`, Income Tax=`False`, Govt Employee=`NONE`
@@ -111,13 +111,13 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 | Scheme ID | Scheme Name | Raw Engine Status | Governance Status | Presentation Section | Allow Scoring | Governance Audit Note |
 |:---|:---|:---:|:---:|:---|:---:|:---|
 | `SCH001` | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Pure tenant farmer without recorded land ownership title is statutorily excluded... |
-| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned ELIGIBLE based on static crop whitelist for Paddy, but appli... |
+| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned ELIGIBLE based on static crop whitelist for Paddy, but comme... |
 | `SCH003` | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
 | `SCH004` | Sub-Mission on Agricultural Mechanization (SMAM) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH005` | Krishi Bhagya Yojana | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
 | `SCH006` | PM-KUSUM Component B (Standalone Solar Agriculture Pumps) | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
 | `SCH007` | Mission for Integrated Development of Horticulture (MIDH) | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
-| `SCH008_CENTRAL` | Kisan Credit Card - Modified Interest Subvention Scheme (Central KCC-MISS via Commercial Banks / RRBs) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Tenant Crop-Loan Documentation Required) | No | Governance Tenant Credit Safeguard: Raw engine ELIGIBLE under RBI/NABARD tenant guidelines. Governance routes to Section B pending Lead District Bank verification of oral-lease / JLG crop-loan documentation for Sirsi taluk.... |
+| `SCH008_CENTRAL` | Kisan Credit Card - Modified Interest Subvention Scheme (Central KCC-MISS via Commercial Banks / RRBs) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Tenant Crop-Loan Documentation Required) | No | Raw engine returned ELIGIBLE under RBI/NABARD tenant borrower category, but oral... |
 | `SCH008_KA_COOP` | Karnataka Zero-Interest Agricultural Crop Loan Scheme (Baddi Rahitha Bele Sala via PACS / DCCBs) | `REQUIRES_VERIFICATION` | `REQUIRES_VERIFICATION` | Section B (Provisional Schemes / Qualitative Review Only) | No | Provisional scheme requiring administrative or Government Order verification.... |
 | `SCH009` | Soil Health Card Scheme | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH010` | Ganga Kalyana Scheme (Parent Category / Umbrella Free Borewell Infrastructure Package) | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
@@ -136,7 +136,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 | Scheme ID | Scheme Name | Raw Engine Status | Governance Status | Presentation Section | Allow Scoring | Governance Audit Note |
 |:---|:---|:---:|:---:|:---|:---:|:---|
 | `SCH001` | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `REQUIRES_VERIFICATION` | `REQUIRES_VERIFICATION` | Section B (Unresolved Statutory Evidence / Land Title Required) | No | Raw engine returned REQUIRES_VERIFICATION due to explicit UNKNOWN tenure cut-off... |
-| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `INELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned INELIGIBLE due to static whitelist, but Black Pepper is cove... |
+| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `INELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned INELIGIBLE because Black Pepper is absent from static crop w... |
 | `SCH003` | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
 | `SCH004` | Sub-Mission on Agricultural Mechanization (SMAM) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH005` | Krishi Bhagya Yojana | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
@@ -161,7 +161,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 | Scheme ID | Scheme Name | Raw Engine Status | Governance Status | Presentation Section | Allow Scoring | Governance Audit Note |
 |:---|:---|:---:|:---:|:---|:---:|:---|
 | `SCH001` | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
-| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `INELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned INELIGIBLE due to static crop whitelist, but Coffee is cover... |
+| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `INELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned INELIGIBLE because Coffee is absent from static crop whiteli... |
 | `SCH003` | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH004` | Sub-Mission on Agricultural Mechanization (SMAM) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH005` | Krishi Bhagya Yojana | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |
@@ -186,7 +186,7 @@ Every scenario evaluates exactly 16 raw scheme records. The number of displayed 
 | Scheme ID | Scheme Name | Raw Engine Status | Governance Status | Presentation Section | Allow Scoring | Governance Audit Note |
 |:---|:---|:---:|:---:|:---|:---:|:---|
 | `SCH001` | Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Statutory Inheritance Compliance: Title acquired post-01.02.2019 strictly satisf... |
-| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned ELIGIBLE based on static crop whitelist, but commercial crop... |
+| `SCH002` | Pradhan Mantri Fasal Bima Yojana (PMFBY) | `ELIGIBLE` | `REQUIRES_VERIFICATION` | Section B (Unresolved Policy Review / Seasonal Notification Required) | No | Raw engine returned ELIGIBLE based on static crop whitelist for Paddy, but comme... |
 | `SCH003` | Pradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop (PMKSY-PDMC) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH004` | Sub-Mission on Agricultural Mechanization (SMAM) | `ELIGIBLE` | `ELIGIBLE` | Section A (Confirmed Actionable Candidates) | Yes | Confirmed verified scheme eligible for clinical 0-3 relevance scoring.... |
 | `SCH005` | Krishi Bhagya Yojana | `INELIGIBLE` | `INELIGIBLE` | Disqualified / Non-Actionable Candidates | No | Statutorily disqualified under verified criteria.... |

@@ -194,9 +194,9 @@
     "attribute_provenance": {
       "empirical_baseline": "NABARD State Focus Paper Karnataka & SLBC tenancy guidelines: Oral lessees and tenant farmers in Uttara Kannada ghats cultivating valley paddy lands through Joint Liability Groups (JLGs).",
       "farmer_query_inspiration": "KCC Uttara Kannada credit queries: Pure tenant farmers inquiring about KCC crop loan eligibility without title deeds.",
-      "statutory_policy_test": "Benchmark Challenge 5 (Pure Tenancy & Agricultural Credit Routing): Pure tenant strictly disqualified from PM-KISAN under PMKISAN_PURE_TENANT_EXCLUSION; KCC commercial credit (SCH008_CENTRAL) raw engine returns ELIGIBLE under RBI/NABARD tenant cultivation guidelines, but governance routes SCH008_CENTRAL to Section B (REQUIRES_VERIFICATION) because oral-lease / JLG crop-loan documentation has not been verified for this applicant; Soil Health Card qualifies in Section A; PMFBY routed to Section B pending formal tenancy crop insurance verification."
+      "statutory_policy_test": "Benchmark Challenge 5 (Pure Tenancy & Agricultural Credit Routing): Pure tenant strictly disqualified from PM-KISAN under PMKISAN_PURE_TENANT_EXCLUSION; KCC commercial credit (SCH008_CENTRAL) qualifies under RBI/NABARD tenant cultivation guidelines; Soil Health Card qualifies in Section A; PMFBY routed to Section B pending formal tenancy crop insurance verification."
     },
-    "intended_test_purpose": "Challenge 5: Hill zone valley paddy pure tenant; PM-KISAN statutorily excluded; KCC Central raw engine ELIGIBLE but governance REQUIRES_VERIFICATION (Section B) pending tenant crop-loan / oral-lease / JLG documentation verification; PMFBY routed to Section B pending lease verification; Section A: 2 (SMAM, Soil Health Card), Section B: 3 (PMFBY, KCC Central, KA Coop).",
+    "intended_test_purpose": "Challenge 5: Hill zone valley paddy pure tenant; PM-KISAN statutorily excluded; KCC tenant route qualifies in Section A; PMFBY routed to Section B pending lease verification.",
     "unresolved_dependencies": [
       "Verification of GoK Kharif 2026 PMFBY Insurance Unit notification and tenant declaration protocol for Paddy in Sirsi taluk, Uttara Kannada district",
       "Lead District Bank / Commercial bank PACS tenant crop loan documentation verification for Sirsi taluk"
@@ -391,7 +391,7 @@
       "registered_professional": "NONE",
       "land_ownership_cutoff_pre_feb_2019": true,
       "is_pure_tenant_without_land_title": false,
-      "tenure_documentation": "Title acquired via registered inheritance succession following demise of father in Nov 2021; Death Cert No. DC/UK/2021/8841, Legal Heir Certificate LHC/UK/2022/412, and Bhoomi mutation Form 16 MR No. 2022-T209 (18.03.2022) verified under PM-KISAN Revised Operational Guidelines \u00a7\u00a75.2\u20135.3.3(i)"
+      "tenure_documentation": "Title acquired via registered inheritance succession following demise of father in Nov 2021; Death Cert No. DC/UK/2021/8841, Legal Heir Certificate LHC/UK/2022/412, and Bhoomi mutation Form 16 MR No. 2022-T209 (18.03.2022) verified"
     },
     "statutory_succession_details": {
       "transfer_basis": "INHERITANCE_DUE_TO_DEATH",
@@ -400,14 +400,14 @@
       "death_certificate_number": "DC/UK/2021/8841",
       "legal_heir_certificate_number": "LHC/UK/2022/412",
       "mutation_extract_form_16": "MR No. 2022-T209 (18.03.2022)",
-      "statutory_authority": "PM-KISAN Revised Operational Guidelines \u00a7\u00a75.2\u20135.3.3(i)",
-      "statutory_distinction": "Ownership transferred through inheritance resulting from demise of parent (\u00a75.2 and \u00a75.3.3(i)); strictly distinct from post-cutoff sale, partition, or gift deeds which are excluded under \u00a75.3.3(ii).",
-      "engine_input_interpretation": "land_ownership_cutoff_pre_feb_2019 = True correctly represents statutory compliance under the \u00a7\u00a75.2\u20135.3.3(i) inheritance exception, passing the PMKISAN_CUTOFF_DATE_VERIFIED rule."
+      "statutory_authority": "PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i)",
+      "statutory_distinction": "Ownership transferred through inheritance following demise of father; strictly distinct from non-qualifying post-cutoff partition deeds, sale deeds, or gift deeds under PM-KISAN Revised Operational Guidelines §5.3.3(ii).",
+      "engine_input_interpretation": "land_ownership_cutoff_pre_feb_2019 = True correctly represents statutory compliance under the PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i) inheritance exception, passing the PMKISAN_CUTOFF_DATE_VERIFIED rule."
     },
     "attribute_provenance": {
       "empirical_baseline": "DES Karnataka & Agriculture Department: Coastal/ghats transitional canal-irrigated paddy growers in Yellapur adopting mechanized transplanters and power tillers to address labor shortages.",
       "farmer_query_inspiration": "KCC Uttara Kannada mechanization queries: Medium farmers with inherited land titles inquiring about SMAM power tiller subsidies and PM-KISAN succession transfers.",
-      "statutory_policy_test": "Benchmark Design v1.0.4 Section 3.3.1 (PM-KISAN Statutory Succession vs Partition Deed Safeguard): Post-01.02.2019 land title transfer qualifies under PM-KISAN Revised Operational Guidelines Clause 3(d) because ownership was transferred through inheritance resulting from demise of parent (transfer_basis = INHERITANCE_DUE_TO_DEATH; Death Cert and mutation extract verified); strictly distinct from post-cutoff partition deeds which remain statutorily excluded; SMAM power tiller subsidy qualifies in Section A; Krishi Bhagya and Ganga Kalyana disqualified due to canal command."
+      "statutory_policy_test": "Benchmark Design v1.0.4 Section 3.3.1 (PM-KISAN Statutory Succession vs Partition Deed Safeguard): Post-01.02.2019 land title transfer qualifies under PM-KISAN Revised Operational Guidelines PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i) because ownership was transferred through inheritance resulting from demise of parent (transfer_basis = INHERITANCE_DUE_TO_DEATH; Death Cert and mutation extract verified); strictly distinct from post-cutoff partition deeds which remain statutorily excluded; SMAM power tiller subsidy qualifies in Section A; Krishi Bhagya and Ganga Kalyana disqualified due to canal command."
     },
     "intended_test_purpose": "SMAM power tiller/paddy transplanter subsidy; medium holding (8.0 ac); post-2019 statutory inheritance upon demise of parent (transfer_basis=INHERITANCE_DUE_TO_DEATH, legal heir cert & mutation verified; distinct from ineligible partition deed); PM-KISAN qualifies in Section A.",
     "unresolved_dependencies": [

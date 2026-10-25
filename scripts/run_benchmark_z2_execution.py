@@ -624,9 +624,9 @@ def generate_execution_report_markdown(exec_data: Dict[str, Any]) -> str:
         act_dets = item["actionable_determinations"]
         sid = sc["scenario_id"]
 
-        el_count = sum(1 for d in act_dets if d["status"] == "ELIGIBLE")
-        in_count = sum(1 for d in act_dets if d["status"] == "INELIGIBLE")
-        rv_count = sum(1 for d in act_dets if d["status"] == "REQUIRES_VERIFICATION")
+        el_count = sum(1 for d in act_dets if d.get("governance_status", d["status"]) == "ELIGIBLE")
+        in_count = sum(1 for d in act_dets if d.get("governance_status", d["status"]) == "INELIGIBLE")
+        rv_count = sum(1 for d in act_dets if d.get("governance_status", d["status"]) == "REQUIRES_VERIFICATION")
 
         suppressed = [d["scheme_id"] for d in raw_dets if not d["is_actionable"]]
 
@@ -634,14 +634,14 @@ def generate_execution_report_markdown(exec_data: Dict[str, Any]) -> str:
         doc.append(f"- **Agro-Climatic Zone:** {sc['agro_climatic_zone']} ({sc['zone_id']})  \n")
         doc.append(f"- **Stated Need:** `{sc['immediate_need']}`  \n")
         doc.append(f"- **Farmer Query:** *\"{sc['kcc_query_text_example']}\"*  \n")
-        doc.append(f"- **Actionable Outcome Summary:** **{el_count} ELIGIBLE** | **{in_count} INELIGIBLE** | **{rv_count} REQUIRES_VERIFICATION**  \n")
+        doc.append(f"- **Governance Outcome Summary:** **{el_count} ELIGIBLE (Section A)** | **{in_count} INELIGIBLE** | **{rv_count} REQUIRES_VERIFICATION (Section B)**  \n")
         if suppressed:
             doc.append(f"- **Automated Parent Deduplication:** Suppressed abstract parent records `{suppressed}` to prevent duplicate cards alongside resolved children.  \n\n")
         else:
             doc.append("- **Automated Parent Deduplication:** No abstract parents required suppression.  \n\n")
 
-        doc.append("| Scheme ID | Resolved Implementation Scheme Name | Record Type | Eligibility Status | Rule Keys Fired | Missing Verifications / Disqualifications | Availability State |\n")
-        doc.append("|---|---|---|---|---|---|---|\n")
+        doc.append("| Scheme ID | Resolved Implementation Scheme Name | Record Type | Raw Engine Status | Governance Presentation Status | Presentation Section | Rule Keys Fired | Missing Verifications / Disqualifications |\n")
+        doc.append("|---|---|---|---|---|---|---|---|\n")
 
         for d in act_dets:
             rules_str = "<br>".join([f"`{r}`" for r in d["rule_keys_fired"]]) if d["rule_keys_fired"] else "None"
@@ -652,14 +652,15 @@ def generate_execution_report_markdown(exec_data: Dict[str, Any]) -> str:
                 disq_missing.extend([f"**Missing:** {x}" for x in d["missing_verifications"]])
             disq_missing_str = "<br>".join(disq_missing) if disq_missing else "None (Fully Verified)"
 
-            status_badge = f"**`{d['status']}`**"
-            doc.append(f"| **{d['scheme_id']}** | {d['scheme_name']} | `{d['record_type']}` | {status_badge} | {rules_str} | {disq_missing_str} | {d['availability_state']} |\n")
+            raw_badge = f"`{d['raw_engine_status']}`"
+            gov_badge = f"**`{d['governance_status']}`**"
+            doc.append(f"| **{d['scheme_id']}** | {d['scheme_name']} | `{d['record_type']}` | {raw_badge} | {gov_badge} | {d['presentation_section']} | {rules_str} | {disq_missing_str} |\n")
 
         doc.append("\n")
 
     doc.append("---\n\n")
 
-    doc.append("## 4. Policy Rules & Statutory Boundary Analysis\n\n")
+    doc.append("## 4. Policy Rules & Governance Safeguard Audits\n\n")
     doc.append("### 4.1 Challenge 3: PM-KISAN Pension Exclusion Boundary Test (Scenario S018)\n\n")
     doc.append("- **Scenario Context:** S018 represents a marginal farmer (2.0 ac, Raichur) who retired from a state institutional board, receiving superannuated monthly pension of **exactly ₹10,000**.\n")
     doc.append("- **Statutory Guideline:** Under Clause 2(d)(iv) of the PM-KISAN operational guidelines, all superannuated/retired pensioners whose monthly pension is ₹10,000 or more (excluding MTS/Class IV/Group D employees) are excluded from the scheme definition of eligible farmer family.\n")

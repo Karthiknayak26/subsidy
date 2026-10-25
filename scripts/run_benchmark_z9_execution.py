@@ -47,13 +47,7 @@ from src.eligibility.models import (
 )
 from src.eligibility.engine import EligibilityEngine
 from src.eligibility.availability import AvailabilityFilter
-
-PROVISIONAL_SCHEMES = {
-    "SCH008_KA_COOP",
-    "SCH010_VALMIKI",
-    "SCH010_DEVARAJ_URS",
-    "SCH010_KMDC"
-}
+from src.eligibility.governance import apply_governance_safeguard, PROVISIONAL_SCHEMES
 
 ZONE_Z9_PROFILES: List[Dict[str, Any]] = [
     {
@@ -443,7 +437,7 @@ ZONE_Z9_PROFILES: List[Dict[str, Any]] = [
             "legal_heir_certificate_number": "LHC/UK/2022/412",
             "mutation_extract_form_16": "MR No. 2022-T209 (18.03.2022)",
             "statutory_authority": "PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i)",
-            "statutory_distinction": "Ownership transferred through inheritance following demise of father; strictly distinct from non-qualifying post-cutoff partition deeds, sale deeds, or gift deeds under PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i).",
+            "statutory_distinction": "Ownership transferred through inheritance following demise of father; strictly distinct from non-qualifying post-cutoff partition deeds, sale deeds, or gift deeds under PM-KISAN Revised Operational Guidelines §5.3.3(ii).",
             "engine_input_interpretation": "land_ownership_cutoff_pre_feb_2019 = True correctly represents statutory compliance under the PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i) inheritance exception, passing the PMKISAN_CUTOFF_DATE_VERIFIED rule."
         },
         "attribute_provenance": {
@@ -534,124 +528,8 @@ def run_execution() -> Dict[str, Any]:
         actionable_serializable = []
         for d in actionable_determinations:
             is_prov = d.scheme_id in PROVISIONAL_SCHEMES
-            missing_verifications = list(d.missing_verifications)
-            disqualifying_factors = list(d.disqualifying_factors)
-            
-            # --- GOVERNANCE CASE 1: PMFBY / RWBCIS Crop Insurance Governance Audit across S059–S064 ---
-            if d.scheme_id == "SCH002":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Unresolved Policy Review / Seasonal Notification Required)"
-                allow_scoring = False
-                if sid == "S059":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 RWBCIS/PMFBY Insurance Unit (Hobli level) notification for Coffee in Somwarpet taluk, Kodagu district"
-                    ]
-                    gov_note = "Raw engine returned INELIGIBLE because Coffee is absent from static crop whitelist. In Western Ghats districts, Coffee is covered under weather-based crop insurance (RWBCIS). Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal scheme notification confirmation."
-                elif sid == "S060":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 RWBCIS/PMFBY Insurance Unit (Hobli level) notification for Cardamom in Mudigere taluk, Chikkamagaluru district"
-                    ]
-                    gov_note = "Raw engine returned INELIGIBLE because Cardamom is not in the static whitelist. Cardamom is notified under RWBCIS in Chikkamagaluru. Governance routes to Section B as REQUIRES_VERIFICATION pending seasonal notification confirmation."
-                elif sid == "S061":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Paddy in Sirsi taluk, Uttara Kannada district",
-                        "Tenant farmer cultivation agreement / oral lessee verification for PMFBY enrollment"
-                    ]
-                    gov_note = "Raw engine returned ELIGIBLE based on static crop whitelist for Paddy, but applicant is a pure tenant. Tenancy proof and seasonal Insurance Unit notification require verification. Governance routes to Section B as REQUIRES_VERIFICATION."
-                elif sid == "S062":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 RWBCIS Insurance Unit (Hobli level) notification for Black Pepper in Virajpet taluk, Kodagu district",
-                        "Revenue Department certification of land title record date / mutation extract for Virajpet taluk"
-                    ]
-                    gov_note = "Raw engine returned INELIGIBLE due to static whitelist, but Black Pepper is covered under RWBCIS in Kodagu. Additionally, land title record date is UNKNOWN. Governance presentation routes determination to Section B as REQUIRES_VERIFICATION without numerical scoring."
-                elif sid == "S063":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 RWBCIS/PMFBY Insurance Unit notification for Coffee in Koppa taluk, Chikkamagaluru district"
-                    ]
-                    gov_note = "Raw engine returned INELIGIBLE due to static crop whitelist, but Coffee is covered under RWBCIS weather-based scheme in Chikkamagaluru. Governance routes to Section B as REQUIRES_VERIFICATION."
-                elif sid == "S064":
-                    missing_verifications = [
-                        "Verification of GoK Kharif 2026 PMFBY Insurance Unit (Gram Panchayat level) notification for Paddy in Yellapur taluk, Uttara Kannada district"
-                    ]
-                    gov_note = "Raw engine returned ELIGIBLE based on static crop whitelist, but commercial crop insurance claims require verified Kharif 2026 Gram Panchayat Insurance Unit notification. Governance presentation routes to Section B as REQUIRES_VERIFICATION."
-
-            # --- GOVERNANCE CASE 2: S062 Challenge 4: Unknown Land Title Status ---
-            elif sid == "S062" and d.scheme_id == "SCH001":
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Unresolved Statutory Evidence / Land Title Required)"
-                allow_scoring = False
-                missing_verifications = [
-                    "Verification of land ownership title record date (must be on or before 01.02.2019 or statutory succession upon death)",
-                    "Revenue Department certification of land ownership record date / inheritance mutation order on RTC for Virajpet taluk"
-                ]
-                gov_note = "Raw engine returned REQUIRES_VERIFICATION due to explicit UNKNOWN tenure cut-off date (land_ownership_cutoff_pre_feb_2019 = None). In strict adherence to Challenge 4 safeguards, missing title evidence must remain REQUIRES_VERIFICATION and never silently default to eligibility or ineligibility. Placed in Section B without scoring."
-
-            # --- GOVERNANCE CASE 3: S064 Statutory Succession (PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i)) ---
-            elif sid == "S064" and d.scheme_id == "SCH001":
-                gov_status = "ELIGIBLE"
-                presentation_section = "Section A (Confirmed Actionable Candidates)"
-                allow_scoring = True
-                missing_verifications = []
-                gov_note = "Statutory Inheritance Compliance: Title acquired post-01.02.2019 strictly satisfies PM-KISAN Revised Operational Guidelines PM-KISAN Revised Operational Guidelines §§5.2–5.3.3(i) exception because ownership was transferred through inheritance resulting from demise of parent (transfer_basis = INHERITANCE_DUE_TO_DEATH; father deceased Nov 2021; Death Cert DC/UK/2021/8841 and Bhoomi mutation Form 16 MR No. 2022-T209 verified). Strictly distinct from non-qualifying partition deeds. Raw engine evaluated ELIGIBLE (PMKISAN_CUTOFF_DATE_VERIFIED) and confirmed in Section A."
-
-            # --- GOVERNANCE CASE 4: S063 Solar Pump Prerequisite Verification ---
-            elif sid == "S063" and d.scheme_id == "SCH006":
-                gov_status = "ELIGIBLE"
-                presentation_section = "Section A (Confirmed Actionable Candidates)"
-                allow_scoring = True
-                missing_verifications = []
-                gov_note = "Solar Pump Prerequisite Verification: Landholding is exactly 2.5 acres (boundary classified as Small [2.5, 5.0]). Operational water source verified as Borewell (Non-energized) (satisfying KUSUM_B_WATER_SOURCE_VERIFIED); electric status verified as UNENERGIZED_OFF_GRID (satisfying KUSUM_B_OFF_GRID_VERIFIED). Confirmed in Section A for primary need SOLAR_PUMP_INSTALLATION."
-
-            # --- GOVERNANCE CASE 5: S061 Pure Tenancy Agricultural Credit Routing ---
-            elif sid == "S061" and d.scheme_id == "SCH001":
-                gov_status = "INELIGIBLE"
-                presentation_section = "Disqualified / Non-Actionable Candidates"
-                allow_scoring = False
-                gov_note = "Pure tenant farmer without recorded land ownership title is statutorily excluded from PM-KISAN (PMKISAN_PURE_TENANT_EXCLUSION). Placed in Disqualified Candidates."
-
-            # --- GOVERNANCE CASE 6: Provisional Schemes ---
-            elif is_prov and d.status == EligibilityStatus.ELIGIBLE:
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Provisional Schemes / Qualitative Review Only)"
-                allow_scoring = False
-                missing_verifications = [f"Administrative circular verification for provisional scheme {d.scheme_id}"]
-                gov_note = "Raw engine returned ELIGIBLE based on encoded rules, but scheme record is PROVISIONAL in registry. Governance safeguard places determination in Section B as REQUIRES_VERIFICATION without numerical scoring."
-            elif is_prov and d.status == EligibilityStatus.REQUIRES_VERIFICATION:
-                gov_status = "REQUIRES_VERIFICATION"
-                presentation_section = "Section B (Provisional Schemes / Qualitative Review Only)"
-                allow_scoring = False
-                if not missing_verifications:
-                    missing_verifications = [f"Administrative circular and Government Order verification for provisional scheme {d.scheme_id}"]
-                gov_note = "Provisional scheme requiring administrative or Government Order verification."
-            elif d.status == EligibilityStatus.ELIGIBLE:
-                gov_status = "ELIGIBLE"
-                presentation_section = "Section A (Confirmed Actionable Candidates)"
-                allow_scoring = True
-                gov_note = "Confirmed verified scheme eligible for clinical 0-3 relevance scoring."
-            else:
-                gov_status = d.status.value
-                presentation_section = "Disqualified / Non-Actionable Candidates"
-                allow_scoring = False
-                gov_note = "Statutorily disqualified under verified criteria."
-
-            actionable_serializable.append({
-                "scheme_id": d.scheme_id,
-                "scheme_name": d.scheme_name,
-                "record_type": d.record_type,
-                "parent_scheme_id": d.parent_scheme_id,
-                "status": d.status.value,
-                "raw_engine_status": d.status.value,
-                "governance_status": gov_status,
-                "presentation_section": presentation_section,
-                "allow_numerical_scoring": allow_scoring,
-                "governance_note": gov_note,
-                "reason": d.reason,
-                "disqualifying_factors": disqualifying_factors,
-                "missing_verifications": missing_verifications,
-                "rule_keys_fired": d.rule_keys_fired,
-                "availability_state": d.availability_state.value,
-                "is_provisional": is_prov
-            })
+            item_dict = apply_governance_safeguard(d, sid, profile, is_prov)
+            actionable_serializable.append(item_dict)
             
         execution_results.append({
             "scenario_id": sid,

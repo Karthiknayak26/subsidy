@@ -619,9 +619,9 @@ def generate_execution_report_markdown(exec_data: Dict[str, Any]) -> str:
         act_dets = item["actionable_determinations"]
         sid = sc["scenario_id"]
 
-        el_count = sum(1 for d in act_dets if d["status"] == "ELIGIBLE")
-        in_count = sum(1 for d in act_dets if d["status"] == "INELIGIBLE")
-        rv_count = sum(1 for d in act_dets if d["status"] == "REQUIRES_VERIFICATION")
+        el_count = sum(1 for d in act_dets if d.get("governance_status", d["status"]) == "ELIGIBLE")
+        in_count = sum(1 for d in act_dets if d.get("governance_status", d["status"]) == "INELIGIBLE")
+        rv_count = sum(1 for d in act_dets if d.get("governance_status", d["status"]) == "REQUIRES_VERIFICATION")
 
         suppressed = [d["scheme_id"] for d in raw_dets if not d["is_actionable"]]
 
@@ -629,14 +629,14 @@ def generate_execution_report_markdown(exec_data: Dict[str, Any]) -> str:
         doc.append(f"- **Agro-Climatic Zone:** {sc['agro_climatic_zone']} ({sc['zone_id']})  \n")
         doc.append(f"- **Stated Need:** `{sc['immediate_need']}`  \n")
         doc.append(f"- **Farmer Query:** *\"{sc['kcc_query_text_example']}\"*  \n")
-        doc.append(f"- **Actionable Outcome Summary:** **{el_count} ELIGIBLE** | **{in_count} INELIGIBLE** | **{rv_count} REQUIRES_VERIFICATION**  \n")
+        doc.append(f"- **Governance Outcome Summary:** **{el_count} ELIGIBLE (Section A)** | **{in_count} INELIGIBLE** | **{rv_count} REQUIRES_VERIFICATION (Section B)**  \n")
         if suppressed:
             doc.append(f"- **Automated Parent Deduplication:** Suppressed abstract parent records `{suppressed}` to prevent duplicate cards alongside resolved children.  \n\n")
         else:
             doc.append("- **Automated Parent Deduplication:** No abstract parents required suppression.  \n\n")
 
-        doc.append("| Scheme ID | Resolved Implementation Scheme Name | Record Type | Eligibility Status | Rule Keys Fired | Missing Verifications / Disqualifications | Availability State |\n")
-        doc.append("|---|---|---|---|---|---|---|\n")
+        doc.append("| Scheme ID | Resolved Implementation Scheme Name | Record Type | Raw Engine Status | Governance Presentation Status | Presentation Section | Rule Keys Fired | Missing Verifications / Disqualifications |\n")
+        doc.append("|---|---|---|---|---|---|---|---|\n")
 
         for d in act_dets:
             rules_str = "<br>".join([f"`{r}`" for r in d["rule_keys_fired"]]) if d["rule_keys_fired"] else "None"
@@ -647,14 +647,15 @@ def generate_execution_report_markdown(exec_data: Dict[str, Any]) -> str:
                 disq_missing.extend([f"**Missing:** {x}" for x in d["missing_verifications"]])
             disq_missing_str = "<br>".join(disq_missing) if disq_missing else "None (Fully Verified)"
 
-            status_badge = f"**`{d['status']}`**"
-            doc.append(f"| **{d['scheme_id']}** | {d['scheme_name']} | `{d['record_type']}` | {status_badge} | {rules_str} | {disq_missing_str} | {d['availability_state']} |\n")
+            raw_badge = f"`{d['raw_engine_status']}`"
+            gov_badge = f"**`{d['governance_status']}`**"
+            doc.append(f"| **{d['scheme_id']}** | {d['scheme_name']} | `{d['record_type']}` | {raw_badge} | {gov_badge} | {d['presentation_section']} | {rules_str} | {disq_missing_str} |\n")
 
         doc.append("\n")
 
     doc.append("---\n\n")
 
-    doc.append("## 4. Policy Rules & Corporation Status Summary\n\n")
+    doc.append("## 4. Policy Rules & Governance Safeguard Audits\n\n")
     doc.append("### 4.1 Ganga Kalyana Implementation Routing\n\n")
     doc.append("- **`S011` (Bidar, OBC):** Routes to D. Devaraj Urs Backward Classes Development Corporation (`SCH010_DEVARAJ_URS`). Individual route passes acreage window ($1.2 \\le 1.8 \\le 5.0$). Other corporation children (`SCH010_AMBEDKAR`, `SCH010_VALMIKI`, `SCH010_KMDC`) cleanly disqualified for social category mismatch. Devaraj Urs rules remain **PROVISIONAL** pending official annual notification.\n")
     doc.append("- **`S012` (Kalaburagi, SC):** Disqualified from Ganga Kalyana parent and children (`GK_PARENT_EXISTING_BOREWELL_EXCLUSION`, `GK_SCH010_AMBEDKAR_EXISTING_BOREWELL`). The farmer already possesses an unenergized borewell; Ganga Kalyana strictly funds borewell drilling for borewell-less plots.\n")

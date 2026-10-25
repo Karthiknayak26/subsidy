@@ -97,7 +97,20 @@ def validate_all_benchmark_artifacts() -> Tuple[bool, List[str]]:
                 exec_data = json.load(f)
             all_executions[f"Z{z}"] = exec_data
 
-        # Check individual JSON and MD files
+        # Check reports for required version and governance content
+        if os.path.exists(report_file):
+            if os.path.getsize(report_file) < 1000:
+                errors.append(f"Report file {report_file} is suspiciously small ({os.path.getsize(report_file)} bytes)")
+            with open(report_file, "r", encoding="utf-8") as f:
+                report_content = f.read()
+            if "v1.0.4" not in report_content:
+                errors.append(f"{report_file}: does not declare milestone version v1.0.4")
+            if "governance" not in report_content.lower():
+                errors.append(f"{report_file}: missing governance audit discussions")
+            if "Section A" not in report_content or "Section B" not in report_content:
+                errors.append(f"{report_file}: missing Section A / Section B governance presentation sections")
+
+        # Check and parse individual JSON and MD files, ensuring 100% equivalence with batch profiles
         z_start = (z - 1) * 6 + 11
         for sid_num in range(z_start, z_start + 6):
             sid = f"S{sid_num:03d}"
@@ -105,8 +118,30 @@ def validate_all_benchmark_artifacts() -> Tuple[bool, List[str]]:
             ind_md = os.path.join(z_dir, f"{sid}.md")
             if not os.path.exists(ind_json):
                 errors.append(f"Missing individual scenario JSON: {ind_json}")
+                continue
             if not os.path.exists(ind_md):
                 errors.append(f"Missing individual scenario MD: {ind_md}")
+            elif os.path.getsize(ind_md) < 100:
+                errors.append(f"Individual scenario MD is empty or incomplete: {ind_md}")
+
+            # Parse and inspect individual JSON file
+            try:
+                with open(ind_json, "r", encoding="utf-8") as f:
+                    ind_profile = json.load(f)
+                
+                ind_ver = ind_profile.get("benchmark_version")
+                if ind_ver != "v1.0.4":
+                    errors.append(f"Individual profile {ind_json}: benchmark_version is '{ind_ver}' (expected 'v1.0.4')")
+                
+                if ind_profile.get("scenario_id") != sid:
+                    errors.append(f"Individual profile {ind_json}: scenario_id is '{ind_profile.get('scenario_id')}' (expected '{sid}')")
+                
+                # Verify individual file is identical to the canonical batch profile
+                batch_p = all_profiles.get(sid)
+                if batch_p is not None and ind_profile != batch_p:
+                    errors.append(f"Individual profile {ind_json} differs from batch scenario {batch_file} for {sid}")
+            except Exception as e:
+                errors.append(f"Failed to parse individual scenario JSON {ind_json}: {str(e)}")
 
     print(f"Total scenario profiles loaded: {len(all_profiles)} / 60")
     if set(all_profiles.keys()) != set(expected_sids):

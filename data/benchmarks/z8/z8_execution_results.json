@@ -1,84 +1,13 @@
 {
   "benchmark_version": "v1.0.4",
   "zone_id": "Z8",
-  "zone": "Z8",
   "agro_climatic_zone": "Northern Transition Zone",
-  "execution_date": "2026-10-19",
+  "execution_date": "2026-10-16",
   "total_scenarios": 6,
-  "scenarios_evaluated": 6,
   "results": [
     {
       "scenario_id": "S053",
       "profile": {
-        "scenario_id": "S053",
-        "benchmark_version": "v1.0.4",
-        "zone_id": "Z8",
-        "agro_climatic_zone": "Northern Transition Zone",
-        "district": "Dharwad",
-        "crop_primary": "Soybean",
-        "crop_secondary": "Jowar",
-        "land_size_acres": 5.5,
-        "land_type": "Dryland (Rainfed)",
-        "social_category": "Minority (Muslim)",
-        "farmer_category": "Medium (5-10 acres)",
-        "existing_assets": [
-          "Dug Well (Seasonal)",
-          "Sprinkler Set (Partial)"
-        ],
-        "annual_family_income_lakh": 2.4,
-        "immediate_need": "RAINWATER_HARVESTING",
-        "paid_income_tax_last_assessment_year": false,
-        "govt_employee_category": "NONE",
-        "superannuated_pensioner_monthly_amount": 0.0,
-        "pensioner_is_mts_exempt": false,
-        "registered_professional": "NONE",
-        "land_ownership_cutoff_pre_feb_2019": true,
-        "is_pure_tenant_without_land_title": false,
-        "borewell_electric_status": "NONE",
-        "prior_micro_irrigation_subsidy_years_ago": null,
-        "prior_farm_pond_subsidy_years_ago": null,
-        "prior_machinery_subsidy_years_ago": null,
-        "prior_ganga_kalyana_in_family": false,
-        "community_pool_acres": 0.0,
-        "community_pool_beneficiaries_count": 0,
-        "farming_stage": "Post-Harvest / Land Resting",
-        "season": "Kharif 2026",
-        "kcc_query_text_example": "Minority medium dryland soybean farmer with 5.5 acres in Navalgund taluk, Dharwad; seasonal dug well dries up by February; seeking 80% capital subsidy on farm pond (Krishi Honda) with polythene lining and diesel pump set under Krishi Bhagya; inquiring about Dharwad taluk portal opening and KMDC corporation borewell criteria.",
-        "landholding_details": {
-          "total_operational_holding_acres": 5.5,
-          "qualifying_parcel_acres": 5.5,
-          "requested_subsidized_area_ha": null,
-          "land_classification_interval": "(5.0, 10.0] Medium",
-          "physical_area_consistency": "PASS: 5.5 ac holding matches parcel"
-        },
-        "water_and_irrigation": {
-          "operational_water_source": "Dug Well (Seasonal, dries Feb-May)",
-          "borewell_electric_status": "NONE",
-          "grid_connection_evidence": "No grid electricity on plot; seasonal dug well without energized pump"
-        },
-        "statutory_flags": {
-          "paid_income_tax_last_assessment_year": false,
-          "govt_employee_category": "NONE",
-          "superannuated_pensioner_monthly_amount": 0.0,
-          "pensioner_is_mts_exempt": false,
-          "registered_professional": "NONE",
-          "land_ownership_cutoff_pre_feb_2019": true,
-          "is_pure_tenant_without_land_title": false,
-          "tenure_documentation": "RTC registered pre-February 2019 in Navalgund taluk, Dharwad district"
-        },
-        "attribute_provenance": {
-          "empirical_baseline": "DES Karnataka & Agricultural Census: Medium rainfed oilseed growers in Northern Transition Zone (Navalgund/Dharwad taluks), black cotton soil belt with high runoff vulnerability.",
-          "farmer_query_inspiration": "KCC Karnataka rainfed farming logs: Minority dryland farmers inquiring about Krishi Bhagya farm pond assistance and seasonal water storage in Dharwad.",
-          "statutory_policy_test": "Krishi Bhagya farm pond evaluation on medium dryland holding (5.5 ac); Dharwad rainfed taluk notification verified; KMDC individual borewell route exceeds 5.0 ac statutory ceiling; PMFBY routed to Section B pending seasonal notification."
-        },
-        "intended_test_purpose": "Krishi Bhagya farm pond for medium Minority dryland soybean; KMDC individual route exceeds 5.0 ac ceiling; PMFBY routed to Section B.",
-        "unresolved_dependencies": [
-          "Verification of GoK Kharif 2026 PMFBY Insurance Unit notification for Soybean in Dharwad district",
-          "KMDC administrative circular and community borewell operational guidelines verification",
-          "Dharwad taluk Krishi Bhagya application portal status and current GO for FY 2026-27"
-        ]
-      },
-      "scenario": {
         "scenario_id": "S053",
         "benchmark_version": "v1.0.4",
         "zone_id": "Z8",
@@ -165,7 +94,7 @@
             "PMKISAN_PENSION_UNDER_10K_OR_NONE",
             "PMKISAN_NO_PROFESSIONAL_EXCLUSION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -182,7 +111,7 @@
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -203,7 +132,7 @@
             "PMKSY_NO_WATER_SOURCE",
             "PMKSY_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -220,7 +149,7 @@
           "rule_keys_fired": [
             "SMAM_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -239,7 +168,7 @@
             "KRISHI_BHAGYA_DISTRICT_NOTIFIED",
             "KRISHI_BHAGYA_ACREAGE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -259,7 +188,7 @@
             "KUSUM_B_NO_WATER_SOURCE",
             "KUSUM_B_OFF_GRID_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -281,7 +210,7 @@
             "MIDH_LAND_MIN_MET",
             "MIDH_NO_MICRO_IRRIGATION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -298,7 +227,7 @@
           "rule_keys_fired": [
             "CREDIT_PARENT_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": false,
           "is_provisional": false
         },
@@ -315,7 +244,7 @@
           "rule_keys_fired": [
             "KCC_CENTRAL_COMMERCIAL_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -334,7 +263,7 @@
           "rule_keys_fired": [
             "KCC_KA_COOP_PROVISIONAL_PENDING_GO"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
@@ -351,7 +280,7 @@
           "rule_keys_fired": [
             "SHC_UNIVERSAL_ACCESS_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -370,18 +299,18 @@
           "rule_keys_fired": [
             "GK_PARENT_EXCEEDS_5_ACRES"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_AMBEDKAR",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC)",
+          "scheme_name": "Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'Minority (Muslim)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).; Individual landholding (5.5 ac) exceeds Ambedkar Corporation individual ceiling of 5.0 acres.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'Minority (Muslim)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).; Individual landholding (5.5 ac) exceeds Ambedkar Corporation individual ceiling of 5.0 acres.",
           "disqualifying_factors": [
             "Applicant social category 'Minority (Muslim)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).",
             "Individual landholding (5.5 ac) exceeds Ambedkar Corporation individual ceiling of 5.0 acres."
@@ -391,18 +320,18 @@
             "GK_SCH010_AMBEDKAR_SOCIAL_CATEGORY_MISMATCH",
             "GK_AMBEDKAR_INDIVIDUAL_OVER_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_VALMIKI",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'Minority (Muslim)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).; Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'Minority (Muslim)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).; Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Applicant social category 'Minority (Muslim)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).",
             "Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling."
@@ -412,18 +341,18 @@
             "GK_SCH010_VALMIKI_SOCIAL_CATEGORY_MISMATCH",
             "GK_SCH010_VALMIKI_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_DEVARAJ_URS",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC)",
+          "scheme_name": "Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'Minority (Muslim)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).; Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'Minority (Muslim)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).; Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Applicant social category 'Minority (Muslim)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).",
             "Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling."
@@ -433,18 +362,18 @@
             "GK_SCH010_DEVARAJ_URS_SOCIAL_CATEGORY_MISMATCH",
             "GK_SCH010_DEVARAJ_URS_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_KMDC",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC): Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC): Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling."
           ],
@@ -452,7 +381,7 @@
           "rule_keys_fired": [
             "GK_SCH010_KMDC_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         }
@@ -479,7 +408,7 @@
             "PMKISAN_PENSION_UNDER_10K_OR_NONE",
             "PMKISAN_NO_PROFESSIONAL_EXCLUSION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -501,7 +430,7 @@
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -525,7 +454,7 @@
             "PMKSY_NO_WATER_SOURCE",
             "PMKSY_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -545,7 +474,7 @@
           "rule_keys_fired": [
             "SMAM_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -567,7 +496,7 @@
             "KRISHI_BHAGYA_DISTRICT_NOTIFIED",
             "KRISHI_BHAGYA_ACREAGE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -590,7 +519,7 @@
             "KUSUM_B_NO_WATER_SOURCE",
             "KUSUM_B_OFF_GRID_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -615,7 +544,7 @@
             "MIDH_LAND_MIN_MET",
             "MIDH_NO_MICRO_IRRIGATION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -635,7 +564,7 @@
           "rule_keys_fired": [
             "KCC_CENTRAL_COMMERCIAL_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -657,7 +586,7 @@
           "rule_keys_fired": [
             "KCC_KA_COOP_PROVISIONAL_PENDING_GO"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
@@ -677,7 +606,7 @@
           "rule_keys_fired": [
             "SHC_UNIVERSAL_ACCESS_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -699,12 +628,12 @@
           "rule_keys_fired": [
             "GK_PARENT_EXCEEDS_5_ACRES"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_AMBEDKAR",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC)",
+          "scheme_name": "Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -713,7 +642,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'Minority (Muslim)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).; Individual landholding (5.5 ac) exceeds Ambedkar Corporation individual ceiling of 5.0 acres.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'Minority (Muslim)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).; Individual landholding (5.5 ac) exceeds Ambedkar Corporation individual ceiling of 5.0 acres.",
           "disqualifying_factors": [
             "Applicant social category 'Minority (Muslim)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).",
             "Individual landholding (5.5 ac) exceeds Ambedkar Corporation individual ceiling of 5.0 acres."
@@ -723,12 +652,12 @@
             "GK_SCH010_AMBEDKAR_SOCIAL_CATEGORY_MISMATCH",
             "GK_AMBEDKAR_INDIVIDUAL_OVER_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_VALMIKI",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -737,7 +666,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'Minority (Muslim)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).; Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'Minority (Muslim)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).; Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Applicant social category 'Minority (Muslim)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).",
             "Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling."
@@ -747,12 +676,12 @@
             "GK_SCH010_VALMIKI_SOCIAL_CATEGORY_MISMATCH",
             "GK_SCH010_VALMIKI_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_DEVARAJ_URS",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC)",
+          "scheme_name": "Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -761,7 +690,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'Minority (Muslim)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).; Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'Minority (Muslim)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).; Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Applicant social category 'Minority (Muslim)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_KMDC instead).",
             "Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling."
@@ -771,12 +700,12 @@
             "GK_SCH010_DEVARAJ_URS_SOCIAL_CATEGORY_MISMATCH",
             "GK_SCH010_DEVARAJ_URS_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_KMDC",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -785,7 +714,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC): Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC): Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Individual landholding (5.5 ac) exceeds maximum 5.0 acres ceiling."
           ],
@@ -793,7 +722,7 @@
           "rule_keys_fired": [
             "GK_SCH010_KMDC_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         }
       ]
@@ -868,74 +797,6 @@
           "Belagavi District Horticulture Department MIDH shade-net FY 2026-27 application window confirmation"
         ]
       },
-      "scenario": {
-        "scenario_id": "S054",
-        "benchmark_version": "v1.0.4",
-        "zone_id": "Z8",
-        "agro_climatic_zone": "Northern Transition Zone",
-        "district": "Belagavi",
-        "crop_primary": "Chilli",
-        "crop_secondary": "Vegetables",
-        "land_size_acres": 1.5,
-        "land_type": "Wetland/valley",
-        "social_category": "SC",
-        "farmer_category": "Marginal (< 2.5 acres)",
-        "existing_assets": [
-          "Borewell (Grid-connected)",
-          "Drip Irrigation (Installed)"
-        ],
-        "annual_family_income_lakh": 0.95,
-        "immediate_need": "PROTECTED_HORTICULTURE",
-        "paid_income_tax_last_assessment_year": false,
-        "govt_employee_category": "NONE",
-        "superannuated_pensioner_monthly_amount": 0.0,
-        "pensioner_is_mts_exempt": false,
-        "registered_professional": "NONE",
-        "land_ownership_cutoff_pre_feb_2019": true,
-        "is_pure_tenant_without_land_title": false,
-        "borewell_electric_status": "GRID_CONNECTED_IP_SET",
-        "prior_micro_irrigation_subsidy_years_ago": null,
-        "prior_farm_pond_subsidy_years_ago": null,
-        "prior_machinery_subsidy_years_ago": null,
-        "prior_ganga_kalyana_in_family": false,
-        "community_pool_acres": 0.0,
-        "community_pool_beneficiaries_count": 0,
-        "farming_stage": "Fruiting / Harvest",
-        "season": "Kharif 2026",
-        "kcc_query_text_example": "SC marginal chilli farmer with 1.5 acres Krishna river valley wetland in Athani taluk, Belagavi; operational grid-connected borewell and drip network installed; seeking 50% capital subsidy on naturally ventilated polyhouse / shade-net structure under Mission for Integrated Development of Horticulture (MIDH); checking crop insurance notification.",
-        "landholding_details": {
-          "total_operational_holding_acres": 1.5,
-          "qualifying_parcel_acres": 1.5,
-          "requested_subsidized_area_ha": null,
-          "land_classification_interval": "[0.0, 2.5) Marginal",
-          "physical_area_consistency": "PASS: 1.5 ac holding matches parcel"
-        },
-        "water_and_irrigation": {
-          "operational_water_source": "Borewell (Grid-connected)",
-          "borewell_electric_status": "GRID_CONNECTED_IP_SET",
-          "grid_connection_evidence": "HESCOM energized 5 HP IP set with operational drip network"
-        },
-        "statutory_flags": {
-          "paid_income_tax_last_assessment_year": false,
-          "govt_employee_category": "NONE",
-          "superannuated_pensioner_monthly_amount": 0.0,
-          "pensioner_is_mts_exempt": false,
-          "registered_professional": "NONE",
-          "land_ownership_cutoff_pre_feb_2019": true,
-          "is_pure_tenant_without_land_title": false,
-          "tenure_documentation": "RTC registered pre-February 2019 in Athani taluk, Belagavi district"
-        },
-        "attribute_provenance": {
-          "empirical_baseline": "Karnataka Horticulture Department & DES: River valley intensive vegetable and spice cultivation in northern Belagavi (Athani/Chikkodi), small and marginal farmers adopting protected structures for high-value Byadagi chilli hybrids.",
-          "farmer_query_inspiration": "KCC Belagavi horticulture queries: SC marginal farmers seeking MIDH shade-net subsidies for chilli cultivation with existing borewell infrastructure.",
-          "statutory_policy_test": "MIDH shade-net qualification for high-value horticultural chilli on marginal holding (1.5 ac >= 0.25 ac threshold); Krishi Bhagya disqualified due to wetland type; Ganga Kalyana disqualified due to existing borewell; PM-KUSUM B disqualified due to grid connection."
-        },
-        "intended_test_purpose": "MIDH shade-net for SC marginal chilli wetland; Krishi Bhagya dryland exclusion; Ganga Kalyana existing-borewell disqualification; PM-KUSUM B grid disqualification.",
-        "unresolved_dependencies": [
-          "Verification of GoK Kharif 2026 PMFBY Insurance Unit notification for Chilli in Athani taluk, Belagavi district",
-          "Belagavi District Horticulture Department MIDH shade-net FY 2026-27 application window confirmation"
-        ]
-      },
       "raw_determinations": [
         {
           "scheme_id": "SCH001",
@@ -954,7 +815,7 @@
             "PMKISAN_PENSION_UNDER_10K_OR_NONE",
             "PMKISAN_NO_PROFESSIONAL_EXCLUSION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -971,7 +832,7 @@
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -990,7 +851,7 @@
             "PMKSY_WATER_SOURCE_VERIFIED",
             "PMKSY_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -1007,7 +868,7 @@
           "rule_keys_fired": [
             "SMAM_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -1028,7 +889,7 @@
             "KRISHI_BHAGYA_DISTRICT_NOTIFIED",
             "KRISHI_BHAGYA_ACREAGE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -1048,7 +909,7 @@
             "KUSUM_B_WATER_SOURCE_PRESENT",
             "KUSUM_B_GRID_CONNECTED_DISQUALIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -1059,7 +920,7 @@
           "parent_scheme_id": null,
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
-          "reason": "Qualifies for MIDH Protected Cultivation subsidy (50% cost norm for Polyhouse / Shade Net up to 4,000 m\u00b2).",
+          "reason": "Qualifies for MIDH Protected Cultivation subsidy (50% cost norm for Polyhouse / Shade Net up to 4,000 m²).",
           "disqualifying_factors": [],
           "missing_verifications": [],
           "rule_keys_fired": [
@@ -1067,7 +928,7 @@
             "MIDH_LAND_MIN_MET",
             "MIDH_MICRO_IRRIGATION_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -1084,7 +945,7 @@
           "rule_keys_fired": [
             "CREDIT_PARENT_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": false,
           "is_provisional": false
         },
@@ -1101,7 +962,7 @@
           "rule_keys_fired": [
             "KCC_CENTRAL_COMMERCIAL_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -1120,7 +981,7 @@
           "rule_keys_fired": [
             "KCC_KA_COOP_PROVISIONAL_PENDING_GO"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
@@ -1137,7 +998,7 @@
           "rule_keys_fired": [
             "SHC_UNIVERSAL_ACCESS_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -1158,18 +1019,18 @@
             "GK_PARENT_NOT_DRYLAND",
             "GK_PARENT_EXISTING_BOREWELL_EXCLUSION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_AMBEDKAR",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC)",
+          "scheme_name": "Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC): Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.; Land parcel already possesses an existing borewell.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC): Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.; Land parcel already possesses an existing borewell.",
           "disqualifying_factors": [
             "Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.",
             "Land parcel already possesses an existing borewell."
@@ -1180,18 +1041,18 @@
             "GK_SCH010_AMBEDKAR_EXISTING_BOREWELL",
             "GK_AMBEDKAR_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_VALMIKI",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'SC' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).; Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.; Land parcel already possesses an existing borewell.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'SC' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).; Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.; Land parcel already possesses an existing borewell.",
           "disqualifying_factors": [
             "Applicant social category 'SC' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).",
             "Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.",
@@ -1204,18 +1065,18 @@
             "GK_SCH010_VALMIKI_EXISTING_BOREWELL",
             "GK_SCH010_VALMIKI_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_DEVARAJ_URS",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC)",
+          "scheme_name": "Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'SC' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).; Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.; Land parcel already possesses an existing borewell.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'SC' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).; Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.; Land parcel already possesses an existing borewell.",
           "disqualifying_factors": [
             "Applicant social category 'SC' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).",
             "Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.",
@@ -1228,18 +1089,18 @@
             "GK_SCH010_DEVARAJ_URS_EXISTING_BOREWELL",
             "GK_SCH010_DEVARAJ_URS_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_KMDC",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC): Applicant social category 'SC' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).; Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.; Land parcel already possesses an existing borewell.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC): Applicant social category 'SC' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).; Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.; Land parcel already possesses an existing borewell.",
           "disqualifying_factors": [
             "Applicant social category 'SC' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).",
             "Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.",
@@ -1252,7 +1113,7 @@
             "GK_SCH010_KMDC_EXISTING_BOREWELL",
             "GK_SCH010_KMDC_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         }
@@ -1279,7 +1140,7 @@
             "PMKISAN_PENSION_UNDER_10K_OR_NONE",
             "PMKISAN_NO_PROFESSIONAL_EXCLUSION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -1301,7 +1162,7 @@
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -1323,7 +1184,7 @@
             "PMKSY_WATER_SOURCE_VERIFIED",
             "PMKSY_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -1343,7 +1204,7 @@
           "rule_keys_fired": [
             "SMAM_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -1367,7 +1228,7 @@
             "KRISHI_BHAGYA_DISTRICT_NOTIFIED",
             "KRISHI_BHAGYA_ACREAGE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -1390,7 +1251,7 @@
             "KUSUM_B_WATER_SOURCE_PRESENT",
             "KUSUM_B_GRID_CONNECTED_DISQUALIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -1404,7 +1265,7 @@
           "presentation_section": "Section A (Confirmed Actionable Candidates)",
           "allow_numerical_scoring": true,
           "governance_note": "Confirmed verified scheme eligible for clinical 0-3 relevance scoring.",
-          "reason": "Qualifies for MIDH Protected Cultivation subsidy (50% cost norm for Polyhouse / Shade Net up to 4,000 m\u00b2).",
+          "reason": "Qualifies for MIDH Protected Cultivation subsidy (50% cost norm for Polyhouse / Shade Net up to 4,000 m²).",
           "disqualifying_factors": [],
           "missing_verifications": [],
           "rule_keys_fired": [
@@ -1412,7 +1273,7 @@
             "MIDH_LAND_MIN_MET",
             "MIDH_MICRO_IRRIGATION_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -1432,7 +1293,7 @@
           "rule_keys_fired": [
             "KCC_CENTRAL_COMMERCIAL_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -1454,7 +1315,7 @@
           "rule_keys_fired": [
             "KCC_KA_COOP_PROVISIONAL_PENDING_GO"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
@@ -1474,7 +1335,7 @@
           "rule_keys_fired": [
             "SHC_UNIVERSAL_ACCESS_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -1498,12 +1359,12 @@
             "GK_PARENT_NOT_DRYLAND",
             "GK_PARENT_EXISTING_BOREWELL_EXCLUSION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_AMBEDKAR",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC)",
+          "scheme_name": "Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -1512,7 +1373,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC): Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.; Land parcel already possesses an existing borewell.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC): Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.; Land parcel already possesses an existing borewell.",
           "disqualifying_factors": [
             "Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.",
             "Land parcel already possesses an existing borewell."
@@ -1523,12 +1384,12 @@
             "GK_SCH010_AMBEDKAR_EXISTING_BOREWELL",
             "GK_AMBEDKAR_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_VALMIKI",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -1537,7 +1398,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'SC' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).; Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.; Land parcel already possesses an existing borewell.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'SC' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).; Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.; Land parcel already possesses an existing borewell.",
           "disqualifying_factors": [
             "Applicant social category 'SC' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).",
             "Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.",
@@ -1550,12 +1411,12 @@
             "GK_SCH010_VALMIKI_EXISTING_BOREWELL",
             "GK_SCH010_VALMIKI_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_DEVARAJ_URS",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC)",
+          "scheme_name": "Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -1564,7 +1425,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'SC' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).; Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.; Land parcel already possesses an existing borewell.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'SC' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).; Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.; Land parcel already possesses an existing borewell.",
           "disqualifying_factors": [
             "Applicant social category 'SC' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).",
             "Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.",
@@ -1577,12 +1438,12 @@
             "GK_SCH010_DEVARAJ_URS_EXISTING_BOREWELL",
             "GK_SCH010_DEVARAJ_URS_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_KMDC",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -1591,7 +1452,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC): Applicant social category 'SC' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).; Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.; Land parcel already possesses an existing borewell.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC): Applicant social category 'SC' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).; Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.; Land parcel already possesses an existing borewell.",
           "disqualifying_factors": [
             "Applicant social category 'SC' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to SCH010_AMBEDKAR instead).",
             "Must be exclusively dryland (kushki). Land type 'Wetland/valley' is disqualified.",
@@ -1604,7 +1465,7 @@
             "GK_SCH010_KMDC_EXISTING_BOREWELL",
             "GK_SCH010_KMDC_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         }
       ]
@@ -1678,73 +1539,6 @@
           "Haveri District Agriculture Joint Director SMAM FY 2026-27 target allocation circular"
         ]
       },
-      "scenario": {
-        "scenario_id": "S055",
-        "benchmark_version": "v1.0.4",
-        "zone_id": "Z8",
-        "agro_climatic_zone": "Northern Transition Zone",
-        "district": "Haveri",
-        "crop_primary": "Cotton",
-        "crop_secondary": "Jowar",
-        "land_size_acres": 3.0,
-        "land_type": "Dryland (Rainfed)",
-        "social_category": "General (OC)",
-        "farmer_category": "Small (2.5-5 acres)",
-        "existing_assets": [
-          "Dug Well (Seasonal)"
-        ],
-        "annual_family_income_lakh": 4.8,
-        "immediate_need": "INCOME_SUPPORT",
-        "paid_income_tax_last_assessment_year": false,
-        "govt_employee_category": "OFFICER_REGULAR",
-        "superannuated_pensioner_monthly_amount": 0.0,
-        "pensioner_is_mts_exempt": false,
-        "registered_professional": "NONE",
-        "land_ownership_cutoff_pre_feb_2019": true,
-        "is_pure_tenant_without_land_title": false,
-        "borewell_electric_status": "NONE",
-        "prior_micro_irrigation_subsidy_years_ago": null,
-        "prior_farm_pond_subsidy_years_ago": null,
-        "prior_machinery_subsidy_years_ago": null,
-        "prior_ganga_kalyana_in_family": false,
-        "community_pool_acres": 0.0,
-        "community_pool_beneficiaries_count": 0,
-        "farming_stage": "Boll Formation / Harvesting",
-        "season": "Kharif 2026",
-        "kcc_query_text_example": "General category farmer with 3.0 acres dryland in Hangal taluk, Haveri; serving as regular government employee (State Commercial Taxes Department Officer); inquiring about eligibility for PM-KISAN annual income support of Rs. 6,000 and farm machinery support under SMAM.",
-        "landholding_details": {
-          "total_operational_holding_acres": 3.0,
-          "qualifying_parcel_acres": 3.0,
-          "requested_subsidized_area_ha": null,
-          "land_classification_interval": "[2.5, 5.0] Small",
-          "physical_area_consistency": "PASS: 3.0 ac holding matches parcel"
-        },
-        "water_and_irrigation": {
-          "operational_water_source": "Dug Well (Seasonal)",
-          "borewell_electric_status": "NONE",
-          "grid_connection_evidence": "No permanent energized irrigation; rainfed dryland parcel"
-        },
-        "statutory_flags": {
-          "paid_income_tax_last_assessment_year": false,
-          "govt_employee_category": "OFFICER_REGULAR",
-          "superannuated_pensioner_monthly_amount": 0.0,
-          "pensioner_is_mts_exempt": false,
-          "registered_professional": "NONE",
-          "land_ownership_cutoff_pre_feb_2019": true,
-          "is_pure_tenant_without_land_title": false,
-          "tenure_documentation": "RTC registered pre-February 2019 in Hangal taluk, Haveri district"
-        },
-        "attribute_provenance": {
-          "empirical_baseline": "PM-KISAN exclusion audit reports (Karnataka): Public servants holding agricultural land identified during Aadhaar-HRMS database seeding.",
-          "farmer_query_inspiration": "KCC Haveri income support logs: Regular government employees inquiring whether holding agricultural land qualifies them for PM-KISAN or State top-up.",
-          "statutory_policy_test": "Benchmark Challenge 3 (Statutory Exclusion Isolation): Serving regular government officer strictly disqualified from PM-KISAN under PMKISAN_REGULAR_OFFICER_EXCLUSION; exclusion is isolated to PM-KISAN and does not spill over to universal or non-statutorily barred schemes (SMAM, SHC, Krishi Bhagya qualify)."
-        },
-        "intended_test_purpose": "Challenge 3: regular government officer excluded from PM-KISAN; no spill-over to SMAM, SHC, Krishi Bhagya, PMKSY-PDMC.",
-        "unresolved_dependencies": [
-          "Verification of GoK Kharif 2026 PMFBY Insurance Unit notification for Cotton in Hangal taluk, Haveri district",
-          "Haveri District Agriculture Joint Director SMAM FY 2026-27 target allocation circular"
-        ]
-      },
       "raw_determinations": [
         {
           "scheme_id": "SCH001",
@@ -1766,7 +1560,7 @@
             "PMKISAN_PENSION_UNDER_10K_OR_NONE",
             "PMKISAN_NO_PROFESSIONAL_EXCLUSION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -1783,7 +1577,7 @@
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -1804,7 +1598,7 @@
             "PMKSY_NO_WATER_SOURCE",
             "PMKSY_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -1821,7 +1615,7 @@
           "rule_keys_fired": [
             "SMAM_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -1840,7 +1634,7 @@
             "KRISHI_BHAGYA_DISTRICT_NOTIFIED",
             "KRISHI_BHAGYA_ACREAGE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -1860,7 +1654,7 @@
             "KUSUM_B_NO_WATER_SOURCE",
             "KUSUM_B_OFF_GRID_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -1882,7 +1676,7 @@
             "MIDH_LAND_MIN_MET",
             "MIDH_NO_MICRO_IRRIGATION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -1899,7 +1693,7 @@
           "rule_keys_fired": [
             "CREDIT_PARENT_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": false,
           "is_provisional": false
         },
@@ -1916,7 +1710,7 @@
           "rule_keys_fired": [
             "KCC_CENTRAL_COMMERCIAL_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -1935,7 +1729,7 @@
           "rule_keys_fired": [
             "KCC_KA_COOP_PROVISIONAL_PENDING_GO"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
@@ -1952,7 +1746,7 @@
           "rule_keys_fired": [
             "SHC_UNIVERSAL_ACCESS_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -1971,18 +1765,18 @@
           "rule_keys_fired": [
             "GK_PARENT_REGISTRY_CORPORATION_MISMATCH"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_AMBEDKAR",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC)",
+          "scheme_name": "Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'General (OC)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'General (OC)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
           "disqualifying_factors": [
             "Applicant social category 'General (OC)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead)."
           ],
@@ -1991,18 +1785,18 @@
             "GK_SCH010_AMBEDKAR_SOCIAL_CATEGORY_MISMATCH",
             "GK_AMBEDKAR_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_VALMIKI",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'General (OC)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'General (OC)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
           "disqualifying_factors": [
             "Applicant social category 'General (OC)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead)."
           ],
@@ -2011,18 +1805,18 @@
             "GK_SCH010_VALMIKI_SOCIAL_CATEGORY_MISMATCH",
             "GK_SCH010_VALMIKI_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_DEVARAJ_URS",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC)",
+          "scheme_name": "Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'General (OC)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
+          "reason": "Ineligible for Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'General (OC)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
           "disqualifying_factors": [
             "Applicant social category 'General (OC)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead)."
           ],
@@ -2031,18 +1825,18 @@
             "GK_SCH010_DEVARAJ_URS_SOCIAL_CATEGORY_MISMATCH",
             "GK_SCH010_DEVARAJ_URS_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_KMDC",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC): Applicant social category 'General (OC)' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC): Applicant social category 'General (OC)' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
           "disqualifying_factors": [
             "Applicant social category 'General (OC)' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead)."
           ],
@@ -2051,7 +1845,7 @@
             "GK_SCH010_KMDC_SOCIAL_CATEGORY_MISMATCH",
             "GK_SCH010_KMDC_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         }
@@ -2081,7 +1875,7 @@
             "PMKISAN_PENSION_UNDER_10K_OR_NONE",
             "PMKISAN_NO_PROFESSIONAL_EXCLUSION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -2103,7 +1897,7 @@
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -2127,7 +1921,7 @@
             "PMKSY_NO_WATER_SOURCE",
             "PMKSY_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -2147,7 +1941,7 @@
           "rule_keys_fired": [
             "SMAM_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -2169,7 +1963,7 @@
             "KRISHI_BHAGYA_DISTRICT_NOTIFIED",
             "KRISHI_BHAGYA_ACREAGE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -2192,7 +1986,7 @@
             "KUSUM_B_NO_WATER_SOURCE",
             "KUSUM_B_OFF_GRID_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -2217,7 +2011,7 @@
             "MIDH_LAND_MIN_MET",
             "MIDH_NO_MICRO_IRRIGATION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -2237,7 +2031,7 @@
           "rule_keys_fired": [
             "KCC_CENTRAL_COMMERCIAL_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -2259,7 +2053,7 @@
           "rule_keys_fired": [
             "KCC_KA_COOP_PROVISIONAL_PENDING_GO"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
@@ -2279,7 +2073,7 @@
           "rule_keys_fired": [
             "SHC_UNIVERSAL_ACCESS_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -2301,12 +2095,12 @@
           "rule_keys_fired": [
             "GK_PARENT_REGISTRY_CORPORATION_MISMATCH"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_AMBEDKAR",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC)",
+          "scheme_name": "Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -2315,7 +2109,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'General (OC)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'General (OC)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
           "disqualifying_factors": [
             "Applicant social category 'General (OC)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead)."
           ],
@@ -2324,12 +2118,12 @@
             "GK_SCH010_AMBEDKAR_SOCIAL_CATEGORY_MISMATCH",
             "GK_AMBEDKAR_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_VALMIKI",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -2338,7 +2132,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'General (OC)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'General (OC)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
           "disqualifying_factors": [
             "Applicant social category 'General (OC)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead)."
           ],
@@ -2347,12 +2141,12 @@
             "GK_SCH010_VALMIKI_SOCIAL_CATEGORY_MISMATCH",
             "GK_SCH010_VALMIKI_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_DEVARAJ_URS",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC)",
+          "scheme_name": "Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -2361,7 +2155,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'General (OC)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
+          "reason": "Ineligible for Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'General (OC)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
           "disqualifying_factors": [
             "Applicant social category 'General (OC)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead)."
           ],
@@ -2370,12 +2164,12 @@
             "GK_SCH010_DEVARAJ_URS_SOCIAL_CATEGORY_MISMATCH",
             "GK_SCH010_DEVARAJ_URS_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_KMDC",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -2384,7 +2178,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC): Applicant social category 'General (OC)' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC): Applicant social category 'General (OC)' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
           "disqualifying_factors": [
             "Applicant social category 'General (OC)' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead)."
           ],
@@ -2393,7 +2187,7 @@
             "GK_SCH010_KMDC_SOCIAL_CATEGORY_MISMATCH",
             "GK_SCH010_KMDC_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         }
       ]
@@ -2401,75 +2195,6 @@
     {
       "scenario_id": "S056",
       "profile": {
-        "scenario_id": "S056",
-        "benchmark_version": "v1.0.4",
-        "zone_id": "Z8",
-        "agro_climatic_zone": "Northern Transition Zone",
-        "district": "Dharwad",
-        "crop_primary": "Wheat",
-        "crop_secondary": "Bengalgram",
-        "land_size_acres": 4.0,
-        "land_type": "Dryland (Rainfed)",
-        "social_category": "ST",
-        "farmer_category": "Small (2.5-5 acres)",
-        "existing_assets": [
-          "Farm Pond (Rainfed)"
-        ],
-        "annual_family_income_lakh": 1.8,
-        "immediate_need": "SOIL_HEALTH_AND_FERTILIZER",
-        "paid_income_tax_last_assessment_year": false,
-        "govt_employee_category": "NONE",
-        "superannuated_pensioner_monthly_amount": 0.0,
-        "pensioner_is_mts_exempt": false,
-        "registered_professional": "NONE",
-        "land_ownership_cutoff_pre_feb_2019": null,
-        "is_pure_tenant_without_land_title": false,
-        "borewell_electric_status": "NONE",
-        "prior_micro_irrigation_subsidy_years_ago": null,
-        "prior_farm_pond_subsidy_years_ago": null,
-        "prior_machinery_subsidy_years_ago": null,
-        "prior_ganga_kalyana_in_family": false,
-        "community_pool_acres": 0.0,
-        "community_pool_beneficiaries_count": 0,
-        "farming_stage": "Sowing / Early Vegetative",
-        "season": "Rabi 2026",
-        "kcc_query_text_example": "ST small wheat cultivator with 4.0 acres dryland in Kalghatgi taluk, Dharwad; ancestral land title partition in progress with record date unverified on Bhoomi portal; seeking Soil Health Card testing and macro/micro nutrient recommendations; inquiring about PM-KISAN and Valmiki Corporation borewell.",
-        "landholding_details": {
-          "total_operational_holding_acres": 4.0,
-          "qualifying_parcel_acres": 4.0,
-          "requested_subsidized_area_ha": null,
-          "land_classification_interval": "[2.5, 5.0] Small",
-          "physical_area_consistency": "PASS: 4.0 ac holding matches parcel"
-        },
-        "water_and_irrigation": {
-          "operational_water_source": "Farm Pond (Rainfed)",
-          "borewell_electric_status": "NONE",
-          "grid_connection_evidence": "Rainfed plot; existing unlined farm pond without electrical connection"
-        },
-        "statutory_flags": {
-          "paid_income_tax_last_assessment_year": false,
-          "govt_employee_category": "NONE",
-          "superannuated_pensioner_monthly_amount": 0.0,
-          "pensioner_is_mts_exempt": false,
-          "registered_professional": "NONE",
-          "land_ownership_cutoff_pre_feb_2019": null,
-          "is_pure_tenant_without_land_title": false,
-          "tenure_documentation": "Ancestral land title partition deed pending mutation in Kalghatgi taluk; ownership record date unconfirmed (UNKNOWN)"
-        },
-        "attribute_provenance": {
-          "empirical_baseline": "Revenue Department Karnataka & Bhoomi portal logs: Tribal and smallholders in Kalghatgi/Dharwad undergoing informal ancestral land divisions without updated record-of-rights (RTC).",
-          "farmer_query_inspiration": "KCC Dharwad soil testing logs: Farmers with unresolved land title records seeking universal diagnostic soil health testing and subsidised inputs.",
-          "statutory_policy_test": "Benchmark Challenge 4 (Three-Valued Logic & Unknown Attribute Handling): Land title cut-off date is UNKNOWN (land_ownership_cutoff_pre_feb_2019 = None); PM-KISAN strictly returns REQUIRES_VERIFICATION (PMKISAN_CUTOFF_DATE_UNKNOWN) without silent default imputation; Soil Health Card qualifies in Section A as universal diagnostic service; title-dependent capital schemes (Krishi Bhagya, Valmiki Corporation borewell) routed to Section B pending title certification."
-        },
-        "intended_test_purpose": "Challenge 4 three-valued logic: UNKNOWN land title; PM-KISAN REQUIRES_VERIFICATION in Section B; title-dependent capital schemes routed to Section B; Soil Health Card ELIGIBLE in Section A.",
-        "unresolved_dependencies": [
-          "Revenue Department certification of land title record date (RTC mutation extract) for Kalghatgi taluk",
-          "Verification of GoK Rabi 2026-27 PMFBY Insurance Unit notification for Wheat in Dharwad district",
-          "Valmiki ST Development Corporation administrative circular and perennial water source adjacency verification",
-          "Kalghatgi Taluk Agriculture Office Soil Health Card sample collection schedule"
-        ]
-      },
-      "scenario": {
         "scenario_id": "S056",
         "benchmark_version": "v1.0.4",
         "zone_id": "Z8",
@@ -2558,7 +2283,7 @@
             "PMKISAN_PENSION_UNDER_10K_OR_NONE",
             "PMKISAN_NO_PROFESSIONAL_EXCLUSION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -2577,7 +2302,7 @@
           "rule_keys_fired": [
             "PMFBY_NON_NOTIFIED_CROP"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -2598,7 +2323,7 @@
             "PMKSY_NO_WATER_SOURCE",
             "PMKSY_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -2615,7 +2340,7 @@
           "rule_keys_fired": [
             "SMAM_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -2634,7 +2359,7 @@
             "KRISHI_BHAGYA_DISTRICT_NOTIFIED",
             "KRISHI_BHAGYA_ACREAGE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -2654,7 +2379,7 @@
             "KUSUM_B_NO_WATER_SOURCE",
             "KUSUM_B_OFF_GRID_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -2676,7 +2401,7 @@
             "MIDH_LAND_MIN_MET",
             "MIDH_NO_MICRO_IRRIGATION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -2693,7 +2418,7 @@
           "rule_keys_fired": [
             "CREDIT_PARENT_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": false,
           "is_provisional": false
         },
@@ -2710,7 +2435,7 @@
           "rule_keys_fired": [
             "KCC_CENTRAL_COMMERCIAL_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -2729,7 +2454,7 @@
           "rule_keys_fired": [
             "KCC_KA_COOP_PROVISIONAL_PENDING_GO"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
@@ -2746,7 +2471,7 @@
           "rule_keys_fired": [
             "SHC_UNIVERSAL_ACCESS_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -2763,18 +2488,18 @@
           "rule_keys_fired": [
             "GK_PARENT_ROUTES_TO_SCH010_VALMIKI"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": false,
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_AMBEDKAR",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC)",
+          "scheme_name": "Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'ST' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead).",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'ST' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead).",
           "disqualifying_factors": [
             "Applicant social category 'ST' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead)."
           ],
@@ -2783,35 +2508,35 @@
             "GK_SCH010_AMBEDKAR_SOCIAL_CATEGORY_MISMATCH",
             "GK_AMBEDKAR_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_VALMIKI",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
-          "reason": "Qualifies for Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST) under Individual Borewell Route. 100% subsidized borewell, pump, and electrification package.",
+          "reason": "Qualifies for Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST) under Individual Borewell Route. 100% subsidized borewell, pump, and electrification package.",
           "disqualifying_factors": [],
           "missing_verifications": [],
           "rule_keys_fired": [
             "GK_SCH010_VALMIKI_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_DEVARAJ_URS",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC)",
+          "scheme_name": "Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'ST' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead).",
+          "reason": "Ineligible for Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'ST' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead).",
           "disqualifying_factors": [
             "Applicant social category 'ST' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead)."
           ],
@@ -2820,18 +2545,18 @@
             "GK_SCH010_DEVARAJ_URS_SOCIAL_CATEGORY_MISMATCH",
             "GK_SCH010_DEVARAJ_URS_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_KMDC",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC): Applicant social category 'ST' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead).",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC): Applicant social category 'ST' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead).",
           "disqualifying_factors": [
             "Applicant social category 'ST' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead)."
           ],
@@ -2840,7 +2565,7 @@
             "GK_SCH010_KMDC_SOCIAL_CATEGORY_MISMATCH",
             "GK_SCH010_KMDC_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         }
@@ -2860,7 +2585,7 @@
           "reason": "Requires verification of statutory documents: Verification of land ownership title record date (must be on or before 01.02.2019 or inherited).",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Verification of land ownership title record date (must be on or before 01.02.2019 or statutory succession upon death under \u00a7\u00a75.1\u20135.3)",
+            "Verification of land ownership title record date (must be on or before 01.02.2019 or statutory succession upon death under §§5.1–5.3)",
             "Revenue Department certification of land ownership record date / inheritance mutation order on RTC for Dharwad district"
           ],
           "rule_keys_fired": [
@@ -2870,7 +2595,7 @@
             "PMKISAN_PENSION_UNDER_10K_OR_NONE",
             "PMKISAN_NO_PROFESSIONAL_EXCLUSION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -2894,7 +2619,7 @@
           "rule_keys_fired": [
             "PMFBY_NON_NOTIFIED_CROP"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -2918,7 +2643,7 @@
             "PMKSY_NO_WATER_SOURCE",
             "PMKSY_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -2938,7 +2663,7 @@
           "rule_keys_fired": [
             "SMAM_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -2962,7 +2687,7 @@
             "KRISHI_BHAGYA_DISTRICT_NOTIFIED",
             "KRISHI_BHAGYA_ACREAGE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -2985,7 +2710,7 @@
             "KUSUM_B_NO_WATER_SOURCE",
             "KUSUM_B_OFF_GRID_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -3010,7 +2735,7 @@
             "MIDH_LAND_MIN_MET",
             "MIDH_NO_MICRO_IRRIGATION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -3030,7 +2755,7 @@
           "rule_keys_fired": [
             "KCC_CENTRAL_COMMERCIAL_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -3052,7 +2777,7 @@
           "rule_keys_fired": [
             "KCC_KA_COOP_PROVISIONAL_PENDING_GO"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
@@ -3072,12 +2797,12 @@
           "rule_keys_fired": [
             "SHC_UNIVERSAL_ACCESS_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_AMBEDKAR",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC)",
+          "scheme_name": "Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -3086,7 +2811,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'ST' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead).",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'ST' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead).",
           "disqualifying_factors": [
             "Applicant social category 'ST' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead)."
           ],
@@ -3095,34 +2820,36 @@
             "GK_SCH010_AMBEDKAR_SOCIAL_CATEGORY_MISMATCH",
             "GK_AMBEDKAR_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_VALMIKI",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "ELIGIBLE",
           "raw_engine_status": "ELIGIBLE",
           "governance_status": "REQUIRES_VERIFICATION",
-          "presentation_section": "Section B (Provisional Schemes / Qualitative Review Only)",
+          "presentation_section": "Section B (Provisional Scheme / Land Title Required)",
           "allow_numerical_scoring": false,
-          "governance_note": "Raw engine returned ELIGIBLE based on encoded rules, but scheme record is PROVISIONAL in registry. Governance safeguard places determination in Section B as REQUIRES_VERIFICATION without numerical scoring.",
-          "reason": "Qualifies for Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST) under Individual Borewell Route. 100% subsidized borewell, pump, and electrification package.",
+          "governance_note": "Raw engine returned ELIGIBLE based on ST social category, dryland acreage, and zero existing borewells. However, scheme is PROVISIONAL in registry, perennial water source adjacency is unverified, and land title status is UNKNOWN. Governance presentation strictly places determination in Section B as REQUIRES_VERIFICATION with numerical scoring disabled.",
+          "reason": "Qualifies for Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST) under Individual Borewell Route. 100% subsidized borewell, pump, and electrification package.",
           "disqualifying_factors": [],
           "missing_verifications": [
-            "Administrative circular verification for provisional scheme SCH010_VALMIKI"
+            "Administrative circular and Government Order verification for provisional scheme SCH010_VALMIKI",
+            "Revenue Department certification of land ownership title deed / RTC extract for Kalghatgi taluk",
+            "Field verification of perennial water source adjacency and hydrogeological feasibility clearance"
           ],
           "rule_keys_fired": [
             "GK_SCH010_VALMIKI_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_DEVARAJ_URS",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC)",
+          "scheme_name": "Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -3131,7 +2858,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'ST' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead).",
+          "reason": "Ineligible for Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'ST' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead).",
           "disqualifying_factors": [
             "Applicant social category 'ST' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead)."
           ],
@@ -3140,12 +2867,12 @@
             "GK_SCH010_DEVARAJ_URS_SOCIAL_CATEGORY_MISMATCH",
             "GK_SCH010_DEVARAJ_URS_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_KMDC",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -3154,7 +2881,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC): Applicant social category 'ST' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead).",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC): Applicant social category 'ST' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead).",
           "disqualifying_factors": [
             "Applicant social category 'ST' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to SCH010_VALMIKI instead)."
           ],
@@ -3163,7 +2890,7 @@
             "GK_SCH010_KMDC_SOCIAL_CATEGORY_MISMATCH",
             "GK_SCH010_KMDC_INDIVIDUAL_ROUTE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         }
       ]
@@ -3239,75 +2966,6 @@
           "Belagavi District Agriculture Joint Director SMAM FY 2026-27 specialized machinery quota circular"
         ]
       },
-      "scenario": {
-        "scenario_id": "S057",
-        "benchmark_version": "v1.0.4",
-        "zone_id": "Z8",
-        "agro_climatic_zone": "Northern Transition Zone",
-        "district": "Belagavi",
-        "crop_primary": "Sugarcane",
-        "crop_secondary": "Maize",
-        "land_size_acres": 12.0,
-        "land_type": "Irrigated (Canal)",
-        "social_category": "OBC",
-        "farmer_category": "Large (> 10 acres)",
-        "existing_assets": [
-          "Canal Outlet",
-          "Intermediate Storage Sump",
-          "Tractor (45 HP)"
-        ],
-        "annual_family_income_lakh": 5.5,
-        "immediate_need": "FARM_MECHANIZATION",
-        "paid_income_tax_last_assessment_year": false,
-        "govt_employee_category": "NONE",
-        "superannuated_pensioner_monthly_amount": 0.0,
-        "pensioner_is_mts_exempt": false,
-        "registered_professional": "NONE",
-        "land_ownership_cutoff_pre_feb_2019": true,
-        "is_pure_tenant_without_land_title": false,
-        "borewell_electric_status": "NONE",
-        "prior_micro_irrigation_subsidy_years_ago": null,
-        "prior_farm_pond_subsidy_years_ago": null,
-        "prior_machinery_subsidy_years_ago": null,
-        "prior_ganga_kalyana_in_family": false,
-        "community_pool_acres": 0.0,
-        "community_pool_beneficiaries_count": 0,
-        "farming_stage": "Tillering / Grand Growth",
-        "season": "Kharif 2026",
-        "kcc_query_text_example": "OBC large sugarcane farmer with 12.0 acres canal command land in Gokak taluk, Belagavi; Ghataprabha right bank canal distributary; owns 45 HP tractor; seeking 40% capital subsidy on tractor-mounted sugarcane stubble shaver, ratoon manager, and rotavator under SMAM; verifying whether large holdings face blanket exclusion.",
-        "landholding_details": {
-          "total_operational_holding_acres": 12.0,
-          "qualifying_parcel_acres": 12.0,
-          "requested_subsidized_area_ha": null,
-          "land_classification_interval": "(10.0, inf) Large",
-          "physical_area_consistency": "PASS: 12.0 ac holding matches parcel"
-        },
-        "water_and_irrigation": {
-          "operational_water_source": "Canal Command & Sump",
-          "borewell_electric_status": "NONE",
-          "grid_connection_evidence": "Ghataprabha canal command outlet with gravity flow to farm storage sump"
-        },
-        "statutory_flags": {
-          "paid_income_tax_last_assessment_year": false,
-          "govt_employee_category": "NONE",
-          "superannuated_pensioner_monthly_amount": 0.0,
-          "pensioner_is_mts_exempt": false,
-          "registered_professional": "NONE",
-          "land_ownership_cutoff_pre_feb_2019": true,
-          "is_pure_tenant_without_land_title": false,
-          "tenure_documentation": "RTC registered pre-February 2019 in Gokak taluk, Belagavi district"
-        },
-        "attribute_provenance": {
-          "empirical_baseline": "DES Karnataka & Sugar Commissionerate: Ghataprabha/Malaprabha canal command large sugarcane growers in Gokak/Raibag taluks, adopting mechanized ratoon management and stubble shaving implements.",
-          "farmer_query_inspiration": "KCC Belagavi mechanization logs: Large farmers inquiring about SMAM tiered subsidy rates for specialized cane implements and tractor attachment eligibility.",
-          "statutory_policy_test": "Benchmark Challenge 8 (Scheme-Specific Ceilings on Large Holdings): Large holding of 12.0 acres (> 10.0 ac); evaluated per scheme tier under SMAM; no blanket exclusion applies; qualifies for 40% subsidy tier; Krishi Bhagya disqualified due to canal command; Ganga Kalyana disqualified due to canal land type."
-        },
-        "intended_test_purpose": "Challenge 8: SMAM for large OBC sugarcane canal; no blanket large-farm exclusion; PMKSY-PDMC qualifies in Section A; Krishi Bhagya and Ganga Kalyana disqualified by canal command.",
-        "unresolved_dependencies": [
-          "Verification of GoK Kharif 2026 PMFBY Insurance Unit notification for Sugarcane in Gokak taluk, Belagavi district",
-          "Belagavi District Agriculture Joint Director SMAM FY 2026-27 specialized machinery quota circular"
-        ]
-      },
       "raw_determinations": [
         {
           "scheme_id": "SCH001",
@@ -3326,7 +2984,7 @@
             "PMKISAN_PENSION_UNDER_10K_OR_NONE",
             "PMKISAN_NO_PROFESSIONAL_EXCLUSION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -3343,7 +3001,7 @@
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -3362,7 +3020,7 @@
             "PMKSY_WATER_SOURCE_VERIFIED",
             "PMKSY_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -3379,7 +3037,7 @@
           "rule_keys_fired": [
             "SMAM_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -3400,7 +3058,7 @@
             "KRISHI_BHAGYA_DISTRICT_NOTIFIED",
             "KRISHI_BHAGYA_ACREAGE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -3420,7 +3078,7 @@
             "KUSUM_B_NO_WATER_SOURCE",
             "KUSUM_B_OFF_GRID_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -3442,7 +3100,7 @@
             "MIDH_LAND_MIN_MET",
             "MIDH_NO_MICRO_IRRIGATION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -3459,7 +3117,7 @@
           "rule_keys_fired": [
             "CREDIT_PARENT_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": false,
           "is_provisional": false
         },
@@ -3476,7 +3134,7 @@
           "rule_keys_fired": [
             "KCC_CENTRAL_COMMERCIAL_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -3495,7 +3153,7 @@
           "rule_keys_fired": [
             "KCC_KA_COOP_PROVISIONAL_PENDING_GO"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
@@ -3512,7 +3170,7 @@
           "rule_keys_fired": [
             "SHC_UNIVERSAL_ACCESS_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -3533,18 +3191,18 @@
             "GK_PARENT_NOT_DRYLAND",
             "GK_PARENT_EXCEEDS_5_ACRES"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_AMBEDKAR",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC)",
+          "scheme_name": "Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'OBC' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.; Individual landholding (12.0 ac) exceeds Ambedkar Corporation individual ceiling of 5.0 acres.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'OBC' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.; Individual landholding (12.0 ac) exceeds Ambedkar Corporation individual ceiling of 5.0 acres.",
           "disqualifying_factors": [
             "Applicant social category 'OBC' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
             "Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.",
@@ -3556,18 +3214,18 @@
             "GK_SCH010_AMBEDKAR_NOT_DRYLAND",
             "GK_AMBEDKAR_INDIVIDUAL_OVER_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_VALMIKI",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'OBC' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.; Individual landholding (12.0 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'OBC' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.; Individual landholding (12.0 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Applicant social category 'OBC' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
             "Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.",
@@ -3579,18 +3237,18 @@
             "GK_SCH010_VALMIKI_NOT_DRYLAND",
             "GK_SCH010_VALMIKI_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_DEVARAJ_URS",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC)",
+          "scheme_name": "Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'OBC' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.; Individual landholding (12.0 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'OBC' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.; Individual landholding (12.0 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Applicant social category 'OBC' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
             "Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.",
@@ -3602,18 +3260,18 @@
             "GK_SCH010_DEVARAJ_URS_NOT_DRYLAND",
             "GK_SCH010_DEVARAJ_URS_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_KMDC",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC): Applicant social category 'OBC' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.; Individual landholding (12.0 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC): Applicant social category 'OBC' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.; Individual landholding (12.0 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Applicant social category 'OBC' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
             "Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.",
@@ -3625,7 +3283,7 @@
             "GK_SCH010_KMDC_NOT_DRYLAND",
             "GK_SCH010_KMDC_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         }
@@ -3652,7 +3310,7 @@
             "PMKISAN_PENSION_UNDER_10K_OR_NONE",
             "PMKISAN_NO_PROFESSIONAL_EXCLUSION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -3674,7 +3332,7 @@
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -3696,7 +3354,7 @@
             "PMKSY_WATER_SOURCE_VERIFIED",
             "PMKSY_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -3716,7 +3374,7 @@
           "rule_keys_fired": [
             "SMAM_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -3740,7 +3398,7 @@
             "KRISHI_BHAGYA_DISTRICT_NOTIFIED",
             "KRISHI_BHAGYA_ACREAGE_VALID"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -3763,7 +3421,7 @@
             "KUSUM_B_NO_WATER_SOURCE",
             "KUSUM_B_OFF_GRID_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -3788,7 +3446,7 @@
             "MIDH_LAND_MIN_MET",
             "MIDH_NO_MICRO_IRRIGATION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -3808,7 +3466,7 @@
           "rule_keys_fired": [
             "KCC_CENTRAL_COMMERCIAL_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -3830,7 +3488,7 @@
           "rule_keys_fired": [
             "KCC_KA_COOP_PROVISIONAL_PENDING_GO"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
@@ -3850,7 +3508,7 @@
           "rule_keys_fired": [
             "SHC_UNIVERSAL_ACCESS_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -3874,12 +3532,12 @@
             "GK_PARENT_NOT_DRYLAND",
             "GK_PARENT_EXCEEDS_5_ACRES"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_AMBEDKAR",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC)",
+          "scheme_name": "Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -3888,7 +3546,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'OBC' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.; Individual landholding (12.0 ac) exceeds Ambedkar Corporation individual ceiling of 5.0 acres.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'OBC' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.; Individual landholding (12.0 ac) exceeds Ambedkar Corporation individual ceiling of 5.0 acres.",
           "disqualifying_factors": [
             "Applicant social category 'OBC' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
             "Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.",
@@ -3900,12 +3558,12 @@
             "GK_SCH010_AMBEDKAR_NOT_DRYLAND",
             "GK_AMBEDKAR_INDIVIDUAL_OVER_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_VALMIKI",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -3914,7 +3572,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'OBC' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.; Individual landholding (12.0 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'OBC' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.; Individual landholding (12.0 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Applicant social category 'OBC' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
             "Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.",
@@ -3926,12 +3584,12 @@
             "GK_SCH010_VALMIKI_NOT_DRYLAND",
             "GK_SCH010_VALMIKI_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_DEVARAJ_URS",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC)",
+          "scheme_name": "Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -3940,7 +3598,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'OBC' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.; Individual landholding (12.0 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'OBC' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.; Individual landholding (12.0 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Applicant social category 'OBC' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
             "Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.",
@@ -3952,12 +3610,12 @@
             "GK_SCH010_DEVARAJ_URS_NOT_DRYLAND",
             "GK_SCH010_DEVARAJ_URS_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_KMDC",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -3966,7 +3624,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC): Applicant social category 'OBC' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.; Individual landholding (12.0 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC): Applicant social category 'OBC' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.; Individual landholding (12.0 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Applicant social category 'OBC' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
             "Must be exclusively dryland (kushki). Land type 'Irrigated (Canal)' is disqualified.",
@@ -3978,7 +3636,7 @@
             "GK_SCH010_KMDC_NOT_DRYLAND",
             "GK_SCH010_KMDC_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         }
       ]
@@ -4038,7 +3696,7 @@
           "factual_declaration": "First-time micro-irrigation applicant; applicant and beneficiary family have never previously availed micro-irrigation capital assistance on this parcel or any other holding.",
           "regulatory_framework": "PMKSY-PDMC Revised Operational Guidelines 2023",
           "statutory_clauses": {
-            "section_7_9_area_ceiling": "Section 7.9: Financial assistance is limited to 5.0 hectares per beneficiary (not per beneficiary family). S058 requests exactly 5.00 ha within a 12.5 ac (5.059 ha) parcel.",
+            "section_7_9_area_ceiling": "Section 7.9: Financial assistance is limited to 5.0 hectares per beneficiary family (either in contiguous or distributed parcels). S058 requests exactly 5.00 ha within a 12.5 ac (5.059 ha) parcel.",
             "section_7_10_repeat_subsidy_restriction": "Section 7.10: Assistance restrictions apply to beneficiaries who have already received micro-irrigation subsidy, imposing a mandatory 7-year lock-in period before becoming eligible again. Because applicant has never availed micro-irrigation subsidy, this 7-year repeat-assistance restriction is fully satisfied.",
             "engine_mapping": "prior_micro_irrigation_subsidy_years_ago = None strictly represents confirmed zero prior subsidy, firing rule PMKSY_NO_PRIOR_SUBSIDY."
           }
@@ -4058,86 +3716,7 @@
           "farmer_query_inspiration": "KCC Haveri micro-irrigation logs: Large farmers requesting PMKSY-PDMC subsidy clarification regarding the maximum 5.00 ha subsidy ceiling and physical parcel accommodation.",
           "statutory_policy_test": "Benchmark Challenge 8 & Boundary Test: Large holding of 12.5 acres (> 10.0 ac); requested subsidized area of exactly 5.00 ha strictly satisfies physical parcel capacity (5.00 ha <= 12.5 ac * 0.404686 = 5.0586 ha) and statutory ceiling (5.00 ha <= 5.00 ha) pursuant to PMKSY-PDMC Revised Operational Guidelines 2023 Section 7.9; Section 7.10 repeat-assistance restriction satisfied by explicit first-time applicant declaration (null mapped to PMKSY_NO_PRIOR_SUBSIDY); operational borewell satisfies water requirement; raw engine INELIGIBLE (PMKSY_LAND_ABOVE_5_HA) preserved; governance presentation qualifies in Section A at 5.00 ha statutory ceiling; confirms grid connection excludes PM-KUSUM B; existing borewell excludes Ganga Kalyana."
         },
-        "intended_test_purpose": "Challenge 8 and boundary test: PMKSY-PDMC 5.00 ha ceiling at exactly 5.00 ha requested (PMKSY-PDMC 2023 Guidelines \u00a77.9); explicit first-time applicant status (\u00a77.10 7-year lock-in satisfied); 12.5 ac / 5.059 ha physical capacity PASS; PMKSY-PDMC qualifies in Section A; Ganga Kalyana and PM-KUSUM B disqualified by existing grid borewell.",
-        "unresolved_dependencies": [
-          "Verification of GoK Kharif 2026 PMFBY Insurance Unit notification for Soybean in Savanur taluk, Haveri district",
-          "Haveri District Agriculture office PMKSY-PDMC FY 2026-27 drip/sprinkler target allocation and empanelled vendor confirmation"
-        ]
-      },
-      "scenario": {
-        "scenario_id": "S058",
-        "benchmark_version": "v1.0.4",
-        "zone_id": "Z8",
-        "agro_climatic_zone": "Northern Transition Zone",
-        "district": "Haveri",
-        "crop_primary": "Soybean",
-        "crop_secondary": "Cotton",
-        "land_size_acres": 12.5,
-        "land_type": "Irrigated (Borewell)",
-        "social_category": "General (OC)",
-        "farmer_category": "Large (> 10 acres)",
-        "existing_assets": [
-          "Borewell (Grid-connected)",
-          "Sprinkler Set (Partial)"
-        ],
-        "annual_family_income_lakh": 7.2,
-        "immediate_need": "MICRO_IRRIGATION_SUPPORT",
-        "paid_income_tax_last_assessment_year": false,
-        "govt_employee_category": "NONE",
-        "superannuated_pensioner_monthly_amount": 0.0,
-        "pensioner_is_mts_exempt": false,
-        "registered_professional": "NONE",
-        "land_ownership_cutoff_pre_feb_2019": true,
-        "is_pure_tenant_without_land_title": false,
-        "borewell_electric_status": "GRID_CONNECTED_IP_SET",
-        "prior_micro_irrigation_subsidy_years_ago": null,
-        "prior_farm_pond_subsidy_years_ago": null,
-        "prior_machinery_subsidy_years_ago": null,
-        "prior_ganga_kalyana_in_family": false,
-        "community_pool_acres": 0.0,
-        "community_pool_beneficiaries_count": 0,
-        "farming_stage": "Vegetative / Pod Formation",
-        "season": "Kharif 2026",
-        "kcc_query_text_example": "General category large farmer with 12.5 acres borewell-irrigated land in Savanur taluk, Haveri; applying for micro-irrigation capital subsidy under PMKSY-PDMC for exactly 5.00 hectares (~12.36 acres); seeking confirmation of 5.00 ha statutory ceiling compliance and vendor quotation requirements.",
-        "landholding_details": {
-          "total_operational_holding_acres": 12.5,
-          "qualifying_parcel_acres": 12.5,
-          "requested_subsidized_area_ha": 5.0,
-          "land_classification_interval": "(10.0, inf) Large",
-          "physical_area_consistency": "PASS: requested 5.00 ha <= 12.5 ac (5.059 ha) qualifying parcel; satisfies PMKSY-PDMC 5.00 ha statutory ceiling"
-        },
-        "water_and_irrigation": {
-          "operational_water_source": "Borewell (Grid-connected)",
-          "borewell_electric_status": "GRID_CONNECTED_IP_SET",
-          "grid_connection_evidence": "HESCOM energized 10 HP IP set; partial sprinkler network installed"
-        },
-        "prior_subsidy_history": {
-          "prior_micro_irrigation_subsidy_years_ago": null,
-          "interpretation": "EXPLICIT_NO_PRIOR_SUBSIDY",
-          "factual_declaration": "First-time micro-irrigation applicant; applicant and beneficiary family have never previously availed micro-irrigation capital assistance on this parcel or any other holding.",
-          "regulatory_framework": "PMKSY-PDMC Revised Operational Guidelines 2023",
-          "statutory_clauses": {
-            "section_7_9_area_ceiling": "Section 7.9: Financial assistance is limited to 5.0 hectares per beneficiary (not per beneficiary family). S058 requests exactly 5.00 ha within a 12.5 ac (5.059 ha) parcel.",
-            "section_7_10_repeat_subsidy_restriction": "Section 7.10: Assistance restrictions apply to beneficiaries who have already received micro-irrigation subsidy, imposing a mandatory 7-year lock-in period before becoming eligible again. Because applicant has never availed micro-irrigation subsidy, this 7-year repeat-assistance restriction is fully satisfied.",
-            "engine_mapping": "prior_micro_irrigation_subsidy_years_ago = None strictly represents confirmed zero prior subsidy, firing rule PMKSY_NO_PRIOR_SUBSIDY."
-          }
-        },
-        "statutory_flags": {
-          "paid_income_tax_last_assessment_year": false,
-          "govt_employee_category": "NONE",
-          "superannuated_pensioner_monthly_amount": 0.0,
-          "pensioner_is_mts_exempt": false,
-          "registered_professional": "NONE",
-          "land_ownership_cutoff_pre_feb_2019": true,
-          "is_pure_tenant_without_land_title": false,
-          "tenure_documentation": "RTC registered pre-February 2019 in Savanur taluk, Haveri district"
-        },
-        "attribute_provenance": {
-          "empirical_baseline": "DES Karnataka & Haveri Agriculture Department: Commercial soybean-cotton growers in Savanur/Shiggaon taluks, large landholdings investing in precision drip irrigation.",
-          "farmer_query_inspiration": "KCC Haveri micro-irrigation logs: Large farmers requesting PMKSY-PDMC subsidy clarification regarding the maximum 5.00 ha subsidy ceiling and physical parcel accommodation.",
-          "statutory_policy_test": "Benchmark Challenge 8 & Boundary Test: Large holding of 12.5 acres (> 10.0 ac); requested subsidized area of exactly 5.00 ha strictly satisfies physical parcel capacity (5.00 ha <= 12.5 ac * 0.404686 = 5.0586 ha) and statutory ceiling (5.00 ha <= 5.00 ha) pursuant to PMKSY-PDMC Revised Operational Guidelines 2023 Section 7.9; Section 7.10 repeat-assistance restriction satisfied by explicit first-time applicant declaration (null mapped to PMKSY_NO_PRIOR_SUBSIDY); operational borewell satisfies water requirement; raw engine INELIGIBLE (PMKSY_LAND_ABOVE_5_HA) preserved; governance presentation qualifies in Section A at 5.00 ha statutory ceiling; confirms grid connection excludes PM-KUSUM B; existing borewell excludes Ganga Kalyana."
-        },
-        "intended_test_purpose": "Challenge 8 and boundary test: PMKSY-PDMC 5.00 ha ceiling at exactly 5.00 ha requested (PMKSY-PDMC 2023 Guidelines \u00a77.9); explicit first-time applicant status (\u00a77.10 7-year lock-in satisfied); 12.5 ac / 5.059 ha physical capacity PASS; PMKSY-PDMC qualifies in Section A; Ganga Kalyana and PM-KUSUM B disqualified by existing grid borewell.",
+        "intended_test_purpose": "Challenge 8 and boundary test: PMKSY-PDMC 5.00 ha ceiling at exactly 5.00 ha requested (PMKSY-PDMC 2023 Guidelines §7.9); explicit first-time applicant status (§7.10 7-year lock-in satisfied); 12.5 ac / 5.059 ha physical capacity PASS; PMKSY-PDMC qualifies in Section A; Ganga Kalyana and PM-KUSUM B disqualified by existing grid borewell.",
         "unresolved_dependencies": [
           "Verification of GoK Kharif 2026 PMFBY Insurance Unit notification for Soybean in Savanur taluk, Haveri district",
           "Haveri District Agriculture office PMKSY-PDMC FY 2026-27 drip/sprinkler target allocation and empanelled vendor confirmation"
@@ -4161,7 +3740,7 @@
             "PMKISAN_PENSION_UNDER_10K_OR_NONE",
             "PMKISAN_NO_PROFESSIONAL_EXCLUSION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -4178,7 +3757,7 @@
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -4199,7 +3778,7 @@
             "PMKSY_WATER_SOURCE_VERIFIED",
             "PMKSY_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -4216,7 +3795,7 @@
           "rule_keys_fired": [
             "SMAM_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -4238,7 +3817,7 @@
             "KRISHI_BHAGYA_DISTRICT_NOTIFIED",
             "KRISHI_BHAGYA_EXCEEDS_5_HA"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -4258,7 +3837,7 @@
             "KUSUM_B_WATER_SOURCE_PRESENT",
             "KUSUM_B_GRID_CONNECTED_DISQUALIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -4280,7 +3859,7 @@
             "MIDH_LAND_MIN_MET",
             "MIDH_NO_MICRO_IRRIGATION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -4297,7 +3876,7 @@
           "rule_keys_fired": [
             "CREDIT_PARENT_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": false,
           "is_provisional": false
         },
@@ -4314,7 +3893,7 @@
           "rule_keys_fired": [
             "KCC_CENTRAL_COMMERCIAL_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -4333,7 +3912,7 @@
           "rule_keys_fired": [
             "KCC_KA_COOP_PROVISIONAL_PENDING_GO"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
@@ -4350,7 +3929,7 @@
           "rule_keys_fired": [
             "SHC_UNIVERSAL_ACCESS_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
@@ -4375,18 +3954,18 @@
             "GK_PARENT_EXISTING_BOREWELL_EXCLUSION",
             "GK_PARENT_EXCEEDS_5_ACRES"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_AMBEDKAR",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC)",
+          "scheme_name": "Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'General (OC)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.; Land parcel already possesses an existing borewell.; Individual landholding (12.5 ac) exceeds Ambedkar Corporation individual ceiling of 5.0 acres.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'General (OC)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.; Land parcel already possesses an existing borewell.; Individual landholding (12.5 ac) exceeds Ambedkar Corporation individual ceiling of 5.0 acres.",
           "disqualifying_factors": [
             "Applicant social category 'General (OC)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
             "Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.",
@@ -4400,18 +3979,18 @@
             "GK_SCH010_AMBEDKAR_EXISTING_BOREWELL",
             "GK_AMBEDKAR_INDIVIDUAL_OVER_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_VALMIKI",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'General (OC)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.; Land parcel already possesses an existing borewell.; Individual landholding (12.5 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'General (OC)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.; Land parcel already possesses an existing borewell.; Individual landholding (12.5 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Applicant social category 'General (OC)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
             "Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.",
@@ -4425,18 +4004,18 @@
             "GK_SCH010_VALMIKI_EXISTING_BOREWELL",
             "GK_SCH010_VALMIKI_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_DEVARAJ_URS",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC)",
+          "scheme_name": "Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'General (OC)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.; Land parcel already possesses an existing borewell.; Individual landholding (12.5 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'General (OC)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.; Land parcel already possesses an existing borewell.; Individual landholding (12.5 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Applicant social category 'General (OC)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
             "Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.",
@@ -4450,18 +4029,18 @@
             "GK_SCH010_DEVARAJ_URS_EXISTING_BOREWELL",
             "GK_SCH010_DEVARAJ_URS_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_KMDC",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
           "raw_engine_status": "INELIGIBLE",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC): Applicant social category 'General (OC)' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.; Land parcel already possesses an existing borewell.; Individual landholding (12.5 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC): Applicant social category 'General (OC)' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.; Land parcel already possesses an existing borewell.; Individual landholding (12.5 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Applicant social category 'General (OC)' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
             "Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.",
@@ -4475,7 +4054,7 @@
             "GK_SCH010_KMDC_EXISTING_BOREWELL",
             "GK_SCH010_KMDC_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_actionable": true,
           "is_provisional": true
         }
@@ -4502,7 +4081,7 @@
             "PMKISAN_PENSION_UNDER_10K_OR_NONE",
             "PMKISAN_NO_PROFESSIONAL_EXCLUSION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -4524,7 +4103,7 @@
           "rule_keys_fired": [
             "PMFBY_NOTIFIED_CROP_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -4548,7 +4127,7 @@
             "PMKSY_WATER_SOURCE_VERIFIED",
             "PMKSY_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -4568,7 +4147,7 @@
           "rule_keys_fired": [
             "SMAM_NO_PRIOR_SUBSIDY"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -4593,7 +4172,7 @@
             "KRISHI_BHAGYA_DISTRICT_NOTIFIED",
             "KRISHI_BHAGYA_EXCEEDS_5_HA"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -4616,7 +4195,7 @@
             "KUSUM_B_WATER_SOURCE_PRESENT",
             "KUSUM_B_GRID_CONNECTED_DISQUALIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -4641,7 +4220,7 @@
             "MIDH_LAND_MIN_MET",
             "MIDH_NO_MICRO_IRRIGATION"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -4661,7 +4240,7 @@
           "rule_keys_fired": [
             "KCC_CENTRAL_COMMERCIAL_ELIGIBLE"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -4683,7 +4262,7 @@
           "rule_keys_fired": [
             "KCC_KA_COOP_PROVISIONAL_PENDING_GO"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
@@ -4703,7 +4282,7 @@
           "rule_keys_fired": [
             "SHC_UNIVERSAL_ACCESS_VERIFIED"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
@@ -4731,12 +4310,12 @@
             "GK_PARENT_EXISTING_BOREWELL_EXCLUSION",
             "GK_PARENT_EXCEEDS_5_ACRES"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_AMBEDKAR",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC)",
+          "scheme_name": "Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -4745,7 +4324,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'General (OC)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.; Land parcel already possesses an existing borewell.; Individual landholding (12.5 ac) exceeds Ambedkar Corporation individual ceiling of 5.0 acres.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Dr. B.R. Ambedkar Development Corporation (SC): Applicant social category 'General (OC)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.; Land parcel already possesses an existing borewell.; Individual landholding (12.5 ac) exceeds Ambedkar Corporation individual ceiling of 5.0 acres.",
           "disqualifying_factors": [
             "Applicant social category 'General (OC)' does not fall under Dr. B.R. Ambedkar Development Corporation Limited, Social Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
             "Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.",
@@ -4759,12 +4338,12 @@
             "GK_SCH010_AMBEDKAR_EXISTING_BOREWELL",
             "GK_AMBEDKAR_INDIVIDUAL_OVER_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": false
         },
         {
           "scheme_id": "SCH010_VALMIKI",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -4773,7 +4352,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'General (OC)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.; Land parcel already possesses an existing borewell.; Individual landholding (12.5 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Maharshi Valmiki ST Development Corporation (ST): Applicant social category 'General (OC)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.; Land parcel already possesses an existing borewell.; Individual landholding (12.5 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Applicant social category 'General (OC)' does not fall under Karnataka Maharshi Valmiki Scheduled Tribes Development Corporation, Scheduled Tribes Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
             "Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.",
@@ -4787,12 +4366,12 @@
             "GK_SCH010_VALMIKI_EXISTING_BOREWELL",
             "GK_SCH010_VALMIKI_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_DEVARAJ_URS",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC)",
+          "scheme_name": "Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -4801,7 +4380,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'General (OC)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.; Land parcel already possesses an existing borewell.; Individual landholding (12.5 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — D. Devaraj Urs Backward Classes Development Corporation (OBC): Applicant social category 'General (OC)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.; Land parcel already possesses an existing borewell.; Individual landholding (12.5 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Applicant social category 'General (OC)' does not fall under D. Devaraj Urs Backward Classes Development Corporation, Backward Classes Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
             "Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.",
@@ -4815,12 +4394,12 @@
             "GK_SCH010_DEVARAJ_URS_EXISTING_BOREWELL",
             "GK_SCH010_DEVARAJ_URS_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         },
         {
           "scheme_id": "SCH010_KMDC",
-          "scheme_name": "Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC)",
+          "scheme_name": "Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC)",
           "record_type": "CHILD",
           "parent_scheme_id": "SCH010",
           "status": "INELIGIBLE",
@@ -4829,7 +4408,7 @@
           "presentation_section": "Disqualified / Non-Actionable Candidates",
           "allow_numerical_scoring": false,
           "governance_note": "Statutorily disqualified under verified criteria.",
-          "reason": "Ineligible for Ganga Kalyana Scheme \u2014 Karnataka Minorities Development Corporation (KMDC): Applicant social category 'General (OC)' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.; Land parcel already possesses an existing borewell.; Individual landholding (12.5 ac) exceeds maximum 5.0 acres ceiling.",
+          "reason": "Ineligible for Ganga Kalyana Scheme — Karnataka Minorities Development Corporation (KMDC): Applicant social category 'General (OC)' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead).; Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.; Land parcel already possesses an existing borewell.; Individual landholding (12.5 ac) exceeds maximum 5.0 acres ceiling.",
           "disqualifying_factors": [
             "Applicant social category 'General (OC)' does not fall under Karnataka Minorities Development Corporation Limited (KMDC), Minority Welfare Department, Govt of Karnataka. (Routes to NONE instead).",
             "Must be exclusively dryland (kushki). Land type 'Irrigated (Borewell)' is disqualified.",
@@ -4843,7 +4422,7 @@
             "GK_SCH010_KMDC_EXISTING_BOREWELL",
             "GK_SCH010_KMDC_EXCEEDS_5_AC"
           ],
-          "availability_state": "Availability unknown \u2014 confirmation required",
+          "availability_state": "Availability unknown — confirmation required",
           "is_provisional": true
         }
       ]

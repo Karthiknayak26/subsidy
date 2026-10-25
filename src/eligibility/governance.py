@@ -439,6 +439,21 @@ def apply_governance_safeguard(
             "as REQUIRES_VERIFICATION without scoring until title documentation is evidenced."
         )
 
+    elif sid == "S056" and d.scheme_id == "SCH010_VALMIKI":
+        gov_status = "REQUIRES_VERIFICATION"
+        presentation_section = "Section B (Provisional Scheme / Land Title Required)"
+        allow_scoring = False
+        missing_verifications = [
+            "Administrative circular and Government Order verification for provisional scheme SCH010_VALMIKI",
+            "Revenue Department certification of land ownership title deed / RTC extract for Kalghatgi taluk",
+            "Field verification of perennial water source adjacency and hydrogeological feasibility clearance"
+        ]
+        gov_note = (
+            "Raw engine returned ELIGIBLE based on ST social category, dryland acreage, and zero existing borewells. "
+            "However, scheme is PROVISIONAL in registry, perennial water source adjacency is unverified, and land title status is UNKNOWN. "
+            "Governance presentation strictly places determination in Section B as REQUIRES_VERIFICATION with numerical scoring disabled."
+        )
+
     elif sid == "S058" and d.scheme_id == "SCH003":
         # PMKSY-PDMC Area limit 5.0 ha per beneficiary
         gov_status = "ELIGIBLE"
