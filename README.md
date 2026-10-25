@@ -3,7 +3,7 @@
 ## Project: ML-Based Personalized Government Scheme and Subsidy Recommendation System for Farmers
 
 [![Status: Phase 5 Expert Annotation](https://img.shields.io/badge/Status-Phase_5:_Expert_Annotation_(Benchmark_v1.0.4_Frozen)-blue.svg)](#part-11--repository-audit-status-matrix--gap-analysis)
-[![Tests: 182 Passing](https://img.shields.io/badge/Tests-182_Passed_(0_Failures)-brightgreen.svg)](#part-8--automated-test-suite--code-coverage-audit)
+[![Tests: 190 Passing](https://img.shields.io/badge/Tests-190_Passed_(0_Failures)-brightgreen.svg)](#part-8--automated-test-suite--code-coverage-audit)
 [![Architecture: Decoupled Filter-Ranker](https://img.shields.io/badge/Architecture-Decoupled_Rule_Engine_%2B_Availability_%2B_ML_Ranker-orange.svg)](#part-3--repository-architecture-reconstruction)
 [![Ground Truth: Verified Official Sources](https://img.shields.io/badge/Ground_Truth-Official_Gazette_%26_Govt_Portals-darkgreen.svg)](#part-4--data-pipeline-trace-from-raw-data-to-registry)
 
@@ -40,7 +40,7 @@ Every claim, rule, metric, and architectural component throughout this teaching 
 - **`[Potential issue]`**: A design risk, code omission, untested branch, policy assumption, or data gap requiring remediation.
 
 > [!IMPORTANT]
-> **Legal Validity vs. Software Consistency:** Passing all 182 automated tests across the engine, scenario matrix, zone runners, annotation packets, and evaluation metrics proves that the Python code is *internally consistent with its encoded rules*. It does **not** prove that the underlying government policies are currently in force, legally complete, or free of unstated administrative circulars in Karnataka.
+> **Legal Validity vs. Software Consistency:** Passing all 190 automated tests across the engine, scenario matrix, zone runners, annotation packets, ingestion pipeline, and evaluation metrics proves that the Python code is *internally consistent with its encoded rules*. It does **not** prove that the underlying government policies are currently in force, legally complete, or free of unstated administrative circulars in Karnataka.
 
 ---
 
@@ -637,12 +637,13 @@ Defined in `research/dataset_research/case_b_scenario_spec.md` and evaluated in 
 
 ### 8.1 Live Test Suite Results
 Executed via `pytest tests/` on October 25, 2026:
-- **Total Tests:** **182 passed in 1.50 seconds** across 15 test suites:
+- **Total Tests:** **190 passed in 1.61 seconds** across 16 test suites:
   - `tests/test_eligibility_engine.py` (56 tests)
   - `tests/test_benchmark_matrix.py` (11 tests)
   - `tests/test_zone_z1_scenarios.py` through `tests/test_zone_z10_scenarios.py` (100 tests)
   - `tests/test_benchmark_annotation_packets.py` (5 tests)
-  - `tests/test_evaluation_metrics.py` (10 tests)
+  - `tests/test_evaluation_metrics.py` (11 tests)
+  - `tests/test_ingest_benchmark_annotations.py` (7 tests)
 - **Benchmark Validators:**
   - `research/dataset_research/validate_benchmark_artifacts.py`: 60/60 scenarios & artifacts pass
   - `research/dataset_research/validate_benchmark_matrix.py`: All dimensions & constraints pass
@@ -833,11 +834,11 @@ When expert labels are collected, the training dataset will pair farmer contexts
 | **Scheme Database** | 16 records (10 core, 6 impl) across 31 attributes | `scheme_master.json`, `.csv`, `.xlsx` | `[Implemented]` | Static snapshot; no live scraping of government circulars. | Maintain manual audit log for circular updates. |
 | **Master Builder** | Openpyxl & Pandas generation script | `build_scheme_master.py` | `[Implemented]` | Validates structure, not policy correctness or URL liveness. | Add automated HTTP schema/URL validation check. |
 | **Eligibility Models** | Strongly typed dataclasses & enums | `models.py` | `[Tested]` (92% cov) | Scenario schema assumes single primary crop & asset list. | Add support for multi-parcel holdings. |
-| **Eligibility Engine** | Deterministic rule evaluators with 3-valued logic | `engine.py` | `[Tested]` (87% cov, 182 suite passes) | Complex rules hardcoded in Python methods rather than external rule DSL. | Decouple rules into configuration rule-cards. |
-| **Parent Deduplication** | Automated suppressor of abstract parents | `engine.py:132-156` | `[Tested]` (182 suite passes) | Only handles 1-level parent-child hierarchy (`SCH008`, `SCH010`). | Support multi-tier departmental hierarchies. |
+| **Eligibility Engine** | Deterministic rule evaluators with 3-valued logic | `engine.py` | `[Tested]` (87% cov, 190 suite passes) | Complex rules hardcoded in Python methods rather than external rule DSL. | Decouple rules into configuration rule-cards. |
+| **Parent Deduplication** | Automated suppressor of abstract parents | `engine.py:132-156` | `[Tested]` (190 suite passes) | Only handles 1-level parent-child hierarchy (`SCH008`, `SCH010`). | Support multi-tier departmental hierarchies. |
 | **Availability Filter** | Decoupled 4-state availability filter | `availability.py` | `[Tested]` (84% cov) | `scheme_availability_template.csv` is currently unpopulated. | Populate template with current circulars from KSDA/RSK. |
-| **Benchmark Scenarios** | 10 pilot scenarios (S001–S010) + 60 Benchmark v1.0.4 scenarios (S011–S070) across Z1–Z10 | `case_b_scenario_spec.md`, `benchmark_v1_design.md`, `benchmark_v1.0.4_freeze.md` | `[Tested]` (182 tests, both validators pass) | Calibration pilot strictly partitioned from evaluation set. | Phase 5: Complete expert relevance annotation for S011–S070. |
-| **Annotation Pipeline** | 2-phase CLI, agreement computation, Protocol v1.1, pre-registered metrics | `run_annotation_session.py`, `compute_agreement.py`, `annotation_protocol_v1.1.md`, `evaluation_preregistration.md` | `[Implemented]` | Staged blank packets (commit `fe6bfd6`); metrics hardened & tested. | Execute independent E1 & E2 annotations under Protocol v1.1. |
+| **Benchmark Scenarios** | 10 pilot scenarios (S001–S010) + 60 Benchmark v1.0.4 scenarios (S011–S070) across Z1–Z10 | `case_b_scenario_spec.md`, `benchmark_v1_design.md`, `benchmark_v1.0.4_freeze.md` | `[Tested]` (190 tests, both validators pass) | Calibration pilot strictly partitioned from evaluation set. | Phase 5: Complete expert relevance annotation for S011–S070. |
+| **Annotation Pipeline** | 2-phase CLI, agreement computation, Protocol v1.1, automated ingestion pipeline | `ingest_benchmark_annotations.py`, `compute_agreement.py`, `annotation_protocol_v1.1.md`, `evaluation_preregistration.md` | `[Tested]` | Staged blank packets (commit `fe6bfd6`); ingestion pipeline hardened & tested. | Execute independent E1 & E2 annotations under Protocol v1.1. |
 | **ML Models & Training** | None | Non-existent in repository | `[Planned]` | **Model training deliberately deferred** until annotations collected. | Establish deterministic baseline first. |
 | **User Interface / API** | None | Non-existent in repository | `[Planned]` | No web application, FastAPI server, or CLI for farmers yet. | Build Streamlit or FastAPI prototype. |
 | **Kannada Localization**| Translation notes in documentation | Documentation references only | `[Planned]` | No translation tables, gettext files, or Kannada strings in code. | Create Kannada string resource catalog. |

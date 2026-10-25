@@ -222,3 +222,76 @@ def evaluate_model_acceptance_criteria(
         "zone_mean_deltas": zone_means,
         "regressed_zones": zone_regressions
     }
+
+
+def evaluate_standalone_ranking_system(
+    rankings_by_scenario: Dict[str, Sequence[str]],
+    consensus_labels_by_scenario: Dict[str, Dict[str, float]],
+    scenario_to_zone_map: Optional[Dict[str, int]] = None
+) -> Dict[str, Any]:
+    """
+    Evaluates a single ranking system (e.g. the frozen deterministic heuristic baseline)
+    independently against frozen consensus relevance ground truth for Benchmark v1.0.4.
+    
+    Computes per-scenario and zone-level NDCG@3 and MRR according to the pre-registered standards.
+    """
+    if scenario_to_zone_map is None:
+        scenario_to_zone_map = FROZEN_BENCHMARK_ZONE_MAP
+    
+    EXPECTED_SCENARIOS = {f"S{i:03d}" for i in range(11, 71)}
+    
+    if set(rankings_by_scenario.keys()) != EXPECTED_SCENARIOS:
+        missing = EXPECTED_SCENARIOS - set(rankings_by_scenario.keys())
+        extra = set(rankings_by_scenario.keys()) - EXPECTED_SCENARIOS
+        raise ValueError(
+            f"Rankings scenario keys mismatch Benchmark v1.0.4. Missing: {sorted(missing)}, Extra: {sorted(extra)}"
+        )
+    
+    if set(consensus_labels_by_scenario.keys()) != EXPECTED_SCENARIOS:
+        missing = EXPECTED_SCENARIOS - set(consensus_labels_by_scenario.keys())
+        extra = set(consensus_labels_by_scenario.keys()) - EXPECTED_SCENARIOS
+        raise ValueError(
+            f"Consensus labels scenario keys mismatch Benchmark v1.0.4. Missing: {sorted(missing)}, Extra: {sorted(extra)}"
+        )
+
+    ndcg_by_scenario: Dict[str, float] = {}
+    mrr_by_scenario: Dict[str, float] = {}
+    zone_ndcg: Dict[int, List[float]] = {z: [] for z in range(1, 11)}
+    zone_mrr: Dict[int, List[float]] = {z: [] for z in range(1, 11)}
+
+    for sid in sorted(EXPECTED_SCENARIOS):
+        zone = scenario_to_zone_map[sid]
+        if zone != FROZEN_BENCHMARK_ZONE_MAP[sid]:
+            raise ValueError(
+                f"Scenario {sid} is assigned to zone {zone}, expected zone {FROZEN_BENCHMARK_ZONE_MAP[sid]}"
+            )
+
+        ranked_schemes = rankings_by_scenario[sid]
+        labels = consensus_labels_by_scenario[sid]
+
+        # Extract ordered score vector for candidate schemes
+        score_vector = [float(labels.get(scheme_id, 0.0)) for scheme_id in ranked_schemes]
+        
+        ndcg_val = compute_ndcg_at_k(score_vector, k=3)
+        mrr_val = compute_mrr(score_vector, threshold=2.0)
+
+        ndcg_by_scenario[sid] = ndcg_val
+        mrr_by_scenario[sid] = mrr_val
+        zone_ndcg[zone].append(ndcg_val)
+        zone_mrr[zone].append(mrr_val)
+
+    global_mean_ndcg = float(np.mean(list(ndcg_by_scenario.values())))
+    global_mean_mrr = float(np.mean(list(mrr_by_scenario.values())))
+
+    zone_mean_ndcg = {z: float(np.mean(zone_ndcg[z])) for z in range(1, 11)}
+    zone_mean_mrr = {z: float(np.mean(zone_mrr[z])) for z in range(1, 11)}
+
+    return {
+        "global_mean_ndcg3": global_mean_ndcg,
+        "global_mean_mrr": global_mean_mrr,
+        "ndcg3_by_scenario": ndcg_by_scenario,
+        "mrr_by_scenario": mrr_by_scenario,
+        "zone_mean_ndcg3": zone_mean_ndcg,
+        "zone_mean_mrr": zone_mean_mrr
+    }
+

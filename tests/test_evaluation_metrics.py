@@ -202,4 +202,24 @@ def test_acceptance_criteria_metric_values_validation():
         evaluate_model_acceptance_criteria(valid_base, corrupted_bool, valid_zone_map)
 
 
+def test_evaluate_standalone_ranking_system():
+    """Verify evaluate_standalone_ranking_system accurately computes per-scenario and zone baseline metrics."""
+    from src.evaluation.metrics import evaluate_standalone_ranking_system, FROZEN_BENCHMARK_ZONE_MAP
+
+    dummy_rankings = {f"S{i:03d}": ["SCH001", "SCH004", "SCH005"] for i in range(11, 71)}
+    dummy_labels = {f"S{i:03d}": {"SCH001": 3.0, "SCH004": 2.0, "SCH005": 1.0} for i in range(11, 71)}
+
+    res = evaluate_standalone_ranking_system(dummy_rankings, dummy_labels)
+
+    assert math.isclose(res["global_mean_ndcg3"], 1.0, rel_tol=1e-5)
+    assert math.isclose(res["global_mean_mrr"], 1.0, rel_tol=1e-5)
+    assert len(res["ndcg3_by_scenario"]) == 60
+    assert len(res["mrr_by_scenario"]) == 60
+    assert len(res["zone_mean_ndcg3"]) == 10
+    assert len(res["zone_mean_mrr"]) == 10
+    for z in range(1, 11):
+        assert math.isclose(res["zone_mean_ndcg3"][z], 1.0, rel_tol=1e-5)
+
+
+
 
