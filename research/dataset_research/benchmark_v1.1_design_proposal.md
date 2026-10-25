@@ -46,59 +46,63 @@ flowchart TD
     end
 ```
 
-### Principle 1: Expanded Candidate Space (Target: 6–10 Eligible Schemes)
-In production, farmers qualify for multiple concurrent schemes. Benchmark `v1.1` scenarios are sampled from agrarian profiles with broader asset bases and farming operations (e.g., mixed cropping, horticulture + livestock, dryland + partial lift), ensuring that **6 to 10 valid statutory schemes** qualify into Section A.
+### Principle 1: Candidate Space as an Empirical Hypothesis
+In production, farmers with diversified operations qualify for multiple concurrent welfare schemes. In Benchmark `v1.1`, candidate sets will be generated **strictly through the frozen statutory eligibility engine** (`src/eligibility/engine.py` at commit `7724fa7`). 
+
+> [!IMPORTANT]
+> **Scientific Integrity Guardrail:**
+> Candidate set sizes (hypothesized 6–10 schemes) and baseline performance (hypothesized $0.65$–$0.80$ NDCG@3) are **design hypotheses to be empirically measured**, not forced requirements. Eligibility rules must never be altered or relaxed artificially to force a lower baseline score or enlarge candidate sets. The engine runs unchanged.
 
 ### Principle 2: Compound Farmer Needs Architecture
-Rather than assigning a singular need string, each scenario in `v1.1` features a **primary acute crisis** accompanied by **secondary acute constraints**:
+Rather than assigning a singular need string, each scenario in `v1.1` features a **primary acute crisis** accompanied by **secondary operational constraints**:
 
 $$\text{Profile Need} = \{\text{Primary Acute Crisis}, \text{Secondary Working Capital}, \text{Infrastructure Barrier}\}$$
 
-### Principle 3: Elimination of Heuristic Target Collusion
-In `v1.0.4-EXP`, the target scheme was unique in the candidate pool. In `v1.1`, every scenario contains **at least two directly competing schemes** with overlapping utility, requiring prioritization based on farm economics, implementation timeline, and cost barriers rather than trivial keyword lookup.
+### Principle 3: Elimination of Heuristic Target Collusion & Real Clinical Trade-Offs
+In `v1.0.4-EXP`, the target scheme was unique in the candidate pool. In `v1.1`, scenarios present **multiple genuinely plausible statutory interventions** providing overlapping or competing benefits. Scenario authors must define scenarios independently of existing heuristic rules, ensuring the evaluation is a fair test of ranking methods.
 
 ---
 
-## 3. Compound Agrarian Need Archetypes
+## 3. Compound Agrarian Need Archetypes & Statutory Intervention Fidelity
 
-Benchmark `v1.1` formalizes four realistic agrarian multi-stress archetypes across Karnataka's 10 agro-climatic zones:
+Benchmark `v1.1` formalizes four realistic multi-stress archetypes, strictly grounded in official statutory mandates:
 
-### Archetype A: Water Infrastructure Failure + Working Capital Crisis
-- **Narrative Context:** A borewell has dried up mid-season in the Central Dry Zone (Zone 4) or Northern Dry Zone (Zone 3); the farmer has standing crops withering, zero water security, and mounting short-term input debt.
+### Archetype A: Water Infrastructure Failure + Working Capital Constraint
+- **Narrative Context:** A borewell has dried up mid-season in the Central Dry Zone (Zone 4) or Northern Dry Zone (Zone 3); the farmer has standing crops withering, zero water security, and seasonal credit constraints for fresh inputs.
 - **Competing Eligible Schemes in Section A:**
   1. `SCH006` (PM-KUSUM Component B standalone solar pump — if off-grid source certified)
-  2. `SCH005` (Krishi Bhagya farm pond + diesel/solar pump lifting package)
+  2. `SCH005` (Krishi Bhagya farm pond + diesel/solar pump lifting package for dryland)
   3. `SCH003` (PMKSY-PDMC micro-irrigation drip to stretch remaining moisture)
-  4. `SCH008_CENTRAL` (KCC-MISS subsidized short-term crop credit to reschedule debt)
+  4. `SCH008_CENTRAL` (Central KCC-MISS concessional short-term crop loan at 4.0% prompt repayment for operational seasonal inputs, per `financialservices.gov.in` — strictly a source of seasonal working capital, *not debt restructuring*)
   5. `SCH001` (PM-KISAN direct income liquidity)
-- **Ranking Challenge:** Should the engine prioritize acute water drilling/pumping (`SCH006`/`SCH005`), water conservation (`SCH003`), or emergency credit liquidity (`SCH008_CENTRAL`)? Simple need lookups tie or miss the critical operational sequencing.
+- **Clinical Ranking Challenge:** Prioritizing water drilling/pumping (`SCH006`/`SCH005`), water conservation (`SCH003`), or seasonal input liquidity (`SCH008_CENTRAL`). A static 1-to-1 need lookup cannot resolve compound trade-offs without multi-factor weighting.
 
 ### Archetype B: Pest/Climate Damage + Working Capital Liquidity + Mechanization
-- **Narrative Context:** A marginal redgram/cotton farmer in Bidar/Kalaburagi (Zone 1/2) experiences severe pink bollworm or pod borer infestation, flower dropping, and cash exhaustion for pesticide sprays.
+- **Narrative Context:** A marginal redgram/cotton farmer in Bidar/Kalaburagi (Zone 1/2) experiences severe pod borer infestation, flower dropping, and cash exhaustion for pesticide sprays.
 - **Competing Eligible Schemes in Section A:**
   1. `SCH001` (PM-KISAN unconditional emergency cash transfer)
-  2. `SCH004` (SMAM battery/power-operated plant protection sprayers subsidy)
-  3. `SCH008_CENTRAL` (KCC-MISS concessional working capital loan for inputs)
+  2. `SCH004` (SMAM procurement subsidy for battery/power-operated plant protection sprayers, per `agrimachinery.nic.in`)
+  3. `SCH008_CENTRAL` (Central KCC-MISS concessional short-term crop credit for purchasing fresh plant protection inputs)
   4. `SCH009` (Soil Health Card diagnostic testing)
-- **Ranking Challenge:** In the absence of immediate PMFBY indemnity payout (quarantined in Section B), does the farmer benefit more immediately from direct cash liquidity (`SCH001`), spray equipment procurement (`SCH004`), or crop loan restructuring (`SCH008_CENTRAL`)?
+- **Clinical Ranking Challenge:** In the absence of immediate PMFBY indemnity payout (quarantined in Section B), evaluating whether the farmer benefits more immediately from direct unconditional cash liquidity (`SCH001`), spray machinery capital procurement (`SCH004`), or short-term input credit (`SCH008_CENTRAL`).
 
 ### Archetype C: Horticulture Transition + Water Scarcity + High Capital Barrier
 - **Narrative Context:** A smallholder in Tumakuru or Kolar (Zone 5) transitioning from rainfed millets to commercial pomegranate/tomato horticulture, facing severe groundwater depletion and high initial capital costs.
 - **Competing Eligible Schemes in Section A:**
-  1. `SCH007` (MIDH shade-net / polyhouse protected cultivation subsidy)
+  1. `SCH007` (MIDH shade-net / polyhouse protected cultivation capital subsidy)
   2. `SCH003` (PMKSY-PDMC micro-irrigation drip installation)
   3. `SCH005` (Krishi Bhagya farm pond rainwater harvesting)
   4. `SCH009` (Soil Health Card micronutrient testing for horticulture)
-  5. `SCH008_CENTRAL` (KCC term credit for plantation development)
-- **Ranking Challenge:** Multi-component capital sequencing: micro-irrigation (`SCH003`) is technically useless without water storage (`SCH005`), while protected cultivation (`SCH007`) requires substantial beneficiary co-funding.
+  5. `SCH008_CENTRAL` (Central KCC-MISS seasonal crop credit for inputs)
+- **Clinical Ranking Challenge:** Multi-component capital sequencing: micro-irrigation (`SCH003`) is technically useless without water storage (`SCH005`), while protected cultivation (`SCH007`) requires substantial beneficiary co-funding.
 
-### Archetype D: Informal Oral Tenancy + Mechanization Bottleneck
-- **Narrative Context:** A tenant farmer in Mandya/Mysuru (Zone 6) operating on oral lease without RTC title deeds, facing acute labor shortage during paddy transplanting/harvesting and high private moneylender rates.
+### Archetype D: Informal Oral Tenancy + Equipment Access Barrier
+- **Narrative Context:** A tenant farmer in Mandya/Mysuru (Zone 6) operating on oral lease without RTC title deeds, facing acute labor shortage during transplanting/harvesting and private moneylender rates.
 - **Competing Eligible Schemes in Section A:**
-  1. `SCH004` (SMAM Custom Hiring Center equipment access)
+  1. `SCH004` (SMAM subsidy to individual farmers/groups for machinery procurement or Custom Hiring Centre establishment per `agrimachinery.nic.in` — explicitly noting that establishing a CHC or procuring equipment is distinct from an individual hiring service access)
   2. `SCH009` (Soil Health Card free diagnostic nutrient management)
   3. Other non-title statutory schemes.
-- **Ranking Challenge:** Differentiating title-restricted schemes from asset-accessible operational services under legal constraints.
+- **Clinical Ranking Challenge:** Differentiating capital asset creation subsidies from operational farmer services under statutory title constraints.
 
 ---
 
@@ -108,23 +112,27 @@ Benchmark `v1.1` formalizes four realistic agrarian multi-stress archetypes acro
 | :--- | :--- |
 | **Total Production Scenarios** | **$N = 60$** (S071 to S130) |
 | **Agro-Climatic Coverage** | Exactly 6 scenarios in each of the 10 Agro-Climatic Zones ($Z1$–$Z10$) |
-| **Candidate Scheme Pool** | 6 to 10 Section A eligible schemes per scenario ($> 400$ total rating pairs) |
-| **Need Complexity** | 100% Compound Needs (Primary Need + Secondary Operational Constraint) |
+| **Candidate Scheme Pool** | Generated strictly by `EligibilityEngine`; recorded empirically without artificial distortion |
+| **Need Complexity** | 100% Compound Needs (Primary Acute Need + Secondary Operational Constraint) |
 | **Calibration Pilot** | S001–S010 permanently held separate as historical calibration data |
 | **Benchmark Freeze** | S011–S070 preserved immutably as `Benchmark v1.0.4-EXP` baseline reference |
 
 ---
 
-## 5. Dual-Human Annotation Protocol (v1.2)
+## 5. Dual-Human Annotation Protocol (v1.2) & Compound-Need Rubric
 
 To guarantee uncompromised scientific provenance:
-1. **Zero AI Initialization:** Blinded annotation packets (`E1_v1.1_blank.csv` and `E2_v1.1_blank.csv`) will be distributed directly to independent agricultural domain experts without LLM-generated seed scores or suggestions.
-2. **Clinical Decision Framework (0–3 Ordinal Scale):**
-   - **Score 3 (High Priority Top Recommendation):** Solves the most acute bottleneck with immediate practical impact given the multi-stress profile.
-   - **Score 2 (Valuable Secondary Support):** High-utility secondary scheme that synergizes directly with the primary intervention.
-   - **Score 1 (Marginal / Low Priority):** Statutorily eligible, but tangential or difficult to operationalize amid compound distress.
-   - **Score 0 (Irrelevant / Counterproductive):** Eligible on paper, but inappropriate (e.g. debt-inducing loan when farmer is in insolvency, or unrequested civil works).
-3. **Mandatory Audit Rationales:** Every single rating must include clinical reasoning justifying the ranking relative to the competing eligible schemes.
+1. **Zero AI Initialization:** Blinded annotation packets (`E1_v1.1_blank.csv` and `E2_v1.1_blank.csv`) will be distributed directly to independent agricultural domain experts without LLM seed scores.
+2. **Compound-Need Relevance Scoring Rubric (0–3 Ordinal Scale):**
+
+| Score | Rating Level | Clinical Decision Rule for Compound Needs |
+| :---: | :--- | :--- |
+| **3** | **Highly Relevant / High Priority** | Directly resolves the farmer's **Primary Acute Crisis** with immediate, high-impact benefit, while aligning with or facilitating the secondary operational constraint. |
+| **2** | **Relevant / Secondary Priority** | Directly resolves the **Secondary Operational Constraint**, or provides valuable secondary support, but does *not* directly solve the acute primary crisis. (e.g. A scheme solving only the secondary need is capped at Score 2). |
+| **1** | **Marginally Relevant / Low Priority** | Technically applicable and statutory criteria satisfied, but offers minor, distant, or tangential value in the current compound context. |
+| **0** | **Irrelevant / Not Useful / Counterproductive** | Despite statutory eligibility, provides no practical benefit, requires unrequested civil works, or exacerbates farmer distress (e.g. debt-inducing loan during acute insolvency). |
+
+3. **Mandatory Audit Rationales:** Every single rating must include clinical reasoning justifying the score relative to both primary and secondary constraints.
 4. **Inter-Rater Reliability Thresholds (Fail-Closed Gates):**
    - **Quadratic Weighted Cohen's Kappa:** $\kappa_w \ge 0.610$
    - **Ordinal Krippendorff's Alpha:** $\alpha_{\text{ord}} \ge 0.670$
