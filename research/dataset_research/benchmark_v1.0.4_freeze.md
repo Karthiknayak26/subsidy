@@ -97,3 +97,17 @@ With Benchmark v1.0.4 frozen, work proceeds to **Phase 5: Expert Relevance Annot
 5. **Agreement Thresholds:** Evaluation baseline calculation and model training remain blocked until:
    - Quadratic Weighted Cohen's Kappa $\kappa_w \ge 0.61$
    - Ordinal Krippendorff's Alpha $\alpha \ge 0.67$
+
+---
+
+## 5. Phase 5 Annotation Packet Staging Record
+
+| Attribute | Specification |
+|:---|:---|
+| **Packet Staging Commit** | `fe6bfd666c3cee66bf343a7a6998b2fd967dcb56` |
+| **Commit Message** | `feat(annotation): generate blinded E1/E2 annotation packets and dossier for benchmark v1.0.4 under protocol v1.1, update README` |
+| **Test Suite Status** | 172 passed / 0 failed (`tests/test_benchmark_annotation_packets.py` added) |
+| **Staged Packets** | - `data/annotations/benchmark_v1.0.4/E1_annotation_packet_blank.csv` (283 rows)<br>- `data/annotations/benchmark_v1.0.4/E2_annotation_packet_blank.csv` (283 rows)<br>- `data/annotations/benchmark_v1.0.4/E1_E2_combined_packet_blank.csv` (566 rows)<br>- `data/annotations/benchmark_v1.0.4/section_b_policy_review_packet.csv` (146 rows) |
+| **Blinded Dossier** | `research/dataset_research/benchmark_v1.0.4_blinded_annotation_dossier.md` (1,659 lines) |
+| **Packet Generator** | `scripts/generate_benchmark_annotation_packet.py` |
+
