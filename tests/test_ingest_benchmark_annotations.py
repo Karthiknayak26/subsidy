@@ -86,3 +86,48 @@ def test_reject_duplicate_candidate_pair(valid_submission_rows, canonical_templa
     bad_rows[1]["scheme_id"] = bad_rows[0]["scheme_id"]
     with pytest.raises(ValueError, match=r"Duplicate candidate scheme pair detected"):
         validate_submission_rows(bad_rows, "E1", canonical_template_pairs)
+
+
+def test_dry_run_writes_no_files(tmp_path, canonical_template_pairs):
+    """Verify --dry-run performs validation only and writes zero files to disk."""
+    import csv as csv_mod
+
+    # Build minimal valid E1 and E2 CSVs in a temp directory
+    fields = ["scenario_id", "scheme_id", "scheme_name", "rater_id", "relevance_score", "rationale"]
+    for rater in ("E1", "E2"):
+        rows = [
+            {
+                "scenario_id": sid,
+                "scheme_id": scheme_id,
+                "scheme_name": f"Scheme {scheme_id}",
+                "rater_id": rater,
+                "relevance_score": "2",
+                "rationale": "Adequate crop alignment and operational fit."
+            }
+            for sid, scheme_id in canonical_template_pairs
+        ]
+        out = tmp_path / f"{rater}_submission.csv"
+        with open(out, "w", newline="", encoding="utf-8") as f:
+            w = csv_mod.DictWriter(f, fieldnames=fields)
+            w.writeheader()
+            w.writerows(rows)
+
+    archive_dir = tmp_path / "archive"
+    output_dir = tmp_path / "output"
+
+    result = ingest_annotations(
+        e1_path=tmp_path / "E1_submission.csv",
+        e2_path=tmp_path / "E2_submission.csv",
+        archive_dir=archive_dir,
+        output_dir=output_dir,
+        dry_run=True
+    )
+
+    assert result["status"] == "DRY_RUN_PASSED"
+
+    # archive_dir and output_dir must not exist (no files written at all)
+    assert not archive_dir.exists(), "dry-run must not create the archive directory"
+    assert not output_dir.exists() or not any(output_dir.iterdir()), (
+        "dry-run must not write output files"
+    )
+

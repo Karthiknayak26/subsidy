@@ -163,23 +163,6 @@ def ingest_annotations(
     if not e2_path.exists():
         raise FileNotFoundError(f"E2 submission file not found: {e2_path}")
 
-    # 1. Pre-validation raw intake: preserve received files immediately for auditability
-    intake_dir = archive_dir / "intake"
-    intake_dir.mkdir(parents=True, exist_ok=True)
-    ts_intake = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S_%f")
-    unique_intake = uuid.uuid4().hex[:8]
-    e1_intake = intake_dir / f"E1_raw_intake_{ts_intake}_{unique_intake}.csv"
-    e2_intake = intake_dir / f"E2_raw_intake_{ts_intake}_{unique_intake}.csv"
-
-    with open(e1_path, "rb") as f_in, open(e1_intake, "xb") as f_out:
-        f_out.write(f_in.read())
-    with open(e2_path, "rb") as f_in, open(e2_intake, "xb") as f_out:
-        f_out.write(f_in.read())
-
-    print(f"[INTAKE PRESERVED] Pre-validation raw intake saved:")
-    print(f"  - E1: {e1_intake.name}")
-    print(f"  - E2: {e2_intake.name}")
-
     print(f"[INGESTION] Validating E1 submission: {e1_path.name}")
     with open(e1_path, "r", encoding="utf-8") as f:
         e1_raw = list(csv.DictReader(f))
@@ -197,6 +180,24 @@ def ingest_annotations(
     if dry_run:
         print("[DRY RUN] Ingestion validation completed successfully. No output files written.")
         return {"status": "DRY_RUN_PASSED"}
+
+    # 1. Pre-validation raw intake: preserve received files immediately for auditability.
+    # This runs only on a real (non-dry-run) ingestion so that dry-run leaves no artifacts.
+    intake_dir = archive_dir / "intake"
+    intake_dir.mkdir(parents=True, exist_ok=True)
+    ts_intake = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S_%f")
+    unique_intake = uuid.uuid4().hex[:8]
+    e1_intake = intake_dir / f"E1_raw_intake_{ts_intake}_{unique_intake}.csv"
+    e2_intake = intake_dir / f"E2_raw_intake_{ts_intake}_{unique_intake}.csv"
+
+    with open(e1_path, "rb") as f_in, open(e1_intake, "xb") as f_out:
+        f_out.write(f_in.read())
+    with open(e2_path, "rb") as f_in, open(e2_intake, "xb") as f_out:
+        f_out.write(f_in.read())
+
+    print(f"[INTAKE PRESERVED] Pre-validation raw intake saved:")
+    print(f"  - E1: {e1_intake.name}")
+    print(f"  - E2: {e2_intake.name}")
 
     # 2. Immutable Archival with collision-resistant naming and exclusive file creation
     archive_dir.mkdir(parents=True, exist_ok=True)

@@ -165,6 +165,7 @@ def load_paired_annotations_from_csv(csv_path: Path) -> List[Dict[str, Any]]:
       - Exact match to canonical candidate pairs S011-S070
       - Scores are integers in {0, 1, 2, 3}
       - No pilot scenarios S001-S010
+      - Non-empty e1_rationale and e2_rationale (Protocol v1.1 audit trail requirement)
     """
     if not csv_path.exists():
         raise FileNotFoundError(f"Paired annotations file not found: {csv_path}")
@@ -203,6 +204,20 @@ def load_paired_annotations_from_csv(csv_path: Path) -> List[Dict[str, Any]]:
                     f"Scores out of range {0, 1, 2, 3} in row {idx}: E1={e1_score}, E2={e2_score}"
                 )
 
+            # Validate rationale presence (Protocol v1.1: audit trail required for every judgment)
+            e1_rat = row.get("e1_rationale", "").strip()
+            e2_rat = row.get("e2_rationale", "").strip()
+            if not e1_rat:
+                raise ValueError(
+                    f"Missing E1 rationale for row {idx} ({sid}:{scheme_id}). "
+                    f"Protocol v1.1 requires an audit rationale for every relevance judgment."
+                )
+            if not e2_rat:
+                raise ValueError(
+                    f"Missing E2 rationale for row {idx} ({sid}:{scheme_id}). "
+                    f"Protocol v1.1 requires an audit rationale for every relevance judgment."
+                )
+
             rows.append({
                 "scenario_id": sid,
                 "scheme_id": scheme_id,
@@ -210,8 +225,8 @@ def load_paired_annotations_from_csv(csv_path: Path) -> List[Dict[str, Any]]:
                 "e1_score": e1_score,
                 "e2_score": e2_score,
                 "score_delta": abs(e1_score - e2_score),
-                "e1_rationale": row.get("e1_rationale", "").strip(),
-                "e2_rationale": row.get("e2_rationale", "").strip()
+                "e1_rationale": e1_rat,
+                "e2_rationale": e2_rat
             })
 
     if len(rows) != 283:

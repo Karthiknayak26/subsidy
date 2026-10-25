@@ -274,3 +274,64 @@ def test_evaluate_benchmark_agreement_and_report(valid_paired_csv, tmp_path):
     assert "Quadratic Weighted Cohen's Kappa" in report_content
     assert "Ordinal Krippendorff's Alpha" in report_content
     assert "| S011 |" in report_content  # Disagreement item in table
+
+
+def test_load_paired_annotations_reject_missing_e1_rationale(tmp_path, canonical_template_pairs):
+    """Verify empty e1_rationale is rejected even when invoked directly via --input-csv."""
+    file_path = tmp_path / "missing_e1_rat.csv"
+    fields = [
+        "scenario_id", "scheme_id", "scheme_name",
+        "e1_score", "e1_rationale", "e2_score", "e2_rationale",
+        "score_delta", "requires_adjudication"
+    ]
+    rows = []
+    for idx, (sid, scheme_id) in enumerate(canonical_template_pairs):
+        rows.append({
+            "scenario_id": sid,
+            "scheme_id": scheme_id,
+            "scheme_name": f"Scheme {scheme_id}",
+            "e1_score": 2,
+            "e1_rationale": "" if idx == 0 else "Adequate crop alignment.",
+            "e2_score": 2,
+            "e2_rationale": "Direct operational benefit.",
+            "score_delta": 0,
+            "requires_adjudication": False
+        })
+    with open(file_path, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=fields)
+        w.writeheader()
+        w.writerows(rows)
+
+    with pytest.raises(ValueError, match=r"Missing E1 rationale for row 1.*Protocol v1\.1 requires an audit rationale"):
+        load_paired_annotations_from_csv(file_path)
+
+
+def test_load_paired_annotations_reject_missing_e2_rationale(tmp_path, canonical_template_pairs):
+    """Verify empty e2_rationale is rejected even when invoked directly via --input-csv."""
+    file_path = tmp_path / "missing_e2_rat.csv"
+    fields = [
+        "scenario_id", "scheme_id", "scheme_name",
+        "e1_score", "e1_rationale", "e2_score", "e2_rationale",
+        "score_delta", "requires_adjudication"
+    ]
+    rows = []
+    for idx, (sid, scheme_id) in enumerate(canonical_template_pairs):
+        rows.append({
+            "scenario_id": sid,
+            "scheme_id": scheme_id,
+            "scheme_name": f"Scheme {scheme_id}",
+            "e1_score": 2,
+            "e1_rationale": "Adequate crop alignment.",
+            "e2_score": 2,
+            "e2_rationale": "" if idx == 5 else "Direct operational benefit.",
+            "score_delta": 0,
+            "requires_adjudication": False
+        })
+    with open(file_path, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=fields)
+        w.writeheader()
+        w.writerows(rows)
+
+    with pytest.raises(ValueError, match=r"Missing E2 rationale for row 6.*Protocol v1\.1 requires an audit rationale"):
+        load_paired_annotations_from_csv(file_path)
+
