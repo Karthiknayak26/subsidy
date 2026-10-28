@@ -1,14 +1,14 @@
 # Benchmark v1.1 Calibration Rubric & Human Reviewer Protocol
 
 **Document Version:** `benchmark-v1.1-calibration-rubric-revised`  
-**Status:** Conditional Proposal — Pending Research Methodology Review & Formal Sign-Off  
+**Status:** Signed-Off — Approved for Human Annotation Packet Distribution (per methodology sign-off 2026-10-25)  
 **Target Benchmark:** Benchmark v1.1 (`S071`–`S130`, 60 Compound-Need Scenarios across Zones Z1–Z10)  
 **Preceding Milestones:** 
-- [Evaluation Preregistration v1.0](file:///c:/Users/User/Desktop/subsidy/farmer-benefit-ml/research/dataset_research/evaluation_preregistration.md)
-- [Benchmark v1.1 Design Proposal](file:///c:/Users/User/Desktop/subsidy/farmer-benefit-ml/research/dataset_research/benchmark_v1.1_design_proposal.md)
-- [Benchmark v1.1 Scenario Manifest](file:///c:/Users/User/Desktop/subsidy/farmer-benefit-ml/research/dataset_research/benchmark_v1.1_scenario_manifest.md)
-- [Preflight Audit Report](file:///c:/Users/User/Desktop/subsidy/farmer-benefit-ml/reports/benchmark_v1.1_preflight_audit.md)  
-- [Scheme Master Registry](file:///c:/Users/User/Desktop/subsidy/farmer-benefit-ml/scheme_database/processed/scheme_master.json)  
+- Evaluation Preregistration v1.0
+- Benchmark v1.1 Design Proposal
+- Benchmark v1.1 Scenario Manifest
+- Preflight Audit Report  
+- Scheme Master Registry  
 **Date:** October 2026  
 
 ---
@@ -42,7 +42,7 @@ To maintain methodological precision and avoid data-leakage or degrees-of-freedo
    - The individual scoring unit is a single **(Scenario $s$, Candidate Scheme $c$) pair**, where scheme $c$ belongs to **Section A** (`allow_numerical_scoring == True` and `governance_status == "ELIGIBLE"`).
    - Annotators assign an ordinal relevance score $y_{s, c} \in \{0, 1, 2, 3\}$ along with an evidence-based operational rationale.
 2. **Statistical Observation Unit (Metric Evaluation Level):**
-   - In strict alignment with [Evaluation Preregistration §4.1](file:///c:/Users/User/Desktop/subsidy/farmer-benefit-ml/research/dataset_research/evaluation_preregistration.md#L72-L91), the statistical observation unit for model comparison and hypothesis testing is the **individual farmer scenario query** ($N = 60$).
+   - In strict alignment with Evaluation Preregistration §4.1, the statistical observation unit for model comparison and hypothesis testing is the **individual farmer scenario query** ($N = 60$).
    - Candidate scheme ratings within a scenario ($K \in [2, 7]$) are correlated and do **not** represent independent degrees of freedom. Statistical tests are computed over scenario-level paired NDCG@3 differences.
 
 ### 2.2 Decoupling Relevance Labels from Ranking Positions and NDCG@3
@@ -105,6 +105,11 @@ Every candidate scheme presented in Section A must be scored on a 4-point ordina
   - The reviewer must flag it as an **Upstream Candidate-Generation/Governance Defect**.
   - A statutory violation indicates a defect in the eligibility engine or governance filter, requiring pipeline inspection rather than label absorption.
 
+### 4.4 Missing Urgency and Implementation Timing
+- **Rule:** Do not infer deadlines, crop-failure timelines, or scheme-processing times that are not documented in the scenario or supporting evidence.
+- Assess relevance using the recorded primary crisis, secondary constraints, eligibility requirements, and available timing evidence.
+- If missing timing information materially affects the rating, explain the uncertainty in the rationale rather than inventing a factual assumption.
+
 ---
 
 ## 5. Synthetic Training Calibration Anchors
@@ -126,7 +131,7 @@ graph TD
 ### Anchor 1: Direct Primary Crisis Resolution (Score 3)
 - **Profile (`CALIB-01`):** Smallholder in Raichur (Zone 2), 3.0 acres dryland groundnut entering the seasonal crop cycle. The farmer recently drilled a successful borewell with verified discharge, but the parcel is completely off-grid with no electrical infrastructure. The primary acute crisis is the complete absence of pumping machinery and water extraction capability to establish irrigation for the crop season. The secondary constraint is seasonal input working capital.
 - **Evaluated Scheme:** `SCH006` (PM-KUSUM Component B — Standalone Solar Agriculture Pump).
-- **Scheme Master Link:** [`SCH006` in scheme_master.json](file:///c:/Users/User/Desktop/subsidy/farmer-benefit-ml/scheme_database/processed/scheme_master.json). Mandate: 60% combined subsidy for standalone solar ag pump (up to 7.5 HP) on unenergized off-grid water sources.
+- **Scheme Master Link:** `SCH006` in scheme_master.json. Mandate: 60% combined subsidy for standalone solar ag pump (up to 7.5 HP) on unenergized off-grid water sources.
 - **Statutory Authority:** Ministry of New and Renewable Energy (`pmkusum.mnre.gov.in`).
 - **Assigned Score:** **`3` (High Priority)**
 - **Operational Rationale:** `SCH006` directly and materially resolves the primary acute crisis by subsidizing a standalone off-grid solar pump on an unenergized borewell, providing the farmer with permanent, grid-independent water lifting capacity for the cropping season. Direct primary relief is sufficient for Score 3; secondary input credit remains unaddressed by this scheme but does not reduce its Score-3 standing.
@@ -136,7 +141,7 @@ graph TD
 ### Anchor 2: Secondary-Only Support (Score 2 — Capped)
 - **Profile (`CALIB-02`):** Same farmer as `CALIB-01` (off-grid unenergized borewell, seasonal water crisis, secondary input cash constraint).
 - **Evaluated Scheme:** `SCH008_CENTRAL` (Central KCC-MISS — Concessional Short-Term Crop Loan).
-- **Scheme Master Link:** [`SCH008_CENTRAL` in scheme_master.json](file:///c:/Users/User/Desktop/subsidy/farmer-benefit-ml/scheme_database/processed/scheme_master.json). Mandate: Concessional short-term crop loans up to Rs. 3 Lakh at 4% effective interest upon prompt repayment for seasonal operational inputs.
+- **Scheme Master Link:** `SCH008_CENTRAL` in scheme_master.json. Mandate: Concessional short-term crop loans up to Rs. 3 Lakh at 4% effective interest upon prompt repayment for seasonal operational inputs.
 - **Statutory Authority:** Department of Financial Services & MoA&FW (`financialservices.gov.in`).
 - **Assigned Score:** **`2` (Secondary Priority / Capped)**
 - **Operational Rationale:** `SCH008_CENTRAL` directly resolves the secondary operational constraint by providing up to Rs. 3 Lakh in short-term credit at 4% prompt repayment interest, which can finance seed and fertilizer purchases. However, credit alone cannot extract water from an unenergized borewell without pump machinery. Under the Primary Crisis Primacy rule, secondary-only resolution is strictly capped at Score 2.
@@ -145,7 +150,7 @@ graph TD
 ### Anchor 3: Partial Primary Crisis Mitigation (Score 2)
 - **Profile (`CALIB-03`):** Farmer in Bagalkote (Zone 3), 4.0 acres horticulture (pomegranate). Groundwater yield dropped from 2.5 inches to 0.75 inches mid-season. Primary acute crisis is insufficient water volume to sustain the orchard canopy. Secondary constraint is high cost of water tanker deliveries.
 - **Evaluated Scheme:** `SCH003` (PMKSY-PDMC — Micro Irrigation / Drip System).
-- **Scheme Master Link:** [`SCH003` in scheme_master.json](file:///c:/Users/User/Desktop/subsidy/farmer-benefit-ml/scheme_database/processed/scheme_master.json). Mandate: 45–55% capital subsidy for drip/sprinkler installation, capped at 5.0 ha.
+- **Scheme Master Link:** `SCH003` in scheme_master.json. Mandate: 45–55% capital subsidy for drip/sprinkler installation, capped at 5.0 ha.
 - **Statutory Authority:** Ministry of Agriculture and Farmers Welfare (`pmksy.gov.in`).
 - **Assigned Score:** **`2` (Partial Primary Relief)**
 - **Operational Rationale:** `SCH003` provides capital assistance for precision drip installation, delivering water directly to tree root zones through emitters in accordance with PMKSY-PDMC guidelines (`pmksy.gov.in`). While drip hardware does not create a new water source, precision root-zone delivery minimizes surface conveyance and evaporation losses compared to unlined flood channels, conditionally stretching the remaining 0.75-inch borewell discharge across the orchard canopy subject to the scenario's soil moisture holding capacity and tree water demand. Because it provides material but incomplete relief of the primary water volume shortage, it warrants Score 2.
@@ -154,7 +159,7 @@ graph TD
 ### Anchor 4: Contextual but Indirect / Tangential Support (Score 1)
 - **Profile (`CALIB-04`):** Smallholder in Kolar (Zone 5), 2.8 acres tomato experiencing severe early-blight fungal infection mid-season. Primary acute crisis is crop disease threatening complete harvest wipeout within 7 days. Secondary constraint is lack of high-pressure spraying equipment.
 - **Evaluated Scheme:** `SCH009` (Soil Health Card Scheme).
-- **Scheme Master Link:** [`SCH009` in scheme_master.json](file:///c:/Users/User/Desktop/subsidy/farmer-benefit-ml/scheme_database/processed/scheme_master.json). Mandate: 100% free statutory soil testing and crop-specific fertilizer recommendations.
+- **Scheme Master Link:** `SCH009` in scheme_master.json. Mandate: 100% free statutory soil testing and crop-specific fertilizer recommendations.
 - **Statutory Authority:** Department of Agriculture and Cooperation (`soilhealth.dac.gov.in`).
 - **Assigned Score:** **`1` (Marginal / Tangential)**
 - **Operational Rationale:** `SCH009` is statutory-eligible and universally accessible, providing free soil macro- and micronutrient testing. However, laboratory processing requires 2–4 weeks, offering zero therapeutic relief for an acute fungal outbreak requiring immediate chemical spraying. It provides indirect long-term agronomic value, but marginal immediate relevance in an acute emergency.
@@ -163,7 +168,7 @@ graph TD
 ### Anchor 5: Mismatched / Counterproductive Intervention (Score 0)
 - **Profile (`CALIB-05`):** Rainfed marginal farmer in Vijayapura (Zone 3), 1.8 acres ragi and bajra, facing severe drought and total crop failure. The farmer has zero existing irrigation assets, zero water source, and outstanding non-institutional debt at high interest. Primary crisis is acute household distress and lack of income.
 - **Evaluated Scheme:** `SCH003` (PMKSY-PDMC — Micro-Irrigation Drip Subsidy).
-- **Scheme Master Link:** [`SCH003` in scheme_master.json](file:///c:/Users/User/Desktop/subsidy/farmer-benefit-ml/scheme_database/processed/scheme_master.json).
+- **Scheme Master Link:** `SCH003` in scheme_master.json.
 - **Statutory Authority:** Ministry of Agriculture and Farmers Welfare (`pmksy.gov.in`).
 - **Assigned Score:** **`0` (Irrelevant / Mismatched)**
 - **Operational Rationale:** Although technically eligible under general landholding criteria, `SCH003` provides a subsidy for drip irrigation hardware that requires a pressurized water source (borewell, open well, or farm pond). The farmer has no water source whatsoever. Recommending drip hardware to a waterless rainfed farmer experiencing drought is practically unviable, requires capital co-investment the farmer lacks, and constitutes a false recommendation.
@@ -172,7 +177,7 @@ graph TD
 ### Anchor 6: Complementarity Captured in Notes, Not Score Inflation (Score 2 + Note)
 - **Profile (`CALIB-06`):** Farmer in Belagavi (Zone 8), 3.2 acres commercial chilli. The farmer has an open well with adequate water, but suffers from extreme seasonal weed infestation and heavy labor costs, while seeking to install drip fertigation for the upcoming cycle. Primary crisis is weed/labor distress; secondary is precision fertigation transition.
 - **Evaluated Scheme:** `SCH003` (PMKSY-PDMC — Drip Irrigation).
-- **Scheme Master Link:** [`SCH003` in scheme_master.json](file:///c:/Users/User/Desktop/subsidy/farmer-benefit-ml/scheme_database/processed/scheme_master.json).
+- **Scheme Master Link:** `SCH003` in scheme_master.json.
 - **Statutory Authority:** Ministry of Agriculture and Farmers Welfare (`pmksy.gov.in`).
 - **Assigned Score:** **`2` (Secondary Priority)**
 - **Operational Rationale:** `SCH003` addresses the secondary need of establishing precision drip lines. It does not resolve the acute standing weed and labor crisis (which requires mechanization or intercultural tools under SMAM, `SCH004`). Although `SCH003` pairs synergistically with future fertigation management, its individual contribution is limited to the secondary need. It is scored 2, not 3.
