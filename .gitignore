@@ -51,6 +51,8 @@ data/annotations/*
 !data/annotations/.gitkeep
 !data/annotations/benchmark_v1.0.4/**
 !data/annotations/benchmark_v1.0.4/
+!data/annotations/benchmark_v1.1/**
+!data/annotations/benchmark_v1.1/
 scheme_database/raw/*
 !scheme_database/raw/.gitkeep
 scheme_database/processed/*
@@ -61,6 +63,7 @@ scheme_database/processed/*
 *.tsv
 *.parquet
 !data/annotations/benchmark_v1.0.4/*.csv
+!data/annotations/benchmark_v1.1/*.csv
 *.feather
 *.h5
 *.hdf5
