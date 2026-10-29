@@ -1,0 +1,911 @@
+{
+  "S131": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 0.0
+  },
+  "S132": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH001",
+      "SCH003",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.7660098612910087,
+    "mrr": 1.0
+  },
+  "S133": {
+    "ranked_schemes": [
+      "SCH005",
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.8785831719004588,
+    "mrr": 1.0
+  },
+  "S134": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH005",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.26207700941401696,
+    "mrr": 0.25
+  },
+  "S135": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH001",
+      "SCH004",
+      "SCH005",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.6732934624429354,
+    "mrr": 1.0
+  },
+  "S136": {
+    "ranked_schemes": [
+      "SCH004",
+      "SCH001",
+      "SCH009",
+      "SCH003",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.8026120593560899,
+    "mrr": 1.0
+  },
+  "S137": {
+    "ranked_schemes": [
+      "SCH008_CENTRAL",
+      "SCH009",
+      "SCH004",
+      "SCH005"
+    ],
+    "ndcg3": 0.20058342686518504,
+    "mrr": 0.25
+  },
+  "S138": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH001",
+      "SCH003",
+      "SCH004",
+      "SCH005",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.7660098612910087,
+    "mrr": 1.0
+  },
+  "S139": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH005",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.17363636171343383,
+    "mrr": 0.25
+  },
+  "S140": {
+    "ranked_schemes": [
+      "SCH008_CENTRAL",
+      "SCH001",
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 0.0
+  },
+  "S141": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S142": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH005",
+      "SCH008_CENTRAL",
+      "SCH010_AMBEDKAR"
+    ],
+    "ndcg3": 0.687147515984829,
+    "mrr": 0.5
+  },
+  "S143": {
+    "ranked_schemes": [
+      "SCH004",
+      "SCH001",
+      "SCH009",
+      "SCH003",
+      "SCH005",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.6861420524061792,
+    "mrr": 1.0
+  },
+  "S144": {
+    "ranked_schemes": [
+      "SCH005",
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S145": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH008_CENTRAL",
+      "SCH009",
+      "SCH004",
+      "SCH010_AMBEDKAR"
+    ],
+    "ndcg3": 0.3951442658987156,
+    "mrr": 0.25
+  },
+  "S146": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH001",
+      "SCH003",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.7660098612910087,
+    "mrr": 1.0
+  },
+  "S147": {
+    "ranked_schemes": [
+      "SCH008_CENTRAL",
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH005"
+    ],
+    "ndcg3": 0.6861420524061792,
+    "mrr": 1.0
+  },
+  "S148": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH005",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.4226766415171612,
+    "mrr": 0.5
+  },
+  "S149": {
+    "ranked_schemes": [
+      "SCH005",
+      "SCH009",
+      "SCH004",
+      "SCH010"
+    ],
+    "ndcg3": 0.9072836011519267,
+    "mrr": 1.0
+  },
+  "S150": {
+    "ranked_schemes": [
+      "SCH004",
+      "SCH009",
+      "SCH005",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.9721212198129313,
+    "mrr": 1.0
+  },
+  "S151": {
+    "ranked_schemes": [
+      "SCH008_CENTRAL",
+      "SCH009",
+      "SCH004",
+      "SCH005"
+    ],
+    "ndcg3": 0.3079797896471021,
+    "mrr": 0.5
+  },
+  "S152": {
+    "ranked_schemes": [
+      "SCH008_CENTRAL",
+      "SCH001",
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S153": {
+    "ranked_schemes": [
+      "SCH005",
+      "SCH009",
+      "SCH004",
+      "SCH008_CENTRAL",
+      "SCH010_AMBEDKAR"
+    ],
+    "ndcg3": 0.7342523322797491,
+    "mrr": 1.0
+  },
+  "S154": {
+    "ranked_schemes": [
+      "SCH008_CENTRAL",
+      "SCH001",
+      "SCH009",
+      "SCH003",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 0.0
+  },
+  "S155": {
+    "ranked_schemes": [
+      "SCH008_CENTRAL",
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH005"
+    ],
+    "ndcg3": 0.49370093291189965,
+    "mrr": 1.0
+  },
+  "S156": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH003",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S157": {
+    "ranked_schemes": [
+      "SCH003",
+      "SCH008_CENTRAL",
+      "SCH001",
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 0.32645608177002144,
+    "mrr": 0.5
+  },
+  "S158": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH009",
+      "SCH003",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.6298989693877386,
+    "mrr": 0.5
+  },
+  "S159": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 0.0
+  },
+  "S160": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.8579514172105233,
+    "mrr": 1.0
+  },
+  "S161": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.6806060567602009,
+    "mrr": 0.5
+  },
+  "S162": {
+    "ranked_schemes": [
+      "SCH005",
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 0.9514426589871553,
+    "mrr": 1.0
+  },
+  "S163": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.7579237460681981,
+    "mrr": 0.3333333333333333
+  },
+  "S164": {
+    "ranked_schemes": [
+      "SCH004",
+      "SCH001",
+      "SCH009",
+      "SCH005",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.7984848580994974,
+    "mrr": 1.0
+  },
+  "S165": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH008_CENTRAL",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S166": {
+    "ranked_schemes": [
+      "SCH004",
+      "SCH009",
+      "SCH003",
+      "SCH005"
+    ],
+    "ndcg3": 0.8428282648809379,
+    "mrr": 1.0
+  },
+  "S167": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH008_CENTRAL",
+      "SCH009",
+      "SCH003",
+      "SCH004",
+      "SCH005"
+    ],
+    "ndcg3": 0.6806060567602009,
+    "mrr": 0.5
+  },
+  "S168": {
+    "ranked_schemes": [
+      "SCH004",
+      "SCH009",
+      "SCH005"
+    ],
+    "ndcg3": 0.9514426589871553,
+    "mrr": 1.0
+  },
+  "S169": {
+    "ranked_schemes": [
+      "SCH004",
+      "SCH001",
+      "SCH009",
+      "SCH003",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.6461858173485043,
+    "mrr": 1.0
+  },
+  "S170": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S171": {
+    "ranked_schemes": [
+      "SCH008_CENTRAL",
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH005"
+    ],
+    "ndcg3": 0.27377123820459426,
+    "mrr": 0.2
+  },
+  "S172": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH008_CENTRAL",
+      "SCH009",
+      "SCH003",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 0.0
+  },
+  "S173": {
+    "ranked_schemes": [
+      "SCH004",
+      "SCH001",
+      "SCH009",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S174": {
+    "ranked_schemes": [
+      "SCH004",
+      "SCH001",
+      "SCH009",
+      "SCH005",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.8026120593560899,
+    "mrr": 1.0
+  },
+  "S175": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH004",
+      "SCH005"
+    ],
+    "ndcg3": 0.9197207891481876,
+    "mrr": 1.0
+  },
+  "S176": {
+    "ranked_schemes": [
+      "SCH005",
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S177": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH004",
+      "SCH005",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.6732934624429354,
+    "mrr": 1.0
+  },
+  "S178": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH003",
+      "SCH004",
+      "SCH005"
+    ],
+    "ndcg3": 0.8556691603792903,
+    "mrr": 1.0
+  },
+  "S179": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH008_CENTRAL",
+      "SCH009",
+      "SCH003",
+      "SCH004"
+    ],
+    "ndcg3": 0.25474746577380225,
+    "mrr": 0.5
+  },
+  "S180": {
+    "ranked_schemes": [
+      "SCH005",
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.9721212198129313,
+    "mrr": 1.0
+  },
+  "S181": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH003",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S182": {
+    "ranked_schemes": [
+      "SCH004",
+      "SCH009",
+      "SCH005"
+    ],
+    "ndcg3": 0.9514426589871553,
+    "mrr": 1.0
+  },
+  "S183": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH001",
+      "SCH004",
+      "SCH005",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.6131471927654584,
+    "mrr": 1.0
+  },
+  "S184": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH001",
+      "SCH008_CENTRAL",
+      "SCH004",
+      "SCH005"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 0.0
+  },
+  "S185": {
+    "ranked_schemes": [
+      "SCH008_CENTRAL",
+      "SCH001",
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 0.0
+  },
+  "S186": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH001",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.6861420524061792,
+    "mrr": 1.0
+  },
+  "S187": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.5364180057596336,
+    "mrr": 0.5
+  },
+  "S188": {
+    "ranked_schemes": [
+      "SCH008_CENTRAL",
+      "SCH001",
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S189": {
+    "ranked_schemes": [
+      "SCH005",
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.7660098612910087,
+    "mrr": 1.0
+  },
+  "S190": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH008_CENTRAL",
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 0.6806060567602009,
+    "mrr": 0.5
+  },
+  "S191": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S192": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S193": {
+    "ranked_schemes": [
+      "SCH008_CENTRAL",
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH005"
+    ],
+    "ndcg3": 0.9197207891481876,
+    "mrr": 1.0
+  },
+  "S194": {
+    "ranked_schemes": [
+      "SCH005",
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.7660098612910087,
+    "mrr": 1.0
+  },
+  "S195": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH001",
+      "SCH003",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.7660098612910087,
+    "mrr": 1.0
+  },
+  "S196": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH008_CENTRAL",
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 0.8145672023038535,
+    "mrr": 0.5
+  },
+  "S197": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 0.0
+  },
+  "S198": {
+    "ranked_schemes": [
+      "SCH008_CENTRAL",
+      "SCH009",
+      "SCH004",
+      "SCH005"
+    ],
+    "ndcg3": 0.8339912323981488,
+    "mrr": 1.0
+  },
+  "S199": {
+    "ranked_schemes": [
+      "SCH005",
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S200": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S201": {
+    "ranked_schemes": [
+      "SCH008_CENTRAL",
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH005"
+    ],
+    "ndcg3": 0.5462626288265326,
+    "mrr": 0.3333333333333333
+  },
+  "S202": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH001",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.6732934624429354,
+    "mrr": 1.0
+  },
+  "S203": {
+    "ranked_schemes": [
+      "SCH004",
+      "SCH001",
+      "SCH009",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S204": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 0.7098097413968655,
+    "mrr": 0.5
+  },
+  "S205": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH001",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.6861420524061792,
+    "mrr": 1.0
+  },
+  "S206": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S207": {
+    "ranked_schemes": [
+      "SCH004",
+      "SCH001",
+      "SCH009",
+      "SCH003",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S208": {
+    "ranked_schemes": [
+      "SCH008_CENTRAL",
+      "SCH001",
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 0.5158474921363962,
+    "mrr": 0.25
+  },
+  "S209": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH003",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S210": {
+    "ranked_schemes": [
+      "SCH003",
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 0.7579237460681981,
+    "mrr": 0.3333333333333333
+  },
+  "S211": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH001",
+      "SCH008_CENTRAL",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  },
+  "S212": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH008_CENTRAL",
+      "SCH009",
+      "SCH003",
+      "SCH004",
+      "SCH010_AMBEDKAR"
+    ],
+    "ndcg3": 0.5158474921363962,
+    "mrr": 0.2
+  },
+  "S213": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH003",
+      "SCH004"
+    ],
+    "ndcg3": 0.7579237460681981,
+    "mrr": 0.3333333333333333
+  },
+  "S214": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH008_CENTRAL",
+      "SCH009",
+      "SCH003",
+      "SCH004"
+    ],
+    "ndcg3": 0.8145672023038535,
+    "mrr": 0.5
+  },
+  "S215": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.5364180057596336,
+    "mrr": 0.5
+  },
+  "S216": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH008_CENTRAL",
+      "SCH009",
+      "SCH004",
+      "SCH010_AMBEDKAR"
+    ],
+    "ndcg3": 0.27377123820459426,
+    "mrr": 0.2
+  },
+  "S217": {
+    "ranked_schemes": [
+      "SCH001",
+      "SCH009",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 0.0
+  },
+  "S218": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH004"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 0.0
+  },
+  "S219": {
+    "ranked_schemes": [
+      "SCH004",
+      "SCH001",
+      "SCH009",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 0.649014791936513,
+    "mrr": 1.0
+  },
+  "S220": {
+    "ranked_schemes": [
+      "SCH009",
+      "SCH004",
+      "SCH008_CENTRAL"
+    ],
+    "ndcg3": 1.0,
+    "mrr": 1.0
+  }
+}

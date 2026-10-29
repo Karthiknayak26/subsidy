@@ -26,6 +26,7 @@
 - [Part 13 — Technical Glossary (Tailored to This Codebase)](#part-13--technical-glossary-tailored-to-this-codebase)
 - [Part 14 — Staged Learning Roadmap](#part-14--staged-learning-roadmap)
 - [Part 15 — Comprehensive Viva Voce Preparation (15 Defense Questions & Answers)](#part-15--comprehensive-viva-voce-preparation-15-defense-questions--answers)
+- [Part 16 — End-to-End Demonstrable Application (Web UI & CLI)](#part-16--end-to-end-demonstrable-application-web-ui--cli)
 
 ---
 
@@ -1106,7 +1107,138 @@ Stage 4: Pilot Scenarios & Expert Annotation
 #### 15. What are the primary technical risks and limitations of your project in its current state?
 **Answer:**
 1. The dynamic availability layer is currently an unpopulated template.
-2. The initial 10-scenario pilot calibration has passed inter-rater agreement (kappa_w = 0.8306, alpha = 0.8311), and progression to 50–100 scenario expansion under `annotation-protocol-v1.1` is formally approved prior to ML training.
+2. The initial 10-scenario pilot calibration passed inter-rater agreement, and Benchmark v1.2 ML training is completed. However, v1.2 ML ranking results remain exploratory as they are trained against a single annotator's labels (Human Reviewer 2; no independent human inter-rater reliability is available).
 3. Ganga Kalyana modeling covers four corporations, rather than statewide coverage.
 4. Rules are currently hardcoded in Python methods rather than a declarative rule DSL.
-5. The system lacks a user-facing web/mobile interface and Kannada localization for direct farmer use.
+5. The system currently features an English interface; Kannada localization is planned for direct farmer field use.
+
+---
+
+## Part 16 — End-to-End Demonstrable Application (Web UI & CLI)
+
+`[Implemented]` `[Tested]`
+
+The project provides a fully functional, end-to-end demonstrable application connecting the **frozen deterministic Eligibility Engine**, **statutory governance safeguard pipeline**, and **Benchmark v1.2 ML ranker** (with explicit heuristic baseline fallback).
+
+### 16.1 System Architecture: The Two-Desk Triage Pipeline
+
+```
+                              ┌────────────────────────────────────────────────────────┐
+                              │            Farmer Input Scenario / Profile             │
+                              │  (District, Zone, Crops, Land, Water, Need, Income)   │
+                              └───────────────────────────┬────────────────────────────┘
+                                                          │
+                                                          ▼
+  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+  ║ DESK 1: Deterministic Eligibility Engine (`src/eligibility/engine.py` - FROZEN)        ║
+  ║ Evaluates all 16 schemes against statutory guidelines (Three-Valued Logic)             ║
+  ╚════════════════════════════════════════════════════════════════════════════════════════╝
+                                                          │
+                                                          ▼
+  ╔════════════════════════════════════════════════════════════════════════════════════════╗
+  ║ STATUTORY GOVERNANCE PIPELINE (`src/eligibility/governance.py`)                        ║
+  ║ Applies presentation safeguards:                                                       ║
+  ║ - Decouples crop insurance (PMFBY) to Section B pending seasonal notification orders   ║
+  ║ - Enforces statutory inheritance succession rules (§§5.2-5.3.3) for PM-KISAN          ║
+  ║ - Excludes pure tenants from landholder welfare and routes credit to tenant advisories ║
+  ║ - Quarantines provisional corporation schemes without numerical scoring                ║
+  ╚═══════════════════════════════════════════════┬════════════════════════════════════════╝
+                                                  │
+                 ┌────────────────────────────────┼───────────────────────────────┐
+                 │                                │                               │
+                 ▼                                ▼                               ▼
+    ┌─────────────────────────┐      ┌─────────────────────────┐     ┌────────────────────────┐
+    │  Section A Candidates   │      │  Section B Candidates   │     │  Disqualified Schemes  │
+    │  (Confirmed Actionable) │      │  (Qualitative Advisory) │     │  (Statutorily Barred)  │
+    └────────────┬────────────┘      └────────────┬────────────┘     └───────────┬────────────┘
+                 │                                │                              │
+                 ▼                                │                              │
+  ╔══════════════════════════════╗                │                              │
+  ║ DESK 2: ML Relevance Ranker  ║                │                              │
+  ║ (`src/models/benchmark_v1_2`)║                │                              │
+  ║ HistGradientBoostingRegressor║                │                              │
+  ║ Predicts 0-3 relevance score ║                │                              │
+  ║ (Fallback: Heuristic Baseline║                │                              │
+  ╚══════════════┬═══════════════╝                │                              │
+                 │                                │                              │
+                 ▼                                ▼                              ▼
+    ┌─────────────────────────┐      ┌─────────────────────────┐     ┌────────────────────────┐
+    │  Ranked Actionable List │      │  Document Checklist &   │     │  Disqualification Log  │
+    │  - Rank & Score (0-3)   │      │  Governance Warnings    │     │  - Legal Rule Keys     │
+    │  - Explainability Notes │      │  - NO Numerical Scores  │     │  - Specific Exclusions │
+    │  - Official Citations   │      │  - Unresolved Evidence  │     │    (Taxes, Grid, etc.) │
+    │  - Statutory Disclaimer │      │  - Official References  │     │                        │
+    └─────────────────────────┘      └─────────────────────────┘     └────────────────────────┘
+```
+
+### 16.2 How to Launch the Web Application
+
+The interactive web user interface is built with Streamlit.
+
+```bash
+# 1. Activate your Python virtual environment (if applicable)
+# 2. Launch the Streamlit application
+streamlit run app.py
+```
+
+#### Web Interface Capabilities
+1. **Interactive Preset Loader**: Rapidly switch between synthetic demonstration profiles or enter custom farming parameters.
+2. **Strict Field Validation**: Required fields (District, Crops, Land Size, Land Type, Social/Farmer Category, Immediate Need) are clearly marked; negative land or income inputs are rejected fail-closed.
+3. **Transparent Model Disclosure**: An alert banner visibly confirms whether recommendations were produced by the `Benchmark v1.2 ML Model` or the `Heuristic Baseline Fallback`.
+4. **Separation of Presentation Sections**:
+   - **Tab 1 (Section A Actionable)**: Displays ranked schemes with relevance scores, fit analysis bullets, required document checklists, and statutory claim disclaimers.
+   - **Tab 2 (Section B Advisory)**: Displays candidates requiring seasonal notifications or administrative circulars. Numerical scoring is strictly disabled.
+   - **Tab 3 (Disqualified Schemes)**: Transparently lists ineligible schemes with the exact statutory exclusion reasons and fired rule keys.
+   - **Tab 4 (Engine Debug & Trace)**: Complete raw JSON payload for technical audit and project guide review.
+
+### 16.3 How to Run the Command-Line Demonstration
+
+A dedicated CLI script allows headless testing and instant terminal walkthroughs:
+
+```bash
+# Run a specific demonstration scenario
+python scripts/run_recommendation_demo.py --preset DEMO_S131
+
+# Run all pre-configured demonstration scenarios sequentially
+python scripts/run_recommendation_demo.py --preset all
+
+# Demonstrate the negative statutory exclusion boundary
+python scripts/run_recommendation_demo.py --preset DEMO_EXCLUSION_BOUNDARY
+
+# Force comparative heuristic baseline fallback
+python scripts/run_recommendation_demo.py --preset DEMO_S131 --heuristic
+
+# Output machine-readable JSON trace
+python scripts/run_recommendation_demo.py --preset DEMO_S131 --json
+```
+
+### 16.4 Pre-Configured Synthetic Demonstration Profiles
+
+All demonstration profiles are **synthetic benchmark scenarios** developed for academic verification:
+
+| Preset Key | Profile Summary | Key Agronomic / Statutory Context | Primary Demonstrable Invariant |
+|:---|:---|:---|:---|
+| **`DEMO_S131`** | Rainfed Marginal Tenant (Yadgir, Z1) | 0.8 ac Bengalgram/Chilli, pure tenant without land title, off-grid, acute rainwater need. | **Pure Tenancy Exclusion**: PM-KISAN (`SCH001`) disqualified; KCC credit routed to Section B pending lease certification; Section A ranked by ML. |
+| **`DEMO_S132`** | Canal SC Smallholder (Bidar, Z1) | 2.0 ac canal Bengalgram/Paddy, SC titleholder, open well, fertilizer cost crisis. | **Soil Health & Nutrient Prioritization**: Soil Health Card (`SCH009`) and KCC prioritized; provisional schemes quarantined in Section B. |
+| **`DEMO_S136`** | Medium Landowner (Yadgir, Z1) | 6.6 ac canal Ragi/Millets, OBC (3A), tractor owner, post-harvest storage crisis. | **Area Capping & Mechanization**: Exceeds smallholder caps; SMAM (`SCH004`) evaluated within medium category rules. |
+| **`DEMO_S137`** | Rainfed Solar Need (Bidar, Z1) | 5.6 ac dryland Wheat/Soybean, General category, stream lift, debt relief need. | **Solar Pump Eligibility**: Non-energized/solar water status evaluated under PM-KUSUM B guidelines. |
+| **`DEMO_EXCLUSION_BOUNDARY`** | Income Tax Payee with Grid Borewell | 4.5 ac canal Tomato (Kolar, Z5), annual income ₹6.5L, paid income tax, grid IP set. | **Strict Statutory Disqualification**: Disqualified from PM-KISAN (income tax clause) and PM-KUSUM B (grid connectivity clause). |
+
+### 16.5 Verification and Automated Tests
+
+The application layer includes comprehensive automated integration tests (`tests/test_app_integration.py`):
+
+```bash
+# Run application integration tests
+python -m pytest tests/test_app_integration.py -v
+
+# Run the complete regression suite across engine, scenarios, metrics, and application
+python -m pytest tests/test_app_integration.py tests/test_ml_ranker_v1_2.py tests/test_benchmark_v1_2_scenarios.py tests/test_benchmark_v1_2_annotation_readiness.py tests/test_eligibility_engine.py tests/test_evaluation_metrics.py -v
+```
+
+### 16.6 Research Limitations & Academic Ethics
+
+1. **Exploratory ML Training**: The Benchmark v1.2 ranker is trained on single-annotator labels (Human Reviewer 2). Because independent human inter-rater reliability is unavailable, reported NDCG@3 gains (+0.1190 over heuristic) represent exploratory algorithmic progress rather than proven real-world farmer benefit.
+2. **Statutory Non-Guarantee**: Recommendation scores reflect modeled suitability. All subsidy sanctions remain subject to official taluk-level biometric verification, land record mutation, and annual budget quota limits.
+3. **No Automatic Inference**: The application never guesses missing statutory attributes (such as income tax status or land title cutoffs); unresolved attributes fail-safely route schemes to Section B as `REQUIRES_VERIFICATION`.
+

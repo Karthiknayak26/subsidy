@@ -1,0 +1,24 @@
+{
+  "benchmark_version": "v1.2",
+  "experiment_version": "v1.2.0",
+  "generated_at": "2026-10-29T05:30:16.909639+00:00",
+  "annotation_source": "data/annotations/benchmark_v1.2/E2_v1.2_blank.csv",
+  "annotation_sha256": "8ab03fba5f4cd4a1c9783a2bac3864f3d8530ed15e112ddd3f3a05f90fdf3d26",
+  "processed_labels_path": "data/benchmarks/v1.2/ml_experiment/training_labels_v1.2.0.csv",
+  "processed_labels_sha256": "8ab03fba5f4cd4a1c9783a2bac3864f3d8530ed15e112ddd3f3a05f90fdf3d26",
+  "annotator": "human reviewer 2",
+  "annotator_count": 1,
+  "irr_available": false,
+  "irr_limitation": "Single annotator. No independent human inter-rater reliability (Cohen's kappa or Krippendorff's alpha) has been computed or is available. Labels are treated as exploratory training targets only.",
+  "preregistration": "research/dataset_research/benchmark_v1.2_evaluation_preregistration.md",
+  "preregistration_approval_date": "2026-10-28",
+  "acceptance_criteria_note": "The approved v1.2 preregistration does NOT specify numeric thresholds for delta_min or alpha. Formal PASS/FAIL for Gate 1 (substantive gain) and Gate 2 (statistical significance) is therefore not possible. Gate 3 (zone-level non-regression) is evaluable without numeric thresholds.",
+  "n_scenarios": 90,
+  "n_candidate_pairs": 369,
+  "score_distribution": {
+    "0": 61,
+    "1": 157,
+    "2": 116,
+    "3": 35
+  }
+}
