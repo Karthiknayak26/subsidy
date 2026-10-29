@@ -13,7 +13,38 @@ End-to-End Demonstrable Application featuring:
 
 import json
 import os
+import re
+from html import escape as _html_escape
 from typing import Any, Dict, List
+
+
+def _esc(text: Any) -> str:
+    """HTML-escape arbitrary values for safe injection into card HTML."""
+    return _html_escape(str(text) if text is not None else "", quote=True)
+
+
+def _parse_doc_list(docs_val: Any) -> List[str]:
+    """Parse required_documents into a list of clean document names.
+
+    Handles comma-separated strings (common in scheme_master), list of strings,
+    and avoids splitting on commas nested inside parentheses.
+    """
+    if not docs_val:
+        return []
+    if isinstance(docs_val, list):
+        res = []
+        for d in docs_val:
+            res.extend(_parse_doc_list(d))
+        return res
+    if isinstance(docs_val, str):
+        parts = [
+            p.strip()
+            for p in re.split(r",\s*(?![^()]*\))", docs_val.strip())
+            if p.strip()
+        ]
+        return parts
+    return [str(docs_val).strip()]
+
 
 # Suppress loky win32 core count warning on Windows
 if "LOKY_MAX_CPU_COUNT" not in os.environ:
@@ -43,6 +74,260 @@ st.set_page_config(
     page_icon="🌾",
     layout="wide",
     initial_sidebar_state="expanded",
+)
+
+# ── Global CSS ────────────────────────────────────────────────────────────────
+st.markdown(
+    """
+    <style>
+    /* ── Reset aggressive word-breaking on all markdown/text containers ── */
+    .stMarkdown, .stMarkdown p, .stMarkdown li,
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4,
+    div[data-testid="stMarkdownContainer"],
+    div[data-testid="stMarkdownContainer"] p,
+    div[data-testid="stMarkdownContainer"] li,
+    div[data-testid="stMarkdownContainer"] a {
+        word-break: normal !important;
+        overflow-wrap: anywhere !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+        min-width: 0 !important;
+    }
+
+    /* ── URLs and long tokens: allow breaking at any character only when
+           necessary, so ordinary words still break at spaces ── */
+    a, code, .stCode {
+        word-break: break-word !important;
+        overflow-wrap: anywhere !important;
+    }
+
+    /* ── Columns: prevent flex children from shrinking below content width ── */
+    div[data-testid="column"] {
+        min-width: 0 !important;
+        overflow: visible !important;
+    }
+
+    /* ── Recommendation card wrapper ── */
+    .scheme-card {
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-left: 6px solid #2563eb;
+        border-radius: 8px;
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 1.5rem;
+        width: 100%;
+        box-sizing: border-box;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    /* ── Card title row: scheme name + score badge side-by-side ── */
+    .card-title-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .card-title-left {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .card-rank-badge {
+        font-size: 0.95rem;
+        font-weight: 800;
+        color: #ffffff !important;
+        background: #2563eb;
+        border-radius: 6px;
+        padding: 0.2rem 0.6rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .card-scheme-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #0f172a !important;
+        margin: 0;
+        word-break: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .card-score-badge {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #1e40af !important;
+        background: #eff6ff !important;
+        border: 1px solid #bfdbfe !important;
+        border-radius: 6px;
+        padding: 0.25rem 0.75rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    /* ── Meta row: department + benefit type ── */
+    .card-meta {
+        font-size: 0.88rem;
+        color: #475569 !important;
+        margin-bottom: 0.85rem;
+        line-height: 1.5;
+        border-bottom: 1px solid #f1f5f9;
+        padding-bottom: 0.5rem;
+        word-break: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .card-meta strong {
+        color: #0f172a !important;
+    }
+
+    /* ── Two-column card body ── */
+    .card-body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        align-items: start;
+        margin-bottom: 0.75rem;
+    }
+
+    @media (max-width: 860px) {
+        .card-body {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+    }
+
+    /* ── Card body sections ── */
+    .card-section-title {
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #475569 !important;
+        margin-bottom: 0.4rem;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    .card-section-content {
+        font-size: 0.92rem;
+        color: #1e293b !important;
+        word-break: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .card-section-content ul {
+        margin: 0.2rem 0 0 0;
+        padding-left: 1.25rem;
+    }
+
+    .card-section-content li {
+        margin-bottom: 0.35rem;
+        line-height: 1.45;
+        color: #1e293b !important;
+        word-break: normal !important;
+        overflow-wrap: anywhere !important;
+        white-space: normal !important;
+    }
+
+    /* ── Benefit rate / max benefit container ── */
+    .card-benefit-container {
+        margin-top: 0.75rem;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 0.6rem 0.8rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    .benefit-item {
+        font-size: 0.85rem;
+        line-height: 1.45;
+        color: #1e293b !important;
+        word-break: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .benefit-label {
+        font-weight: 700;
+        color: #0f172a !important;
+        margin-right: 0.3rem;
+    }
+
+    .benefit-value {
+        color: #334155 !important;
+    }
+
+    /* ── Statutory disclaimer strip ── */
+    .card-disclaimer {
+        font-size: 0.82rem;
+        line-height: 1.45;
+        color: #92400e !important;
+        background: #fffbeb !important;
+        border: 1px solid #fde68a !important;
+        border-radius: 6px;
+        padding: 0.65rem 0.9rem;
+        margin-top: 0.85rem;
+        word-break: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .card-disclaimer strong {
+        color: #78350f !important;
+    }
+
+    /* ── Official link ── */
+    .card-ref-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.86rem;
+        font-weight: 600;
+        color: #2563eb !important;
+        text-decoration: none;
+        word-break: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .card-ref-link:hover {
+        text-decoration: underline;
+    }
+
+    /* ── Section B / Disqualified expanders ── */
+    .stExpander summary p {
+        word-break: normal !important;
+        overflow-wrap: anywhere !important;
+    }
+
+    /* ── Form section headers spacing ── */
+    .section-header {
+        margin-top: 0.5rem;
+        margin-bottom: 0.25rem;
+    }
+
+    /* ── Metric cards: ensure label text doesn't split ── */
+    div[data-testid="stMetric"] label,
+    div[data-testid="stMetricLabel"] {
+        word-break: normal !important;
+        white-space: normal !important;
+    }
+
+    /* ── Main content max-width guard (prevents ultra-wide stretch) ── */
+    section.main > div {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
 )
 
 
@@ -475,7 +760,7 @@ if submit_button:
         with tab1:
             st.subheader("Section A: Confirmed Actionable Recommendations")
             st.caption(
-                "Statutotily eligible schemes ordered by personalized relevance score. "
+                "Statutorily eligible schemes ordered by personalized relevance score. "
                 "Numerical scoring strictly applies only to this section."
             )
 
@@ -483,44 +768,59 @@ if submit_button:
                 st.warning("No actionable schemes identified matching all statutory criteria.")
             else:
                 for item in results["section_a"]:
-                    with st.container():
-                        st.markdown(
-                            f"### #{item['rank']} {item['scheme_name']} "
-                            f"`Relevance Score: {item['score']:.4f}`"
-                        )
-                        st.markdown(
-                            f"**Department:** {item['department']} | **Benefit Type:** {item['benefit_type']}"
-                        )
+                    docs = _parse_doc_list(item.get("required_documents"))
+                    docs_html = (
+                        "<ul>" + "".join(f"<li>{_esc(d)}</li>" for d in docs) + "</ul>"
+                        if docs
+                        else "<p style='color:#64748b;font-style:italic;'>Standard Aadhaar, RTC extract, and bank passbook.</p>"
+                    )
 
-                        col_left, col_right = st.columns([2, 1])
+                    rationale_html = "<ul>" + "".join(
+                        f"<li>{_esc(r)}</li>" for r in item["ranking_rationale"]
+                    ) + "</ul>"
 
-                        with col_left:
-                            st.markdown("#### 💡 Ranking Rationale & Fit Analysis")
-                            for r in item["ranking_rationale"]:
-                                st.markdown(f"- {r}")
+                    ref_html = (
+                        f'<a class="card-ref-link" href="{item["official_source_url"]}" '
+                        f'target="_blank" rel="noopener noreferrer">'
+                        f"🔗 Official Guidelines Reference</a>"
+                        if item.get("official_source_url")
+                        else "<span style='color:#94a3b8;font-size:0.82rem;'>Reference URL not available.</span>"
+                    )
 
-                            st.markdown(
-                                f"**Benefit Rate:** {item['benefit_rate']}  \n"
-                                f"**Maximum Benefit:** {item['maximum_benefit']}"
-                            )
-
-                        with col_right:
-                            st.markdown("#### 📄 Required Documentation")
-                            docs = item.get("required_documents") or []
-                            if docs:
-                                for d in docs:
-                                    st.markdown(f"- {d}")
-                            else:
-                                st.caption("Standard Aadhaar, RTC extract, and bank passbook.")
-
-                            if item.get("official_source_url"):
-                                st.markdown(f"🔗 [Official Guidelines Reference]({item['official_source_url']})")
-
-                        # Statutory Disclaimer Box
-                        st.warning(
-                            f"⚠️ **Statutory Caveat**: {item['statutory_disclaimer']}"
-                        )
-                        st.markdown("---")
+                    card_html = f"""
+                    <div class="scheme-card">
+                      <div class="card-title-row">
+                        <div class="card-title-left">
+                          <span class="card-rank-badge">#{item['rank']}</span>
+                          <span class="card-scheme-title">{_esc(item['scheme_name'])}</span>
+                        </div>
+                        <span class="card-score-badge">Score: {item['score']:.4f}</span>
+                      </div>
+                      <div class="card-meta">
+                        <strong>Department:</strong> {_esc(item['department'])}&ensp;|&ensp;
+                        <strong>Benefit Type:</strong> {_esc(item['benefit_type'])}
+                      </div>
+                      <div class="card-body">
+                        <div>
+                          <div class="card-section-title">💡 Ranking Rationale &amp; Fit Analysis</div>
+                          <div class="card-section-content">{rationale_html}</div>
+                          <div class="card-benefit-container">
+                            <div class="benefit-item"><span class="benefit-label">Rate:</span><span class="benefit-value">{_esc(item['benefit_rate'])}</span></div>
+                            <div class="benefit-item"><span class="benefit-label">Max:</span><span class="benefit-value">{_esc(item['maximum_benefit'])}</span></div>
+                          </div>
+                        </div>
+                        <div>
+                          <div class="card-section-title">📄 Required Documentation</div>
+                          <div class="card-section-content">{docs_html}</div>
+                          <div style="margin-top:0.75rem;">{ref_html}</div>
+                        </div>
+                      </div>
+                      <div class="card-disclaimer">
+                        <strong>⚠️ Statutory Caveat:</strong> {_esc(item['statutory_disclaimer'])}
+                      </div>
+                    </div>
+                    """
+                    st.markdown(card_html, unsafe_allow_html=True)
 
         with tab2:
             st.subheader("Section B: Qualitative Advisory & Pending Verification")
