@@ -1,0 +1,51 @@
+{
+  "experiment_version": "v1.1.1",
+  "experiment_type": "feature_ablation",
+  "reference_version": "v1.1.0",
+  "random_state": 42,
+  "n_splits": 5,
+  "n_scenarios": 60,
+  "n_candidate_pairs": 269,
+  "n_schemes": 16,
+  "label_source": "human_reviewer_annotations.csv (single annotator)",
+  "provenance_limitation": "All 269 annotation scores match an earlier AI practice file (269/269). Labels are exploratory training targets only.",
+  "configurations": {
+    "A": {
+      "name": "full_feature_set",
+      "description": "All 30 features (reference, same as v1.1.0)",
+      "exclude": []
+    },
+    "B": {
+      "name": "no_heuristic_match",
+      "description": "Exclude immediate_need_matches_heuristic_primary (29 features)",
+      "exclude": [
+        "immediate_need_matches_heuristic_primary"
+      ]
+    },
+    "C": {
+      "name": "no_archetype_id",
+      "description": "Exclude archetype_id (29 features)",
+      "exclude": [
+        "archetype_id"
+      ]
+    },
+    "D": {
+      "name": "no_immediate_need",
+      "description": "Exclude immediate_need (29 features). Interaction feature immediate_need_matches_heuristic_primary retained because it is computed independently from scenario data.",
+      "exclude": [
+        "immediate_need"
+      ]
+    },
+    "E": {
+      "name": "combined_ablation",
+      "description": "Exclude immediate_need_matches_heuristic_primary, archetype_id, and immediate_need (27 features)",
+      "exclude": [
+        "immediate_need_matches_heuristic_primary",
+        "archetype_id",
+        "immediate_need"
+      ]
+    }
+  },
+  "cv_strategy": "GroupKFold by scenario_id (n_splits=5) + leave-one-archetype-out",
+  "evaluation_type": "exploratory_feature_ablation"
+}

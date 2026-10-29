@@ -1,0 +1,32 @@
+{
+  "benchmark_version": "v1.2",
+  "ablation_version": "v1.2.0",
+  "ablation_1_structured": {
+    "mean_ndcg3": 0.8993426836839155,
+    "mean_mrr": 0.8120370370370371,
+    "n_features": 29
+  },
+  "ablation_2_no_immediate_need": {
+    "mean_ndcg3": 0.8885909210425843,
+    "mean_mrr": 0.7892592592592592,
+    "n_features": 28
+  },
+  "ablation_3_text_need": {
+    "mean_ndcg3": 0.8993426836839155,
+    "mean_mrr": 0.8120370370370371,
+    "n_features": 29
+  },
+  "heuristic_baseline": {
+    "mean_ndcg3": 0.7803117092783102,
+    "mean_mrr": 0.7131481481481482
+  },
+  "delta_structured_vs_text_ndcg3": 0.0,
+  "delta_structured_vs_no_need_ndcg3": 0.010751762641331153,
+  "delta_structured_vs_heuristic_ndcg3": 0.11903097440560528,
+  "crisis_type_loao": {
+    "held_out": "SOIL_HEALTH_AND_FERTILIZER",
+    "ml_mean_ndcg3": 0.8353275254881467,
+    "heuristic_mean_ndcg3": 0.8099177974103194,
+    "delta_ndcg3": 0.025409728077827265
+  }
+}

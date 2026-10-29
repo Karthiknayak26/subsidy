@@ -1,0 +1,25 @@
+{
+  "benchmark_version": "v1.2",
+  "experiment_version": "v1.2.0",
+  "model_type": "HistGradientBoostingRegressor",
+  "pipeline": "ColumnTransformer + StandardScaler + OneHotEncoder + HistGradientBoostingRegressor",
+  "random_state": 42,
+  "n_splits": 5,
+  "n_scenarios": 90,
+  "n_candidate_pairs": 369,
+  "n_unique_schemes": 8,
+  "label_source": "data/annotations/benchmark_v1.2/E2_v1.2_blank.csv",
+  "label_sha256": "8ab03fba5f4cd4a1c9783a2bac3864f3d8530ed15e112ddd3f3a05f90fdf3d26",
+  "annotator": "human reviewer 2",
+  "irr_available": false,
+  "irr_limitation": "Single annotator; no independent IRR computed or available.",
+  "cv_strategy": "GroupKFold by scenario_id (n_splits=5)",
+  "evaluation_type": "preregistered_v1.2",
+  "preregistration_doc": "research/dataset_research/benchmark_v1.2_evaluation_preregistration.md",
+  "preregistration_approval_date": "2026-10-28",
+  "excluded_features": [
+    "immediate_need_matches_heuristic_primary",
+    "archetype_id"
+  ],
+  "retained_features_note": "immediate_need retained as legitimate farmer context per preregistration"
+}
