@@ -64,10 +64,24 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-DATA_DIR = REPO_ROOT / "data" / "benchmarks" / "v1.2" / "ml_experiment"
-REPORTS_DIR = REPO_ROOT / "reports"
+CURRENT_DIR = Path(__file__).resolve().parent
+REPO_ROOT = CURRENT_DIR.parent
+
+# Self-contained data resolution: check local data/ first, fallback to repo data
+if (CURRENT_DIR / "data" / "feature_df.pkl").exists():
+    DATA_DIR = CURRENT_DIR / "data"
+else:
+    DATA_DIR = REPO_ROOT / "data" / "benchmarks" / "v1.2" / "ml_experiment"
+
+# Self-contained reports resolution: writes to repo reports if present, plus local reports
+if (REPO_ROOT / "reports").exists():
+    REPORTS_DIR = REPO_ROOT / "reports"
+else:
+    REPORTS_DIR = CURRENT_DIR / "reports"
 REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+
+LOCAL_REPORTS_DIR = CURRENT_DIR / "reports"
+LOCAL_REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
 RANDOM_SEED = 42
 np.random.seed(RANDOM_SEED)
@@ -379,6 +393,7 @@ def generate_visualizations(
     plt.tight_layout()
     fig1_path = REPORTS_DIR / "fig1_confusion_matrices.png"
     plt.savefig(fig1_path, bbox_inches="tight")
+    plt.savefig(LOCAL_REPORTS_DIR / fig1_path.name, bbox_inches="tight")
     plt.close()
 
     # ── Figure 2: ROC Curves ──────────────────────────────────────────────────
@@ -397,6 +412,7 @@ def generate_visualizations(
     plt.tight_layout()
     fig2_path = REPORTS_DIR / "fig2_roc_curves.png"
     plt.savefig(fig2_path, bbox_inches="tight")
+    plt.savefig(LOCAL_REPORTS_DIR / fig2_path.name, bbox_inches="tight")
     plt.close()
 
     # ── Figure 3: Bootstrap Sampling Distribution ─────────────────────────────
@@ -440,6 +456,7 @@ def generate_visualizations(
     plt.tight_layout()
     fig3_path = REPORTS_DIR / "fig3_bootstrap_ci.png"
     plt.savefig(fig3_path, bbox_inches="tight")
+    plt.savefig(LOCAL_REPORTS_DIR / fig3_path.name, bbox_inches="tight")
     plt.close()
 
     # ── Figure 4: McNemar Contingency Table ────────────────────────────────────
@@ -469,6 +486,7 @@ def generate_visualizations(
     plt.tight_layout()
     fig4_path = REPORTS_DIR / "fig4_mcnemar_contingency.png"
     plt.savefig(fig4_path, bbox_inches="tight")
+    plt.savefig(LOCAL_REPORTS_DIR / fig4_path.name, bbox_inches="tight")
     plt.close()
 
 
