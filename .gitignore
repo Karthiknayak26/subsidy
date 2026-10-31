@@ -40,7 +40,6 @@ venv.bak/
 .virtual_documents/
 
 # Datasets & Large Files
-# (Preserve directories using .gitkeep while ignoring actual data dumps)
 data/raw/*
 !data/raw/.gitkeep
 data/processed/*
@@ -53,17 +52,12 @@ data/annotations/*
 !data/annotations/benchmark_v1.0.4/
 !data/annotations/benchmark_v1.1/**
 !data/annotations/benchmark_v1.1/
-scheme_database/raw/*
-!scheme_database/raw/.gitkeep
-scheme_database/processed/*
-!scheme_database/processed/.gitkeep
+!data/annotations/benchmark_v1.2/**
+!data/annotations/benchmark_v1.2/
 
 # Large binary / data dumps
-*.csv
 *.tsv
 *.parquet
-!data/annotations/benchmark_v1.0.4/*.csv
-!data/annotations/benchmark_v1.1/*.csv
 *.feather
 *.h5
 *.hdf5
@@ -71,7 +65,20 @@ scheme_database/processed/*
 *.zip
 *.7z
 
-# Retain scheme_master.xlsx tracking
+# Explicit data whitelisting for benchmarks and annotations
+!data/annotations/benchmark_v1.0.4/*.csv
+!data/annotations/benchmark_v1.1/*.csv
+!data/annotations/benchmark_v1.2/*.csv
+!data/annotations/benchmark_v1.2/raw/*.csv
+
+# Retain scheme database assets
+scheme_database/raw/*
+!scheme_database/raw/.gitkeep
+!scheme_database/raw/*.json
+scheme_database/processed/*
+!scheme_database/processed/.gitkeep
+!scheme_database/processed/scheme_master.json
+!scheme_database/processed/scheme_master.csv
 !scheme_database/scheme_master.xlsx
 
 # ML Models and Artifacts
@@ -79,17 +86,25 @@ models/*
 !models/.gitkeep
 *.pt
 *.pth
-*.pkl
 *.pickle
-*.joblib
 *.onnx
 *.bin
 *.weights
 checkpoints/
 
-# Evaluation Reports and Logs
+# Explicit whitelist for trained benchmark models and training labels
+!data/benchmarks/**/model_*.joblib
+!data/benchmarks/**/training_labels_*.csv
+
+# Evaluation Reports, Logs, and Test caches
 logs/
 *.log
+test_output.txt
+test_results.txt
+.coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 reports/*.pdf
 reports/*.docx
 

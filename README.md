@@ -119,7 +119,7 @@ Statutory eligibility is a **hard filter**, not a **prioritization engine**. A f
 ```
 farmer-benefit-ml/
 ├── README.md                                  # Conceptual overview & roadmap [Documented]
-├── document.md                                # Comprehensive 15-Part Technical Teaching Master [Implemented]
+├── docs/document.md                                # Comprehensive 15-Part Technical Teaching Master [Implemented]
 ├── docs/                                      # Conceptual documentation [Documented]
 │   ├── architecture.md
 │   ├── data_dictionary.md
