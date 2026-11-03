@@ -2,8 +2,8 @@
 
 ## Project: ML-Based Personalized Government Scheme and Subsidy Recommendation System for Farmers
 
-[![Status: Phase 5 Expert Annotation](https://img.shields.io/badge/Status-Phase_5:_Expert_Annotation_(Benchmark_v1.0.4_Frozen)-blue.svg)](#part-11--repository-audit-status-matrix--gap-analysis)
-[![Tests: 208 Passing](https://img.shields.io/badge/Tests-208_Passed_(0_Failures)-brightgreen.svg)](#part-8--automated-test-suite--code-coverage-audit)
+[![Status: Phase 5 Complete (Benchmark v1.2 & APS)](https://img.shields.io/badge/Status-Phase_5_Complete_(Benchmark_v1.2_%26_APS)-blue.svg)](#part-11--repository-audit-status-matrix--gap-analysis)
+[![Tests: 329 Passing](https://img.shields.io/badge/Tests-329_Passed_(0_Failures)-brightgreen.svg)](#part-8--automated-test-suite--code-coverage-audit)
 [![Architecture: Decoupled Filter-Ranker](https://img.shields.io/badge/Architecture-Decoupled_Rule_Engine_%2B_Availability_%2B_ML_Ranker-orange.svg)](#part-3--repository-architecture-reconstruction)
 [![Ground Truth: Verified Official Sources](https://img.shields.io/badge/Ground_Truth-Official_Gazette_%26_Govt_Portals-darkgreen.svg)](#part-4--data-pipeline-trace-from-raw-data-to-registry)
 
@@ -41,7 +41,7 @@ Every claim, rule, metric, and architectural component throughout this teaching 
 - **`[Potential issue]`**: A design risk, code omission, untested branch, policy assumption, or data gap requiring remediation.
 
 > [!IMPORTANT]
-> **Legal Validity vs. Software Consistency:** Passing all 190 automated tests across the engine, scenario matrix, zone runners, annotation packets, ingestion pipeline, and evaluation metrics proves that the Python code is *internally consistent with its encoded rules*. It does **not** prove that the underlying government policies are currently in force, legally complete, or free of unstated administrative circulars in Karnataka.
+> **Legal Validity vs. Software Consistency:** Passing all 329 automated tests across the engine, scenario matrix, zone runners, annotation packets, ingestion pipeline, ML rankers, ablations, app integration, and evaluation metrics proves that the Python code is *internally consistent with its encoded rules*. It does **not** prove that the underlying government policies are currently in force, legally complete, or free of unstated administrative circulars in Karnataka.
 
 ---
 
@@ -73,7 +73,7 @@ Government portals index programmes by **administrative budget heads** (e.g., *"
 Think of this project as a **two-desk hospital outpatient service**:
 1. **Desk 1: Triage Nurse (Deterministic Eligibility Engine `[Implemented]`):**  
    The nurse checks objective constraints: age, blood group, vital signs, whether you have insurance, and whether you are allergic to penicillin. If you do not meet the strict criteria for a specific clinical trial, you cannot enter. The nurse **never guesses** or uses probabilities. If your blood pressure is unknown, the nurse does not guess it is normal; they order a blood pressure test (`REQUIRES_VERIFICATION`).
-2. **Desk 2: Senior Specialist Doctor (Machine Learning Relevance Ranker `[Planned]`):**  
+2. **Desk 2: Senior Specialist Doctor (Machine Learning Relevance Ranker `[Implemented]`):**  
    From the set of 5 treatments you strictly qualify for, which one will best resolve your primary symptom today? The doctor uses contextual judgment and clinical experience (learned patterns) to rank the most relevant intervention at the top.
 
 ### 2.3 Answers to Foundational Architectural Questions
@@ -637,8 +637,8 @@ Defined in `research/dataset_research/case_b_scenario_spec.md` and evaluated in 
 ## Part 8 — Automated Test Suite & Code Coverage Audit
 
 ### 8.1 Live Test Suite Results
-Executed via `pytest tests/` on October 25, 2026:
-- **Total Tests:** **206 passed in 1.91 seconds** across 18 test suites:
+Executed via `pytest tests/` (all 25 test suites):
+- **Total Tests:** **329 passed in 16.8 seconds (100% Passing, 0 Failures)** across 25 test suites (including eligibility engine, all 10 zones Z1–Z10, Benchmark v1.2 scenarios, annotation readiness, ML ranker, ablation studies, app integration, and evaluation metrics).
   - `tests/test_eligibility_engine.py` (56 tests)
   - `tests/test_benchmark_matrix.py` (11 tests)
   - `tests/test_zone_z1_scenarios.py` through `tests/test_zone_z10_scenarios.py` (100 tests)
@@ -777,19 +777,19 @@ To understand this system, consider the progression from simple catalogues to pe
 
 [Level 3: Rule-Based Priority Heuristics]
   └─ Sorts eligible schemes using hardcoded keyword matching on immediate need.
-     Status: [Planned as baseline benchmark].
+     Status: [Implemented and Tested as deterministic baseline (NDCG@3 = 0.7803)].
 
 [Level 4: Expert-Annotated Relevance Dataset]
   └─ Multi-expert consensus scores (0-3) on candidate scheme utility.
-     Status: [Infrastructure Implemented; Data Collection Planned].
+     Status: [Implemented and Validated across Benchmark v1.0.4, v1.1, and v1.2 (90 scenarios, 369 pairs)].
 
 [Level 5: Trained ML Ranking Model]
   └─ Supervised Learning-to-Rank (LTR) or Ordinal Classifier trained on expert labels.
-     Status: [Planned / Future Work].
+     Status: [Implemented and Tested in src/models/benchmark_v1_2/ (NDCG@3 = 0.8993, MRR = 0.8120)].
 
 [Level 6: End-to-End Multilingual Delivery Application]
   └─ Production web/mobile/IVR application with live portal monitoring.
-     Status: [Planned Roadmap].
+     Status: [Implemented and Tested: app.py Streamlit UI & scripts/run_recommendation_demo.py CLI; Kannada i18n planned].
 ```
 
 ### 10.2 Future ML Formulation: Feature Representation
@@ -839,13 +839,13 @@ When expert labels are collected, the training dataset will pair farmer contexts
 | **Scheme Database** | 16 records (10 core, 6 impl) across 31 attributes | `scheme_master.json`, `.csv`, `.xlsx` | `[Implemented]` | Static snapshot; no live scraping of government circulars. | Maintain manual audit log for circular updates. |
 | **Master Builder** | Openpyxl & Pandas generation script | `build_scheme_master.py` | `[Implemented]` | Validates structure, not policy correctness or URL liveness. | Add automated HTTP schema/URL validation check. |
 | **Eligibility Models** | Strongly typed dataclasses & enums | `models.py` | `[Tested]` (92% cov) | Scenario schema assumes single primary crop & asset list. | Add support for multi-parcel holdings. |
-| **Eligibility Engine** | Deterministic rule evaluators with 3-valued logic | `engine.py` | `[Tested]` (87% cov, 190 suite passes) | Complex rules hardcoded in Python methods rather than external rule DSL. | Decouple rules into configuration rule-cards. |
-| **Parent Deduplication** | Automated suppressor of abstract parents | `engine.py:132-156` | `[Tested]` (190 suite passes) | Only handles 1-level parent-child hierarchy (`SCH008`, `SCH010`). | Support multi-tier departmental hierarchies. |
+| **Eligibility Engine** | Deterministic rule evaluators with 3-valued logic | `engine.py` | `[Tested]` (329 suite passes) | Complex rules hardcoded in Python methods rather than external rule DSL. | Decouple rules into configuration rule-cards. |
+| **Parent Deduplication** | Automated suppressor of abstract parents | `engine.py:132-156` | `[Tested]` (329 suite passes) | Only handles 1-level parent-child hierarchy (`SCH008`, `SCH010`). | Support multi-tier departmental hierarchies. |
 | **Availability Filter** | Decoupled 4-state availability filter | `availability.py` | `[Tested]` (84% cov) | `scheme_availability_template.csv` is currently unpopulated. | Populate template with current circulars from KSDA/RSK. |
-| **Benchmark Scenarios** | 10 pilot scenarios (S001–S010) + 60 Benchmark v1.0.4 scenarios (S011–S070) across Z1–Z10 | `case_b_scenario_spec.md`, `benchmark_v1_design.md`, `benchmark_v1.0.4_freeze.md` | `[Tested]` (190 tests, both validators pass) | Calibration pilot strictly partitioned from evaluation set. | Phase 5: Complete expert relevance annotation for S011–S070. |
+| **Benchmark Scenarios** | 10 pilot scenarios (S001–S010) + 60 Benchmark v1.0.4 scenarios (S011–S070) + Benchmark v1.2 (90 scenarios, 369 candidate pairs across Z1–Z10) | `case_b_scenario_spec.md`, `benchmark_v1_design.md`, `benchmark_v1.0.4_freeze.md`, `benchmark_v1.2_design_proposal.md` | `[Tested]` (329 tests pass) | Calibration pilot strictly partitioned from evaluation sets. | Expand with additional field-collected cases. |
 | **Annotation Pipeline** | 2-phase CLI, agreement computation, Protocol v1.1, automated ingestion pipeline | `ingest_benchmark_annotations.py`, `compute_agreement.py`, `annotation_protocol_v1.1.md`, `evaluation_preregistration.md` | `[Tested]` | Staged blank packets (commit `fe6bfd6`); ingestion pipeline hardened & tested. | Execute independent E1 & E2 annotations under Protocol v1.1. |
-| **ML Models & Training** | None | Non-existent in repository | `[Planned]` | **Model training deliberately deferred** until annotations collected. | Establish deterministic baseline first. |
-| **User Interface / API** | None | Non-existent in repository | `[Planned]` | No web application, FastAPI server, or CLI for farmers yet. | Build Streamlit or FastAPI prototype. |
+| **ML Models & Training** | Benchmark v1.2 HistGradientBoosting Ranker + Ablations + LOZO CV | `src/models/benchmark_v1_2/`, `src/evaluation/metrics.py` | `[Tested]` | Evaluated against single-expert annotations; LOZO non-regression achieved (NDCG@3 = 0.8993). | Multi-expert IRR recruitment in Phase 6. |
+| **User Interface / API** | Streamlit Web App (`app.py`) + CLI Demo Runner (`scripts/run_recommendation_demo.py`) | `app.py`, `scripts/run_recommendation_demo.py` | `[Tested]` | 4-tab interface (Actionable, Provisional, Disqualified, Trace). | Integrate Kannada language localization. |
 | **Kannada Localization**| Translation notes in documentation | Documentation references only | `[Planned]` | No translation tables, gettext files, or Kannada strings in code. | Create Kannada string resource catalog. |
 | **Live Portal Monitor** | None | Non-existent in repository | `[Planned]` | No real-time scraping of Seva Sindhu or Samrakshane portals. | Design headless alert scraper. |
 

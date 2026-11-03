@@ -60,14 +60,14 @@ All generated submission deliverables are version-controlled and located as foll
 
 | Deliverable | File Path | Description |
 |---|---|---|
-| **Jupyter Notebook** | `notebooks/subsidy_probability_statistics_assignment.ipynb` | Fully executed, 12-section notebook with rich explanations, KaTeX math, tables, and embedded plots. |
-| **Standalone Python Script** | `scripts/subsidy_probability_statistics_assignment.py` | Independent, reproducible Python CLI script that runs the entire pipeline and outputs full statistical results. |
-| **Word Report Document** | `reports/subsidy_probability_statistics_report.docx` | Formatted academic report including executive summary, problem statement, methodology, metrics, and answers. |
-| **PDF Report Document** | `reports/subsidy_probability_statistics_report.pdf` | Multipage, publication-ready PDF report with embedded figures and tables. |
-| **Figure 1 (Confusion Matrices)** | `reports/fig1_confusion_matrices.png` | Side-by-side confusion matrices for Logistic Regression and Random Forest. |
-| **Figure 2 (ROC Curves)** | `reports/fig2_roc_curves.png` | ROC curves comparing AUC for both models against the chance diagonal. |
-| **Figure 3 (Bootstrap Distribution)** | `reports/fig3_bootstrap_ci.png` | Bootstrap sampling distribution of accuracy difference with 95% CI bounds and zero effect line. |
-| **Figure 4 (McNemar Matrix)** | `reports/fig4_mcnemar_contingency.png` | 2x2 contingency matrix heatmap illustrating concordant and discordant prediction counts. |
+| **Jupyter Notebook** | `APS_ASSIGNMENT/subsidy_probability_statistics_assignment.ipynb` | Fully executed, 12-section notebook with rich explanations, KaTeX math, tables, and embedded plots. |
+| **Standalone Python Script** | `APS_ASSIGNMENT/subsidy_probability_statistics_assignment.py` | Independent, reproducible Python CLI script that runs the entire pipeline and outputs full statistical results. |
+| **Word Report Document** | `APS_ASSIGNMENT/subsidy_probability_statistics_report_formatted.docx` | Formatted academic report including executive summary, problem statement, methodology, metrics, and answers. |
+| **PDF Report Document** | `APS_ASSIGNMENT/subsidy_probability_statistics_report_formatted.pdf` | Multipage, publication-ready formatted PDF report with embedded figures and tables. |
+| **Figure 1 (Confusion Matrices)** | `APS_ASSIGNMENT/reports/fig1_confusion_matrices.png` | Side-by-side confusion matrices for Logistic Regression and Random Forest. |
+| **Figure 2 (ROC Curves)** | `APS_ASSIGNMENT/reports/fig2_roc_curves.png` | ROC curves comparing AUC for both models against the chance diagonal. |
+| **Figure 3 (Bootstrap Distribution)** | `APS_ASSIGNMENT/reports/fig3_bootstrap_ci.png` | Bootstrap sampling distribution of accuracy difference with 95% CI bounds and zero effect line. |
+| **Figure 4 (McNemar Matrix)** | `APS_ASSIGNMENT/reports/fig4_mcnemar_contingency.png` | 2x2 contingency matrix heatmap illustrating concordant and discordant prediction counts. |
 
 ---
 
@@ -82,7 +82,7 @@ pip install numpy pandas scikit-learn scipy matplotlib seaborn python-docx nbfor
 ### Option A: Run the Standalone Python Script
 Execute the independent evaluation pipeline from the repository root:
 ```bash
-python scripts/subsidy_probability_statistics_assignment.py
+python APS_ASSIGNMENT/subsidy_probability_statistics_assignment.py
 ```
 This script will:
 1. Load the Benchmark v1.2 candidate pair dataset.
@@ -97,11 +97,11 @@ This script will:
 ### Option B: Execute the Jupyter Notebook
 To re-run the complete Jupyter notebook from a clean kernel:
 ```bash
-python -m nbconvert --to notebook --execute --inplace notebooks/subsidy_probability_statistics_assignment.ipynb
+python -m nbconvert --to notebook --execute --inplace APS_ASSIGNMENT/subsidy_probability_statistics_assignment.ipynb
 ```
 Or open and run it interactively via Jupyter Lab / Notebook:
 ```bash
-jupyter notebook notebooks/subsidy_probability_statistics_assignment.ipynb
+jupyter notebook APS_ASSIGNMENT/subsidy_probability_statistics_assignment.ipynb
 ```
 
 ---
